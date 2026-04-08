@@ -17,7 +17,7 @@ export default function SolutionPage() {
     <div
       className="relative min-h-screen overflow-hidden"
       style={{
-        backgroundImage: "url('/images/reference/solutionbackground.svg')",
+        backgroundImage: "url('/images/reference/solution-page-background.svg')",
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'top center',
