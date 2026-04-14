@@ -21,6 +21,12 @@ export default function CareersSection({ data }) {
 
   return (
     <section id="careers" className="relative flex min-h-screen items-center bg-transparent py-16">
+      <img 
+        src="decor/careerelements.svg" 
+        alt="" 
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-0 w-full h-full object-cover opacity-100"
+      />
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <h2 className="text-center text-4xl font-black text-[#0a0b85]">Be Our Team!</h2>
 

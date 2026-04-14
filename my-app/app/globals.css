@@ -42,50 +42,6 @@ section.scroll-reveal.in-view {
   filter: blur(0);
 }
 
-.home-reference-bg {
-  position: relative;
-  background-color: transparent;
-  overflow: hidden;
-}
-
-.home-reference-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url('/images/reference/background.png');
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: top center;
-  opacity: 0.92;
-}
-
-.home-reference-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(
-      115deg,
-      rgba(10, 11, 133, 0.045) 0px,
-      rgba(10, 11, 133, 0.045) 2px,
-      transparent 2px,
-      transparent 22px
-    );
-  background-size: 680px 680px;
-  background-position: 0 0;
-  opacity: 0;
-  animation: homePatternDrift 28s linear infinite;
-}
-
-.home-reference-bg > * {
-  position: relative;
-  z-index: 1;
-}
-
 @keyframes homePatternDrift {
   0% {
     transform: translate3d(0, 0, 0);
@@ -118,21 +74,12 @@ section.scroll-reveal.in-view {
 }
 
 @media (max-width: 1024px) {
-  .home-reference-bg::before {
-    background-size: cover;
-    background-position: center top;
-  }
-
   .home-panel {
     min-height: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-reference-bg::after {
-    animation: none;
-  }
-
   .vision-card,
   .vision-card:hover,
   .vision-card-enter,
@@ -180,6 +127,14 @@ section.scroll-reveal.in-view {
 .vision-card {
   transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
+}
+
+.about-content-enter {
+  animation: aboutContentIn 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.about-content-enter-delay {
+  animation-delay: 120ms;
 }
 
 .vision-card:hover {
@@ -263,6 +218,19 @@ section.scroll-reveal.in-view .careers-row {
   }
   100% {
     opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes aboutContentIn {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
     filter: blur(0);
   }
 }
@@ -381,29 +349,34 @@ section.scroll-reveal.in-view .careers-row {
     radial-gradient(120% 100% at 100% 120%, transparent 69%, rgba(66, 76, 170, 0.26) 70%, transparent 71%);
 }
 
-.card-grad-0 { background: linear-gradient(130deg, #7d4d3f, #2f2123); }
-.card-grad-1 { background: linear-gradient(130deg, #826e4e, #3a3030); }
-.card-grad-2 { background: linear-gradient(130deg, #7e6f5a, #243137); }
-.card-grad-3 { background: linear-gradient(130deg, #675749, #2b3957); }
-.card-grad-4 { background: linear-gradient(130deg, #3e4f72, #1e2435); }
+.card-grad-0 { background: url('/images/commitment.jpg') center/cover no-repeat; opacity: 100%; }
+.card-grad-1 { background: url('/images/integrity.png') center/cover no-repeat; opacity: 100%; }
+.card-grad-2 { background: url('/images/professionalism.png') center/cover no-repeat; opacity: 100%;}
+.card-grad-3 { background: url('/images/teamwork.png') center/cover no-repeat; opacity: 100%; }
+.card-grad-4 { background: url('/images/advancement.png') center/cover no-repeat; opacity: 100%; }
 
 .news-photo-1 {
   background:
-    radial-gradient(circle at 75% 30%, rgba(241, 49, 107, 0.55), transparent 30%),
-    linear-gradient(135deg, #0e1422 10%, #101a2d 50%, #1a2339 100%);
+    radial-gradient(circle at 78% 28%, rgba(56, 189, 248, 0.42), transparent 26%),
+    radial-gradient(circle at 22% 72%, rgba(99, 102, 241, 0.38), transparent 28%),
+    linear-gradient(135deg, #08111f 0%, #12213b 48%, #1d3154 100%);
+  background-blend-mode: screen, screen, normal;
 }
 
 .news-photo-2 {
   background:
-    radial-gradient(circle at 65% 36%, rgba(237, 68, 68, 0.65), transparent 32%),
-    radial-gradient(circle at 40% 70%, rgba(69, 124, 255, 0.75), transparent 36%),
-    linear-gradient(135deg, #0d1a3a, #22338a);
+    radial-gradient(circle at 68% 34%, rgba(244, 114, 182, 0.38), transparent 25%),
+    radial-gradient(circle at 36% 72%, rgba(59, 130, 246, 0.48), transparent 30%),
+    linear-gradient(135deg, #0a1020 0%, #1a2450 55%, #3346a8 100%);
+  background-blend-mode: screen, screen, normal;
 }
 
 .news-photo-3 {
   background:
-    radial-gradient(circle at 26% 35%, rgba(20, 20, 20, 0.6), transparent 45%),
-    linear-gradient(135deg, #101318, #20252f);
+    radial-gradient(circle at 28% 34%, rgba(34, 211, 238, 0.3), transparent 25%),
+    radial-gradient(circle at 70% 68%, rgba(148, 163, 184, 0.26), transparent 32%),
+    linear-gradient(135deg, #0f172a 0%, #1f2937 52%, #334155 100%);
+  background-blend-mode: screen, screen, normal;
 }
 
 .achievement-track {
@@ -447,6 +420,30 @@ section.scroll-reveal.in-view .careers-row {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.brand-grid-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #0a0b85 #e5e7eb;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0a0b85, #4c52b9);
+  border-radius: 999px;
+  border: 2px solid #e5e7eb;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #08096e, #3d43a8);
 }
 
 ::-webkit-scrollbar {

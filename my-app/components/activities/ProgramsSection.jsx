@@ -11,27 +11,35 @@ function ProgramCard({ program, index }) {
     <AnimatedSection delay={index * 0.1}>
       <motion.div
         layout
-        whileHover={{ y: -4 }}
+        whileHover={{ y: -6 }}
         transition={{ duration: 0.2 }}
-        className="gradient-border cursor-pointer"
+        className="cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="glass-card-glow rounded-2xl p-6 h-full relative overflow-hidden group">
-          <div className="absolute -top-16 -right-16 w-32 h-32 bg-[#010268]/8 rounded-full blur-[50px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className="group relative h-full overflow-hidden rounded-[1.9rem] border border-white/60 bg-white/80 p-6 shadow-[0_22px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm transition-shadow hover:shadow-[0_30px_80px_rgba(10,11,133,0.15)]">
+          <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(135deg,#eef3ff_0%,#dfe8ff_50%,#f8fbff_100%)]" />
+          <div className="absolute -top-16 right-[-1rem] h-36 w-36 rounded-full bg-[#0a0b85]/10 blur-[60px] opacity-70 transition-opacity duration-700 group-hover:opacity-100" />
 
           <div className="relative">
-            <div className="flex gap-3 mb-4 overflow-x-auto">
+            <div className="mb-5 flex gap-3 overflow-x-auto pb-1">
               {program.images.map((_, j) => (
                 <div
                   key={j}
-                  className="w-24 h-18 rounded-lg bg-gradient-to-br from-[#f8fafc] to-[#eef2f7] flex items-center justify-center shadow-sm flex-shrink-0 group-hover:shadow-md transition-shadow"
+                  className="flex h-20 w-24 flex-shrink-0 items-center justify-center rounded-2xl border border-white/70 bg-white/88 shadow-md shadow-[#0a0b85]/8 transition-shadow group-hover:shadow-lg"
                 >
-                  <Mountain className="text-[#111827] group-hover:scale-110 transition-transform duration-500" size={18} />
+                  <Mountain className="text-[#0a0b85] group-hover:scale-110 transition-transform duration-500" size={20} />
                 </div>
               ))}
             </div>
-            <h3 className="text-[#111827] font-bold text-lg mb-2 group-hover:text-[#111827] transition-colors">{program.name}</h3>
-            <p className={`text-[#111827] text-sm leading-relaxed ${expanded ? '' : 'line-clamp-3'}`}>
+
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <span className="inline-flex rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85]">
+                Program
+              </span>
+            </div>
+
+            <h3 className="text-lg font-bold text-[#111827] transition-colors group-hover:text-[#0a0b85]">{program.name}</h3>
+            <p className={`mt-3 text-sm leading-7 text-[#475569] ${expanded ? '' : 'line-clamp-3'}`}>
               {program.description}
             </p>
 
@@ -44,8 +52,8 @@ function ProgramCard({ program, index }) {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="border-t border-white/[0.06] pt-4 mt-4">
-                    <p className="text-[#111827] text-xs leading-relaxed">
+                  <div className="mt-5 rounded-2xl border border-[#0a0b85]/8 bg-[#f8fbff] p-4">
+                    <p className="text-xs leading-6 text-[#64748b]">
                       This program is part of AMI&apos;s commitment to community engagement and professional development in the IT industry across Indonesia.
                     </p>
                   </div>
@@ -54,7 +62,7 @@ function ProgramCard({ program, index }) {
             </AnimatePresence>
 
             <button
-              className="mt-3 text-[#111827] text-xs flex items-center gap-1 hover:text-[#111827] transition-colors"
+              className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#f3f6ff] px-3 py-1.5 text-[11px] font-semibold text-[#0a0b85] transition-colors hover:bg-[#e8eeff]"
               onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
             >
               <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -72,19 +80,19 @@ function ProgramCard({ program, index }) {
 export default function ProgramsSection({ data }) {
   return (
     <section className="relative py-28">
-      <div className="absolute inset-0 bg-[#ffffff]" />
+      <div className="absolute inset-0 bg-transparent" />
       <div className="absolute inset-0 dot-pattern opacity-[0.03]" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
-          <div className="mb-14">
+          <div className="mb-14 max-w-2xl">
             <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
               Programs
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-2 tracking-tight">
               {data.title}
             </h2>
-            <p className="text-[#111827] text-sm">{data.subtitle}</p>
+            <p className="text-[#475569] text-sm leading-7">{data.subtitle}</p>
           </div>
         </AnimatedSection>
 

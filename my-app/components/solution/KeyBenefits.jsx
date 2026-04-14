@@ -16,7 +16,7 @@ export default function KeyBenefits({ data }) {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="relative bg-black z-10 max-w-5xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-16">
             <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">

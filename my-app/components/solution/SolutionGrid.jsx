@@ -14,7 +14,7 @@ function SolutionCard({ solution, index }) {
     <AnimatedSection delay={index * 0.08}>
       <motion.div
         layout
-        className="gradient-border group cursor-pointer"
+        className="gradient-border group cursor-pointer bg-[#0a0b85]/20 rounded-2xl "
         onClick={() => setExpanded(!expanded)}
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3 }}
@@ -123,9 +123,6 @@ function SolutionCard({ solution, index }) {
 export default function SolutionGrid({ solutions }) {
   return (
     <section className="relative py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-[#ffffff]" />
-      <div className="absolute inset-0 mesh-gradient-accent opacity-15" />
-      <div className="absolute inset-0 dot-pattern opacity-20" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
