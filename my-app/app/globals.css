@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #1f2937;
+  --nav-height: clamp(4.25rem, 6.4vw, 5.5rem);
 }
 
 @theme inline {
@@ -23,6 +24,8 @@ body {
   color: var(--foreground);
   font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
   overflow-x: hidden;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 section.scroll-reveal {
@@ -102,7 +105,7 @@ section.scroll-reveal.in-view {
 }
 
 .home-panel {
-  min-height: 100svh;
+  min-height: calc(100svh - var(--nav-height));
   display: flex;
   align-items: flex-start;
 }

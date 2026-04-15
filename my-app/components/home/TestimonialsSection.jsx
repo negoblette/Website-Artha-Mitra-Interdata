@@ -4,7 +4,25 @@ import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function TestimonialsSection({ data }) {
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(1);
+
+  useEffect(() => {
+    const syncItemsPerPage = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setItemsPerPage(3);
+      } else if (width >= 640) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(1);
+      }
+    };
+
+    syncItemsPerPage();
+    window.addEventListener('resize', syncItemsPerPage);
+    return () => window.removeEventListener('resize', syncItemsPerPage);
+  }, []);
+
   const pages = useMemo(() => {
     const source = data.items || [];
     if (!source.length) return [];
@@ -14,7 +32,7 @@ export default function TestimonialsSection({ data }) {
       chunked.push(source.slice(i, i + itemsPerPage));
     }
     return chunked;
-  }, [data.items]);
+  }, [data.items, itemsPerPage]);
 
   const [activePage, setActivePage] = useState(0);
   const [manualTrigger, setManualTrigger] = useState(0);
@@ -49,10 +67,10 @@ export default function TestimonialsSection({ data }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="mt-6 sm:mt-8 md:mt-9 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4"
+            className="mt-6 sm:mt-8 md:mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
           >
             {currentItems.map((item) => (
-              <article key={`${item.author}-${item.text.slice(0, 24)}`} className="rounded-2xl bg-[#0a0b85] p-4 sm:p-5 text-white min-h-56">
+              <article key={`${item.author}-${item.text.slice(0, 24)}`} className="rounded-2xl bg-[#0a0b85] p-4 sm:p-5 text-white min-h-[13rem] sm:min-h-56">
                 <p className="text-sm leading-relaxed text-white/95">{item.text}</p>
                 <p className="mt-6 text-base font-semibold">{item.author}</p>
               </article>

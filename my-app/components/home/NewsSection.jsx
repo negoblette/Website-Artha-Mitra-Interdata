@@ -17,6 +17,10 @@ function NewsRow({ title, excerpt, reverse, tone }) {
 }
 
 export default function NewsSection({ data }) {
+  const safeItems = Array.isArray(data?.items) && data.items.length > 0
+    ? data.items
+    : [{ excerpt: 'Latest updates and insights are coming soon.' }];
+
   const rows = [
     { title: 'Data Hacked', tone: 'news-photo-1' },
     { title: 'Malware', tone: 'news-photo-2', reverse: true },
@@ -25,7 +29,7 @@ export default function NewsSection({ data }) {
 
   return (
     <section className="home-section relative bg-transparent overflow-hidden">
-      <div className="relative z-10 px-4 sm:px-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <h2 className="text-center text-3xl sm:text-4xl font-black text-black mb-4 sm:mb-5 md:mb-6">NEWS & ARTICLES</h2>
         <div className="space-y-3 sm:space-y-4 md:space-y-5">
           {rows.map((row, i) => (
@@ -34,7 +38,7 @@ export default function NewsSection({ data }) {
               title={row.title}
               reverse={row.reverse}
               tone={row.tone}
-              excerpt={data.items[i % data.items.length].excerpt}
+              excerpt={safeItems[i % safeItems.length].excerpt}
             />
           ))}
         </div>

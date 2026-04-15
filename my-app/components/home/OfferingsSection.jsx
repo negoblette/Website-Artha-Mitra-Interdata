@@ -41,7 +41,7 @@ function OfferColumn({ eyebrow, title, items, icons }) {
         <h3 className="mt-1.5 text-3xl sm:text-4xl md:text-5xl font-extrabold text-black">{title}</h3>
       </div>
 
-      <div className="no-scrollbar mt-1.5 space-y-2.5 md:space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0 max-h-96 md:max-h-none">
+      <div className="no-scrollbar mt-1.5 space-y-2.5 md:space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0 max-h-[26rem] sm:max-h-[32rem] md:max-h-[calc(100svh-15rem)]">
         {normalizedItems.map((item, i) => {
           const Icon = icons[i % icons.length];
 
@@ -71,11 +71,11 @@ export default function OfferingsSection({ data }) {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section className="relative w-full bg-transparent border-t border-[#bebebe73] py-10 sm:py-12 md:py-0 md:min-h-screen">
+    <section className="relative w-full bg-transparent border-t border-[#bebebe73] py-10 sm:py-12 md:py-0 md:min-h-[calc(100svh-7rem)]">
       <div className="w-full h-full border-y border-[#dbdbdb] bg-white/22 backdrop-blur-[2px] overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 h-auto md:h-full">
           <div
-            className={`border-r border-[#dbdbdb] bg-[#f4f5f7]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}
+            className={`md:border-r border-[#dbdbdb] bg-[#f4f5f7]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}
             onMouseEnter={() => setHovered('left')}
             onMouseLeave={() => setHovered(null)}
           >

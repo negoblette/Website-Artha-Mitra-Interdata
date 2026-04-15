@@ -12,7 +12,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="home-section section-last relative bg-transparent overflow-hidden -mt-6 md:-mt-8 pt-8 md:pt-10 pb-10 md:pb-12">
+    <section id="contact" className="home-section section-last relative bg-transparent overflow-hidden pt-8 md:pt-10 pb-8 md:pb-10">
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-[0.95fr_1.35fr_1fr] gap-6 md:gap-8 items-start">
         <div className="pt-1">
           <p className="text-xs tracking-[0.16em] font-bold text-black">CONTACT US</p>
