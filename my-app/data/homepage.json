@@ -174,25 +174,29 @@
         "category": "Security",
         "title": "IT Security Spending to Reach $96 Billion in 2018",
         "excerpt": "Gartner predicts that worldwide security spend will reach $96 billion dollars, up 8% from the previous year. The latest figures show substantial increases reflecting the growing importance of cybersecurity in modern enterprises.",
-        "slug": "security-spending-2018"
+        "slug": "security-spending-2018",
+        "image": "/images/news1.jpg"
       },
       {
         "category": "Compliance",
         "title": "The Real Reason You're Failing at PCI DSS Compliance",
         "excerpt": "IT organizations don't struggle with PCI DSS compliance due to a lack of knowledge or technology. The problem is proficiency. With years of data breach investigation reports, patterns start to become clear.",
-        "slug": "pci-dss-compliance"
+        "slug": "pci-dss-compliance",
+        "image": "/images/news2.jpg"
       },
       {
         "category": "IoT",
         "title": "DDI is a Critical Component of IoT Success",
         "excerpt": "The Internet of Things era has arrived, and businesses need to be prepared for a world where everything is connected. There are currently 25 billion internet-connected devices, and that will double by 2025.",
-        "slug": "ddi-iot-success"
+        "slug": "ddi-iot-success",
+        "image": "/images/news3.jpg"
       },
       {
         "category": "Cyber Security",
         "title": "Fighting Automation with Automation",
         "excerpt": "Disruptions caused by autonomous malware could have devastating implications. As attackers leverage automation, defenders must also adopt automated threat detection and response capabilities to keep pace.",
-        "slug": "fighting-automation"
+        "slug": "fighting-automation",
+        "image": "/images/news/fighting-automation.jpg"
       }
     ]
   }

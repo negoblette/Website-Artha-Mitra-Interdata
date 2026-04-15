@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Sora } from 'next/font/google';
 import {
   Server,
   Shield,
@@ -25,11 +24,6 @@ import {
   Cloud,
 } from 'lucide-react';
 
-const sora = Sora({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
-
 const leftIcons = [Server, Shield, Phone, Cpu, Database, Network, ShieldAlert, ShieldCheck, Siren, FileWarning, GitBranch];
 const rightIcons = [Handshake, Rocket, Headphones, Search, Cloud, Cpu, Shield, CloudCog, ShieldPlus, Lock];
 
@@ -43,29 +37,29 @@ function OfferColumn({ eyebrow, title, items, icons }) {
   return (
     <div className="h-full min-h-0 flex flex-col px-4 sm:px-7 py-5 sm:py-6">
       <div className="sticky top-0 z-10 bg-[#f4f5f7]/92 backdrop-blur-sm pb-3">
-        <p className={`${sora.className} text-[10px] font-bold tracking-[0.22em] text-[rgb(13,27,94)] uppercase`} >{eyebrow}</p>
-        <h3 className={`${sora.className} mt-1.5 text-4xl sm:text-5xl font-extrabold text-[rgb(13,27,94)]`}>{title}</h3>
+        <p className="text-[10px] pl-50 font-bold tracking-[0.22em] text-[rgb(13,27,94)] uppercase">{eyebrow}</p>
+        <h3 className="mt-1.5 text-4xl sm:text-5xl pl-50 font-extrabold text-[rgb(13,27,94)]">{title}</h3>
       </div>
 
-      <div className="no-scrollbar mt-1.5 space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0">
+      <div className="no-scrollbar mt-1.5 space-y-4 overflow-y-auto pl-50 pr-50 flex-1 min-h-0">
         {normalizedItems.map((item, i) => {
           const Icon = icons[i % icons.length];
 
           return (
             <div key={`${item.name}-${i}`}>
-              <p className={`${sora.className} flex items-start gap-2.5 font-bold text-[rgb(13,27,94)] leading-tight`}>
+              <p className="flex items-start gap-2.5 font-bold text-[rgb(13,27,94)] leading-tight">
                 <Icon size={19} className="mt-1 text-[#007f99]" />
                 <span className="text-[18px] sm:text-[21px]">{item.name}</span>
               </p>
-              <p className={`${sora.className} ml-7 text-[12px] sm:text-[14px] text-black mt-0.5 leading-snug`}>{item.description}</p>
+              <p className="ml-7 text-[12px] sm:text-[14px] text-black mt-0.5 leading-snug">{item.description}</p>
             </div>
           );
         })}
       </div>
 
-      <p className={`${sora.className} text-center mt-3 text-[10px] font-bold text-[rgb(13,27,94)]`}>scroll for more</p>
+      <p className="text-center mt-3 text-base font-bold text-[rgb(13,27,94)]">scroll for more</p>
       <div className="text-center mt-2">
-        <Link href="/solution" className={`${sora.className} inline-flex rounded-full border-2 border-black px-6 py-1.5 text-black text-sm sm:text-base font-semibold hover:bg-[#d7d9ff] hover:text-black transition-colors`}>
+        <Link href="/solution" className="inline-flex rounded-full border-2 border-black px-6 py-1.5 text-black text-sm sm:text-base font-semibold hover:bg-[rgba(13,27,94)] hover:text-white transition-colors">
           Learn More
         </Link>
       </div>

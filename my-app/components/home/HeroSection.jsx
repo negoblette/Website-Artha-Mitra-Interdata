@@ -9,15 +9,7 @@ export default function HeroSection({ data }) {
     <section className="home-panel relative overflow-hidden bg-white min-h-screen flex flex-col items-center justify-center">
       <WaveCanvas />
 
-      <div className="hero-content-shell relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
-
-        <span className="hero-fade-1 inline-flex items-center rounded-full bg-[rgb(13,27,94)] px-7 py-2 text-[11px] tracking-widest text-white font-bold uppercase mb-40">
-          <span
-            className="mr-3.5 h-2 w-2 rounded-full bg-[#22c55e] shadow-[0_0_0_2px_rgba(34,197,94,0.22),0_0_10px_rgba(34,197,94,0.9)] animate-pulse"
-            aria-hidden="true"
-          />
-          IT Solutions Integrator and Provider
-        </span>
+      <div className="hero-content-shell relative z-10 max-w-6xl mx-auto pt-30 px-4 sm:px-6 text-center">
 
         <h1 className="hero-fade-2 mb-2 text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-[rgb(107,107,184)] font-bold">
           {words[0]} <span className="text-[rgb(13,27,94)] font-extrabold">{words[1]}</span> {words[2]} {words[3]}<br />{words[4]}
