@@ -26,7 +26,7 @@ export default function HeroSection({ data }) {
             aria-hidden="true"
           />
           {data.eyebrow}
-        </span> */}
+        </span> */} // ON Hold for now
 
         <h1 className={`${alegreyaSans.className} hero-readable-title mt-40 text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-black font-bold`}>
           {titleParts[0]}
