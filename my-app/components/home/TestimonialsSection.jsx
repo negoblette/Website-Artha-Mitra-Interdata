@@ -55,8 +55,6 @@ export default function TestimonialsSection({ data }) {
 
   return (
     <section className="home-section relative bg-transparent py-10 sm:py-12 md:py-16 lg:py-20">
-      <div className="absolute inset-0 bg-white pointer-events-none" />
-
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <h2 className="text-center text-4xl sm:text-5xl font-black text-black">What People Says</h2>
 

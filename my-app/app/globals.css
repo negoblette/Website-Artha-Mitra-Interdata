@@ -49,6 +49,7 @@ section.scroll-reveal.in-view {
   position: relative;
   background-color: transparent;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .home-reference-bg::before {
@@ -59,8 +60,8 @@ section.scroll-reveal.in-view {
   pointer-events: none;
   background-image: url('/images/reference/background.png');
   background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-position: top center;
+  background-size: cover;
+  background-position: center top;
   opacity: 0.92;
 }
 
@@ -105,9 +106,9 @@ section.scroll-reveal.in-view {
 }
 
 .home-panel {
-  min-height: calc(100svh - var(--nav-height));
+  min-height: 100svh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .home-section {
@@ -121,13 +122,8 @@ section.scroll-reveal.in-view {
 }
 
 @media (max-width: 1024px) {
-  .home-reference-bg::before {
-    background-size: cover;
-    background-position: center top;
-  }
-
   .home-panel {
-    min-height: auto;
+    min-height: 100svh;
   }
 }
 

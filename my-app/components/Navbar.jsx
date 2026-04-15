@@ -28,15 +28,15 @@ export default function Navbar({ data }) {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-3">
           <Link href="/" className="flex items-center group justify-self-start">
-            <motion.div className="relative w-44 sm:w-48 h-12 sm:h-14 overflow-hidden" whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>
+            <motion.div className="relative w-36 sm:w-44 md:w-48 h-10 sm:h-12 md:h-14 overflow-hidden" whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>
               <Image src={data.logo} alt={data.companyName} fill className="object-contain object-left" priority />
             </motion.div>
           </Link>
 
           <motion.div
-            className="hidden xl:flex h-12 items-center gap-0.5 bg-[#0a0b85] rounded-full px-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+            className="hidden lg:flex h-11 xl:h-12 items-center gap-0.5 bg-[#0a0b85] rounded-full px-2 xl:px-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.25)] justify-self-center"
           >
             {navItems.map((item) => (
               <motion.div
@@ -47,7 +47,7 @@ export default function Navbar({ data }) {
               >
                 <Link
                   href={item.href}
-                  className={`group relative inline-flex h-10 items-center px-5 rounded-full text-[15px] font-semibold transition-colors ${
+                  className={`group relative inline-flex h-9 xl:h-10 items-center px-3 xl:px-5 rounded-full text-[13px] xl:text-[15px] font-semibold transition-colors ${
                     pathname === item.href
                       ? 'text-white'
                       : 'text-white hover:text-white'
@@ -84,7 +84,7 @@ export default function Navbar({ data }) {
             <motion.button
               onClick={() => setMobileOpen(!mobileOpen)}
               whileTap={{ scale: 0.9 }}
-              className="xl:hidden p-2.5 text-[#111827] hover:bg-[#0a0b85] hover:text-white rounded-full transition-colors"
+              className="lg:hidden p-2.5 text-[#111827] hover:bg-[#0a0b85] hover:text-white rounded-full transition-colors"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </motion.button>

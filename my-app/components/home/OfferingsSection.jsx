@@ -36,12 +36,12 @@ function OfferColumn({ eyebrow, title, items, icons }) {
 
   return (
     <div className="h-full min-h-0 flex flex-col px-4 sm:px-6 md:px-7 py-4 sm:py-5 md:py-6">
-      <div className="sticky top-0 z-10 bg-[#f4f5f7]/92 backdrop-blur-sm pb-2 md:pb-3">
+      <div className="pb-2 md:pb-3">
         <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.22em] text-black uppercase">{eyebrow}</p>
         <h3 className="mt-1.5 text-3xl sm:text-4xl md:text-5xl font-extrabold text-black">{title}</h3>
       </div>
 
-      <div className="no-scrollbar mt-1.5 space-y-2.5 md:space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0 max-h-[26rem] sm:max-h-[32rem] md:max-h-[calc(100svh-15rem)]">
+      <div className="no-scrollbar mt-1.5 space-y-2.5 md:space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0 max-h-[26rem] sm:max-h-[30rem] md:max-h-[34rem]">
         {normalizedItems.map((item, i) => {
           const Icon = icons[i % icons.length];
 
@@ -71,11 +71,12 @@ export default function OfferingsSection({ data }) {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section className="relative w-full bg-transparent border-t border-[#bebebe73] py-10 sm:py-12 md:py-0 md:min-h-[calc(100svh-7rem)]">
-      <div className="w-full h-full border-y border-[#dbdbdb] bg-white/22 backdrop-blur-[2px] overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-auto md:h-full">
+    <section className="relative w-full bg-transparent py-10 sm:py-12 md:py-14">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="w-full bg-white/22 backdrop-blur-[2px] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2">
           <div
-            className={`md:border-r border-[#dbdbdb] bg-[#f4f5f7]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}
+            className={`bg-[#f4f5f7]/82 min-h-0 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}
             onMouseEnter={() => setHovered('left')}
             onMouseLeave={() => setHovered(null)}
           >
@@ -87,7 +88,7 @@ export default function OfferingsSection({ data }) {
             />
           </div>
           <div
-            className={`bg-[#f2f3f5]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'left' ? 'md:opacity-45' : 'md:opacity-100'}`}
+            className={`bg-[#f2f3f5]/82 min-h-0 transition-all duration-300 ${hovered === 'left' ? 'md:opacity-45' : 'md:opacity-100'}`}
             onMouseEnter={() => setHovered('right')}
             onMouseLeave={() => setHovered(null)}
           >
@@ -99,6 +100,7 @@ export default function OfferingsSection({ data }) {
             />
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

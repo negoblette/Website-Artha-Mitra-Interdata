@@ -33,12 +33,12 @@
   ];
 
   return (
-    <section className="home-section bg-transparent overflow-hidden py-10 sm:py-12 md:py-16 lg:py-20">
+    <section className="home-section relative overflow-hidden pt-10 sm:pt-12 md:pt-16 lg:pt-20 pb-14 sm:pb-16 md:pb-20 lg:pb-24">
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
         <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-black">{data.title}</h2>
         <p className="mt-4 text-black text-base sm:text-lg md:text-xl max-w-4xl mx-auto leading-snug">{data.description}</p>
 
-        <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
+        <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-4">
           {cards.map((card, index) => (
             <article key={card.title} className="group [perspective:1200px]">
               <div className="relative h-40 sm:h-44 md:h-48 rounded-xl [transform-style:preserve-3d] transition-transform duration-700 group-hover:[transform:rotateY(180deg)]">
