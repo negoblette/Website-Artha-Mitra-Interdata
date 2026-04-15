@@ -20,7 +20,7 @@ export default function HeroSection({ data }) {
           IT Solutions Integrator and Provider
         </span>
 
-        <h1 className={`${alegreyaSans.className} hero-readable-title mt-7 text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-black font-bold`}>
+        <h1 className={`${alegreyaSans.className} hero-readable-title mt-7 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] text-black font-bold`}>
           {words[0]} <span className="text-[#0a0b85] font-extrabold">{words[1]}</span> {words[2]} {words[3]}<br />{words[4]}
         </h1>
 
@@ -28,16 +28,16 @@ export default function HeroSection({ data }) {
           {data.description}
         </p>
 
-        <div className="mt-14 flex flex-col sm:flex-row justify-center gap-4">
+        <div className="mt-14 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <Link
             href={data.cta.href}
-            className="inline-flex min-w-48 items-center justify-center rounded-full border-2 border-black text-black px-8 py-2.5 text-base sm:text-lg font-semibold hover:bg-[#0a0b85] hover:text-white transition-colors"
+            className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border-2 border-black text-black px-6 sm:px-8 py-2 sm:py-2.5 text-sm sm:text-base lg:text-lg font-semibold hover:bg-[#0a0b85] hover:text-white transition-colors"
           >
             Get to Know Us
           </Link>
           <Link
             href="/contact"
-            className="inline-flex min-w-48 items-center justify-center rounded-full border-2 border-black text-black px-8 py-2.5 text-base sm:text-lg font-semibold hover:bg-[#0a0b85] hover:text-white transition-colors"
+            className="inline-flex w-full sm:w-auto items-center justify-center rounded-full border-2 border-black text-black px-6 sm:px-8 py-2 sm:py-2.5 text-sm sm:text-base lg:text-lg font-semibold hover:bg-[#0a0b85] hover:text-white transition-colors"
           >
             Contact Us
           </Link>

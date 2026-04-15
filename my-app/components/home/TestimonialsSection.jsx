@@ -36,10 +36,10 @@ export default function TestimonialsSection({ data }) {
   const currentItems = pages[activePage] || [];
 
   return (
-    <section className="home-section relative bg-transparent md:h-[calc(100svh-98px)] md:py-0">
+    <section className="home-section relative bg-transparent py-10 sm:py-12 md:py-16 lg:py-20">
       <div className="absolute inset-0 bg-white pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 md:h-full md:flex md:flex-col md:justify-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <h2 className="text-center text-4xl sm:text-5xl font-black text-black">What People Says</h2>
 
         <AnimatePresence mode="wait">
@@ -49,10 +49,10 @@ export default function TestimonialsSection({ data }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="mt-9 grid grid-cols-1 md:grid-cols-3 gap-4"
+            className="mt-6 sm:mt-8 md:mt-9 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4"
           >
             {currentItems.map((item) => (
-              <article key={`${item.author}-${item.text.slice(0, 24)}`} className="rounded-2xl bg-[#0a0b85] p-5 text-white min-h-56">
+              <article key={`${item.author}-${item.text.slice(0, 24)}`} className="rounded-2xl bg-[#0a0b85] p-4 sm:p-5 text-white min-h-56">
                 <p className="text-sm leading-relaxed text-white/95">{item.text}</p>
                 <p className="mt-6 text-base font-semibold">{item.author}</p>
               </article>

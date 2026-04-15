@@ -35,13 +35,13 @@ function OfferColumn({ eyebrow, title, items, icons }) {
   );
 
   return (
-    <div className="h-full min-h-0 flex flex-col px-4 sm:px-7 py-5 sm:py-6">
-      <div className="sticky top-0 z-10 bg-[#f4f5f7]/92 backdrop-blur-sm pb-3">
-        <p className="text-[10px] font-bold tracking-[0.22em] text-black uppercase">{eyebrow}</p>
-        <h3 className="mt-1.5 text-4xl sm:text-5xl font-extrabold text-black">{title}</h3>
+    <div className="h-full min-h-0 flex flex-col px-4 sm:px-6 md:px-7 py-4 sm:py-5 md:py-6">
+      <div className="sticky top-0 z-10 bg-[#f4f5f7]/92 backdrop-blur-sm pb-2 md:pb-3">
+        <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.22em] text-black uppercase">{eyebrow}</p>
+        <h3 className="mt-1.5 text-3xl sm:text-4xl md:text-5xl font-extrabold text-black">{title}</h3>
       </div>
 
-      <div className="no-scrollbar mt-1.5 space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0">
+      <div className="no-scrollbar mt-1.5 space-y-2.5 md:space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0 max-h-96 md:max-h-none">
         {normalizedItems.map((item, i) => {
           const Icon = icons[i % icons.length];
 
@@ -57,9 +57,9 @@ function OfferColumn({ eyebrow, title, items, icons }) {
         })}
       </div>
 
-      <p className="text-center mt-3 text-[10px] font-bold text-black">scroll for more</p>
-      <div className="text-center mt-2">
-        <Link href="/solution" className="inline-flex rounded-full border-2 border-black px-6 py-1.5 text-black text-sm sm:text-base font-semibold hover:bg-[#d7d9ff] hover:text-black transition-colors">
+      <p className="text-center mt-2 md:mt-3 text-[9px] sm:text-[10px] font-bold text-black">scroll for more</p>
+      <div className="text-center mt-1.5 md:mt-2">
+        <Link href="/solution" className="inline-flex rounded-full border-2 border-black px-4 sm:px-6 py-1 sm:py-1.5 text-black text-xs sm:text-sm md:text-base font-semibold hover:bg-[#d7d9ff] hover:text-black transition-colors">
           Learn More
         </Link>
       </div>
@@ -71,9 +71,9 @@ export default function OfferingsSection({ data }) {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section className="relative w-full bg-transparent border-t border-[#bebebe73] md:h-[calc(100svh-98px)]">
+    <section className="relative w-full bg-transparent border-t border-[#bebebe73] py-10 sm:py-12 md:py-0 md:min-h-screen">
       <div className="w-full h-full border-y border-[#dbdbdb] bg-white/22 backdrop-blur-[2px] overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-auto md:h-full">
           <div
             className={`border-r border-[#dbdbdb] bg-[#f4f5f7]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}
             onMouseEnter={() => setHovered('left')}

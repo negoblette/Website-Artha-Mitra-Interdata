@@ -55,7 +55,7 @@ export default function ContactSection() {
           </button>
         </form>
 
-        <div className="rounded-xl bg-[#22007f] min-h-[330px] md:min-h-[338px] md:mt-5 flex items-center justify-center text-black">
+        <div className="rounded-xl bg-[#22007f] h-44 sm:h-56 md:h-auto md:min-h-[330px] md:mt-5 flex items-center justify-center text-black">
           <MapPin size={44} />
         </div>
       </div>

@@ -1,7 +1,6 @@
 import { getContent } from '@/lib/content';
 import SolutionHero from '@/components/solution/SolutionHero';
-import SolutionGrid from '@/components/solution/SolutionGrid';
-import ServicesGrid from '@/components/solution/ServicesGrid';
+import SolutionServicesGrid from '@/components/solution/SolutionServicesGrid';
 import WhyChoose from '@/components/products/WhyChoose';
 
 export const metadata = {
@@ -16,8 +15,7 @@ export default function SolutionPage() {
   return (
     <>
       <SolutionHero data={data.hero} />
-      <SolutionGrid solutions={data.solutions} />
-      <ServicesGrid services={data.services} />
+      <SolutionServicesGrid solutions={data.solutions} services={data.services} />
       <WhyChoose data={products.whyChoose} />
     </>
   );

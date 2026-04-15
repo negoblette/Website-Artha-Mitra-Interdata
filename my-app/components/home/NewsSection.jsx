@@ -3,9 +3,9 @@
 function NewsRow({ title, excerpt, reverse, tone }) {
   return (
     <article className="bg-[#d9dadd] border border-[#e5e5e5] rounded-lg overflow-hidden">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2">
-        <div className={`h-44 md:h-52 ${tone} ${reverse ? 'md:order-2' : ''}`} />
-        <div className="p-4 md:p-5">
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <div className={`h-36 sm:h-44 md:h-52 ${tone} ${reverse ? 'md:order-2' : ''}`} />
+        <div className="p-3 sm:p-4 md:p-5">
           <h3 className="text-black text-2xl sm:text-3xl font-black leading-tight">{title}</h3>
           <p className="mt-2 text-black text-sm sm:text-[14px] leading-relaxed max-w-xl">
             {excerpt}
@@ -25,9 +25,9 @@ export default function NewsSection({ data }) {
 
   return (
     <section className="home-section relative bg-transparent overflow-hidden">
-      <div className="relative z-10">
-        <h2 className="text-center text-3xl sm:text-4xl font-black text-black mb-4 md:mb-5">NEWS & ARTICLES</h2>
-        <div className="space-y-4 md:space-y-5">
+      <div className="relative z-10 px-4 sm:px-6">
+        <h2 className="text-center text-3xl sm:text-4xl font-black text-black mb-4 sm:mb-5 md:mb-6">NEWS & ARTICLES</h2>
+        <div className="space-y-3 sm:space-y-4 md:space-y-5">
           {rows.map((row, i) => (
             <NewsRow
               key={row.title}
