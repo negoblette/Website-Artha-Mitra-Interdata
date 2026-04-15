@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g3)"/>
+  <path d="M0 560C200 500 340 700 560 620C780 540 930 680 1200 560V800H0V560Z" fill="white" fill-opacity="0.12"/>
+  <text x="80" y="650" fill="white" fill-opacity="0.92" font-family="Arial" font-size="84" font-weight="700">Achievement 3</text>
+</svg>
