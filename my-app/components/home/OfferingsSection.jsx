@@ -35,7 +35,7 @@ function OfferColumn({ eyebrow, title, items, icons, cta }) {
   );
 
   return (
-    <div className="h-full ml-8 min-h-0 flex flex-col px-4 sm:px-7 py-5 sm:py-6">
+    <div className="h-full min-h-0 flex flex-col px-4 sm:px-7 py-5 sm:py-6">
       <div className="sticky top-0 z-10 bg-[#f4f5f7]/92 backdrop-blur-sm pb-3">
         <p className="text-[10px] font-bold tracking-[0.22em] text-black uppercase">{eyebrow}</p>
         <h3 className="mt-1.5 text-4xl sm:text-5xl font-extrabold text-black">{title}</h3>
@@ -72,34 +72,41 @@ export default function OfferingsSection({ data }) {
   const [leftTab, rightTab] = data.tabs;
 
   return (
-    <section className="relative w-full bg-white border-t border-[#bebebe73] md:h-[calc(100svh-98px)]">
-      <div className="w-full h-full border-y border-[#dbdbdb] bg-white overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-full">
-          <div
-            className={`border-r border-[#dbdbdb] bg-[#f4f5f7]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}
-            onMouseEnter={() => setHovered('left')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <OfferColumn
-              eyebrow={leftTab.eyebrow}
-              title={leftTab.label}
-              items={leftTab.items}
-              icons={leftIcons}
-              cta={data.cta}
-            />
-          </div>
-          <div
-            className={`bg-[#f2f3f5]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'left' ? 'md:opacity-45' : 'md:opacity-100'}`}
-            onMouseEnter={() => setHovered('right')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <OfferColumn
-              eyebrow={rightTab.eyebrow}
-              title={rightTab.label}
-              items={rightTab.items}
-              icons={rightIcons}
-              cta={data.cta}
-            />
+    <section className="relative w-full overflow-x-hidden border-t border-[#bebebe73] bg-white md:h-[calc(100svh-98px)]">
+      <div className="pointer-events-none absolute inset-0 hidden md:grid md:grid-cols-2">
+        <div className="border-r border-[#dbdbdb] bg-[#f4f5f7]/82" />
+        <div className="bg-[#f2f3f5]/82" />
+      </div>
+
+      <div className="relative z-10 mx-auto h-full w-full max-w-[1200px] px-6 md:px-8">
+        <div className="h-full overflow-hidden border-y border-[#dbdbdb] bg-transparent">
+          <div className="grid h-full min-w-0 grid-cols-1 md:grid-cols-2">
+            <div
+              className={`h-full min-h-0 bg-[#f4f5f7]/82 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}
+              onMouseEnter={() => setHovered('left')}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <OfferColumn
+                eyebrow={leftTab.eyebrow}
+                title={leftTab.label}
+                items={leftTab.items}
+                icons={leftIcons}
+                cta={data.cta}
+              />
+            </div>
+            <div
+              className={`h-full min-h-0 bg-[#f2f3f5]/82 transition-all duration-300 md:border-l md:border-[#dbdbdb] ${hovered === 'left' ? 'md:opacity-45' : 'md:opacity-100'}`}
+              onMouseEnter={() => setHovered('right')}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <OfferColumn
+                eyebrow={rightTab.eyebrow}
+                title={rightTab.label}
+                items={rightTab.items}
+                icons={rightIcons}
+                cta={data.cta}
+              />
+            </div>
           </div>
         </div>
       </div>
