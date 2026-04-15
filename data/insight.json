@@ -1,0 +1,107 @@
+{
+  "hero": {
+    "title": "Insight",
+    "subtitle": "Knowledge Hub",
+    "description": "Stay informed with the latest articles, news, and insights about IT infrastructure, cybersecurity, and technology trends from Artha Mitra Interdata."
+  },
+  "articles": {
+    "title": "Articles",
+    "subtitle": "In-depth analysis and expert perspectives",
+    "items": [
+      {
+        "slug": "importance-of-network-security-2026",
+        "category": "Security",
+        "title": "The Growing Importance of Network Security in 2026",
+        "excerpt": "As cyber threats become more sophisticated, organizations must adopt a multi-layered security approach. From next-generation firewalls to advanced threat detection, learn how modern enterprises are protecting their digital assets.",
+        "content": "In today's interconnected world, network security has become a critical business priority. With the rise of remote work, cloud adoption, and IoT devices, the attack surface has expanded dramatically. Organizations need comprehensive security strategies that encompass perimeter defense, internal segmentation, and continuous monitoring. At Artha Mitra Interdata, we help businesses implement robust security frameworks using industry-leading solutions from our technology partners including Juniper Networks, Barracuda, and Hillstone Networks.",
+        "author": "AMI Security Team",
+        "date": "2026-02-15",
+        "tags": ["Network Security", "Cybersecurity", "Enterprise"]
+      },
+      {
+        "slug": "optimizing-bandwidth-enterprise",
+        "category": "Infrastructure",
+        "title": "Optimizing Bandwidth for Enterprise Networks",
+        "excerpt": "Bandwidth optimization is crucial for maintaining network performance. Discover best practices for managing and optimizing your organization's bandwidth to ensure seamless operations and user experience.",
+        "content": "Enterprise networks face increasing demands as applications become more bandwidth-intensive. Video conferencing, cloud services, and real-time collaboration tools all compete for available bandwidth. Effective bandwidth management requires a combination of traffic shaping, QoS policies, and intelligent monitoring. Solutions from DataBlink and A10 Networks provide the tools needed to optimize network performance while controlling costs. Our team at AMI specializes in designing and implementing bandwidth management solutions tailored to your specific needs.",
+        "author": "AMI Infrastructure Team",
+        "date": "2026-01-20",
+        "tags": ["Bandwidth", "Network Optimization", "Infrastructure"]
+      },
+      {
+        "slug": "zero-trust-architecture-guide",
+        "category": "Security",
+        "title": "A Practical Guide to Zero Trust Architecture",
+        "excerpt": "Zero Trust is no longer just a buzzword — it's becoming the standard for enterprise security. Learn how to implement Zero Trust principles in your organization's network infrastructure.",
+        "content": "The traditional perimeter-based security model is no longer sufficient in today's distributed work environment. Zero Trust Architecture operates on the principle of 'never trust, always verify,' requiring authentication and authorization for every access request regardless of location. Implementing Zero Trust involves network micro-segmentation, strong identity verification, least-privilege access controls, and continuous monitoring. With solutions from Pulse Secure for secure access and Juniper Networks for network segmentation, AMI helps organizations transition to a Zero Trust framework systematically.",
+        "author": "AMI Security Team",
+        "date": "2025-12-10",
+        "tags": ["Zero Trust", "Security Architecture", "Access Control"]
+      },
+      {
+        "slug": "future-of-it-infrastructure",
+        "category": "Trends",
+        "title": "The Future of IT Infrastructure: Trends to Watch",
+        "excerpt": "From AI-driven network management to edge computing, the IT infrastructure landscape is evolving rapidly. Here are the key trends shaping the future of enterprise IT.",
+        "content": "The IT infrastructure landscape is undergoing a fundamental transformation. AI and machine learning are being integrated into network management tools, enabling predictive analytics and automated troubleshooting. Edge computing is bringing processing power closer to where data is generated, reducing latency and improving performance. Software-defined networking (SDN) continues to gain traction, offering greater flexibility and programmability. As organizations navigate these trends, having a trusted IT partner like Artha Mitra Interdata ensures that technology investments are strategic and future-proof.",
+        "author": "AMI Research Team",
+        "date": "2025-11-05",
+        "tags": ["IT Trends", "AI", "Edge Computing", "SDN"]
+      }
+    ]
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest updates and announcements",
+    "items": [
+      {
+        "slug": "security-spending-2018",
+        "category": "Security",
+        "title": "IT Security Spending to Reach $96 Billion in 2018",
+        "excerpt": "Gartner predicts that worldwide security spend will reach $96 billion dollars, up 8% from the previous year. The latest figures show substantial increases reflecting the growing importance of cybersecurity in modern enterprises.",
+        "date": "2018-03-15",
+        "source": "Gartner Research"
+      },
+      {
+        "slug": "pci-dss-compliance",
+        "category": "Compliance",
+        "title": "The Real Reason You're Failing at PCI DSS Compliance",
+        "excerpt": "IT organizations don't struggle with PCI DSS compliance due to a lack of knowledge or technology. The problem is proficiency. With years of data breach investigation reports, patterns start to become clear.",
+        "date": "2018-02-20",
+        "source": "Industry Report"
+      },
+      {
+        "slug": "ddi-iot-success",
+        "category": "IoT",
+        "title": "DDI is a Critical Component of IoT Success",
+        "excerpt": "The Internet of Things era has arrived, and businesses need to be prepared for a world where everything is connected. There are currently 25 billion internet-connected devices, and that will double by 2025.",
+        "date": "2018-01-10",
+        "source": "Technology Review"
+      },
+      {
+        "slug": "fighting-automation",
+        "category": "Cyber Security",
+        "title": "Fighting Automation with Automation",
+        "excerpt": "Disruptions caused by autonomous malware could have devastating implications. As attackers leverage automation, defenders must also adopt automated threat detection and response capabilities to keep pace.",
+        "date": "2017-11-25",
+        "source": "Cybersecurity Today"
+      },
+      {
+        "slug": "ami-juniper-partnership-renewal",
+        "category": "Partnership",
+        "title": "AMI Renews Strategic Partnership with Juniper Networks",
+        "excerpt": "Artha Mitra Interdata proudly announces the renewal of its strategic partnership with Juniper Networks, reinforcing our commitment to delivering cutting-edge networking solutions to clients across Indonesia.",
+        "date": "2026-01-15",
+        "source": "AMI Press Release"
+      },
+      {
+        "slug": "ransomware-threats-rising",
+        "category": "Cyber Security",
+        "title": "Ransomware Threats Continue to Rise in Southeast Asia",
+        "excerpt": "Southeast Asian enterprises face an increasing wave of ransomware attacks targeting critical infrastructure. Organizations are urged to strengthen their security posture with multi-layered defense strategies.",
+        "date": "2025-12-20",
+        "source": "ASEAN Cyber Report"
+      }
+    ]
+  }
+}
