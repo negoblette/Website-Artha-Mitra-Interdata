@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIthlete</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="site-container">
+    <header>
+      <nav class="navbar">
+        <h1 class="logo">AIthlete</h1>
+        <ul class="nav-links">
+          <li><a href="#" onclick="showTab('home')">Home</a></li>
+          <li><a href="#" onclick="showTab('workout')">Workout</a></li>
+          <li><a href="#" onclick="showTab('nutrition')">Nutrition</a></li>
+          <li><a href="#" onclick="showTab('progress')">Progress</a></li>
+          <li><a href="#" onclick="showTab('community')">Community</a></li>
+          <li><a href="#" onclick="showTab('membership')">Membership</a></li>
+          <li><a href="#" onclick="showTab('login')">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="tab-section">
+        <h2>Welcome to AIthlete</h2>
+        <p>Your AI-powered fitness and nutrition planner.</p>
+      </section>
+
+      <section id="workout" class="tab-section hidden">
+        <h2>Workout Program</h2>
+        <button onclick="generateWorkout()">Get AI Recommendation</button>
+        <div id="workout-output"></div>
+      </section>
+
+      <section id="nutrition" class="tab-section hidden">
+        <h2>Nutrition Plan</h2>
+        <button onclick="generateMealPlan()">Get AI Nutrition</button>
+        <div id="meal-output"></div>
+      </section>
+
+      <section id="progress" class="tab-section hidden">
+        <h2>Progress Tracker</h2>
+        <p>Track your weight, calories burned, and muscle gain.</p>
+      </section>
+
+      <section id="community" class="tab-section hidden">
+        <h2>Community</h2>
+        <p>Join discussions and fitness challenges.</p>
+      </section>
+
+      <section id="membership" class="tab-section hidden">
+        <h2>Membership</h2>
+        <p>Choose a plan to unlock premium features.</p>
+      </section>
+
+      <section id="login" class="tab-section hidden">
+        <h2>Login / Sign Up</h2>
+        <form id="loginForm" onsubmit="loginUser(event)">
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 AIthlete Inc. All rights reserved.</p>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
