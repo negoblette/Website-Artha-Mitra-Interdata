@@ -36,7 +36,7 @@ export default function Navbar({ data }) {
           </Link>
 
           <motion.div
-            className="hidden md:flex h-12 items-center gap-0.5 bg-[rgb(13,27,94)] rounded-full px-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+            className="hidden xl:flex h-12 items-center gap-0.5 bg-[rgb(13,27,94)] rounded-full px-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
           >
             {navItems.map((item) => (
               <motion.div
@@ -84,7 +84,7 @@ export default function Navbar({ data }) {
             <motion.button
               onClick={() => setMobileOpen(!mobileOpen)}
               whileTap={{ scale: 0.9 }}
-              className="md:hidden p-2.5 text-[#111827] hover:bg-[#0a0b85] hover:text-white rounded-full transition-colors"
+              className="xl:hidden p-2.5 text-[#111827] hover:bg-[#0a0b85] hover:text-white rounded-full transition-colors"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </motion.button>
