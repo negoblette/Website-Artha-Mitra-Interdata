@@ -32,7 +32,7 @@ export default function NewsSection({ data }) {
   return (
     <section className="home-section relative bg-transparent overflow-hidden">
       <div className="relative z-10 pb-30">
-        <h2 className= "text-center text-[40px] font-black text-[rgb(13,27,94)] mb-4 md:mb-5">NEWS & ARTICLES</h2>
+        <h2 className= "text-center text-3xl sm:text-4xl lg:text-5xl font-black text-[rgb(13,27,94)] mb-4 md:mb-5">News & Articles</h2>
         <div className="space-y-4 md:space-y-5">
           {rows.map((row, i) => (
             <NewsRow
