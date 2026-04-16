@@ -27,6 +27,7 @@ export default function NewsSection({ data }) {
     { tone: 'news-photo-2', reverse: true },
     { tone: 'news-photo-3' },
   ];
+  const items = data?.items || [];
 
   return (
     <section className="home-section mt-10 md:mt-12 relative bg-transparent overflow-hidden">
@@ -36,17 +37,17 @@ export default function NewsSection({ data }) {
             Top Trending News
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
-            {data.title}
+            {data?.title || 'News & Articles'}
           </h2>
           <p className="mt-2.5 text-sm sm:text-base text-black/75 max-w-2xl mx-auto">
-            {data.subtitle}
+            {data?.subtitle || 'Stay updated with the latest in IT security and technology'}
           </p>
         </div>
 
         <div className="space-y-3.5 md:space-y-4">
-          {data.items.slice(0, visuals.length).map((item, i) => (
+          {items.slice(0, visuals.length).map((item, i) => (
             <NewsRow
-              key={item.slug}
+              key={item.slug || `${item.title}-${i}`}
               title={item.title}
               category={item.category}
               reverse={visuals[i].reverse}
@@ -58,10 +59,10 @@ export default function NewsSection({ data }) {
 
         <div className="mt-6 flex justify-center">
           <Link
-            href={data.cta.href}
+            href={data?.cta?.href || '/insight'}
             className="inline-flex items-center justify-center rounded-full border border-black px-6 py-2 text-sm sm:text-base font-semibold text-black bg-[#eceeff] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d7d9ff] hover:shadow-[0_12px_24px_rgba(10,11,133,0.12)]"
           >
-            {data.cta.label}
+            {data?.cta?.label || 'Visit Articles Page'}
           </Link>
         </div>
       </div>
