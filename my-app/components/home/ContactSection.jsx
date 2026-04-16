@@ -40,7 +40,7 @@ export default function ContactSection() {
               />
             </div>
           ))}
-
+          
           <div>
             <label className="block text-[11px] tracking-wide font-bold uppercase text-black mb-1">message</label>
             <textarea
