@@ -212,7 +212,7 @@ export default function TestimonialsSection({ data }) {
 
   const GAP = 20;
 
-  // ✅ responsive items
+  //responsive items
   useEffect(() => {
     const handleResize = () => {
       setItemsPerPage(getItemsPerPage());
@@ -223,7 +223,7 @@ export default function TestimonialsSection({ data }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ✅ container width
+  
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -236,7 +236,7 @@ export default function TestimonialsSection({ data }) {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // ✅ clone items (infinite)
+  //clone items infinite
   const loopItems = useMemo(() => {
     if (!items.length) return [];
 
@@ -247,7 +247,7 @@ export default function TestimonialsSection({ data }) {
     ];
   }, [items, itemsPerPage]);
 
-  // ✅ ukuran card
+  //ukuran card
   const cardWidth =
     itemsPerPage > 0
       ? (containerWidth - GAP * (itemsPerPage - 1)) / itemsPerPage
@@ -255,7 +255,7 @@ export default function TestimonialsSection({ data }) {
 
   const step = cardWidth + GAP;
 
-  // ✅ reset awal
+  //reset awal
   useEffect(() => {
     if (!items.length) return;
 
@@ -266,7 +266,7 @@ export default function TestimonialsSection({ data }) {
     return () => cancelAnimationFrame(frame);
   }, [itemsPerPage, items.length]);
 
-  // ✅ auto slide (per CARD, bukan per page)
+  // auto slide (per CARD)
   useEffect(() => {
     if (!items.length || isPaused) return;
 
@@ -277,7 +277,7 @@ export default function TestimonialsSection({ data }) {
     return () => clearInterval(timer);
   }, [isPaused, items.length]);
 
-  // ✅ infinite reset
+  //infinite reset / loop
   const handleComplete = () => {
     if (!items.length) return;
 
@@ -292,7 +292,7 @@ export default function TestimonialsSection({ data }) {
     }
   };
 
-  // ✅ re-enable animasi
+  //re enable animasi
   useEffect(() => {
     if (!isAnimating) {
       const id = requestAnimationFrame(() => setIsAnimating(true));
@@ -300,7 +300,7 @@ export default function TestimonialsSection({ data }) {
     }
   }, [isAnimating]);
 
-  // ✅ DOT (berdasarkan kelompok 3)
+  //DOT per 3 card
   const totalPages = items.length;
 
   const activePage =
