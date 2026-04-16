@@ -57,7 +57,7 @@ export default function ContactSection() {
           </button>
         </form>
 
-        <div className="rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] min-h-[330px] md:min-h-[360px] md:mt-5 flex items-center justify-center text-black">
+        <div className="rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] min-h-[330px] md:min-h-[360px] md:mt-5 flex items-center justify-center text-white">
           <MapPin size={35} />
         </div>
       </div>
