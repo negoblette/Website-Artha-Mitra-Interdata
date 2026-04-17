@@ -115,12 +115,6 @@ export default function TestimonialsSection({ data }) {
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-transparent">
       <div className="pointer-events-none absolute top-0 left-1/2 h-full w-[115vw] -translate-x-1/2">
-        <Image
-          src="/decor/careerelements.svg"
-          alt=""
-          fill
-          className="object-cover blur-[1px]"
-        />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-4 py-0 sm:px-6">

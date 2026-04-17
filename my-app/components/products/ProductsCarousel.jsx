@@ -32,7 +32,6 @@ export default function ProductsCarousel({ items = {} }) {
     return () => window.clearInterval(timerId);
   }, [photos.length]);
 
-  // Preload images to avoid stutter on first transition
   useEffect(() => {
     if (!photos.length) return;
     photos.forEach((src) => {

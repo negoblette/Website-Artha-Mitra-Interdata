@@ -31,7 +31,7 @@ export default function Navbar({ data }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
           <Link href="/" className="flex items-center group justify-self-start">
             <motion.div className="relative w-44 sm:w-48 h-12 sm:h-14 overflow-hidden" whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>
-              <Image src={data.logo} alt={data.companyName} fill className="object-contain object-left" priority />
+              <Image src={data.logo} alt={data.companyName} fill sizes="180px" className="object-contain object-left" priority />
             </motion.div>
           </Link>
 

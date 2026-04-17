@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
   const global = getContent('global');
 
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${geistSans.variable} ${geistMono.variable} ${alegreyaSans.variable} ${sora.variable} ${dmSans.variable} antialiased`}>
         <LayoutShell globalData={global}>{children}</LayoutShell>
       </body>
