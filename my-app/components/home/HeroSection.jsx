@@ -9,9 +9,9 @@ export default function HeroSection({ data }) {
     <section className="home-panel relative overflow-hidden bg-white min-h-screen flex flex-col items-center justify-center">
       <WaveCanvas />
 
-      <div className="hero-content-shell relative z-10 w-full max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 text-center">
+      <div className="hero-content-shell relative z-10 w-full max-w-10xl mx-auto px-6 sm:px-8 lg:px-10 text-center">
 
-        <h1 className="hero-fade-2 mb-2  max-w-4xl mx-auto text-4xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] lg:leading-[0.95] text-[rgb(107,107,184)] font-bold">
+        <h1 className="hero-fade-2 mb-2 max-w-6xl mx-auto text-5xl sm:text-7xl lg:text-8xl xl:text-9xl leading-[1.05] lg:leading-[0.95] text-[rgb(107,107,184)] font-bold">
           {words[0]} <span className="text-[rgb(13,27,94)] font-extrabold">{words[1]}</span> {words[2]} {words[3]}<br />{words[4]}
         </h1>
 
