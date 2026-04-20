@@ -157,11 +157,6 @@ section.scroll-reveal.in-view {
   }
 }
 
-.font-alegreya {
-  font-family: var(--font-alegreya-sans), var(--font-sans), sans-serif;
-}
-
-
 .hero-readable-title {
   text-shadow:
     0 2px 0 rgba(255, 255, 255, 0.9),

@@ -1,115 +1,153 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function ProductsCarousel({ items = {} }) {
   const data = Array.isArray(items) ? { images: items } : items || {};
   const photos = data.images || [];
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  const getWrappedIndex = (index) => {
-    if (!photos.length) return 0;
-    return (index + photos.length) % photos.length;
+  const [trackIndex, setTrackIndex] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  const CARD_RATIO = 0.30;
+  const GAP = 20;
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const update = () => setContainerWidth(containerRef.current.offsetWidth);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const cardWidth = containerWidth * CARD_RATIO;
+  const step = cardWidth + GAP;
+
+  const loopPhotos = photos.length ? [photos[photos.length - 1], ...photos, photos[0]] : [];
+
+  useEffect(() => {
+    if (!photos.length || isPaused) return;
+    const id = setInterval(() => setTrackIndex((p) => p + 1), 3500);
+    return () => clearInterval(id);
+  }, [isPaused, photos.length]);
+
+  const handleAnimationComplete = () => {
+    if (trackIndex >= loopPhotos.length - 1) {
+      setIsAnimating(false);
+      setTrackIndex(1);
+    }
+    if (trackIndex <= 0) {
+      setIsAnimating(false);
+      setTrackIndex(loopPhotos.length - 2);
+    }
   };
 
-  const stripSlots = [
-    { offset: -2, x: '-94%', scale: 0.8, zIndex: 1, opacity: 0.76 },
-    { offset: -1, x: '-48%', scale: 0.9, zIndex: 2, opacity: 0.88 },
-    { offset: 0, x: '0%', scale: 1, zIndex: 5, opacity: 1 },
-    { offset: 1, x: '48%', scale: 0.9, zIndex: 2, opacity: 0.88 },
-    { offset: 2, x: '94%', scale: 0.8, zIndex: 1, opacity: 0.76 },
-  ];
-
   useEffect(() => {
-    if (photos.length <= 1) return;
+    if (!isAnimating) {
+      const id = requestAnimationFrame(() => setIsAnimating(true));
+      return () => cancelAnimationFrame(id);
+    }
+  }, [isAnimating]);
 
-    const timerId = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % photos.length);
-    }, 3000);
+  const activeRealIndex = ((trackIndex - 1) % photos.length + photos.length) % photos.length;
 
-    return () => window.clearInterval(timerId);
-  }, [photos.length]);
+  const goTo = (i) => {
+    setIsAnimating(true);
+    setTrackIndex(i + 1);
+  };
 
-  useEffect(() => {
-    if (!photos.length) return;
-    photos.forEach((src) => {
-      const img = new window.Image();
-      img.src = src;
-    });
-  }, [photos]);
+  if (!photos.length) return null;
+
+  const offsetX = containerWidth / 2 - cardWidth / 2 - trackIndex * step;
 
   return (
-    <section className="relative flex items-center overflow-hidden bg-transparent py-6">
-      <div className="absolute left-0 right-0 top-8 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.22)_0px,rgba(124,140,232,0.22)_2px,transparent_2px,transparent_24px)] opacity-35" />
-      <div className="absolute left-0 right-0 bottom-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
+    <section className="relative overflow-hidden bg-transparent py-10">
+      <div className="absolute inset-0 pointer-events-none bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.18)_0px,rgba(124,140,232,0.18)_2px,transparent_2px,transparent_24px)] opacity-30" />
 
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
-        {/* <h2 className="text-5xl font-black text-[#0a0b85] md:text-6xl">{data.title}</h2> */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 text-center">
 
-        {/* ga usah make title jadi terlalu cluttered */}
+        <div
+          ref={containerRef}
+          className="relative w-full overflow-hidden"
+          style={{ height: 'clamp(130px, 16vw, 230px)' }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <motion.div
+            className="absolute top-0 flex items-center"
+            style={{ gap: GAP }}
+            animate={{ x: offsetX }}
+            transition={
+              isAnimating
+                ? { type: 'spring', stiffness: 280, damping: 32, mass: 0.1 }
+                : { duration: 0 }
+            }
+            onAnimationComplete={handleAnimationComplete}
 
-        <div className="mx-auto mt-8 w-full max-w-[1120px] overflow-hidden">
-          <div className="relative mx-auto h-[32vh] w-full sm:h-[24vh]">
-            {photos.length ? stripSlots.map((slot, slotIndex) => {
-              const photoIndex = getWrappedIndex(activeIndex + slot.offset);
-              const isActive = slot.offset === 0;
-
+            // ini ribet bgt logic animationnya(?)
+          >
+            {loopPhotos.map((src, i) => {
+              const isActive = i === trackIndex;
               return (
-                <div key={`${photoIndex}-${slotIndex}`} className="absolute left-1/2 top-1/2" style={{ transform: 'translate(-50%, -50%)' }}>
-                  <motion.button
-                    type="button"
-                    onClick={() => setActiveIndex(photoIndex)}
-                    initial={false}
-                    animate={{ x: slot.x, scale: slot.scale, opacity: slot.opacity }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                    className="relative overflow-hidden rounded-xl border border-[#c9d2ff] bg-[#dfe6ff] shadow-[0_10px_22px_rgba(10,11,133,0.16)] transform-gpu"
-                    style={{
-                      width: 'clamp(180px, 24vw, 340px)',
-                      height: 'clamp(96px, 11vw, 170px)',
-                      willChange: 'transform, opacity',
-                      zIndex: slot.zIndex,
-                    }}
-                    aria-label={`Select life image ${photoIndex + 1}`}
-                    aria-current={isActive}
-                  >
-                    <Image
-                      src={photos[photoIndex]}
-                      alt={`${data.title} ${photoIndex + 1}`}
-                      fill
-                      sizes="(min-width: 1024px) 24vw, 44vw"
-                      className="object-cover"
-                      priority={photoIndex === 0}
-                    />
-                    <span className={`absolute inset-0 bg-gradient-to-t from-black/30 to-transparent transition-opacity duration-500 ${isActive ? 'opacity-72' : 'opacity-42'}`} />
-                  </motion.button>
-                </div>
+                <motion.div
+                  key={i}
+                  animate={{
+                    scale: isActive ? 1 : 0.82,
+                    opacity: isActive ? 1 : 0.80,
+                  }}
+                  transition={{ type: 'spring', stiffness: 280, damping: 32 }}
+                  className="relative flex-shrink-0 overflow-hidden rounded-2xl cursor-pointer"
+                  style={{
+                    width: cardWidth,
+                    height: isActive ? 'clamp(130px, 16vw, 230px)' : 'clamp(100px, 12vw, 180px)',
+                    transition: 'height 0.4s cubic-bezier(0.22,1,0.36,1)',
+                    border: isActive ? '2px solid rgba(10,11,133,0.4)' : '1px solid #c9d2ff',
+                    boxShadow: isActive ? '0 16px 40px rgba(10,11,133,0.28)' : '0 8px 20px rgba(10,11,133,0.14)',
+                    zIndex: isActive ? 10 : 1,
+                  }}
+                  onClick={() => goTo(((i - 1) + photos.length) % photos.length)}
+                >
+                  <Image
+                    src={src}
+                    alt={`Image ${i}`}
+                    fill
+                    sizes="55vw"
+                    className="object-cover"
+                    priority={i <= 2}
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t from-black/40 to-transparent ${isActive ? 'opacity-50' : 'opacity-70'}`} />
+                </motion.div>
               );
-            }) : (
-              <div className="flex h-full items-center justify-center">
-                <p className="text-sm font-black text-gray-500">No images available</p>
-              </div>
-            )}
-          </div>
+            })}
+          </motion.div>
         </div>
 
-        <div className="mt-6 flex justify-center gap-2">
+        <div className="mt-8 flex justify-center gap-2">
           {photos.map((_, i) => (
             <button
               key={i}
               type="button"
-              onClick={() => setActiveIndex(i)}
-              className={`rounded-full transition-all duration-300 ${activeIndex === i ? 'h-2.5 w-7 bg-[#0a0b85]' : 'h-2.5 w-2.5 bg-[#0a0b85]/35 hover:bg-[#0a0b85]/55'}`}
-              aria-label={`Go to slide ${i + 1}`}
-              aria-current={activeIndex === i}
+              onClick={() => goTo(i)}
+              className={`rounded-full transition-all duration-300 ${
+                activeRealIndex === i
+                  ? 'h-1.5 w-7 bg-[#0a0b85]'
+                  : 'h-1.5 w-2.5 bg-[#0a0b85]/35 hover:bg-[#0a0b85]/55'
+              }`}
             />
           ))}
         </div>
 
-        <p className="mx-auto mt-7 max-w-3xl text-sm leading-relaxed text-black/80 md:text-base">{data.description}</p>
+        {data.description && (
+          <p className="mx-auto mt-6 max-w-3xl text-sm leading-relaxed text-black/80 md:text-base">
+            {data.description}
+          </p>
+        )}
       </div>
     </section>
   );
 }
-
