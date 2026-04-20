@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mountain, ChevronDown } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
@@ -22,12 +23,24 @@ function ProgramCard({ program, index }) {
 
           <div className="relative">
             <div className="mb-5 flex gap-3 overflow-x-auto pb-1">
-              {program.images.map((_, j) => (
+              {program.images.map((imageSrc, j) => (
                 <div
                   key={j}
-                  className="flex h-20 w-24 flex-shrink-0 items-center justify-center rounded-2xl border border-white/70 bg-white/88 shadow-md shadow-[#0a0b85]/8 transition-shadow group-hover:shadow-lg"
+                  className="relative h-20 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-white/88 shadow-md shadow-[#0a0b85]/8 transition-shadow group-hover:shadow-lg"
                 >
-                  <Mountain className="text-[#0a0b85] group-hover:scale-110 transition-transform duration-500" size={20} />
+                  {imageSrc ? (
+                    <Image
+                      src={imageSrc}
+                      alt={`${program.name} image ${j + 1}`}
+                      fill
+                      sizes="96px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-[#f3f6ff]">
+                      <Mountain className="text-[#0a0b85] transition-transform duration-500 group-hover:scale-110" size={20} />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
