@@ -2,44 +2,51 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Mountain } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 function EventCard({ event, index, flippedCards, toggleFlip }) {
   const isFlipped = Boolean(flippedCards[index]);
+  const hasImage = typeof event.image === 'string' && event.image.trim().length > 0;
 
   return (
     <AnimatedSection delay={index * 0.1}>
-      <button
-        type="button"
-        onClick={() => toggleFlip(index)}
+      <motion.article
+        layout
         className="group h-full w-full text-left [perspective:1600px]"
-        aria-pressed={isFlipped}
-        aria-label={`Flip event card ${index + 1}`}
       >
         <div
-          className={`relative min-h-[520px] rounded-[1.85rem] [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:rotateY(180deg)] ${
+          className={`relative min-h-[520px] rounded-[1.85rem] [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
             isFlipped ? '[transform:rotateY(180deg)]' : ''
           }`}
         >
           <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-white/65 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm [backface-visibility:hidden]">
             <div className="relative flex h-52 w-full items-center justify-center overflow-hidden bg-[linear-gradient(135deg,#eef4ff_0%,#d8e4ff_46%,#f7faff_100%)]">
-              <Image
-                src={event.image}
-                alt={event.name}
-                fill
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              {hasImage ? (
+                <Image
+                  src={event.image}
+                  alt={event.name}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,#eef4ff_0%,#d8e4ff_46%,#f7faff_100%)]">
+                  <Mountain className="text-[#0a0b85] transition-transform duration-500 group-hover:scale-110" size={30} />
+                </div>
+              )}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.96),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(10,11,133,0.10),transparent_28%),linear-gradient(135deg,rgba(10,11,133,0.06),transparent_58%)]" />
               <div className="absolute left-5 top-5 rounded-full border border-white/75 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_10px_20px_rgba(10,11,133,0.08)] backdrop-blur-sm">
                 Event
               </div>
               <div className="absolute -right-10 top-8 h-28 w-28 rounded-full bg-[#0a0b85]/10 blur-3xl" />
               <div className="absolute -left-8 bottom-0 h-20 w-20 rounded-full bg-white/40 blur-2xl" />
-              <div className="relative flex h-16 w-16 items-center justify-center rounded-[1.45rem] border border-white/75 bg-white/90 shadow-[0_18px_40px_rgba(10,11,133,0.14)] ring-1 ring-[#0a0b85]/5">
-                <Mountain className="text-[#0a0b85] transition-transform duration-500 group-hover:scale-110" size={30} />
-              </div>
+              {!hasImage && (
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-[1.45rem] border border-white/75 bg-white/90 shadow-[0_18px_40px_rgba(10,11,133,0.14)] ring-1 ring-[#0a0b85]/5">
+                  <Mountain className="text-[#0a0b85] transition-transform duration-500 group-hover:scale-110" size={30} />
+                </div>
+              )}
             </div>
 
             <div className="relative flex min-h-[258px] flex-col p-5 sm:p-6">
@@ -54,16 +61,22 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
                 {event.description}
               </p>
               <div className="mt-auto pt-6">
-                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#0a0b85]">
-                  Flip card
-                  <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
+                <button
+                  type="button"
+                  onClick={() => toggleFlip(index)}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#0a0b85] transition-colors hover:text-[#111827]"
+                  aria-pressed={isFlipped}
+                  aria-label={isFlipped ? `Show front of ${event.name}` : `Flip ${event.name} card`}
+                >
+                  {isFlipped ? 'Show front' : 'Flip card'}
+                  <ChevronRight className="h-4 w-4 transition-transform duration-300 hover:translate-x-1" />
+                </button>
               </div>
             </div>
           </div>
 
           <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-[#0a0b85]/15 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] p-6 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
-            <div className="flex h-full flex-col">
+              <div className="flex h-full flex-col">
               <span className="inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-white/90">
                 Event Details
               </span>
@@ -72,25 +85,35 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
                 {event.name}
               </h4>
 
-              <p className="mt-4 text-sm leading-7 text-white/80">
+              <p className="mt-4 text-sm leading-5 text-white/80">
                 {event.description}
               </p>
 
-              <div className="mt-18 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+              <div className="mt-15 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
                   Category
                 </p>
                 <p className="mt-2 text-base font-semibold text-white">
                   {event.category}
                 </p>
-                <p className="mt-3 text-sm leading-6 text-white/75">
-                  Click the card again to return to the front side.
+                <p className="mt-[1] text-sm leading-6 text-white/75">
+                  Use the button below to return to the front side.
                 </p>
+
+                <button
+                  type="button"
+                  onClick={() => toggleFlip(index)}
+                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/15"
+                  aria-pressed={isFlipped}
+                  aria-label={isFlipped ? `Show front of ${event.name}` : `Flip ${event.name} card`}
+                >
+                  {isFlipped ? 'Show front' : 'Flip card'}
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </button>
+      </motion.article>
     </AnimatedSection>
   );
 }
