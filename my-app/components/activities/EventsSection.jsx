@@ -1,102 +1,204 @@
 'use client';
+
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mountain, ChevronDown } from 'lucide-react';
+import Image from 'next/image';
+import { ChevronLeft, ChevronRight, Mountain } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
-function EventCard({ event, index }) {
-  const [expanded, setExpanded] = useState(false);
+function EventCard({ event, index, flippedCards, toggleFlip }) {
+  const isFlipped = Boolean(flippedCards[index]);
 
   return (
     <AnimatedSection delay={index * 0.1}>
-      <motion.div
-        layout
-        whileHover={{ y: -6, scale: 1.02 }}
-        transition={{ duration: 0.2 }}
-        className="group cursor-pointer overflow-hidden rounded-[1.75rem] border border-white/60 bg-white shadow-[0_20px_55px_rgba(15,23,42,0.08)] backdrop-blur-sm transition-shadow hover:shadow-[0_28px_70px_rgba(10,11,133,0.16)]"
-        onClick={() => setExpanded(!expanded)}
+      <button
+        type="button"
+        onClick={() => toggleFlip(index)}
+        className="group h-full w-full text-left [perspective:1600px]"
+        aria-pressed={isFlipped}
+        aria-label={`Flip event card ${index + 1}`}
       >
-        <div className="relative flex h-48 w-full items-center justify-center overflow-hidden bg-[linear-gradient(135deg,#edf3ff_0%,#dce6ff_52%,#f6f9ff_100%)]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.9),transparent_0%),linear-gradient(135deg,rgba(10,11,133,0.08),transparent_58%)]" />
-          <div className="absolute left-5 top-5 rounded-full border border-white/70 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85]">
-            Event
+        <div
+          className={`relative min-h-[520px] rounded-[1.85rem] [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:rotateY(180deg)] ${
+            isFlipped ? '[transform:rotateY(180deg)]' : ''
+          }`}
+        >
+          <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-white/65 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm [backface-visibility:hidden]">
+            <div className="relative flex h-52 w-full items-center justify-center overflow-hidden bg-[linear-gradient(135deg,#eef4ff_0%,#d8e4ff_46%,#f7faff_100%)]">
+              <Image
+                src={event.image}
+                alt={event.name}
+                fill
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.96),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(10,11,133,0.10),transparent_28%),linear-gradient(135deg,rgba(10,11,133,0.06),transparent_58%)]" />
+              <div className="absolute left-5 top-5 rounded-full border border-white/75 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_10px_20px_rgba(10,11,133,0.08)] backdrop-blur-sm">
+                Event
+              </div>
+              <div className="absolute -right-10 top-8 h-28 w-28 rounded-full bg-[#0a0b85]/10 blur-3xl" />
+              <div className="absolute -left-8 bottom-0 h-20 w-20 rounded-full bg-white/40 blur-2xl" />
+              <div className="relative flex h-16 w-16 items-center justify-center rounded-[1.45rem] border border-white/75 bg-white/90 shadow-[0_18px_40px_rgba(10,11,133,0.14)] ring-1 ring-[#0a0b85]/5">
+                <Mountain className="text-[#0a0b85] transition-transform duration-500 group-hover:scale-110" size={30} />
+              </div>
+            </div>
+
+            <div className="relative flex min-h-[258px] flex-col p-5 sm:p-6">
+              <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(10,11,133,0.22),transparent)]" />
+              <span className="inline-flex w-fit rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.06)]">
+                {event.category}
+              </span>
+              <h4 className="mt-3 text-[1.02rem] font-bold tracking-tight text-[#111827] transition-colors group-hover:text-[#0a0b85]">
+                {event.name}
+              </h4>
+              <p className="mt-2 line-clamp-3 text-sm leading-7 text-[#526076]">
+                {event.description}
+              </p>
+              <div className="mt-auto pt-6">
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#0a0b85]">
+                  Flip card
+                  <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="flex h-16 w-16 items-center justify-center rounded-[1.35rem] border border-white/70 bg-white/85 shadow-lg shadow-[#0a0b85]/10">
-            <Mountain className="text-[#0a0b85] group-hover:scale-110 transition-transform duration-500" size={30} />
+
+          <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-[#0a0b85]/15 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] p-6 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
+            <div className="flex h-full flex-col">
+              <span className="inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-white/90">
+                Event Details
+              </span>
+
+              <h4 className="mt-4 text-2xl font-bold tracking-tight">
+                {event.name}
+              </h4>
+
+              <p className="mt-4 text-sm leading-7 text-white/80">
+                {event.description}
+              </p>
+
+              <div className="mt-18 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
+                  Category
+                </p>
+                <p className="mt-2 text-base font-semibold text-white">
+                  {event.category}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-white/75">
+                  Click the card again to return to the front side.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="relative flex min-h-[260px] flex-col p-5 sm:p-6">
-          <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(10,11,133,0.2),transparent)]" />
-          <span className="inline-flex rounded-full border border-[#0a0b85]/10 bg-[#eef3ff]\ px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85]">
-            {event.category}
-          </span>
-          <h4 className="mt-3 text-base font-bold text-[#111827] transition-colors group-hover:text-[#0a0b85]">
-            {event.name}
-          </h4>
-          <p className={`mt-2 text-sm leading-7 text-[#475569] ${expanded ? '' : 'line-clamp-3'}`}>
-            {event.description}
-          </p>
-
-          <AnimatePresence>
-            {expanded && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-4 rounded-2xl border border-[#0a0b85]/8 bg-[#f8fbff] p-4">
-                  <p className="text-[12px] leading-6 text-[#64748b]">
-                    Part of AMI&apos;s ongoing commitment to knowledge sharing and industry engagement.
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <button
-            className="mt-auto inline-flex items-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#f3f6ff] px-3 py-1.5 text-[11px] font-semibold text-[#0a0b85] transition-colors hover:bg-[#e8eeff]"
-            onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
-          >
-            <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
-              <ChevronDown className="w-3 h-3" />
-            </motion.span>
-            {expanded ? 'Less' : 'More'}
-          </button>
-        </div>
-      </motion.div>
+      </button>
     </AnimatedSection>
   );
 }
 
 export default function EventsSection({ data }) {
+  const [flippedCards, setFlippedCards] = useState({});
+  const [startIndex, setStartIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState('');
+  const [isSliding, setIsSliding] = useState(false);
+
+  const events = data?.items || [];
+  const totalCards = events.length;
+  const visibleCount = Math.min(3, totalCards || 0);
+
+  const visibleIndices = Array.from({ length: visibleCount }, (_, offset) =>
+    (startIndex + offset) % totalCards
+  );
+
+  const toggleFlip = (index) => {
+    setFlippedCards((prev) => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const goPrev = () => {
+    if (totalCards <= visibleCount || isSliding) return;
+    setSlideDirection('prev');
+    setIsSliding(true);
+    setStartIndex((prev) => (prev - visibleCount + totalCards) % totalCards);
+    window.setTimeout(() => {
+      setIsSliding(false);
+      setSlideDirection('');
+    }, 420);
+  };
+
+  const goNext = () => {
+    if (totalCards <= visibleCount || isSliding) return;
+    setSlideDirection('next');
+    setIsSliding(true);
+    setStartIndex((prev) => (prev + visibleCount) % totalCards);
+    window.setTimeout(() => {
+      setIsSliding(false);
+      setSlideDirection('');
+    }, 420);
+  };
+
   return (
     <section className="relative py-28">
       <div className="absolute inset-0 bg-transparent" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-20" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <AnimatedSection>
           <div className="mb-14 max-w-2xl">
-            <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+            <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.3em] text-[#737373]">
               Events
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-2 tracking-tight">
-              {data.title}
+            <h2 className="gradient-text mb-2 inline-block text-3xl font-bold tracking-tight sm:text-4xl">
+              {data?.title}
             </h2>
-            <p className="text-[#475569] text-sm leading-7">{data.subtitle}</p>
+            <p className="text-sm leading-7 text-[#475569]">{data?.subtitle}</p>
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {data.items.map((event, i) => (
-            <EventCard key={i} event={event} index={i} />
-          ))}
+        <div className="mx-auto mb-6 flex max-w-5xl items-center justify-end gap-3">
+          <button
+            type="button"
+            onClick={goPrev}
+            disabled={totalCards <= visibleCount || isSliding}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+            aria-label="Previous events"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          <button
+            type="button"
+            onClick={goNext}
+            disabled={totalCards <= visibleCount || isSliding}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+            aria-label="Next events"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        <div
+          className={`achievement-track mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-3 ${
+            isSliding
+              ? slideDirection === 'next'
+                ? 'achievement-track-slide-next'
+                : 'achievement-track-slide-prev'
+              : ''
+          }`}
+        >
+          {visibleIndices.map((cardIndex) => {
+            const event = events[cardIndex];
+
+            return (
+              <EventCard
+                key={`${event.name}-${cardIndex}`}
+                event={event}
+                index={cardIndex}
+                flippedCards={flippedCards}
+                toggleFlip={toggleFlip}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-
