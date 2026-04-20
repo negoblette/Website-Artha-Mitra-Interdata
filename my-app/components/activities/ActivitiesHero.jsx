@@ -1,42 +1,52 @@
 'use client';
+
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function ActivitiesHero({ data }) {
   return (
-    <section className="relative pt-36 pb-20 overflow-hidden">
-      <div className="absolute inset-0 " />
-      <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
-      <div className="absolute inset-0 grid-pattern opacity-[0.045]" />
-
-      <motion.div
-        className="absolute top-16 right-0 w-96 h-64 bg-[#010268]/[0.04] rounded-full blur-[100px]"
-        animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-10 left-10 w-72 h-72 bg-[#737373]/8 rounded-full blur-[120px]"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
+    <section className="relative overflow-hidden bg-transparent pt-28 pb-16 sm:pt-32">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 0, x: -30, y: 12 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="relative mx-auto w-full max-w-[760px] lg:mx-0"
         >
-          <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-            Activities
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#111827] mb-3 tracking-tight">
-            {data.title}
-          </h1>
-          <h2 className="text-xl sm:text-2xl font-semibold text-[#010268] mb-6">
-            {data.subtitle}
-          </h2>
-          <p className="text-[#111827] text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
-            {data.description}
-          </p>
+          <div className="relative overflow-hidden bg-transparent">
+            <div className="relative aspect-[850/582] w-full">
+              <Image
+                src="/images/reference/Activities_hero.png"
+                alt="Activities hero illustration"
+                fill
+                priority
+                className="object-contain bg-transparent"
+                sizes="(min-width: 1024px) 52vw, 100vw"
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 30, y: 12 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.08 }}
+          className="mx-auto w-full max-w-xl lg:mx-0 lg:justify-self-end"
+        >
+          <div className="text-center lg:text-center">
+            <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.3em] text-[#737373]">
+              Activities
+            </span>
+            <h1 className="mx-auto max-w-lg text-4xl font-bold tracking-tight text-[#010268] sm:text-5xl md:text-6xl">
+              {data.title}
+            </h1>
+            <h2 className="mx-auto mt-4 max-w-lg text-lg font-semibold text-[#111827] sm:text-xl md:text-2xl">
+              {data.subtitle}
+            </h2>
+            <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-[#111827]/85 sm:text-base">
+              {data.description}
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
