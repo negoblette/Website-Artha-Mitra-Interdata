@@ -42,19 +42,19 @@
         "description": "Annual gathering of IT security professionals discussing the latest threats, solutions, and strategies for enterprise cybersecurity."
       },
       {
-        "image": "/images/event-2.jpg",
+        "image": "",
         "category": "Exhibition",
         "name": "Jakarta Network Expo",
         "description": "Showcasing the latest in network infrastructure technology, featuring live demos from our principal partners and hands-on experience."
       },
       {
-        "image": "/images/event-3.jpg",
+        "image": "",
         "category": "Seminar",
         "name": "Cyber Threat Intelligence Briefing",
         "description": "Expert-led sessions on emerging cyber threats, vulnerability trends, and proactive defense strategies for Indonesian enterprises."
       },
       {
-        "image": "/images/event-4.jpg",
+        "image": "",
         "category": "Workshop",
         "name": "Enterprise Firewall Masterclass",
         "description": "Deep-dive technical workshop on next-generation firewall deployment, configuration, and management for enterprise environments."
