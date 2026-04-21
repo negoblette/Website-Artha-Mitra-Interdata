@@ -172,8 +172,8 @@ export default function ArticlesSection({ data }) {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
-          <div className="mb-8 sm:mb-10">
-            <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+          <div className="mb-8 sm:mb-10 text-center">
+            <span className="inline-block  text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-1">
               Expert Insights
             </span>
             <div className="mb-1">

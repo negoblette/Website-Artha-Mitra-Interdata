@@ -127,13 +127,15 @@ export default function InsightNewsSection({ data }) {
 
       <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
-          <div className="mb-14">
-            <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+          <div className="mb-14 text-center">
+            <span className="inline-block bg-black/10 p-2 rounded-2xl text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-1">
               Stay Updated
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-2">
-              {data.title}
-            </h2>
+            <div className="mb-1">
+              <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-2">
+                {data.title}
+              </h2>
+            </div>
             <p className="text-[#111827] text-sm">{data.subtitle}</p>
           </div>
         </AnimatedSection>

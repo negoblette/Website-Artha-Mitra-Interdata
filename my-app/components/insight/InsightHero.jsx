@@ -5,7 +5,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 export default function InsightHero({ data }) {
   return (
     <section className="relative pt-36 pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" />
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)]" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
       <div className="absolute inset-0 grid-pattern opacity-[0.045]" />
 
@@ -22,13 +22,15 @@ export default function InsightHero({ data }) {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
         <AnimatedSection>
-          <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-            {data.subtitle}
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#111827] inline-block mb-5">
+          <div className="mb-4">
+            <span className="inline-block text-white text-xs font-semibold tracking-[0.3em] uppercase">
+              {data.subtitle}
+            </span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white inline-block mb-5">
             {data.title}
           </h1>
-          <p className="text-[#111827] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             {data.description}
           </p>
         </AnimatedSection>

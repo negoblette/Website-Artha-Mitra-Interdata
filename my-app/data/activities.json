@@ -1,7 +1,6 @@
 {
   "hero": {
-    "title": "Our Events &",
-    "subtitle": "Programs",
+    "title": "Our Events & Programs",
     "description": "Stay connected with AMI's latest activities, training programs, and industry events. We actively participate in and organize initiatives that foster knowledge sharing, technology adoption, and community engagement in the IT security space.",
     "image": "/images/activities-hero.jpg"
   },
@@ -28,6 +27,16 @@
         "images": ["", ""],
         "name": "Partner Certification Training",
         "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
+      },
+      {
+        "images": ["", ""],
+        "name": "Partner Certification Training",
+        "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
+      },
+      {
+        "images": ["", ""],
+        "name": "IT Infrastructure Assessment",
+        "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
       }
     ]
   },
