@@ -13,11 +13,11 @@ export default function LifeAtAmi({ data }) {
   };
 
   const stripSlots = [
-    { offset: -2, x: '-90%', scale: 0.86, zIndex: 1, opacity: 0.76 },
-    { offset: -1, x: '-50%', scale: 0.95, zIndex: 2, opacity: 0.9 },
-    { offset: 0, x: '0%', scale: 1.08, zIndex: 5, opacity: 1 },
-    { offset: 1, x: '50%', scale: 0.95, zIndex: 2, opacity: 0.9 },
-    { offset: 2, x: '90%', scale: 0.86, zIndex: 1, opacity: 0.76 },
+    { offset: -2, x: '-112%', scale: 0.9, zIndex: 1, opacity: 0.76 },
+    { offset: -1, x: '-65%', scale: 0.99, zIndex: 2, opacity: 0.9 },
+    { offset: 0, x: '0%', scale: 1.12, zIndex: 5, opacity: 1 },
+    { offset: 1, x: '65%', scale: 0.99, zIndex: 2, opacity: 0.9 },
+    { offset: 2, x: '112%', scale: 0.9, zIndex: 1, opacity: 0.76 },
   ];
 
   useEffect(() => {
@@ -25,21 +25,21 @@ export default function LifeAtAmi({ data }) {
 
     const timerId = window.setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % photos.length);
-    }, 3500);
+    }, 2600);
 
     return () => window.clearInterval(timerId);
   }, [photos.length]);
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-transparent py-16">
-      <img 
-        src="decor/lifeatamielements.svg" 
+      <img
+        src="decor/lifeatamielements.svg"
         alt=""
         aria-hidden="true"
-        className="pointer-events-none top-[-10] absolute top-0 left-0 w-full h-full object-cover opacity-100" 
+        className="pointer-events-none absolute left-0 top-[-rem] h-full w-full object-cover opacity-100"
       />
       <div className="absolute left-0 right-0 top-8 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.22)_0px,rgba(124,140,232,0.22)_2px,transparent_2px,transparent_24px)] opacity-35" />
-      <div className="absolute left-0 right-0 bottom-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
+      <div className="absolute bottom-0 left-0 right-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
         <h2 className="text-5xl font-black text-[#0a0b85] md:text-6xl">{data.title}</h2>

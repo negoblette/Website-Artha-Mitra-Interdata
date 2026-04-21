@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Newspaper, ChevronDown, Calendar, ExternalLink } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
@@ -16,16 +17,16 @@ function NewsCard({ item, index }) {
         className="gradient-border group cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="glass-card rounded-2xl p-6 sm:p-7 h-full relative overflow-hidden">
+        <div className="relative bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] rounded-2xl p-6 sm:p-7 h-full relative overflow-hidden">
           <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
           <div className="relative">
             <div className="flex items-center gap-3 mb-3">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#010268] border border-[#010268] text-white text-[10px] font-semibold tracking-wider uppercase">
+              <span className="glass-card items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 border border-[#010268] text-white text-[10px] font-semibold tracking-wider uppercase">
                 {item.category}
               </span>
               {item.date && (
-                <span className="flex items-center gap-1 text-[#111827] text-[10px]">
+                <span className="flex items-center gap-1 text-white text-[10px]">
                   <Calendar className="w-3 h-3" />
                   {new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                 </span>
@@ -33,13 +34,13 @@ function NewsCard({ item, index }) {
             </div>
 
             <div className="flex items-start justify-between gap-4 mb-2">
-              <h3 className="text-[#111827] font-semibold text-base group-hover:text-[#111827] transition-colors">
+              <h3 className="text-[#e8eaeb] font-semibold text-base group-hover:text-white transition-colors">
                 {item.title}
               </h3>
-              <Newspaper size={16} className="text-[#d1d5db] group-hover:text-[#010268] transition-colors flex-shrink-0 mt-1" />
+              <Newspaper size={16} className="text-[#e8eaeb] group-hover:text-white transition-colors flex-shrink-0 mt-1" />
             </div>
 
-            <p className={`text-[#111827] text-sm leading-relaxed ${expanded ? '' : 'line-clamp-2'}`}>
+            <p className="text-white text-sm leading-relaxed line-clamp-2">
               {item.excerpt}
             </p>
 
@@ -52,9 +53,14 @@ function NewsCard({ item, index }) {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="border-t border-white/[0.06] pt-3 mt-3">
+                  <div className="mt-4">
+                    {item.content && (
+                      <p className="text-white text-sm leading-relaxed">
+                        {item.content}
+                      </p>
+                    )}
                     {item.source && (
-                      <span className="flex items-center gap-1.5 text-[#111827] text-xs">
+                      <span className="mt-4 flex items-center gap-1.5 text-white text-xs">
                         <ExternalLink className="w-3 h-3" />
                         Source: {item.source}
                       </span>
@@ -65,11 +71,11 @@ function NewsCard({ item, index }) {
             </AnimatePresence>
 
             <button
-              className="mt-3 text-[#111827] text-xs flex items-center gap-1 hover:text-[#111827] transition-colors"
+              className="mt-3 text-[#e8eaeb] text-xs flex items-center gap-1 hover:text-white transition-colors"
               onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
             >
               <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                <ChevronDown className="w-3.5 h-3.5" />
+                <ChevronDown className="w-3 h-3" />
               </motion.span>
               {expanded ? 'Show less' : 'Read more'}
             </button>
@@ -81,13 +87,45 @@ function NewsCard({ item, index }) {
 }
 
 export default function InsightNewsSection({ data }) {
+  const [activeCategory, setActiveCategory] = useState('All');
+  const items = Array.from(
+    new Map(
+      (data?.items ?? [])
+        .filter((item) => item?.slug)
+        .map((item) => [
+          item.slug,
+          {
+            ...item,
+            category: typeof item.category === 'string' ? item.category.trim() : item.category,
+          },
+        ]),
+    ).values(),
+  );
+  const categories = ['All', ...new Set(items.map((item) => item.category).filter(Boolean))];
+
+  const filteredItems =
+    activeCategory === 'All'
+      ? items
+      : items.filter((item) => item.category === activeCategory);
+
   return (
     <section className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" />
-      <div className="absolute inset-0 grid-pattern opacity-8" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-900/10 rounded-full blur-[120px]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[920px] overflow-hidden sm:h-[840px] lg:h-[1200px]">
+        <Image
+          src="/decor/Insight_news.svg"
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="100vw"
+          className="pointer-events-none h-full w-full object-cover opacity-100 mix-blend-multiply"
+          priority
+        />
+      </div>
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/6 via-[#fafbfc]/8 to-[#f6f7fa]/12" />
+      <div className="absolute inset-0 z-10 grid-pattern opacity-[0.02]" />
+      <div className="absolute bottom-0 right-0 z-10 h-96 w-96 rounded-full bg-cyan-900/5 blur-[120px]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="mb-14">
             <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
@@ -100,8 +138,30 @@ export default function InsightNewsSection({ data }) {
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {data.items.map((item, i) => (
+        <div className="mb-8 flex flex-wrap gap-2">
+          {categories.map((category) => {
+            const isActive = activeCategory === category;
+
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                  isActive
+                    ? 'border-[#010268] bg-[#010268] text-white'
+                    : 'border-[#010268]/10 bg-white text-[#010268] hover:bg-[#f3f5ff]'
+                }`}
+                aria-pressed={isActive}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+          {filteredItems.map((item, i) => (
             <NewsCard key={item.slug} item={item} index={i} />
           ))}
         </div>
@@ -109,4 +169,3 @@ export default function InsightNewsSection({ data }) {
     </section>
   );
 }
-

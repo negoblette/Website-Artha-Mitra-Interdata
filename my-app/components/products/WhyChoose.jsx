@@ -6,14 +6,14 @@ import AnimatedSection from '@/components/AnimatedSection';
 export default function WhyChoose({ data }) {
   return (
     <section className="relative py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#04063f_0%,#06095f_42%,#0a0b85_100%)]" />
+      <div className="absolute inset-0 bg-transparent]" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-8" />
-      <div className="absolute left-[-8%] top-10 h-64 w-64 rounded-full bg-cyan-300/18 blur-3xl" />
-      <div className="absolute bottom-[-8rem] right-[-3rem] h-80 w-80 rounded-full bg-indigo-200/12 blur-3xl" />
+      <div className="absolute left-[-8%] top-10 h-64 w-64 rounded-full bg-blue-300/100 blur-3xl" />
+      <div className="absolute bottom-[-8rem] right-[-3rem] h-80 w-80 rounded-full bg-indigo-200/100 blur-3xl" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
-          <div className="relative overflow-hidden rounded-[2rem] border border-cyan-200/14 bg-[#06095f]/58 p-8 shadow-[0_24px_80px_rgba(3,6,53,0.52)] backdrop-blur-xl sm:p-12">
+          <div className="relative overflow-hidden rounded-[2rem] border border-black-200/ bg-[#06095f]/100 p-8 shadow-[0_24px_80px_rgba(3,6,53,0.52)] backdrop-blur-xl sm:p-12">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.2),transparent_28%)]" />
             <div className="absolute inset-y-0 right-0 hidden w-[42%] border-l border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03))] lg:block" />
 
