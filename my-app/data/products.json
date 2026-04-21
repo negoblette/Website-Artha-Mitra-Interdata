@@ -110,7 +110,11 @@
         "/images/principals/hillstone.png",
         "/images/principals/juniper.png",
         "/images/principals/pulsesecure.png",
-        "/images/principals/rapid7.png"
+        "/images/principals/rapid7.png",
+        "/images/principals-products/barracuda.png",
+        "/images/principals-products/a10networks.png",
+        "/images/principals-products/netscout.png",
+        "/images/principals-products/juniper-mist.png"
       ]
   }
 }
