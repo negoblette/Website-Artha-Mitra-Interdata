@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
@@ -8,18 +8,23 @@ export default function ProductsCarousel({ items = {} }) {
   const data = Array.isArray(items) ? { images: items } : items || {};
   const photos = data.images || [];
 
-  const [trackIndex, setTrackIndex] = useState(1);
+  const [trackIndex, setTrackIndex] = useState(2);
   const [isAnimating, setIsAnimating] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
-  const CARD_RATIO = 0.30;
+  const CARD_RATIO = 0.3;
   const GAP = 20;
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const update = () => setContainerWidth(containerRef.current.offsetWidth);
+
+    const update = () => {
+      setContainerWidth(containerRef.current.offsetWidth);
+    };
+
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
@@ -28,49 +33,86 @@ export default function ProductsCarousel({ items = {} }) {
   const cardWidth = containerWidth * CARD_RATIO;
   const step = cardWidth + GAP;
 
-  const loopPhotos = photos.length ? [photos[photos.length - 1], ...photos, photos[0]] : [];
+  const loopPhotos = useMemo(() => {
+    if (photos.length < 3) return photos;
+
+    return [
+      photos[photos.length - 2],
+      photos[photos.length - 1],
+      ...photos,
+      photos[0],
+      photos[1],
+    ];
+  }, [photos]);
+
+  useEffect(() => {
+    if (!photos.length) return;
+
+    const frame = requestAnimationFrame(() => {
+      setIsAnimating(false);
+      setTrackIndex(2);
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [photos.length]);
 
   useEffect(() => {
     if (!photos.length || isPaused) return;
-    const id = setInterval(() => setTrackIndex((p) => p + 1), 3500);
-    return () => clearInterval(id);
+
+    const timer = setInterval(() => {
+      setTrackIndex((prev) => prev + 1);
+    }, 3500);
+
+    return () => clearInterval(timer);
   }, [isPaused, photos.length]);
 
-  const handleAnimationComplete = () => {
-    if (trackIndex >= loopPhotos.length - 1) {
+  const offsetX = useMemo(() => {
+    return containerWidth / 2 - cardWidth / 2 - trackIndex * step;
+  }, [containerWidth, cardWidth, trackIndex, step]);
+
+  const handleSlideComplete = () => {
+    if (photos.length <= 1) return;
+
+    if (trackIndex === photos.length + 1) {
       setIsAnimating(false);
-      setTrackIndex(1);
+      setTrackIndex(2);
     }
-    if (trackIndex <= 0) {
+
+    if (trackIndex === 1) {
       setIsAnimating(false);
-      setTrackIndex(loopPhotos.length - 2);
+      setTrackIndex(photos.length + 1);
     }
   };
 
   useEffect(() => {
     if (!isAnimating) {
-      const id = requestAnimationFrame(() => setIsAnimating(true));
-      return () => cancelAnimationFrame(id);
+      let raf1 = requestAnimationFrame(() => {
+        let raf2 = requestAnimationFrame(() => {
+          setIsAnimating(true);
+        });
+        return () => cancelAnimationFrame(raf2);
+      });
+
+      return () => cancelAnimationFrame(raf1);
     }
   }, [isAnimating]);
 
-  const activeRealIndex = ((trackIndex - 1) % photos.length + photos.length) % photos.length;
+  const activeRealIndex = photos.length
+    ? (trackIndex - 2 + photos.length) % photos.length
+    : 0;
 
   const goTo = (i) => {
     setIsAnimating(true);
-    setTrackIndex(i + 1);
+    setTrackIndex(i + 2);
   };
 
   if (!photos.length) return null;
-
-  const offsetX = containerWidth / 2 - cardWidth / 2 - trackIndex * step;
 
   return (
     <section className="relative overflow-hidden bg-transparent py-10">
       <div className="absolute inset-0 pointer-events-none bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.18)_0px,rgba(124,140,232,0.18)_2px,transparent_2px,transparent_24px)] opacity-30" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 text-center">
-
         <div
           ref={containerRef}
           className="relative w-full overflow-hidden"
@@ -79,38 +121,47 @@ export default function ProductsCarousel({ items = {} }) {
           onMouseLeave={() => setIsPaused(false)}
         >
           <motion.div
+            key={isAnimating ? 'animating' : 'static'}
             className="absolute top-0 flex items-center"
-            style={{ gap: GAP }}
+            style={{ gap: GAP, willChange: 'transform' }}
             animate={{ x: offsetX }}
             transition={
               isAnimating
-                ? { type: 'spring', stiffness: 280, damping: 32, mass: 0.1 }
+                ? { duration: 0.7, ease: [0.33, 1, 0.68, 1] }
                 : { duration: 0 }
             }
-            onAnimationComplete={handleAnimationComplete}
-
-            // ini ribet bgt logic animationnya(?)
+            onAnimationComplete={handleSlideComplete}
           >
             {loopPhotos.map((src, i) => {
               const isActive = i === trackIndex;
+
               return (
                 <motion.div
                   key={i}
                   animate={{
                     scale: isActive ? 1 : 0.82,
-                    opacity: isActive ? 1 : 0.80,
+                    opacity: isActive ? 1 : 0.8,
                   }}
-                  transition={{ type: 'spring', stiffness: 280, damping: 32 }}
+                  transition={{ duration: 0.4 }}
                   className="relative flex-shrink-0 overflow-hidden rounded-2xl cursor-pointer"
                   style={{
                     width: cardWidth,
-                    height: isActive ? 'clamp(130px, 16vw, 230px)' : 'clamp(100px, 12vw, 180px)',
-                    transition: 'height 0.4s cubic-bezier(0.22,1,0.36,1)',
-                    border: isActive ? '2px solid rgba(10,11,133,0.4)' : '1px solid #c9d2ff',
-                    boxShadow: isActive ? '0 16px 40px rgba(10,11,133,0.28)' : '0 8px 20px rgba(10,11,133,0.14)',
+                    height: isActive
+                      ? 'clamp(130px, 16vw, 230px)'
+                      : 'clamp(100px, 12vw, 180px)',
+                    transition:
+                      'height 0.4s cubic-bezier(0.22,1,0.36,1)',
+                    border: isActive
+                      ? '2px solid rgba(10,11,133,0.4)'
+                      : '1px solid #c9d2ff',
+                    boxShadow: isActive
+                      ? '0 16px 40px rgba(10,11,133,0.28)'
+                      : '0 8px 20px rgba(10,11,133,0.14)',
                     zIndex: isActive ? 10 : 1,
                   }}
-                  onClick={() => goTo(((i - 1) + photos.length) % photos.length)}
+                  onClick={() =>
+                    goTo((i - 2 + photos.length) % photos.length)
+                  }
                 >
                   <Image
                     src={src}
@@ -120,7 +171,12 @@ export default function ProductsCarousel({ items = {} }) {
                     className="object-cover"
                     priority={i <= 2}
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t from-black/40 to-transparent ${isActive ? 'opacity-50' : 'opacity-70'}`} />
+
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t from-black/40 to-transparent ${
+                      isActive ? 'opacity-50' : 'opacity-70'
+                    }`}
+                  />
                 </motion.div>
               );
             })}
