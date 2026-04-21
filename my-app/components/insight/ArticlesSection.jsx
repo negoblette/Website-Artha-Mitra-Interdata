@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, ChevronDown, Tag, User, Calendar } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
-
+import Image from 'next/image';
 function ArticleCard({ item, index }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -96,6 +96,8 @@ function ArticleCard({ item, index }) {
 
 export default function ArticlesSection({ data }) {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
   const items = Array.from(
     new Map(
       (data?.items ?? [])
@@ -116,21 +118,69 @@ export default function ArticlesSection({ data }) {
       ? items
       : items.filter((item) => item.category === activeCategory);
 
+  const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+  const paginatedItems = filteredItems.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+    setCurrentPage(1);
+  };
+
   return (
     <section className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-[#ffffff]" />
+      <div className="absolute inset-0 bg-white" />
+      <div className="absolute inset-0 mesh-gradient-accent opacity-[0.08]" />
       <div className="absolute inset-0 dot-pattern opacity-15" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-[#737373]/10 rounded-full blur-[120px]" />
+      <div
+        className="pointer-events-none absolute -inset-28 z-0"
+        style={{
+          WebkitMaskImage:
+            'linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%)',
+          WebkitMaskSize: '100% 100%',
+          WebkitMaskRepeat: 'no-repeat',
+          maskImage:
+            'linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%)',
+          maskSize: '100% 100%',
+          maskRepeat: 'no-repeat',
+        }}
+      >
+        <Image
+          src="/decor/grid.svg"
+          alt=""
+          fill
+          sizes="100vw"
+          priority
+          className="scale-[1.45] object-cover object-center opacity-60 [filter:invert(7%)_sepia(100%)_saturate(3600%)_hue-rotate(200deg)_brightness(0.42)_contrast(1.2)]"
+        />
+      </div>
+      <div className="absolute left-[-8%] top-16 h-64 w-64 rounded-full bg-blue-300/100 blur-3xl" />
+      <div className="absolute bottom-[9rem] right-[-3rem] h-80 w-80 rounded-full bg-indigo-200/100 blur-3xl" />
+      <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-[#737373]/10 blur-[120px]" />
+      {/* <div className="pointer-events-none absolute left-[44.5rem] top-[-1.75rem] z-10 h-[320px] w-[320px] opacity-100">
+        <Image
+          src="/decor/dots.svg"
+          alt=""
+          fill
+          sizes="56px"
+          priority
+          className="object-contain"
+        />
+      </div> */}
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
-          <div className="mb-14">
+          <div className="mb-8 sm:mb-10">
             <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
               Expert Insights
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-2">
-              {data.title}
-            </h2>
+            <div className="mb-1">
+              <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block">
+                {data.title}
+              </h2>
+            </div>
             <p className="text-[#111827] text-sm">{data.subtitle}</p>
           </div>
         </AnimatedSection>
@@ -143,7 +193,7 @@ export default function ArticlesSection({ data }) {
               <button
                 key={category}
                 type="button"
-                onClick={() => setActiveCategory(category)}
+                onClick={() => handleCategoryChange(category)}
                 className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors ${
                   isActive
                     ? 'border-[#010268] bg-[#010268] text-white'
@@ -158,10 +208,54 @@ export default function ArticlesSection({ data }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-          {filteredItems.map((item, i) => (
+          {paginatedItems.map((item, i) => (
             <ArticleCard key={item.slug} item={item} index={i} />
           ))}
         </div>
+
+        {filteredItems.length > itemsPerPage && (
+          <div className="mt-10 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+              disabled={currentPage === 1}
+              className="rounded-full border border-[#010268]/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#010268] transition-colors hover:bg-[#f3f5ff] disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Prev
+            </button>
+
+            <div className="flex items-center gap-2">
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => {
+                const isActive = page === currentPage;
+
+                return (
+                  <button
+                    key={page}
+                    type="button"
+                    onClick={() => setCurrentPage(page)}
+                    className={`h-9 min-w-9 rounded-full px-3 text-xs font-semibold transition-colors ${
+                      isActive
+                        ? 'bg-[#010268] text-white'
+                        : 'border border-[#010268]/10 bg-white text-[#010268] hover:bg-[#f3f5ff]'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+              disabled={currentPage === totalPages}
+              className="rounded-full border border-[#010268]/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#010268] transition-colors hover:bg-[#f3f5ff] disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
