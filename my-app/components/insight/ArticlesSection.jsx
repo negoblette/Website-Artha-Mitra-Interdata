@@ -119,9 +119,9 @@ function FeaturedArticle({ item }) {
     <AnimatedSection>
       <motion.article
         layout
-        className="group mx-auto grid max-w-5xl gap-8 rounded-[2rem] border border-[#e7ebff] bg-white p-4 shadow-[0_28px_80px_rgba(10,11,133,0.08)] sm:p-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
+        className="group mx-auto grid max-w-5xl gap-8 rounded-[2rem] border border-[#a9abd6]/100 bg-white p-4 shadow-[0_28px_80px_rgba(10,11,133,0.08)] sm:p-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
       >
-        <div className="relative min-h-[280px] overflow-hidden rounded-[1.7rem] bg-[linear-gradient(135deg,#eef2ff_0%,#dfe8ff_50%,#f8fbff_100%)] sm:min-h-[340px]">
+        <div className="relative min-h-[280px] overflow-hidden border-[#a9abd6] rounded-[1.7rem] bg-[linear-gradient(135deg,#eef2ff_0%,#dfe8ff_50%,#f8fbff_100%)] sm:min-h-[340px]">
           {hasImage ? (
             <Image
               src={item.image}
@@ -243,7 +243,7 @@ export default function ArticlesSection({ data }) {
         }}
       >
         <div className="absolute inset-x-[-12%] inset-y-0 bg-[url('/decor/grid.svg')] bg-[length:1220px_auto] bg-repeat-x bg-top opacity-60 [filter:invert(7%)_sepia(100%)_saturate(3600%)_hue-rotate(200deg)_brightness(0.42)_contrast(1.2)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.72)_10%,rgba(255,255,255,0)_20%,rgba(255,255,255,0)_78%,rgba(255,255,255,0.78)_91%,rgba(255,255,255,0.99)_100%)]" />
+        <div className="absolute inset-0 border- bg-[linear-gradient(to_bottom,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.72)_10%,rgba(255,255,255,0)_20%,rgba(255,255,255,0)_78%,rgba(255,255,255,0.78)_91%,rgba(255,255,255,0.99)_100%)]" />
       </div>
       <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-[#737373]/10 blur-[120px]" />
 

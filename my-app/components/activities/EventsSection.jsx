@@ -161,7 +161,7 @@ export default function EventsSection({ data }) {
   return (
     <section className="relative py-28">
       <div className="absolute inset-0 bg-transparent" />
-      <div className="absolute inset-0 mesh-gradient-accent opacity-20" />
+      {/* <div className="absolute inset-0 mesh-gradient-accent opacity-0" /> */}
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <AnimatedSection>

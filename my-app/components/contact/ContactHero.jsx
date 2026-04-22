@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export default function ContactHero() {
   return (
     <section className="relative pt-36 pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" />
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" /> */}
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
       <div className="absolute inset-0 grid-pattern opacity-[0.045]" />
 

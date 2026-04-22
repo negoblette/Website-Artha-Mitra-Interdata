@@ -3,8 +3,15 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 export default function ContactInfo({ contact, mapUrl }) {
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative z-10 py-20 overflow-visible">
       <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" />
+      <img
+        src="/decor/careerelements.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute -inset-y-10 inset-x-0 h-[calc(100%+5rem)] w-full object-cover opacity-100"
+      />
+      <div className="absolute inset-0 bg-white/5" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
@@ -12,7 +19,7 @@ export default function ContactInfo({ contact, mapUrl }) {
             <iframe
               src={contact.mapEmbedUrl || mapUrl}
               width="100%"
-              height="400"
+              height="460"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
@@ -39,4 +46,3 @@ export default function ContactInfo({ contact, mapUrl }) {
     </section>
   );
 }
-
