@@ -34,7 +34,7 @@ export default function ActivitiesHero({ data }) {
           className="mx-auto w-full max-w-xl lg:mx-0 lg:justify-self-end "
         >
           <div className="text-center lg:text-center lg:translate-y-15">
-            <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.3em] text-[#737373]">
+            <span className="mb-4 bg-black/13 p-2 rounded-2xl inline-block text-xs font-semibold uppercase tracking-[0.3em] text-[#737373]">
               Activities
             </span>
             <h1 className="mx-auto max-w-lg text-4xl font-bold tracking-tight text-[#010268] sm:text-5xl md:text-6xl">

@@ -7,6 +7,16 @@
   "articles": {
     "title": "Articles",
     "subtitle": "In-depth analysis and expert perspectives",
+    "headline": {
+      "category": "Technology",
+      "title": "Zero Trust in Modern Infrastructure",
+      "excerpt": "A practical headline feature about securing access, validating identity, and reducing implicit trust across modern enterprise environments.",
+      "content": "Zero Trust is designed around continuous verification instead of assumed trust. In modern environments, this helps reduce lateral movement, tighten access boundaries, and improve visibility into user and device activity.",
+      "author": "AMI Editorial Team",
+      "date": "2026-03-01",
+      "image": "/images/brow.jpg",
+      "tags": ["Zero Trust", "Security", "Access Control"]
+    },
     "items": [
       {
         "slug": "network-security-basics",
@@ -22,6 +32,7 @@
         "slug": "zero-trust-explained",
         "category": "Security",
         "title": "Zero Trust Explained in Simple Terms",
+        "image": "/images/brow.jpg",
         "excerpt": "A straightforward dummy article that explains the core idea behind Zero Trust and why it matters for distributed work environments.",
         "content": "Zero Trust is based on the principle of verifying every request instead of assuming trust inside the network. In practice, this means stronger identity checks, limited access, and continuous validation of devices and users. The content here is intentionally generic so it can serve as safe placeholder data in the insight page.",
         "author": "AMI Security Team",
@@ -77,6 +88,16 @@
         "author": "AMI Research Team",
         "date": "2025-12-09",
         "tags": ["IT Trends", "AI", "Automation", "Edge Computing"]
+      },
+      {
+        "slug": "reset-hack-checklist",
+        "category": "Cloud",
+        "title": "Cloud Readiness Checklist for Growing Companies",
+        "excerpt": "A practical dummy checklist to help teams think through migration planning, governance, and operational readiness before moving workloads.",
+        "content": "Before a cloud migration, teams should review application dependencies, identity controls, backup strategy, and cost visibility. Clear ownership and phased adoption reduce risk and make the transition easier to manage. This placeholder article helps test a fifth category in the UI.",
+        "author": "AMI Cloud Team",
+        "date": "2025-10-18",
+        "tags": ["Cloud", "Migration", "Governance"]
       }
     ]
   },

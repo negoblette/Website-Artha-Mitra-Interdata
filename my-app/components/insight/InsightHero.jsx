@@ -23,7 +23,7 @@ export default function InsightHero({ data }) {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
         <AnimatedSection>
           <div className="mb-4">
-            <span className="inline-block text-white text-xs font-semibold tracking-[0.3em] uppercase">
+            <span className="inline-block text-[#d9dbde] text-xs font-semibold tracking-[0.3em] uppercase">
               {data.subtitle}
             </span>
           </div>

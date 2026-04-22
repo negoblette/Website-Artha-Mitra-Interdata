@@ -43,7 +43,7 @@ export default function Navbar({ data }) {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-4">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-4">
           <Link href="/" className="flex items-center group justify-self-start">
             <motion.div
               className="relative h-11 w-32 overflow-hidden sm:h-12 sm:w-40 lg:h-14 lg:w-48"
@@ -54,9 +54,7 @@ export default function Navbar({ data }) {
             </motion.div>
           </Link>
 
-          <motion.div
-            className="hidden lg:flex justify-self-center h-12 max-w-max items-center gap-0.5 rounded-full bg-[#0a0b85] px-2 shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
-          >
+          <motion.div className="absolute left-1/2 top-1/2 hidden h-12 max-w-max -translate-x-1/2 -translate-y-1/2 items-center gap-0.5 rounded-full bg-[#0a0b85] px-2 shadow-[0_4px_10px_rgba(0,0,0,0.25)] lg:flex">
             {navItems.map((item) => (
               <motion.div
                 key={item.href}
