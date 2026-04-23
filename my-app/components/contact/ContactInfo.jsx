@@ -1,48 +1,48 @@
-'use client';
-import AnimatedSection from '@/components/AnimatedSection';
+// 'use client';
+// import AnimatedSection from '@/components/AnimatedSection';
 
-export default function ContactInfo({ contact, mapUrl }) {
-  return (
-    <section className="relative z-10 py-20 overflow-visible">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" />
-      <img
-        src="/decor/careerelements.svg"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute -inset-y-10 inset-x-0 h-[calc(100%+5rem)] w-full object-cover opacity-100"
-      />
-      <div className="absolute inset-0 bg-white/5" />
+// export default function ContactInfo({ contact, mapUrl }) {
+//   return (
+//     <section className="relative z-10 py-20 overflow-visible">
+//       <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" />
+//       <img
+//         src="/decor/careerelements.svg"
+//         alt=""
+//         aria-hidden="true"
+//         className="pointer-events-none absolute -inset-y-10 inset-x-0 h-[calc(100%+5rem)] w-full object-cover opacity-100"
+//       />
+//       <div className="absolute inset-0 bg-white/5" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-        <AnimatedSection>
-          <div className="glass-card-glow rounded-2xl overflow-hidden">
-            <iframe
-              src={contact.mapEmbedUrl || mapUrl}
-              width="100%"
-              height="460"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Office Location"
-              className="w-full"
-            />
-            {contact.mapLink && (
-              <div className="flex items-center justify-between gap-3 border-t border-black/5 bg-white px-4 py-3 text-sm text-[#111827]">
-                <span className="font-medium">Tidak bisa melihat map?</span>
-                <a
-                  href={contact.mapLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center rounded-full bg-[#0a0b85] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#08096e]"
-                >
-                  Buka di Google Maps
-                </a>
-              </div>
-            )}
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
-  );
-}
+//       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+//         <AnimatedSection>
+//           <div className="glass-card-glow rounded-2xl overflow-hidden shadow-[0_55px_80px_rgba(10,11,133,0.14)]">
+//             <iframe
+//               src={contact.mapEmbedUrl || mapUrl}
+//               width="100%"
+//               height="460"
+//               style={{ border: 0 }}
+//               allowFullScreen
+//               loading="lazy"
+//               referrerPolicy="no-referrer-when-downgrade"
+//               title="Office Location"
+//               className="w-full"
+//             />
+//             {contact.mapLink && (
+//               <div className="flex items-center justify-between gap-3 border-t border-black/5 bg-white px-4 py-3 text-sm text-[#111827]">
+//                 <span className="font-medium">Tidak bisa melihat map?</span>
+//                 <a
+//                   href={contact.mapLink}
+//                   target="_blank"
+//                   rel="noreferrer"
+//                   className="inline-flex items-center rounded-full bg-[#0a0b85] px-4 py-2 font-semibold text-white transition-colors hover:bg-[#08096e]"
+//                 >
+//                   Buka di Google Maps
+//                 </a>
+//               </div>
+//             )}
+//           </div>
+//         </AnimatedSection>
+//       </div>
+//     </section>
+//   );
+// }

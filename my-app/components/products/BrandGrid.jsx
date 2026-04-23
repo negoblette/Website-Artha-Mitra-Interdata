@@ -6,6 +6,13 @@ import Link from 'next/link';
 import { ExternalLink, ChevronDown, Search, X } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
+const FILTER_CHIPS = [  
+  'Network Infrastructure',
+  'IT Security',
+  'Network Monitoring',
+  'Secure Access & VPN',
+];
+
 function BrandCard({ brand, index }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -113,6 +120,7 @@ function BrandCard({ brand, index }) {
 
 export default function BrandGrid({ brands }) {
   const [query, setQuery] = useState('');
+  const normalizedQuery = query.toLowerCase().trim();
 
   const filteredBrands = brands.filter((brand) => {
     const haystack = [
@@ -123,69 +131,121 @@ export default function BrandGrid({ brands }) {
       .join(' ')
       .toLowerCase();
 
-    return haystack.includes(query.toLowerCase().trim());
+    return haystack.includes(normalizedQuery);
   });
 
   return (
     <section className="relative py-24 pb-8 overflow-visible">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f5f8ff]/75 to-transparent" />
+      <div className="absolute inset-0 mesh-gradient-accent opacity-[0.04]" />
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-14">
-            <span className="block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+            <span className="block text-[#737373] text-sm font-semibold tracking-[0.3em] uppercase mb-4">
               Our Partners
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-3 text-[rgb(19,27,94)]">
               World-Class Technology Brands
             </h2>
-            <p className="text-[#111827] text-sm max-w-2xl font-semibold mx-auto">
-              Each brand card shows the solutions they power. Search by brand, description, or solution to find what you need faster.
-            </p>
           </div>
         </AnimatedSection>
 
-        <div className="mb-6">
-          <label className="sr-only" htmlFor="brand-search">
-            Search brands
-          </label>
-          <div className="mx-auto flex max-w-2xl items-center gap-3 rounded-2xl border border-[#d7dbe8] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(10,11,133,0.06)]">
-            <Search className="h-4 w-4 shrink-0 text-[rgb(19,27,94)]/55" />
-            <input
-              id="brand-search"
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search brand, solution, or description"
-              className="w-full bg-transparent text-sm font-medium text-[rgb(19,27,94)] outline-none placeholder:text-[rgb(19,27,94)]/40"
-            />
-            {query ? (
-              <button
-                type="button"
-                onClick={() => setQuery('')}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-[rgb(19,27,94)]/55 transition-colors hover:bg-slate-100 hover:text-[rgb(19,27,94)]"
-                aria-label="Clear search"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            ) : null}
-          </div>
-        </div>
+        <div className="relative overflow-hidden rounded-[2rem] border border-[#dbe4ff]/85 bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(240,245,255,0.92))] p-4 shadow-[0_24px_70px_rgba(10,11,133,0.08)] backdrop-blur-xl sm:p-6">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.78),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(135,175,255,0.14),transparent_34%)]" />
+          <div className="absolute -top-16 right-[-3rem] h-48 w-48 rounded-full bg-[#9bb6ff]/18 blur-3xl" />
+          <div className="absolute -bottom-12 left-[-2rem] h-44 w-44 rounded-full bg-[#cfd9ff]/30 blur-3xl" />
 
-        <div className="overflow-visible">
-          <div className="max-h-[80vh] overflow-y-scroll pr-2 pt-3 pb-8 brand-grid-scrollbar">
-            {filteredBrands.length > 0 ? (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {filteredBrands.map((brand, i) => (
-                  <BrandCard key={brand.slug} brand={brand} index={i} />
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-dashed border-[#cdd4ea] bg-white/70 px-6 py-16 text-center">
-                <p className="text-base font-bold text-[rgb(19,27,94)]">No brands found</p>
-                <p className="mt-2 text-sm font-medium text-[#111827]/70">
-                  Try another keyword or clear the search to see all brand cards.
+          <div className="relative">
+            <div className="mb-6 flex flex-col gap-4 border-b border-[#d8e2ff]/80 pb-5 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85]/55">
+                  Partner Catalog
+                </p>
+                <h3 className="mt-2 text-xl font-bold tracking-tight text-[rgb(19,27,94)] sm:text-2xl">
+                  Explore Solutions by Principal
+                </h3>
+                <p className="mt-2 max-w-xl text-sm font-medium leading-6 text-[#111827]/72">
+                  Browse our technology partners by brand, capability, or solution area.
                 </p>
               </div>
-            )}
+
+              <div className="rounded-2xl border border-[#d6e0ff] bg-white/70 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0b85]/50">
+                  Showing
+                </p>
+                <p className="mt-1 text-base font-bold text-[rgb(19,27,94)]">
+                  {filteredBrands.length}
+                  <span className="ml-1 text-sm font-medium text-[#111827]/55">
+                    of {brands.length} partners
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <label className="sr-only" htmlFor="brand-search">
+                Search brands
+              </label>
+              <div className="flex items-center gap-3 rounded-[1.6rem] border border-[#cfd9ff]/80 bg-[linear-gradient(135deg,rgba(255,255,255,0.95),rgba(237,243,255,0.88))] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition-shadow duration-300 focus-within:shadow-[0_0_0_4px_rgba(10,11,133,0.08)]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#0a0b85]/8 text-[#0a0b85]">
+                  <Search className="h-4 w-4" />
+                </div>
+                <input
+                  id="brand-search"
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search by brand, capability, or solution"
+                  className="w-full bg-transparent text-sm font-semibold text-[rgb(19,27,94)] outline-none placeholder:text-[rgb(19,27,94)]/38"
+                />
+                {query ? (
+                  <button
+                    type="button"
+                    onClick={() => setQuery('')}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[rgb(19,27,94)]/55 transition-colors hover:bg-[#0a0b85]/6 hover:text-[rgb(19,27,94)]"
+                    aria-label="Clear search"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                ) : null}
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {FILTER_CHIPS.map((chip) => (
+                  <button
+                    key={chip}
+                    type="button"
+                    onClick={() => setQuery((current) => (current === chip ? '' : chip))}
+                    className={`rounded-full border px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all duration-200 ${
+                      query === chip
+                        ? 'border-[#0a0b85]/20 bg-[#0a0b85] text-white shadow-[0_10px_24px_rgba(10,11,133,0.2)]'
+                        : 'border-[#d8e0ff] bg-white/70 text-[#0a0b85]/72 hover:border-[#0a0b85]/18 hover:bg-[#eef3ff]'
+                    }`}
+                  >
+                    {chip}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-[#d8e2ff]/80 bg-white/42 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+              <div className="max-h-[68vh] overflow-y-auto px-1 pb-3 pt-3 brand-grid-scrollbar">
+                {filteredBrands.length > 0 ? (
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {filteredBrands.map((brand, i) => (
+                      <BrandCard key={brand.slug} brand={brand} index={i} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="rounded-2xl border border-dashed border-[#cdd4ea] bg-white/70 px-6 py-16 text-center">
+                    <p className="text-base font-bold text-[rgb(19,27,94)]">No brands found</p>
+                    <p className="mt-2 text-sm font-medium text-[#111827]/70">
+                      Try another keyword or clear the search to see all brand cards.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

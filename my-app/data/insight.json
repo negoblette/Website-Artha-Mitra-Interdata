@@ -158,6 +158,96 @@
         "content": "Ransomware remains one of the most disruptive threats facing enterprises in Southeast Asia, targeting critical systems, backups, and user credentials. Organizations need a multi-layered defense that includes strong endpoint protection, network segmentation, identity controls, and tested recovery plans. Proactive monitoring and employee awareness are essential to reducing both the likelihood and impact of an attack.",
         "date": "2025-12-20",
         "source": "ASEAN Cyber Report"
+      },
+      {
+        "slug": "cloud-security-posture-management",
+        "category": "Cloud",
+        "title": "Why Cloud Security Posture Management Matters",
+        "excerpt": "Cloud environments move fast, and security teams need visibility into misconfigurations, excessive permissions, and drifting policies before they become risk.",
+        "content": "Cloud Security Posture Management helps organizations continuously check for insecure storage, overly permissive access, and unmonitored resources. With more workloads moving to cloud platforms, a posture-first approach makes it easier to standardize guardrails and reduce exposure across teams.",
+        "date": "2026-02-02",
+        "source": "AMI Cloud Brief"
+      },
+      {
+        "slug": "zero-trust-network-access-trends",
+        "category": "Security",
+        "title": "Zero Trust Network Access Trends for Hybrid Work",
+        "excerpt": "Hybrid work has pushed many companies to rethink VPN-only access and adopt more granular identity-based controls.",
+        "content": "Zero Trust Network Access gives organizations a more controlled way to connect users to applications without exposing the full network. It is especially useful for hybrid workplaces that need stronger access boundaries, device checks, and policy enforcement across remote employees.",
+        "date": "2026-01-28",
+        "source": "Security Weekly"
+      },
+      {
+        "slug": "observability-modern-networks",
+        "category": "Networking",
+        "title": "Observability is Essential for Modern Networks",
+        "excerpt": "Teams need better visibility into traffic patterns, latency, and service dependencies to keep network operations predictable.",
+        "content": "Observability combines metrics, logs, and traces so teams can understand how systems behave under real-world conditions. For network operations, this means faster troubleshooting, clearer root-cause analysis, and better decisions when capacity or user experience starts to degrade.",
+        "date": "2025-12-11",
+        "source": "Network Operations Journal"
+      },
+      {
+        "slug": "ai-ops-for-enterprise-monitoring",
+        "category": "AI",
+        "title": "AI Ops Is Changing Enterprise Monitoring",
+        "excerpt": "AI-assisted operations are helping IT teams detect patterns faster and reduce the noise from repetitive alerts.",
+        "content": "AI Ops platforms can summarize event streams, highlight anomalies, and recommend next steps for support teams. When implemented carefully, they help reduce alert fatigue and free engineers to focus on incidents that need human judgment.",
+        "date": "2025-11-26",
+        "source": "Technology Review Asia"
+      },
+      {
+        "slug": "incident-response-retainers",
+        "category": "Security",
+        "title": "Incident Response Retainers Prepare Teams for the Worst",
+        "excerpt": "Retainer-based incident response planning gives organizations faster access to expertise when an attack happens.",
+        "content": "An incident response retainer helps businesses define escalation paths, align responsibilities, and reduce response delays during a security event. Instead of building the plan during a crisis, teams can prepare in advance and focus on containment and recovery.",
+        "date": "2025-10-30",
+        "source": "Cyber Resilience Report"
+      },
+      {
+        "slug": "data-center-modernization-planning",
+        "category": "Infrastructure",
+        "title": "Data Center Modernization Planning for Growth",
+        "excerpt": "Infrastructure teams need a clear roadmap for refreshing aging systems while maintaining service continuity.",
+        "content": "A modernization roadmap helps organizations phase out legacy components, improve redundancy, and make room for new workloads. By mapping dependencies early, teams can reduce migration risk and create a smoother path toward a more resilient environment.",
+        "date": "2025-09-19",
+        "source": "Infrastructure Monthly"
+      },
+      {
+        "slug": "secure-access-remote-teams",
+        "category": "Secure Access",
+        "title": "Secure Access Best Practices for Remote Teams",
+        "excerpt": "Remote users need strong authentication, device health checks, and simple access paths that do not expose the whole network.",
+        "content": "Secure access programs work best when identity verification, endpoint posture, and least-privilege access are designed together. For remote teams, this reduces the attack surface while keeping the user experience practical enough for day-to-day work.",
+        "date": "2025-08-14",
+        "source": "AMI Security Notes"
+      },
+      {
+        "slug": "network-segmentation-matters",
+        "category": "Security",
+        "title": "Why Network Segmentation Still Matters",
+        "excerpt": "Segmentation remains one of the most effective ways to reduce lateral movement and limit the blast radius of incidents.",
+        "content": "Even in modern zero trust environments, segmentation gives teams an additional layer of control over how systems communicate. By separating critical assets from general user traffic, organizations can make containment much easier during a security event.",
+        "date": "2025-07-22",
+        "source": "Security Architecture Digest"
+      },
+      {
+        "slug": "backup-strategy-for-recovery",
+        "category": "Infrastructure",
+        "title": "Backup Strategy Essentials for Fast Recovery",
+        "excerpt": "Backups are only useful when they are tested, protected, and aligned with the recovery needs of the business.",
+        "content": "A reliable backup strategy should include offsite copies, immutable storage where possible, and regular recovery drills. Organizations that treat backups as an active part of resilience planning are better prepared when outages or ransomware incidents occur.",
+        "date": "2025-06-18",
+        "source": "Resilience Quarterly"
+      },
+      {
+        "slug": "ai-assisted-phishing-defenses",
+        "category": "Cyber Security",
+        "title": "Defending Against AI-Assisted Phishing",
+        "excerpt": "As phishing campaigns become more convincing, organizations need layered controls and stronger user awareness.",
+        "content": "AI-generated phishing messages can be more personalized and harder to spot than traditional scams. Defenders should combine email security, identity verification, and ongoing user training to reduce the chance of successful impersonation attacks.",
+        "date": "2025-05-27",
+        "source": "Threat Intelligence Review"
       }
     ]
   }

@@ -6,6 +6,8 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 export default function ContactForm({ contact }) {
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', message: '' });
+  const formBg =
+    'bg-[linear-gradient(135deg,#0a0b85_0%,#121b9d_42%,#192bca_100%)]';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,137 +16,201 @@ export default function ContactForm({ contact }) {
   };
 
   return (
-    <section className="relative z-30 py-20 overflow-visible">
+    <section className="relative z-30 overflow-visible py-20">
       <div className="absolute inset-0 z-0 bg-[#ffffff]" />
-      <div className="absolute inset-0 z-0 dot-pattern opacity-30" />
-      <img
-        src="/decor/contactform.svg"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute left-[-27rem] top-[27rem] z-10 h-[140%] w-auto -translate-y-1/2 opacity-100"
-      />
-      {/* <div className="absolute inset-0 z-10 bg-gradient-to-r from-white via-white/75 to-white/10" /> */}
+      <div className="absolute inset-0 z-0 dot-pattern opacity-35" />
+      <div className="absolute inset-0 z-0 grid-pattern opacity-[0.14]" />
+      <div className="absolute inset-0 z-0 mesh-gradient-accent opacity-[0.09]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-full overflow-hidden">
+        <div className="absolute inset-x-[-12%] inset-y-0 bg-[url('/decor/grid.svg')] bg-[length:1220px_auto] bg-repeat-x bg-top opacity-45 [filter:invert(7%)_sepia(100%)_saturate(3600%)_hue-rotate(200deg)_brightness(0.68)_contrast(1.22)]" />
+      </div>
+      <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+        <img
+          src="/decor/contactform.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute -left-[60rem] bottom-[-0rem] z-[1] h-[90%] w-full opacity-65"
+        />
+      </div>
+      <div className="relative z-20 px-4 sm:px-6">
+        <div className="glass-card mx-auto min-h-[70vh] w-full max-w-7xl overflow-hidden rounded-[2.25rem] border border-[#dfe7ff] bg-white shadow-[0_32px_100px_rgba(10,11,133,0.14)]">
+          <div className="grid min-h-[70vh] grid-cols-1 lg:grid-cols-[1.02fr_1fr]">
+            <AnimatedSection
+              direction="left"
+              className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,250,255,0.96))] px-8 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(10,11,133,0.08),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(140,163,255,0.14),transparent_30%)]" />
+              <div className="relative z-10 flex h-full flex-col justify-between gap-10">
+                <div className="space-y-8">
+                  <div>
+                      <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#0a0b85]/55">
+                        Contact Us
+                      </p>
+                    <h2 className="mb-2 text-[40px] font-bold tracking-tight text-[#0f172a]">Let&#39;s talk</h2>
+                    <p className="max-w-md text-sm leading-relaxed text-[#334155]">
+                      Fill out the form and our team will get back to you within 24 hours.
+                    </p>
+                  </div>
 
-      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-          {/* Contact info column */}
-          <AnimatedSection direction="left" className="lg:col-span-2">
-            <div className="space-y-8">
+                  <div className="space-y-5">
+                    <div className="group flex items-start gap-4">
+                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-colors group-hover:bg-white">
+                        <MapPin size={18} className="text-white group-hover:text-[#0f198d]" />
+                      </div>
+                      <div>
+                        <p className="mb-0.5 text-sm font-medium text-[#0f172a]">Address</p>
+                        <p className="text-sm leading-relaxed text-[#475569]">{contact.address}</p>
+                      </div>
+                    </div>
+
+                    <div className="group flex items-start gap-4">
+                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-colors group-hover:bg-white">
+                        <Phone size={18} className="text-white group-hover:text-[#0f198d]" />
+                      </div>
+                      <div>
+                        <p className="mb-0.5 text-sm font-medium text-[#0f172a]">Phone</p>
+                        <p className="text-sm text-[#475569]">{contact.phone}</p>
+                      </div>
+                    </div>
+
+                    <div className="group flex items-start gap-4">
+                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-colors group-hover:bg-white">
+                        <Mail size={18} className="text-white group-hover:text-[#0f198d]" />
+                      </div>
+                      <div>
+                        <p className="mb-0.5 text-sm font-medium text-[#0f172a]">Email</p>
+                        <p className="text-sm text-[#475569]">{contact.email}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="overflow-hidden rounded-[1.4rem] border border-[#dbe4ff] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,255,0.98))] shadow-[0_18px_40px_rgba(10,11,133,0.10)]">
+                    <div className="border-b border-[#dbe4ff] px-5 py-3.5">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85]/60">
+                        Location
+                      </p>
+                    </div>
+                    {contact.mapEmbedUrl ? (
+                      <iframe
+                        src={contact.mapEmbedUrl}
+                        width="100%"
+                        height="280"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="Office Location"
+                        className="block w-full"
+                      />
+                    ) : (
+                      <div className="px-5 py-5">
+                        <p className="text-sm font-semibold text-[#0f172a]">Artha Mitra Interdata</p>
+                        <p className="mt-1 text-sm leading-relaxed text-[#475569]">{contact.address}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection
+              delay={0.2}
+              className={`relative overflow-hidden px-8 pt-14 text-white sm:px-10 sm:pt-16 lg:pb-14 lg:pt-20 ${formBg}`}
+            >
               <div>
-                <h2 className="text-[40px] font-bold text-[#111827] mb-2">Let&#39;s talk</h2>
-                <p className="text-[#111827] text-sm leading-relaxed">
-                  Fill out the form and our team will get back to you within 24 hours.
-                </p>
+                <h2 className="mb-10 text-[20px] font-bold uppercase tracking-[0.36em] text-white/85">
+                    Contact Form
+                </h2>
               </div>
-
-              <div className="space-y-5">
-                <div className="flex items-start gap-4 group">
-                  <div className="w-11 h-11 rounded-xl bg-[#0f198d]/100 border border-[#010268]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white transition-colors">
-                    <MapPin size={18} className="text-white group-hover:text-[#0f198d]" />
-                  </div>
-                  <div>
-                    <p className="text-[#111827] text-sm font-medium mb-0.5">Address</p>
-                    <p className="text-[#111827] text-sm leading-relaxed">{contact.address}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 group">
-                  <div className="w-11 h-11 rounded-xl bg-[#0f198d]/100 border border-[#010268]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white transition-colors">
-                    <Phone size={18} className="text-white group-hover:text-[#0f198d]" />
-                  </div>
-                  <div>
-                    <p className="text-[#111827] text-sm font-medium mb-0.5">Phone</p>
-                    <p className="text-[#111827] text-sm">{contact.phone}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 group">
-                  <div className="w-11 h-11 rounded-xl bg-[#0f198d]/100 border border-[#010268]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-white transition-colors">
-                    <Mail size={18} className="text-white group-hover:text-[#0f198d]" />
-                  </div>
-                  <div>
-                    <p className="text-[#111827] text-sm font-medium mb-0.5">Email</p>
-                    <p className="text-[#111827] text-sm">{contact.email}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Form column */}
-          <AnimatedSection delay={0.2} className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="glass-card-glow border border-[#a9abd6]/100 rounded-2xl bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm transition-shadow duration-300 group-hover:shadow-[0_24px_70px_rgba(10,11,133,0.18)] p-8 sm:p-10 space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="text-white text-xs font-medium tracking-wider uppercase mb-2 block">Name</label>
-                  <input
-                    type="text"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    required
-                    className="w-full bg-[#f3f4f6] border border-[#d1d5db] rounded-xl px-4 py-3 text-[#101964] text-sm placeholder:text-[#101964]/65 focus:outline-none focus:border-[#010268]/70 focus:ring-1 focus:ring-[#010268]/20 transition-all"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label className="text-white text-xs font-medium tracking-wider uppercase mb-2 block">Company</label>
-                  <input
-                    type="text"
-                    value={form.company}
-                    onChange={(e) => setForm({ ...form, company: e.target.value })}
-                    className="w-full bg-[#f3f4f6] border border-[#d1d5db] rounded-xl px-4 py-3 text-[#101964] text-sm placeholder:text-[#101964]/65 focus:outline-none focus:border-[#010268]/70 focus:ring-1 focus:ring-[#010268]/20 transition-all"
-                    placeholder="Company name"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="text-white text-xs font-medium tracking-wider uppercase mb-2 block">Email</label>
-                  <input
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    required
-                    className="w-full bg-[#f3f4f6] border border-[#d1d5db] rounded-xl px-4 py-3 text-[#101964] text-sm placeholder:text-[#101964]/65 focus:outline-none focus:border-[#010268]/70 focus:ring-1 focus:ring-[#010268]/20 transition-all"
-                    placeholder="you@company.com"
-                  />
-                </div>
-                <div>
-                  <label className="text-white text-xs font-medium tracking-wider uppercase mb-2 block">Phone</label>
-                  <input
-                    type="tel"
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="w-full bg-[#f3f4f6] border border-[#d1d5db] rounded-xl px-4 py-3 text-[#101964] text-sm placeholder:text-[#101964]/65 focus:outline-none focus:border-[#010268]/70 focus:ring-1 focus:ring-[#010268]/20 transition-all"
-                    placeholder="+62..."
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-white text-xs font-medium tracking-wider uppercase mb-2 block">Message</label>
-                <textarea
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  rows={5}
-                  required
-                  className="w-full bg-[#f3f4f6] border border-[#d1d5db] rounded-xl px-4 py-3 text-[#101964] text-sm placeholder:text-[#101964]/65 focus:outline-none focus:border-[#010268]/70 focus:ring-1 focus:ring-[#010268]/20 transition-all resize-none"
-                  placeholder="Tell us about your project..."
-                />
-              </div>
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-2 bg-gradient-to-r from-[#010268] to-[#1a1b78] hover:from-[#1a1b78] hover:to-[#010268] text-white px-8 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-gray-300/50"
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.16),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.10),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0))]" />
+              <form
+                onSubmit={handleSubmit}
+                className="relative z-10 flex h-full min-h-[calc(78vh-7rem)] w-full flex-col space-y-5 bg-transparent"
               >
-                <Send size={16} />
-                Send Message
-              </motion.button>
-            </form>
-          </AnimatedSection>
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      required
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
+                      Company
+                    </label>
+                    <input
+                      type="text"
+                      value={form.company}
+                      onChange={(e) => setForm({ ...form, company: e.target.value })}
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      placeholder="Company name"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      required
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      placeholder="you@company.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      placeholder="+62..."
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/90">
+                    Message
+                  </label>
+                  <textarea
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    rows={3}
+                    required
+                    className="w-full min-h-[140px] resize-none rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                    placeholder="Tell us about your project..."
+                  />
+                </div>
+
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="mt-5 inline-flex items-center justify-center gap-2 self-start rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0b85] shadow-[0_16px_34px_rgba(255,255,255,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(255,255,255,0.24)]"
+                >
+                  <Send size={16} />
+                  Send Message
+                </motion.button>
+              </form>
+            </AnimatedSection>
+          </div>
         </div>
       </div>
     </section>
   );
 }
-
