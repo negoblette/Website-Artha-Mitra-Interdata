@@ -1,7 +1,6 @@
 {
   "hero": {
-    "title": "Our Events &",
-    "subtitle": "Programs",
+    "title": "Our Events & Programs",
     "description": "Stay connected with AMI's latest activities, training programs, and industry events. We actively participate in and organize initiatives that foster knowledge sharing, technology adoption, and community engagement in the IT security space.",
     "image": "/images/activities-hero.jpg"
   },
@@ -10,24 +9,34 @@
     "subtitle": "Training, workshops, and initiatives we deliver for clients and partners",
     "items": [
       {
-        "images": ["/images/program-1a.jpg", "/images/program-1b.jpg"],
+        "images": ["/images/IT_summit.jpg", ""],
         "name": "Network Security Workshop",
         "description": "Hands-on training covering enterprise firewall configuration, intrusion detection, and network threat mitigation using solutions from Juniper Networks and Hillstone."
       },
       {
-        "images": ["/images/program-2a.jpg", "/images/program-2b.jpg"],
+        "images": ["", ""],
         "name": "Cybersecurity Awareness Training",
         "description": "Comprehensive security awareness program designed for enterprise teams, covering phishing prevention, data protection best practices, and incident response procedures."
       },
       {
-        "images": ["/images/program-3a.jpg", "/images/program-3b.jpg"],
+        "images": ["", ""],
         "name": "IT Infrastructure Assessment",
         "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
       },
       {
-        "images": ["/images/program-4a.jpg", "/images/program-4b.jpg"],
+        "images": ["", ""],
         "name": "Partner Certification Training",
         "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
+      },
+      {
+        "images": ["", ""],
+        "name": "Partner Certification Training",
+        "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
+      },
+      {
+        "images": ["", ""],
+        "name": "IT Infrastructure Assessment",
+        "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
       }
     ]
   },
@@ -36,25 +45,25 @@
     "subtitle": "Industry events, exhibitions, and conferences we participate in",
     "items": [
       {
-        "image": "/images/event-1.jpg",
+        "image": "/images/IT_summit.jpg",
         "category": "Conference",
         "name": "Indonesia IT Security Summit",
         "description": "Annual gathering of IT security professionals discussing the latest threats, solutions, and strategies for enterprise cybersecurity."
       },
       {
-        "image": "/images/event-2.jpg",
+        "image": "",
         "category": "Exhibition",
         "name": "Jakarta Network Expo",
         "description": "Showcasing the latest in network infrastructure technology, featuring live demos from our principal partners and hands-on experience."
       },
       {
-        "image": "/images/event-3.jpg",
+        "image": "",
         "category": "Seminar",
         "name": "Cyber Threat Intelligence Briefing",
         "description": "Expert-led sessions on emerging cyber threats, vulnerability trends, and proactive defense strategies for Indonesian enterprises."
       },
       {
-        "image": "/images/event-4.jpg",
+        "image": "",
         "category": "Workshop",
         "name": "Enterprise Firewall Masterclass",
         "description": "Deep-dive technical workshop on next-generation firewall deployment, configuration, and management for enterprise environments."
