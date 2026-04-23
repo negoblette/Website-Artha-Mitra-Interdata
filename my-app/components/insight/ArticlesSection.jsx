@@ -30,26 +30,23 @@ function ArticleCard({ item, index, expanded, onToggle }) {
               </div>
             )}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.96),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(10,11,133,0.10),transparent_28%),linear-gradient(135deg,rgba(10,11,133,0.06),transparent_58%)]" />
-            <div className="absolute left-5 top-5 rounded-full border border-white/75 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_10px_20px_rgba(10,11,133,0.08)] backdrop-blur-sm">
-              Article
-            </div>
-            {item.date && (
-              <div className="absolute right-5 top-5 rounded-full border border-white/75 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_10px_20px_rgba(10,11,133,0.08)] backdrop-blur-sm">
-                <span className="flex items-center gap-1">
-                  <Calendar className="h-3 w-3" />
-                  {new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-                </span>
-              </div>
-            )}
             <div className="absolute -right-10 top-8 h-28 w-28 rounded-full bg-[#0a0b85]/10 blur-3xl" />
             <div className="absolute -left-8 bottom-0 h-20 w-20 rounded-full bg-white/40 blur-2xl" />
           </div>
 
           <div className="relative flex flex-1 flex-col p-5 sm:p-6">
             <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(10,11,133,0.22),transparent)]" />
-            <span className="inline-flex w-fit rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.06)]">
-              {item.category}
-            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex w-fit rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.06)]">
+                {item.category}
+              </span>
+              {item.date && (
+                <span className="inline-flex items-center gap-1 rounded-full border border-[#0a0b85]/10 bg-white/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.05)] backdrop-blur-sm">
+                  <Calendar className="h-3 w-3" />
+                  {new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </span>
+              )}
+            </div>
 
             <h3 className="mt-3 line-clamp-2 text-[1.02rem] font-bold tracking-tight text-white transition-colors group-hover:text-white">
               {item.title}
@@ -139,23 +136,20 @@ function FeaturedArticle({ item }) {
           )}
 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(10,11,133,0.12),transparent_30%),linear-gradient(135deg,rgba(10,11,133,0.06),transparent_58%)]" />
-          <div className="absolute left-5 top-5 rounded-full border border-white/75 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_10px_20px_rgba(10,11,133,0.08)] backdrop-blur-sm">
-            Featured Article
-          </div>
-          {item.date && (
-            <div className="absolute bottom-5 left-5 rounded-full border border-white/75 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_10px_20px_rgba(10,11,133,0.08)] backdrop-blur-sm">
-              <span className="flex items-center gap-1">
-                <Calendar className="h-3 w-3" />
-                {new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              </span>
-            </div>
-          )}
         </div>
 
         <div className="flex flex-col justify-center px-1 py-2 sm:px-2 lg:pr-6">
-          <span className="inline-flex w-fit rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.06)]">
-            {item.category}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex w-fit rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.06)]">
+              {item.category}
+            </span>
+            {item.date && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-[#0a0b85]/10 bg-white/85 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.05)] backdrop-blur-sm">
+                <Calendar className="h-3 w-3" />
+                {new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </span>
+            )}
+          </div>
 
           <h3 className="mt-4 text-2xl font-bold tracking-tight text-[#111827] transition-colors group-hover:text-[#0a0b85] sm:text-3xl lg:text-[2.15rem] lg:leading-tight">
             {item.title}

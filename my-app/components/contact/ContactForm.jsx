@@ -33,7 +33,7 @@ export default function ContactForm({ contact }) {
         />
       </div>
       <div className="relative z-20 px-4 sm:px-6">
-        <div className="glass-card mx-auto min-h-[70vh] w-full max-w-7xl overflow-hidden rounded-[2.25rem] border border-[#dfe7ff] bg-white shadow-[0_32px_100px_rgba(10,11,133,0.14)]">
+        <div className="glass-card mx-auto min-h-[70vh] w-full max-w-7xl overflow-hidden rounded-[2.25rem] border border-[#dfe7ff] bg-white shadow-[0_48px_140px_rgba(10,11,133,0.22),0_18px_40px_rgba(10,11,133,0.12)]">
           <div className="grid min-h-[70vh] grid-cols-1 lg:grid-cols-[1.02fr_1fr]">
             <AnimatedSection
               direction="left"
