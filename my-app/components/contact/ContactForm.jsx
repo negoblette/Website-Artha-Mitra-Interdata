@@ -40,14 +40,21 @@ export default function ContactForm({ contact }) {
               className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,250,255,0.96))] px-8 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(10,11,133,0.08),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(140,163,255,0.14),transparent_30%)]" />
+              <img
+                src="/decor/careerelements.svg"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-[0rem] z-0 h-full w-full object-cover opacity-90 mix-blend-multiply [filter:contrast(1.08)_saturate(1.25)_brightness(0.98)]"
+              />
+              <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(255,255,255,0.86)_0%,rgba(255,255,255,0.62)_38%,rgba(255,255,255,0.28)_100%)]" />
               <div className="relative z-10 flex h-full flex-col justify-between gap-10">
                 <div className="space-y-8">
                   <div>
-                      <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#0a0b85]/55">
+                      <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.34em] text-[#0a0b85]/60">
                         Contact Us
                       </p>
                     <h2 className="mb-2 text-[40px] font-bold tracking-tight text-[#0f172a]">Let&#39;s talk</h2>
-                    <p className="max-w-md text-sm leading-relaxed text-[#334155]">
+                    <p className="max-w-md text-base leading-8 text-[#334155] sm:text-[1.05rem]">
                       Fill out the form and our team will get back to you within 24 hours.
                     </p>
                   </div>
@@ -58,8 +65,8 @@ export default function ContactForm({ contact }) {
                         <MapPin size={18} className="text-white group-hover:text-[#0f198d]" />
                       </div>
                       <div>
-                        <p className="mb-0.5 text-sm font-medium text-[#0f172a]">Address</p>
-                        <p className="text-sm leading-relaxed text-[#475569]">{contact.address}</p>
+                        <p className="mb-0.5 text-[1.02rem] font-medium text-[#0f172a]">Address</p>
+                        <p className="text-[1.02rem] leading-7 text-[#475569]">{contact.address}</p>
                       </div>
                     </div>
 
@@ -68,8 +75,8 @@ export default function ContactForm({ contact }) {
                         <Phone size={18} className="text-white group-hover:text-[#0f198d]" />
                       </div>
                       <div>
-                        <p className="mb-0.5 text-sm font-medium text-[#0f172a]">Phone</p>
-                        <p className="text-sm text-[#475569]">{contact.phone}</p>
+                        <p className="mb-0.5 text-[1.02rem] font-medium text-[#0f172a]">Phone</p>
+                        <p className="text-[1.02rem] text-[#475569]">{contact.phone}</p>
                       </div>
                     </div>
 
@@ -78,15 +85,15 @@ export default function ContactForm({ contact }) {
                         <Mail size={18} className="text-white group-hover:text-[#0f198d]" />
                       </div>
                       <div>
-                        <p className="mb-0.5 text-sm font-medium text-[#0f172a]">Email</p>
-                        <p className="text-sm text-[#475569]">{contact.email}</p>
+                        <p className="mb-0.5 text-[1.02rem] font-medium text-[#0f172a]">Email</p>
+                        <p className="text-[1.02rem] text-[#475569]">{contact.email}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="overflow-hidden rounded-[1.4rem] border border-[#dbe4ff] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,255,0.98))] shadow-[0_18px_40px_rgba(10,11,133,0.10)]">
                     <div className="border-b border-[#dbe4ff] px-5 py-3.5">
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85]/60">
+                      <p className="text-[12px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85]/65">
                         Location
                       </p>
                     </div>
@@ -104,8 +111,8 @@ export default function ContactForm({ contact }) {
                       />
                     ) : (
                       <div className="px-5 py-5">
-                        <p className="text-sm font-semibold text-[#0f172a]">Artha Mitra Interdata</p>
-                        <p className="mt-1 text-sm leading-relaxed text-[#475569]">{contact.address}</p>
+                        <p className="text-[1.02rem] font-semibold text-[#0f172a]">Artha Mitra Interdata</p>
+                        <p className="mt-1 text-[1.02rem] leading-7 text-[#475569]">{contact.address}</p>
                       </div>
                     )}
                   </div>
@@ -129,27 +136,27 @@ export default function ContactForm({ contact }) {
               >
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
-                      Name
-                    </label>
+                      <label className="mb-2 block text-sm font-medium uppercase tracking-wider text-white/90">
+                        Name
+                      </label>
                     <input
                       type="text"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
                       required
-                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-base text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
-                      Company
-                    </label>
+                      <label className="mb-2 block text-sm font-medium uppercase tracking-wider text-white/90">
+                        Company
+                      </label>
                     <input
                       type="text"
                       value={form.company}
                       onChange={(e) => setForm({ ...form, company: e.target.value })}
-                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-base text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
                       placeholder="Company name"
                     />
                   </div>
@@ -157,34 +164,34 @@ export default function ContactForm({ contact }) {
 
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
-                      Email
-                    </label>
+                      <label className="mb-2 block text-sm font-medium uppercase tracking-wider text-white/90">
+                        Email
+                      </label>
                     <input
                       type="email"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
                       required
-                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-base text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
                       placeholder="you@company.com"
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-white/90">
-                      Phone
-                    </label>
+                      <label className="mb-2 block text-sm font-medium uppercase tracking-wider text-white/90">
+                        Phone
+                      </label>
                     <input
                       type="tel"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      className="w-full rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-base text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
                       placeholder="+62..."
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/90">
+                  <label className="mb-1 block text-sm font-medium uppercase tracking-wider text-white/90">
                     Message
                   </label>
                   <textarea
@@ -192,7 +199,7 @@ export default function ContactForm({ contact }) {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     rows={3}
                     required
-                    className="w-full min-h-[140px] resize-none rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-sm text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
+                    className="w-full min-h-[140px] resize-none rounded-xl border border-white/15 bg-white/94 px-4 py-3 text-base text-[#101964] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] placeholder:text-[#101964]/55 transition-all focus:border-white/45 focus:outline-none focus:ring-1 focus:ring-white/20"
                     placeholder="Tell us about your project..."
                   />
                 </div>
@@ -201,7 +208,7 @@ export default function ContactForm({ contact }) {
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-5 inline-flex items-center justify-center gap-2 self-start rounded-full bg-white px-8 py-3.5 text-sm font-semibold text-[#0a0b85] shadow-[0_16px_34px_rgba(255,255,255,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(255,255,255,0.24)]"
+                  className="mt-5 inline-flex items-center justify-center gap-2 self-start rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#0a0b85] shadow-[0_16px_34px_rgba(255,255,255,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(255,255,255,0.24)]"
                 >
                   <Send size={16} />
                   Send Message
