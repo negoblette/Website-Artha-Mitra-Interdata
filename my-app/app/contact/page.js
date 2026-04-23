@@ -15,7 +15,7 @@ export default function ContactPage() {
     <>
       <ContactHero />
       <ContactForm contact={global.contact} />
-      <ContactInfo contact={global.contact} mapUrl={global.contact.mapEmbedUrl} />
+      {/* <ContactInfo contact={global.contact} mapUrl={global.contact.mapEmbedUrl} /> */}
     </>
   );
 }

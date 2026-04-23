@@ -26,6 +26,7 @@ export default function SolutionPage() {
         <SolutionHero data={data.hero} />
         <SolutionGrid solutions={data.solutions} />
         <ServicesGrid services={data.services} />
+        <WhyChoose data={products.whyChoose} />
       </div>
     </div>
       

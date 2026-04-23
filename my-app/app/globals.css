@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -114,6 +114,27 @@ section.scroll-reveal.in-view {
 
 .home-section.section-last {
   padding-bottom: clamp(0.5rem, 1.6vw, 1rem);
+}
+
+.mesh-gradient-accent {
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(10, 11, 133, 0.14), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(79, 70, 229, 0.12), transparent 26%),
+    radial-gradient(circle at 70% 78%, rgba(37, 99, 235, 0.1), transparent 30%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(243, 244, 246, 0.72));
+}
+
+.dot-pattern {
+  background-image:
+    radial-gradient(circle, rgba(17, 24, 39, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
 }
 
 @media (max-width: 1024px) {
@@ -473,6 +494,30 @@ section.scroll-reveal.in-view .careers-row {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.brand-grid-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #0a0b85 #e5e7eb;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0a0b85, #4c52b9);
+  border-radius: 999px;
+  border: 2px solid #e5e7eb;
+}
+
+.brand-grid-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #08096e, #3d43a8);
 }
 
 ::-webkit-scrollbar {

@@ -20,24 +20,41 @@ export default function Navbar({ data }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${showSolidNavbar ? 'bg-white/96 backdrop-blur-xl py-3 shadow-sm' : 'bg-transparent py-4'}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          showSolidNavbar
+            ? 'bg-gradient-to-b from-white/96 via-[#fafbfc]/95 to-[#f6f7fa]/94 backdrop-blur-xl py-3 shadow-sm'
+            : 'bg-transparent py-4'
+        }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-3">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-4">
           <Link href="/" className="flex items-center group justify-self-start">
-            <motion.div className="relative w-44 sm:w-48 h-12 sm:h-14 overflow-hidden" whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>
-              <Image src={data.logo} alt={data.companyName} fill sizes="180px" className="object-contain object-left" priority />
+            <motion.div
+              className="relative h-11 w-32 overflow-hidden sm:h-12 sm:w-40 lg:h-14 lg:w-48"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Image src={data.logo} alt={data.companyName} fill className="object-contain object-left" priority />
             </motion.div>
           </Link>
 
-          <motion.div
-            className="hidden xl:flex h-12 items-center gap-0.5 bg-[rgb(13,27,94)] rounded-full px-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
-          >
+          <motion.div className="absolute left-1/2 top-1/2 hidden h-12 max-w-max -translate-x-1/2 -translate-y-1/2 items-center gap-0.5 rounded-full bg-[#0a0b85] px-2 shadow-[0_4px_10px_rgba(0,0,0,0.25)] lg:flex">
             {navItems.map((item) => (
               <motion.div
                 key={item.href}
@@ -47,7 +64,7 @@ export default function Navbar({ data }) {
               >
                 <Link
                   href={item.href}
-                  className={`group relative inline-flex h-10 items-center px-5 rounded-full text-[13px] font-semibold transition-colors ${
+                  className={`group relative inline-flex h-10 items-center px-3 xl:px-5 rounded-full text-sm xl:text-[15px] font-semibold transition-colors ${
                     pathname === item.href
                       ? 'text-white'
                       : 'text-white hover:text-white'
@@ -57,7 +74,7 @@ export default function Navbar({ data }) {
                     {item.label}
                   </span>
                   <span
-                    className={`pointer-events-none absolute left-5 right-5 bottom-1 h-0.5 origin-center rounded-full transition-transform duration-200 ${
+                    className={`pointer-events-none absolute left-3 right-3 bottom-1 h-0.5 origin-center rounded-full transition-transform duration-200 xl:left-5 xl:right-5 ${
                       pathname === item.href
                         ? 'scale-x-100 bg-white'
                         : 'scale-x-0 bg-white/90 group-hover:scale-x-100'
@@ -75,7 +92,7 @@ export default function Navbar({ data }) {
             >
               <Link
                 href="/contact"
-                className="group hidden sm:inline-flex h-12 items-center bg-[rgb(13,27,94)] text-white hover:bg-[#1e1f92] rounded-full px-8 text-[13px] font-semibold transition-colors shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+                className="group hidden md:inline-flex h-11 lg:h-12 items-center rounded-full bg-[#0a0b85] px-5 lg:px-7 text-sm lg:text-[15px] font-semibold text-white transition-colors hover:bg-[#1e1f92] shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
               >
                 <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">Contact Us</span>
               </Link>
@@ -84,7 +101,12 @@ export default function Navbar({ data }) {
             <motion.button
               onClick={() => setMobileOpen(!mobileOpen)}
               whileTap={{ scale: 0.9 }}
-              className="xl:hidden p-2.5 text-[#111827] hover:bg-[#0a0b85] hover:text-white rounded-full transition-colors"
+              className={`lg:hidden rounded-full p-2.5 transition-colors ${
+                showSolidNavbar
+                  ? 'text-[#111827] hover:bg-[#0a0b85] hover:text-white'
+                  : 'text-[#0a0b85] bg-white/85 backdrop-blur hover:bg-[#0a0b85] hover:text-white'
+              }`}
+              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </motion.button>
@@ -98,9 +120,12 @@ export default function Navbar({ data }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl"
+            className="fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-white via-[#fafbfc] to-[#f6f7fa] backdrop-blur-2xl"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(1,2,104,0.08),_transparent_28%),radial-gradient(circle_at_bottom_left,_rgba(115,115,115,0.08),_transparent_24%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(17,24,39,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,24,39,0.04)_1px,transparent_1px)] bg-[size:34px_34px]" />
+
+            <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center gap-8 px-4 pb-10 pt-28 sm:px-6">
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.href}
@@ -108,10 +133,11 @@ export default function Navbar({ data }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: i * 0.08 }}
+                  className="text-center"
                 >
                   <Link
                     href={item.href}
-                    className={`text-3xl tracking-wide transition-colors ${
+                    className={`text-2xl sm:text-3xl tracking-wide transition-colors ${
                       pathname === item.href ? 'text-[#0a0b85] font-bold' : 'text-[#111827] hover:text-[#0a0b85]'
                     }`}
                   >
@@ -123,10 +149,11 @@ export default function Navbar({ data }) {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navItems.length * 0.08 }}
+                className="text-center"
               >
                 <Link
                   href="/contact"
-                  className="mt-4 inline-flex items-center gap-2 bg-[#0a0b85] text-white rounded-full px-8 py-3 text-sm font-semibold"
+                  className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0a0b85] px-8 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(10,11,133,0.18)]"
                 >
                   Contact Us
                 </Link>

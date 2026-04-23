@@ -229,11 +229,6 @@ export default function BrandGrid({ brands }) {
             </div>
 
             <div className="relative overflow-hidden rounded-[1.75rem] border border-[#d8e2ff]/80 bg-white/42 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
-              {/* <div className="pointer-events-none absolute inset-x-3 top-3 z-10 h-14 rounded-t-[1.25rem] bg-gradient-to-b from-[#f8fbff] via-[#f8fbff]/82 to-transparent" />
-              <div className="pointer-events-none absolute inset-x-3 bottom-3 z-10 h-16 rounded-b-[1.25rem] bg-gradient-to-t from-[#eef3ff] via-[#eef3ff]/82 to-transparent" /> */}
-
-              {/* kalo misal mau ditambahin fade ^ */}
-
               <div className="max-h-[68vh] overflow-y-auto px-1 pb-3 pt-3 brand-grid-scrollbar">
                 {filteredBrands.length > 0 ? (
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

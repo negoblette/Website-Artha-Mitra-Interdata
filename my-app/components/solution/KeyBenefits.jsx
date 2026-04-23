@@ -13,18 +13,18 @@
 //         ))}
 //       </div>
 
-//       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
-//         <AnimatedSection>
-//           <div className="text-center mb-16">
-//             <span className="font-[family-name:var(--font-sora)] inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-//               Why Us
-//             </span>
-//             <h2 className="font-[family-name:var(--font-sora)] text-3xl sm:text-4xl font-bold gradient-text inline-block mb-4">
-//               {data.title}
-//             </h2>
-//             <p className="text-[#111827] text-sm">{data.subtitle}</p>
-//           </div>
-//         </AnimatedSection>
+      <div className="relative bg-black z-10 max-w-5xl mx-auto px-4 sm:px-6">
+        <AnimatedSection>
+          <div className="text-center mb-16">
+            <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
+              Why Us
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-4">
+              {data.title}
+            </h2>
+            <p className="text-[#111827] text-sm">{data.subtitle}</p>
+          </div>
+        </AnimatedSection>
 
 //         {/* Benefits grid */}
 //         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

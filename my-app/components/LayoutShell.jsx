@@ -46,7 +46,7 @@ export default function LayoutShell({ globalData, children }) {
     };
 
     const initReveal = () => {
-      targets = Array.from(document.querySelectorAll('main section'));
+      targets = Array.from(document.querySelectorAll('main section:not([data-no-reveal="true"])'));
       if (!targets.length) return;
 
       targets.forEach((el, index) => {

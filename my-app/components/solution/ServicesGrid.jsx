@@ -61,4 +61,3 @@ export default function ServicesGrid({ services }) {
     </section>
   );
 }
-
