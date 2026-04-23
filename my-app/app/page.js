@@ -11,13 +11,13 @@ export default function Home() {
   const global = getContent('global');
 
   return (
-    <div className="home-reference-bg">
+    <div>
       <HeroSection data={data.hero} />
       <HowItWorksSection data={data.howItWorks} />
       <OfferingsSection data={data.offerings} />
       <TestimonialsSection data={data.testimonials} />
       <NewsSection data={data.news} />
-      <ContactSection contact={global.contact} />
+      <ContactSection data={data.contactSection} contact={global.contact} socials={global.footer?.socials} />
     </div>
   );
 }
