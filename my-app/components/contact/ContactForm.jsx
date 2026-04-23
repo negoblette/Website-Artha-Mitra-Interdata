@@ -14,9 +14,22 @@ export default function ContactForm({ contact }) {
   };
 
   return (
+<<<<<<< Updated upstream
     <section className="relative py-20 overflow-hidden">
       <div className="absolute inset-0 bg-[#ffffff]" />
       <div className="absolute inset-0 dot-pattern opacity-30" />
+=======
+    <section className="relative z-10 py-20 overflow-visible">
+      <div className="absolute inset-0 z-0 bg-[#ffffff]" />
+      <div className="absolute inset-0 z-0 dot-pattern opacity-30" />
+      <img
+        src="/decor/contactform.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-27rem] top-[27rem] z-10 h-[140%] w-auto -translate-y-1/2 opacity-100"
+      />
+      {/* <div className="absolute inset-0 z-10 bg-gradient-to-r from-white via-white/75 to-white/10" /> */}
+>>>>>>> Stashed changes
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
