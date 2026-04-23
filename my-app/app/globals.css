@@ -3,14 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #1f2937;
-  --nav-height: clamp(4.25rem, 6.4vw, 5.5rem);
-}
-
-@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sora);
 }
 
 * {
@@ -22,7 +17,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
+  font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -58,7 +53,7 @@ section.scroll-reveal.in-view {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url('/images/reference/background.png');
+  background-image: url('/images/reference/home-page-background.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
@@ -158,10 +153,6 @@ section.scroll-reveal.in-view {
     filter: none;
     transition: none;
   }
-}
-
-.font-alegreya {
-  font-family: var(--font-alegreya-sans), var(--font-sans), sans-serif;
 }
 
 .hero-readable-title {
@@ -327,6 +318,31 @@ section.scroll-reveal.in-view .careers-row {
   }
 }
 
+.hero-fade-1,
+.hero-fade-2,
+.hero-fade-3,
+.hero-fade-4 {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: heroFadeUp 0.9s ease forwards;
+}
+
+.hero-fade-1 { animation-delay: 0.2s; }
+.hero-fade-2 { animation-delay: 0.4s; }
+.hero-fade-3 { animation-delay: 0.6s; }
+.hero-fade-4 { animation-delay: 0.8s; }
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-wave-layer {
   position: absolute;
   inset: 0;
@@ -415,6 +431,17 @@ section.scroll-reveal.in-view .careers-row {
 
 .achievement-track-slide-prev {
   animation: achievementSlidePrev 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: none;
+  }
+  50% {
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 12px rgba(147, 197, 253, 0.8), 0 0 24px rgba(147, 197, 253, 0.4);
+  }
 }
 
 @keyframes achievementSlideNext {

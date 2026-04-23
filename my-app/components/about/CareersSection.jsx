@@ -22,10 +22,10 @@ export default function CareersSection({ data }) {
   return (
     <section id="careers" className="relative flex min-h-screen items-center bg-transparent py-16">
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
-        <h2 className="text-center text-4xl font-black text-[#0a0b85]">Be Our Team!</h2>
+        <h2 className="text-center text-4xl font-black text-[rgba(13,27,94)] ">Be Our Team!</h2>
 
         <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <article className="careers-panel careers-panel-left rounded-xl bg-[#0a0b85] p-4 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)]">
+          <article className="careers-panel careers-panel-left rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-4 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)]">
             <div className={`space-y-2.5 ${showAllPositions ? 'max-h-[290px] overflow-y-auto pr-1' : ''}`}>
               {displayedPositions.map((pos, index) => (
                 <div
@@ -85,7 +85,7 @@ export default function CareersSection({ data }) {
             </button>
           </article>
 
-          <article className="careers-panel careers-panel-right rounded-xl bg-[#0a0b85] p-4 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)]">
+          <article className="careers-panel careers-panel-right rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-4 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)]">
             <h3 className="text-2xl font-black">{data.cvForm.title}</h3>
             <p className="mt-2 text-[11px] leading-relaxed text-white/85">{data.cvForm.description}</p>
 

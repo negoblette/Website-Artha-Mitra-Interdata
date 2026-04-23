@@ -1,12 +1,17 @@
 'use client';
 import { motion } from 'framer-motion';
+import { Sora } from 'next/font/google';
 import Image from 'next/image';
 import AnimatedSection from '@/components/AnimatedSection';
+
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
 
 export default function PrincipalsSection({ data }) {
   return (
     <section className="relative py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#fafbfc] to-[#f6f7fa]" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>

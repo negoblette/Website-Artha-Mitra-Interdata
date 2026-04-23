@@ -35,19 +35,19 @@ function OfferColumn({ eyebrow, title, items, icons }) {
   );
 
   return (
-    <div className="h-full min-h-0 flex flex-col px-4 sm:px-6 md:px-7 py-4 sm:py-5 md:py-6">
-      <div className="pb-2 md:pb-3">
-        <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.22em] text-black uppercase">{eyebrow}</p>
-        <h3 className="mt-1.5 text-3xl sm:text-4xl md:text-5xl font-extrabold text-black">{title}</h3>
+    <div className="h-full min-h-0 flex flex-col px-4 sm:px-7 py-5 sm:py-6">
+      <div className="sticky top-0 z-10 bg-[#f4f5f7]/92 backdrop-blur-sm pb-3">
+        <p className="text-[10px] pl-50 font-bold tracking-[0.22em] text-[rgb(13,27,94)] uppercase">{eyebrow}</p>
+        <h3 className="mt-1.5 text-4xl sm:text-5xl pl-50 font-extrabold text-[rgb(13,27,94)]">{title}</h3>
       </div>
 
-      <div className="no-scrollbar mt-1.5 space-y-2.5 md:space-y-3.5 overflow-y-auto pr-1 flex-1 min-h-0 max-h-[26rem] sm:max-h-[30rem] md:max-h-[34rem]">
+      <div className="no-scrollbar mt-1.5 space-y-4 overflow-y-auto pl-50 pr-50 flex-1 min-h-0">
         {normalizedItems.map((item, i) => {
           const Icon = icons[i % icons.length];
 
           return (
             <div key={`${item.name}-${i}`}>
-              <p className="flex items-start gap-2.5 font-bold text-black leading-tight">
+              <p className="flex items-start gap-2.5 font-bold text-[rgb(13,27,94)] leading-tight">
                 <Icon size={19} className="mt-1 text-[#007f99]" />
                 <span className="text-[18px] sm:text-[21px]">{item.name}</span>
               </p>
@@ -57,9 +57,9 @@ function OfferColumn({ eyebrow, title, items, icons }) {
         })}
       </div>
 
-      <p className="text-center mt-2 md:mt-3 text-[9px] sm:text-[10px] font-bold text-black">scroll for more</p>
-      <div className="text-center mt-1.5 md:mt-2">
-        <Link href="/solution" className="inline-flex rounded-full border-2 border-black px-4 sm:px-6 py-1 sm:py-1.5 text-black text-xs sm:text-sm md:text-base font-semibold hover:bg-[#d7d9ff] hover:text-black transition-colors">
+      <p className="text-center mt-3 text-base font-bold text-[rgb(13,27,94)]">scroll for more</p>
+      <div className="text-center mt-2">
+        <Link href="/solution" className="inline-flex rounded-full border-2 border-black px-6 py-1.5 text-black text-sm sm:text-base font-semibold hover:bg-[rgba(13,27,94)] hover:text-white transition-colors">
           Learn More
         </Link>
       </div>

@@ -36,7 +36,7 @@ export default function LifeAtAmi({ data }) {
       <div className="absolute left-0 right-0 bottom-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
-        <h2 className="text-5xl font-black text-[#0a0b85] md:text-6xl">{data.title}</h2>
+        <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">{data.title}</h2>
 
         <div className="mx-auto mt-8 w-full max-w-[1120px] overflow-hidden">
           <div className="relative mx-auto h-[180px] w-full sm:h-[205px]">

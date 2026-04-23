@@ -23,11 +23,11 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
                 <Image src={logo} alt={companyName} fill className="object-contain" />
               </div>
               <div>
-                <p className="text-sm sm:text-[15px] font-semibold leading-tight text-[#1a1a1a]">{companyName}</p>
-                <p className="text-[10px] leading-tight text-black/55">{tagline}</p>
+                <p className="text-sm sm:text-[15px] font-bold leading-tight text-[#1a1a1a]">{companyName}</p>
+                <p className="text-[12px] leading-tight text-black/55">{tagline}</p>
               </div>
             </Link>
-            <p className="mt-4 max-w-[280px] text-[11px] leading-relaxed text-black/60">Simply put, We Optimize IT For You.</p>
+            {/* <p className="mt-4 max-w-[280px] text-[12px] leading-relaxed text-black/60">Simply put, We Optimize IT For You.</p> */}
 
             <div className="mt-5 flex gap-3 text-black/90">
               {socials.map((social) => {
@@ -51,7 +51,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
 
           <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-7">
             <div>
-              <h4 className="text-[11px] font-semibold uppercase tracking-wide text-black/60">Quick Links</h4>
+              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Quick Links</h4>
               <ul className="mt-3 space-y-2">
                 {data.columns[0].links.map((link) => (
                   <li key={link.href + link.label}>
@@ -62,7 +62,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             </div>
 
             <div>
-              <h4 className="text-[11px] font-semibold uppercase tracking-wide text-black/60">Solutions</h4>
+              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Solutions</h4>
               <ul className="mt-3 space-y-2">
                 {data.columns[1].links.map((link) => (
                   <li key={link.href + link.label}>
@@ -73,7 +73,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             </div>
 
             <div>
-              <h4 className="text-[11px] font-semibold uppercase tracking-wide text-black/60">Careers</h4>
+              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Careers</h4>
               <ul className="mt-3 space-y-2">
                 {data.columns[4].links.map((link) => (
                   <li key={link.href + link.label}>
@@ -84,7 +84,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             </div>
 
             <div>
-              <h4 className="text-[11px] font-semibold uppercase tracking-wide text-black/60">Contact</h4>
+              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Contact</h4>
               <div className="mt-3 space-y-2.5 text-[12px] leading-snug text-black/70">
                 <p className="flex items-start gap-2"><MapPin size={13} className="mt-0.5 flex-shrink-0" />{contact.address}</p>
                 <p className="flex items-start gap-2"><Phone size={13} className="mt-0.5 flex-shrink-0" />{contact.phone}</p>

@@ -1,15 +1,19 @@
 ﻿import Link from 'next/link';
 
-function NewsRow({ title, excerpt, reverse, tone }) {
+function NewsRow({ title, excerpt, reverse, tone, image }) {
   return (
-    <article className="w-full bg-[#cfd2d6]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
-          <div className={`h-44 sm:h-56 md:h-64 ${tone} ${reverse ? 'md:order-2' : ''}`} />
-          <div className={`flex items-center p-4 sm:p-5 md:p-7 ${reverse ? 'md:order-1' : ''}`}>
-            <div className="max-w-lg">
-              <h3 className="text-white text-3xl sm:text-4xl font-black leading-tight">{title}</h3>
-              <p className="mt-3 text-white text-sm sm:text-[14px] leading-relaxed">
+    <article className="bg-[#d9dadd] border border-[#e5e5e5] rounded-lg overflow-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2">
+        {image ? (
+          <div className={`h-44 md:h-52 overflow-hidden ${reverse ? 'md:order-2' : ''}`}>
+            <img src={image} alt={title} className="w-full h-full object-cover" />
+          </div>
+        ) : (
+          <div className={`h-44 md:h-52 ${tone} ${reverse ? 'md:order-2' : ''}`} />
+        )}
+        <div className="p-4 md:p-5">
+          <h3 className="text-black text-[25px] font-black leading-tight">{title}</h3>
+          <p className="mt-2 text-black font-semibold text-sm sm:text-[18px] leading-relaxed max-w-xl">
             {excerpt}
               </p>
             </div>
@@ -32,17 +36,18 @@ export default function NewsSection({ data }) {
   ];
 
   return (
-    <section className="home-section relative overflow-hidden bg-transparent pt-8 sm:pt-10 md:pt-12 pb-10 sm:pb-12 md:pb-14">
-      <div className="relative z-10">
-        <h2 className="text-center text-4xl sm:text-5xl font-black text-[#0a0b85] mb-5 sm:mb-6 md:mb-8">NEWS & ARTICLES</h2>
-        <div className="space-y-6 sm:space-y-7 md:space-y-8">
+    <section className="home-section relative bg-transparent overflow-hidden">
+      <div className="relative z-10 pb-30">
+        <h2 className= "text-center text-3xl sm:text-4xl lg:text-5xl font-black text-[rgb(13,27,94)] mb-4 md:mb-5">News & Articles</h2>
+        <div className="space-y-4 md:space-y-5">
           {rows.map((row, i) => (
             <NewsRow
               key={row.title}
               title={row.title}
               reverse={row.reverse}
               tone={row.tone}
-              excerpt={safeItems[i % safeItems.length].excerpt}
+              image={data.items[i % data.items.length].image}
+              excerpt={data.items[i % data.items.length].excerpt}
             />
           ))}
         </div>
@@ -50,7 +55,7 @@ export default function NewsSection({ data }) {
         <div className="mt-6 sm:mt-8 flex justify-center px-4 sm:px-6">
           <Link
             href="/insight"
-            className="inline-flex rounded-full border-2 border-black px-6 py-2 text-black text-sm sm:text-base font-semibold bg-white hover:bg-[#eceeff] transition-colors"
+            className= "inline-flex rounded-full border-2 border-black px-6 py-2 text-black text-sm sm:text-base font-semibold hover:bg-[rgba(13,27,94)] hover:text-white transition-colors"
           >
             Visit Articles Page
           </Link>

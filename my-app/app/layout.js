@@ -1,7 +1,19 @@
-﻿import { Geist, Geist_Mono, Alegreya_Sans } from "next/font/google";
+﻿import { Geist, Geist_Mono, Alegreya_Sans, Sora, DM_Sans } from "next/font/google";
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 import { getContent } from "@/lib/content";
+
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +40,8 @@ export default function RootLayout({ children }) {
   const global = getContent('global');
 
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${alegreyaSans.variable} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth">
+      <body className={`${geistSans.variable} ${geistMono.variable} ${alegreyaSans.variable} ${sora.variable} ${dmSans.variable} antialiased`}>
         <LayoutShell globalData={global}>{children}</LayoutShell>
       </body>
     </html>

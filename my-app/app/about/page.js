@@ -18,7 +18,7 @@ export default function AboutPage() {
     <div
       className="relative min-h-screen overflow-hidden bg-[#f3f4f8]"
       style={{
-        backgroundImage: "url('/images/reference/about-background.svg')",
+        backgroundImage: "url('/images/reference/about-page-background.svg')",
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'top center',

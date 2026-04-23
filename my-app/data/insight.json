@@ -7,46 +7,97 @@
   "articles": {
     "title": "Articles",
     "subtitle": "In-depth analysis and expert perspectives",
+    "headline": {
+      "category": "Technology",
+      "title": "Zero Trust in Modern Infrastructure",
+      "excerpt": "A practical headline feature about securing access, validating identity, and reducing implicit trust across modern enterprise environments.",
+      "content": "Zero Trust is designed around continuous verification instead of assumed trust. In modern environments, this helps reduce lateral movement, tighten access boundaries, and improve visibility into user and device activity.",
+      "author": "AMI Editorial Team",
+      "date": "2026-03-01",
+      "image": "/images/brow.jpg",
+      "tags": ["Zero Trust", "Security", "Access Control"]
+    },
     "items": [
       {
-        "slug": "importance-of-network-security-2026",
+        "slug": "network-security-basics",
         "category": "Security",
-        "title": "The Growing Importance of Network Security in 2026",
-        "excerpt": "As cyber threats become more sophisticated, organizations must adopt a multi-layered security approach. From next-generation firewalls to advanced threat detection, learn how modern enterprises are protecting their digital assets.",
-        "content": "In today's interconnected world, network security has become a critical business priority. With the rise of remote work, cloud adoption, and IoT devices, the attack surface has expanded dramatically. Organizations need comprehensive security strategies that encompass perimeter defense, internal segmentation, and continuous monitoring. At Artha Mitra Interdata, we help businesses implement robust security frameworks using industry-leading solutions from our technology partners including Juniper Networks, Barracuda, and Hillstone Networks.",
+        "title": "Network Security Basics for Modern Teams",
+        "excerpt": "A practical overview of the controls that help modern organizations reduce risk, protect users, and maintain visibility across the network.",
+        "content": "Modern network security starts with clear segmentation, strong access controls, and continuous monitoring. Teams should align firewall policies, identity checks, and endpoint protection so threats are contained before they spread. This dummy article is meant to test article filtering and card layout in the insight section.",
         "author": "AMI Security Team",
         "date": "2026-02-15",
-        "tags": ["Network Security", "Cybersecurity", "Enterprise"]
+        "tags": ["Network Security", "Access Control", "Monitoring"]
       },
       {
-        "slug": "optimizing-bandwidth-enterprise",
-        "category": "Infrastructure",
-        "title": "Optimizing Bandwidth for Enterprise Networks",
-        "excerpt": "Bandwidth optimization is crucial for maintaining network performance. Discover best practices for managing and optimizing your organization's bandwidth to ensure seamless operations and user experience.",
-        "content": "Enterprise networks face increasing demands as applications become more bandwidth-intensive. Video conferencing, cloud services, and real-time collaboration tools all compete for available bandwidth. Effective bandwidth management requires a combination of traffic shaping, QoS policies, and intelligent monitoring. Solutions from DataBlink and A10 Networks provide the tools needed to optimize network performance while controlling costs. Our team at AMI specializes in designing and implementing bandwidth management solutions tailored to your specific needs.",
-        "author": "AMI Infrastructure Team",
-        "date": "2026-01-20",
-        "tags": ["Bandwidth", "Network Optimization", "Infrastructure"]
-      },
-      {
-        "slug": "zero-trust-architecture-guide",
+        "slug": "zero-trust-explained",
         "category": "Security",
-        "title": "A Practical Guide to Zero Trust Architecture",
-        "excerpt": "Zero Trust is no longer just a buzzword — it's becoming the standard for enterprise security. Learn how to implement Zero Trust principles in your organization's network infrastructure.",
-        "content": "The traditional perimeter-based security model is no longer sufficient in today's distributed work environment. Zero Trust Architecture operates on the principle of 'never trust, always verify,' requiring authentication and authorization for every access request regardless of location. Implementing Zero Trust involves network micro-segmentation, strong identity verification, least-privilege access controls, and continuous monitoring. With solutions from Pulse Secure for secure access and Juniper Networks for network segmentation, AMI helps organizations transition to a Zero Trust framework systematically.",
+        "title": "Zero Trust Explained in Simple Terms",
+        "image": "/images/brow.jpg",
+        "excerpt": "A straightforward dummy article that explains the core idea behind Zero Trust and why it matters for distributed work environments.",
+        "content": "Zero Trust is based on the principle of verifying every request instead of assuming trust inside the network. In practice, this means stronger identity checks, limited access, and continuous validation of devices and users. The content here is intentionally generic so it can serve as safe placeholder data in the insight page.",
         "author": "AMI Security Team",
         "date": "2025-12-10",
-        "tags": ["Zero Trust", "Security Architecture", "Access Control"]
+        "tags": ["Zero Trust", "Identity", "Access Control"]
       },
       {
-        "slug": "future-of-it-infrastructure",
+        "slug": "modern-infrastructure-planning",
+        "category": "Infrastructure",
+        "title": "Planning a Scalable IT Infrastructure",
+        "excerpt": "A dummy editorial about designing infrastructure that can grow with user demand, office expansion, and new application workloads.",
+        "content": "A scalable infrastructure plan considers capacity, resilience, and operational simplicity from the beginning. Good architecture avoids single points of failure, keeps core services observable, and leaves room for future growth. This placeholder content helps validate the article list without using production copy.",
+        "author": "AMI Infrastructure Team",
+        "date": "2026-01-20",
+        "tags": ["Infrastructure", "Scalability", "Resilience"]
+      },
+      {
+        "slug": "bandwidth-qos-principles",
+        "category": "Infrastructure",
+        "title": "Bandwidth and QoS Principles",
+        "excerpt": "A dummy explanation of traffic prioritization, queue management, and performance tuning for busy enterprise networks.",
+        "content": "QoS helps prioritize critical applications when network demand becomes uneven. By classifying traffic and reserving capacity for important services, teams can reduce congestion and improve user experience. This article is intentionally generic and works as a placeholder for testing repeated category entries.",
+        "author": "AMI Infrastructure Team",
+        "date": "2025-09-08",
+        "tags": ["Bandwidth", "QoS", "Performance"]
+      },
+      {
+        "slug": "future-it-trends-2026",
         "category": "Trends",
-        "title": "The Future of IT Infrastructure: Trends to Watch",
-        "excerpt": "From AI-driven network management to edge computing, the IT infrastructure landscape is evolving rapidly. Here are the key trends shaping the future of enterprise IT.",
-        "content": "The IT infrastructure landscape is undergoing a fundamental transformation. AI and machine learning are being integrated into network management tools, enabling predictive analytics and automated troubleshooting. Edge computing is bringing processing power closer to where data is generated, reducing latency and improving performance. Software-defined networking (SDN) continues to gain traction, offering greater flexibility and programmability. As organizations navigate these trends, having a trusted IT partner like Artha Mitra Interdata ensures that technology investments are strategic and future-proof.",
+        "title": "IT Trends to Watch in 2026",
+        "excerpt": "A dummy article covering automation, AI-assisted operations, and modern service delivery patterns that are shaping enterprise IT.",
+        "content": "Technology teams are increasingly adopting automation to reduce repetitive tasks and improve response time. AI-assisted monitoring, edge processing, and software-defined services are becoming common parts of modern IT roadmaps. This sample article is meant to provide realistic variety for category filters and card heights.",
         "author": "AMI Research Team",
         "date": "2025-11-05",
-        "tags": ["IT Trends", "AI", "Edge Computing", "SDN"]
+        "tags": ["IT Trends", "AI", "Automation", "Edge Computing"]
+      },
+      {
+        "slug": "cloud-readiness-checklist",
+        "category": "Cloud",
+        "title": "Cloud Readiness Checklist for Growing Companies",
+        "excerpt": "A practical dummy checklist to help teams think through migration planning, governance, and operational readiness before moving workloads.",
+        "content": "Before a cloud migration, teams should review application dependencies, identity controls, backup strategy, and cost visibility. Clear ownership and phased adoption reduce risk and make the transition easier to manage. This placeholder article helps test a fifth category in the UI.",
+        "author": "AMI Cloud Team",
+        "date": "2025-10-18",
+        "tags": ["Cloud", "Migration", "Governance"]
+      },
+      {
+        "slug": "future-tech-trends-2027",
+        "category": "Infrastructure",
+        "title": "IT Trends to Watch in 2027",
+        "excerpt": "A dummy article automation, AI-assisted operations, and modern service delivery patterns that are shaping enterprise IT.",
+        "content": "Technology teams are increasingly adopting automation to reduce repetitive tasks and improve response time. AI-assisted monitoring, edge processing, and software-defined services are becoming common parts of modern IT roadmaps. This sample article is meant to provide realistic variety for category filters and card heights.",
+        "author": "AMI Research Team",
+        "date": "2025-12-09",
+        "tags": ["IT Trends", "AI", "Automation", "Edge Computing"]
+      },
+      {
+        "slug": "reset-hack-checklist",
+        "category": "Cloud",
+        "title": "Cloud Readiness Checklist for Growing Companies",
+        "excerpt": "A practical dummy checklist to help teams think through migration planning, governance, and operational readiness before moving workloads.",
+        "content": "Before a cloud migration, teams should review application dependencies, identity controls, backup strategy, and cost visibility. Clear ownership and phased adoption reduce risk and make the transition easier to manage. This placeholder article helps test a fifth category in the UI.",
+        "author": "AMI Cloud Team",
+        "date": "2025-10-18",
+        "tags": ["Cloud", "Migration", "Governance"]
       }
     ]
   },
@@ -59,6 +110,7 @@
         "category": "Security",
         "title": "IT Security Spending to Reach $96 Billion in 2018",
         "excerpt": "Gartner predicts that worldwide security spend will reach $96 billion dollars, up 8% from the previous year. The latest figures show substantial increases reflecting the growing importance of cybersecurity in modern enterprises.",
+        "content": "Global security spending continues to grow as organizations respond to more advanced threats, stricter compliance needs, and wider digital adoption across industries. Enterprises are allocating more budget to endpoint protection, network security, monitoring, and incident response capabilities to reduce operational risk. For businesses in Indonesia, this trend reinforces the need for a layered security strategy that can scale with evolving threat landscapes.",
         "date": "2018-03-15",
         "source": "Gartner Research"
       },
@@ -67,6 +119,7 @@
         "category": "Compliance",
         "title": "The Real Reason You're Failing at PCI DSS Compliance",
         "excerpt": "IT organizations don't struggle with PCI DSS compliance due to a lack of knowledge or technology. The problem is proficiency. With years of data breach investigation reports, patterns start to become clear.",
+        "content": "PCI DSS compliance often fails not because the standard is unclear, but because teams lack consistent processes and operational discipline. Organizations need to map technical controls to daily practices, ensure documentation is maintained, and regularly test their security posture. A mature compliance program combines policy, training, monitoring, and audit readiness so security becomes part of the workflow instead of a one-time project.",
         "date": "2018-02-20",
         "source": "Industry Report"
       },
@@ -75,6 +128,7 @@
         "category": "IoT",
         "title": "DDI is a Critical Component of IoT Success",
         "excerpt": "The Internet of Things era has arrived, and businesses need to be prepared for a world where everything is connected. There are currently 25 billion internet-connected devices, and that will double by 2025.",
+        "content": "As IoT deployments expand, organizations need a reliable foundation for DNS, DHCP, and IP address management to keep devices connected and visible. DDI helps teams control scale, reduce configuration errors, and improve troubleshooting across distributed environments. Without a solid DDI strategy, the complexity of connected devices can quickly overwhelm network operations and security teams.",
         "date": "2018-01-10",
         "source": "Technology Review"
       },
@@ -83,6 +137,7 @@
         "category": "Cyber Security",
         "title": "Fighting Automation with Automation",
         "excerpt": "Disruptions caused by autonomous malware could have devastating implications. As attackers leverage automation, defenders must also adopt automated threat detection and response capabilities to keep pace.",
+        "content": "Automation has become a double-edged sword in cybersecurity. Attackers use it to scale phishing, reconnaissance, and malware delivery, while defenders can use the same principles to accelerate detection, triage, and response. Security teams that invest in automated workflows can reduce dwell time, react faster to incidents, and improve consistency across their defenses.",
         "date": "2017-11-25",
         "source": "Cybersecurity Today"
       },
@@ -91,6 +146,7 @@
         "category": "Partnership",
         "title": "AMI Renews Strategic Partnership with Juniper Networks",
         "excerpt": "Artha Mitra Interdata proudly announces the renewal of its strategic partnership with Juniper Networks, reinforcing our commitment to delivering cutting-edge networking solutions to clients across Indonesia.",
+        "content": "The renewed partnership with Juniper Networks reflects AMI's ongoing commitment to delivering reliable networking solutions and expert implementation support for clients in Indonesia. This collaboration strengthens our ability to provide modern infrastructure, security, and performance-focused technologies that help organizations grow. Through this partnership, customers can expect continued access to trusted solutions and technical expertise.",
         "date": "2026-01-15",
         "source": "AMI Press Release"
       },
@@ -99,8 +155,99 @@
         "category": "Cyber Security",
         "title": "Ransomware Threats Continue to Rise in Southeast Asia",
         "excerpt": "Southeast Asian enterprises face an increasing wave of ransomware attacks targeting critical infrastructure. Organizations are urged to strengthen their security posture with multi-layered defense strategies.",
+        "content": "Ransomware remains one of the most disruptive threats facing enterprises in Southeast Asia, targeting critical systems, backups, and user credentials. Organizations need a multi-layered defense that includes strong endpoint protection, network segmentation, identity controls, and tested recovery plans. Proactive monitoring and employee awareness are essential to reducing both the likelihood and impact of an attack.",
         "date": "2025-12-20",
         "source": "ASEAN Cyber Report"
+      },
+      {
+        "slug": "cloud-security-posture-management",
+        "category": "Cloud",
+        "title": "Why Cloud Security Posture Management Matters",
+        "excerpt": "Cloud environments move fast, and security teams need visibility into misconfigurations, excessive permissions, and drifting policies before they become risk.",
+        "content": "Cloud Security Posture Management helps organizations continuously check for insecure storage, overly permissive access, and unmonitored resources. With more workloads moving to cloud platforms, a posture-first approach makes it easier to standardize guardrails and reduce exposure across teams.",
+        "date": "2026-02-02",
+        "source": "AMI Cloud Brief"
+      },
+      {
+        "slug": "zero-trust-network-access-trends",
+        "category": "Security",
+        "title": "Zero Trust Network Access Trends for Hybrid Work",
+        "excerpt": "Hybrid work has pushed many companies to rethink VPN-only access and adopt more granular identity-based controls.",
+        "content": "Zero Trust Network Access gives organizations a more controlled way to connect users to applications without exposing the full network. It is especially useful for hybrid workplaces that need stronger access boundaries, device checks, and policy enforcement across remote employees.",
+        "date": "2026-01-28",
+        "source": "Security Weekly"
+      },
+      {
+        "slug": "observability-modern-networks",
+        "category": "Networking",
+        "title": "Observability is Essential for Modern Networks",
+        "excerpt": "Teams need better visibility into traffic patterns, latency, and service dependencies to keep network operations predictable.",
+        "content": "Observability combines metrics, logs, and traces so teams can understand how systems behave under real-world conditions. For network operations, this means faster troubleshooting, clearer root-cause analysis, and better decisions when capacity or user experience starts to degrade.",
+        "date": "2025-12-11",
+        "source": "Network Operations Journal"
+      },
+      {
+        "slug": "ai-ops-for-enterprise-monitoring",
+        "category": "AI",
+        "title": "AI Ops Is Changing Enterprise Monitoring",
+        "excerpt": "AI-assisted operations are helping IT teams detect patterns faster and reduce the noise from repetitive alerts.",
+        "content": "AI Ops platforms can summarize event streams, highlight anomalies, and recommend next steps for support teams. When implemented carefully, they help reduce alert fatigue and free engineers to focus on incidents that need human judgment.",
+        "date": "2025-11-26",
+        "source": "Technology Review Asia"
+      },
+      {
+        "slug": "incident-response-retainers",
+        "category": "Security",
+        "title": "Incident Response Retainers Prepare Teams for the Worst",
+        "excerpt": "Retainer-based incident response planning gives organizations faster access to expertise when an attack happens.",
+        "content": "An incident response retainer helps businesses define escalation paths, align responsibilities, and reduce response delays during a security event. Instead of building the plan during a crisis, teams can prepare in advance and focus on containment and recovery.",
+        "date": "2025-10-30",
+        "source": "Cyber Resilience Report"
+      },
+      {
+        "slug": "data-center-modernization-planning",
+        "category": "Infrastructure",
+        "title": "Data Center Modernization Planning for Growth",
+        "excerpt": "Infrastructure teams need a clear roadmap for refreshing aging systems while maintaining service continuity.",
+        "content": "A modernization roadmap helps organizations phase out legacy components, improve redundancy, and make room for new workloads. By mapping dependencies early, teams can reduce migration risk and create a smoother path toward a more resilient environment.",
+        "date": "2025-09-19",
+        "source": "Infrastructure Monthly"
+      },
+      {
+        "slug": "secure-access-remote-teams",
+        "category": "Secure Access",
+        "title": "Secure Access Best Practices for Remote Teams",
+        "excerpt": "Remote users need strong authentication, device health checks, and simple access paths that do not expose the whole network.",
+        "content": "Secure access programs work best when identity verification, endpoint posture, and least-privilege access are designed together. For remote teams, this reduces the attack surface while keeping the user experience practical enough for day-to-day work.",
+        "date": "2025-08-14",
+        "source": "AMI Security Notes"
+      },
+      {
+        "slug": "network-segmentation-matters",
+        "category": "Security",
+        "title": "Why Network Segmentation Still Matters",
+        "excerpt": "Segmentation remains one of the most effective ways to reduce lateral movement and limit the blast radius of incidents.",
+        "content": "Even in modern zero trust environments, segmentation gives teams an additional layer of control over how systems communicate. By separating critical assets from general user traffic, organizations can make containment much easier during a security event.",
+        "date": "2025-07-22",
+        "source": "Security Architecture Digest"
+      },
+      {
+        "slug": "backup-strategy-for-recovery",
+        "category": "Infrastructure",
+        "title": "Backup Strategy Essentials for Fast Recovery",
+        "excerpt": "Backups are only useful when they are tested, protected, and aligned with the recovery needs of the business.",
+        "content": "A reliable backup strategy should include offsite copies, immutable storage where possible, and regular recovery drills. Organizations that treat backups as an active part of resilience planning are better prepared when outages or ransomware incidents occur.",
+        "date": "2025-06-18",
+        "source": "Resilience Quarterly"
+      },
+      {
+        "slug": "ai-assisted-phishing-defenses",
+        "category": "Cyber Security",
+        "title": "Defending Against AI-Assisted Phishing",
+        "excerpt": "As phishing campaigns become more convincing, organizations need layered controls and stronger user awareness.",
+        "content": "AI-generated phishing messages can be more personalized and harder to spot than traditional scams. Defenders should combine email security, identity verification, and ongoing user training to reduce the chance of successful impersonation attacks.",
+        "date": "2025-05-27",
+        "source": "Threat Intelligence Review"
       }
     ]
   }
