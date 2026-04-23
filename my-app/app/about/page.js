@@ -1,6 +1,7 @@
 import { getContent } from '@/lib/content';
 import AboutHero from '@/components/about/AboutHero';
 import VisionMission from '@/components/about/VisionMission';
+import CiptaValuesSection from '@/components/about/CiptaValuesSection';
 import HistorySection from '@/components/about/HistorySection';
 import AchievementSection from '@/components/about/AchievementSection';
 import LifeAtAmi from '@/components/about/LifeAtAmi';
@@ -13,6 +14,7 @@ export const metadata = {
 
 export default function AboutPage() {
   const data = getContent('about');
+  const homepage = getContent('homepage');
 
   return (
     <div
@@ -27,6 +29,7 @@ export default function AboutPage() {
       <div className="relative z-10">
         <AboutHero data={data.hero} />
         <VisionMission vision={data.vision} mission={data.mission} />
+        <CiptaValuesSection values={homepage.howItWorks?.values} />
         <HistorySection data={data.history} />
         <AchievementSection data={data.achievement} />
         <LifeAtAmi data={data.lifeAtAmi} />

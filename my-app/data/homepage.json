@@ -1,20 +1,62 @@
 {
   "hero": {
+    "eyebrow": "IT Solutions Integrator and Provider",
     "title": "we optimize IT for you",
-    "description": "With technology continuing to grow and play a bigger role than ever in our lives, so do the complexities and costs of managing it. Artha Mitra Interdata is built to partner with you in managing IT infrastructure and security by optimizing its efficiency.",
+    "accentWord": "Optimize",
+    "description": "As technology grows more complex, managing it effectively becomes critical to staying competitive. Artha Mitra Interdata partners with you to take control of your IT infrastructure and security, improving efficiency, reducing risk, and enabling sustainable growth.",
     "cta": {
       "label": "Get to Know Us",
       "href": "/about"
+    },
+    "secondaryCta": {
+      "label": "Contact Us",
+      "href": "/contact"
+    },
+    "background": {
+      "image": "/images/reference/home-page-background.svg"
     }
   },
   "howItWorks": {
     "title": "How We Optimize IT For You",
-    "description": "Our core focus has never wavered since our establishment in that we have always trusted in the partnership approach of shared responsibility and vision. This is how we differ from other IT Solutions Integrator and Provider, we hold ourselves accountable to what we set out to achieve."
+"description": "At Artha Mitra Interdata, optimizing IT means ensuring that technology consistently supports and strengthens your business objectives. We work closely with our customers as trusted partners, taking the time to understand their priorities so that every solution we design delivers practical, measurable value. From infrastructure to security, our focus is on building IT environments that are stable, efficient, and able to adapt as your business evolves.\n\nOur approach is guided by a clear vision to become the technology partner of choice, and a mission to help customers achieve their competitive goals through strong leadership and professional service. Guided by our core values of Commitment, Integrity, Professionalism, Teamwork, and Advancement (CIPTA), we cultivate a culture of accountability, collaboration, and continuous improvement. These principles shape how we engage, how we deliver, and how we help our customers transform IT into a sustained competitive advantage.",
+    "values": [
+      {
+        "letter": "C",
+        "title": "Commitment",
+        "description": "We understand the importance of delivering on our promises and are dedicated to excellence in completing the tasks at hand.",
+        "image": "/images/commitment.jpg"
+      },
+      {
+        "letter": "I",
+        "title": "Integrity",
+        "description": "We abide to a set of moral standards that is unwavering and steadfast - we always look to do the right thing.",
+        "image": "/images/Integrity.png"
+      },
+      {
+        "letter": "P",
+        "title": "Professionalism",
+        "description": "We believe in our competence and seek to achieve the best results in all that we do.",
+        "image": "/images/professionalism.png"
+      },
+      {
+        "letter": "T",
+        "title": "Teamwork",
+        "description": "Understanding that synergy enables us to achieve more, we always collaborate in formulating the optimum solution.",
+        "image": "/images/teamwork.png"
+      },
+      {
+        "letter": "A",
+        "title": "Advancement",
+        "description": "Encapsulating our vision and purpose as a company, we ensure every delivery provides tangible value that advances the business.",
+        "image": "/images/advancement.png"
+      }
+    ]
   },
   "offerings": {
     "title": "Our Offerings",
     "tabs": [
       {
+        "eyebrow": "The Infrastructure",
         "label": "Solutions",
         "items": [
           {
@@ -65,6 +107,7 @@
         "description": "We offer a wide range of solutions centered on IT Infrastructure and Security, designed to maximize impact and value to your business. Our solutions cover everything from network hardware and software to advanced security measures, bandwidth optimization, and communication systems."
       },
       {
+        "eyebrow": "The Expertise",
         "label": "Services",
         "items": [
           {
@@ -106,6 +149,14 @@
           {
             "name": "GRC",
             "description": "Managing policies, risks, and regulatory compliance."
+          },
+          {
+            "name": "GRData Security",
+            "description": "Managing policies, risks, and regulatory compliance."
+          },
+          {
+            "name": "Managed IT",
+            "description": "Managing policies, risks, and regulatory compliance."
           }
         ],
         "description": "We offer a wide range of services centered on IT Infrastructure and Security, designed to maximize impact and value to your business. Our services are aimed at optimizing IT, enabling and extending to further achieve your organizational objectives and success."
@@ -117,7 +168,7 @@
     }
   },
   "testimonials": {
-    "title": "What People Say",
+    "title": "What People Says",
     "items": [
       {
         "image": "/images/principals/juniper.png",
@@ -169,35 +220,56 @@
   "news": {
     "title": "News & Articles",
     "subtitle": "Stay updated with the latest in IT security and technology",
+    "cta": {
+      "label": "Visit Articles Page",
+      "href": "/insight"
+    },
     "items": [
       {
         "category": "Security",
         "title": "IT Security Spending to Reach $96 Billion in 2018",
         "excerpt": "Gartner predicts that worldwide security spend will reach $96 billion dollars, up 8% from the previous year. The latest figures show substantial increases reflecting the growing importance of cybersecurity in modern enterprises.",
-        "slug": "security-spending-2018",
-        "image": "/images/news1.jpg"
+        "slug": "security-spending-2018"
       },
       {
         "category": "Compliance",
         "title": "The Real Reason You're Failing at PCI DSS Compliance",
         "excerpt": "IT organizations don't struggle with PCI DSS compliance due to a lack of knowledge or technology. The problem is proficiency. With years of data breach investigation reports, patterns start to become clear.",
-        "slug": "pci-dss-compliance",
-        "image": "/images/news2.jpg"
+        "slug": "pci-dss-compliance"
       },
       {
         "category": "IoT",
         "title": "DDI is a Critical Component of IoT Success",
         "excerpt": "The Internet of Things era has arrived, and businesses need to be prepared for a world where everything is connected. There are currently 25 billion internet-connected devices, and that will double by 2025.",
-        "slug": "ddi-iot-success",
-        "image": "/images/news3.jpg"
+        "slug": "ddi-iot-success"
       },
       {
         "category": "Cyber Security",
         "title": "Fighting Automation with Automation",
         "excerpt": "Disruptions caused by autonomous malware could have devastating implications. As attackers leverage automation, defenders must also adopt automated threat detection and response capabilities to keep pace.",
-        "slug": "fighting-automation",
-        "image": "/images/news/fighting-automation.jpg"
+        "slug": "fighting-automation"
       }
     ]
+  },
+  "contactSection": {
+    "eyebrow": "Contact Us",
+    "title": "Get In Touch With Us",
+    "socials": [
+      {
+        "platform": "Instagram",
+        "label": "@arthamitrainterdata"
+      },
+      {
+        "platform": "Facebook",
+        "label": "@arthamitrainterdata"
+      },
+      {
+        "platform": "LinkedIn",
+        "label": "@arthamitrainterdata"
+      }
+    ],
+    "form": {
+      "submitLabel": "> Send Message"
+    }
   }
 }

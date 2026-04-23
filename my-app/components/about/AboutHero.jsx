@@ -62,7 +62,7 @@ export default function AboutHero({ data }) {
           </motion.div>
           <div className="mt-15 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] text-white p-8 rounded-2xl max-w-auto">
             <p className="text-xl font-semibold leading-relaxed">
-              We believe in the power of collaboration and innovation. By partnering closely with our clients, we deliver solutions that truly make a difference.
+              At Artha Mitra Interdata, we believe in a partnership approach built on shared responsibility and vision. We work closely with our customers to deliver infrastructure and security solutions that create real value, building IT environments that are efficient, resilient, and ready to support long-term growth.
             </p>
           </div>
         </motion.div>

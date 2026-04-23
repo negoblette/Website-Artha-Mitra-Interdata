@@ -15,7 +15,7 @@ export default function HeroSection({ data }) {
           {words[0]} <span className="text-[rgb(13,27,94)] font-extrabold">{words[1]}</span> {words[2]} {words[3]}<br />{words[4]}
         </h1>
 
-        <p className="hero-fade-3 mt-8 mb-12 text-sm sm:text-base lg:text-lg text-[rgb(13,27,94)] max-w-3xl mx-auto leading-relaxed font-semibold">
+        <p className="hero-fade-3 mt-8 mb-12 text-3xl sm:text-base lg:text-2xl text-[rgb(13,27,94)] max-w-5xl mx-auto leading-relaxed font-semibold">
           {data.description}
         </p>
 
