@@ -3,8 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-// jangan pake import Sora terus berat Next.js ny...//
-
 export default function AboutHero({ data }) {
   return (
     <section data-no-reveal="true" className="relative h-screen min-h-[700px] overflow-visible">
@@ -51,8 +49,8 @@ export default function AboutHero({ data }) {
                   <p className="mt-3 text-3xl font-black text-[#0a0b85]">AMI</p>
                   <p className="mt-2 text-sm font-semibold text-[#0a0b85]/80">Your Technology Partner</p>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>

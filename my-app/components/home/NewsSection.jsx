@@ -5,7 +5,7 @@ function NewsRow({ title, excerpt, reverse, tone, category }) {
     <article className="group overflow-hidden rounded-[1.35rem] border border-slate-200/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(242,245,249,0.95)_100%)] shadow-[0_14px_34px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(15,23,42,0.12)]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-stretch">
         <div className={`relative h-40 md:h-full min-h-[10rem] overflow-hidden ${tone} ${reverse ? 'md:order-2' : ''}`} />
-        <div className="p-4 md:p-5 lg:p-6">
+        <div className={`p-4 md:p-5 lg:p-6 ${reverse ? 'md:order-1' : ''}`}>
           <p className="inline-flex w-fit rounded-full border border-[#0a0b85]/15 bg-[#eceeff] px-2.5 py-0.75 text-[9px] font-bold uppercase tracking-[0.22em] text-[#0a0b85]">
             {category}
           </p>
@@ -14,9 +14,7 @@ function NewsRow({ title, excerpt, reverse, tone, category }) {
           </h3>
           <p className="mt-2.5 text-black/78 text-[13px] sm:text-[14px] leading-relaxed max-w-xl">
             {excerpt}
-              </p>
-            </div>
-          </div>
+          </p>
         </div>
       </div>
     </article>

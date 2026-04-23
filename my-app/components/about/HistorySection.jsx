@@ -1,10 +1,14 @@
 export default function HistorySection({ data }) {
+  const title = 'History & Journey';
+  const topDescription = 'Perjalanan AMI dibangun melalui komitmen jangka panjang, kolaborasi yang kuat, dan fokus pada hasil yang terukur.';
+  const footerDescription = 'Kami terus berkembang bersama pelanggan sebagai partner teknologi yang konsisten, adaptif, dan berorientasi pada dampak bisnis.';
+
   return (
     <section id="history" className="relative flex min-h-screen items-center bg-transparent py-16">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="history-intro mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-black text-[rgba(13,27,94)] md:text-5xl">{data.title}</h2>
-          <p className="mt-4 text-sm leading-relaxed font-semibold text-black md:text-base">{data.description.split('\n')[0]}</p>
+          <h2 className="text-4xl font-black text-[rgba(13,27,94)] md:text-5xl">{title}</h2>
+          <p className="mt-4 text-sm leading-relaxed font-semibold text-black md:text-base">{topDescription}</p>
         </div>
 
         <div className="mx-auto mt-9 max-w-5xl space-y-3.5 md:space-y-4">
@@ -32,7 +36,7 @@ export default function HistorySection({ data }) {
 
         <div className="mx-auto mt-8 max-w-3xl text-center">
           <p className="text-sm leading-relaxed font-semibold text-black md:text-base">
-            {data.description.split('\n').slice(1).join(' ').trim()}
+            {footerDescription}
           </p>
         </div>
       </div>

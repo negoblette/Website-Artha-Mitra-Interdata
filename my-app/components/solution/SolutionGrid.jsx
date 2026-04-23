@@ -45,24 +45,28 @@ function SolutionCard({ solution, index }) {
 
             <div className="flex items-center gap-2.5 mb-3.5 flex-wrap">
               <span className="text-[10px] text-white/60 uppercase tracking-wider font-bold">Partners:</span>
-              {solution.brands.map((brand, i) => (
-              <Link
-                key={i}
-                href={brand.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="bg-white/10 border border-white/20 rounded-xl px-3 hover:bg-white/15 hover:scale-105 transition-all duration-200"                title={`Visit ${brand.name}`}
-              >
-                <Image
-                  src={brand.logo}
-                  alt={brand.name}
-                  width={80}
-                  height={28}
-                  className="h-8 w-auto object-contain brightness-0 invert"
-                />
-              </Link>
-              ))}
+              {solution.brands.map((brand, i) => {
+                const useOriginalLogo = /netscout|fluke/i.test(brand.name || '');
+                return (
+                  <Link
+                    key={i}
+                    href={brand.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="bg-white/10 border border-white/20 rounded-xl px-3 hover:bg-white/15 hover:scale-105 transition-all duration-200"
+                    title={`Visit ${brand.name}`}
+                  >
+                    <Image
+                      src={brand.logo}
+                      alt={brand.name}
+                      width={80}
+                      height={28}
+                      className={`h-8 w-auto object-contain ${useOriginalLogo ? '' : 'brightness-0 invert'}`}
+                    />
+                  </Link>
+                );
+              })}
             </div>
 
             <AnimatePresence>
@@ -128,7 +132,7 @@ export default function SolutionGrid({ solutions }) {
               What We Offer
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[rgb(13,27,94)] tracking-tight mb-3">
-              Our Solutions
+              Our Solution
             </h2>
             <p className="text-[#111827] text-[13px] font-semibold sm:text-sm max-w-2xl mx-auto">
               Click any card to explore details, or hit &quot;Learn More&quot; for the full solution page.

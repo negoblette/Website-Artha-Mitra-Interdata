@@ -6,13 +6,35 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 export default function ContactForm({ contact }) {
   const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
   const formBg =
     'bg-[linear-gradient(135deg,#0a0b85_0%,#121b9d_42%,#192bca_100%)]';
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon.');
-    setForm({ name: '', company: '', email: '', phone: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const json = await res.json();
+      if (!res.ok) {
+        throw new Error(json?.error || 'Failed to send message.');
+      }
+
+      setSubmitStatus({ type: 'success', message: 'Message sent successfully. We will get back to you soon.' });
+      setForm({ name: '', company: '', email: '', phone: '', message: '' });
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: error.message || 'Failed to send message.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -61,8 +83,8 @@ export default function ContactForm({ contact }) {
 
                   <div className="space-y-5">
                     <div className="group flex items-start gap-4">
-                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-colors group-hover:bg-white">
-                        <MapPin size={18} className="text-white group-hover:text-[#0f198d]" />
+                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-all duration-200 group-hover:scale-[1.03] group-hover:ring-2 group-hover:ring-[#0f198d]/25">
+                        <MapPin size={18} className="text-white" />
                       </div>
                       <div>
                         <p className="mb-0.5 text-[1.02rem] font-medium text-[#0f172a]">Address</p>
@@ -71,8 +93,8 @@ export default function ContactForm({ contact }) {
                     </div>
 
                     <div className="group flex items-start gap-4">
-                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-colors group-hover:bg-white">
-                        <Phone size={18} className="text-white group-hover:text-[#0f198d]" />
+                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-all duration-200 group-hover:scale-[1.03] group-hover:ring-2 group-hover:ring-[#0f198d]/25">
+                        <Phone size={18} className="text-white" />
                       </div>
                       <div>
                         <p className="mb-0.5 text-[1.02rem] font-medium text-[#0f172a]">Phone</p>
@@ -81,8 +103,8 @@ export default function ContactForm({ contact }) {
                     </div>
 
                     <div className="group flex items-start gap-4">
-                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-colors group-hover:bg-white">
-                        <Mail size={18} className="text-white group-hover:text-[#0f198d]" />
+                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-[#010268]/15 bg-[linear-gradient(135deg,#0a0b85,#0f198d)] shadow-[0_10px_24px_rgba(10,11,133,0.18)] transition-all duration-200 group-hover:scale-[1.03] group-hover:ring-2 group-hover:ring-[#0f198d]/25">
+                        <Mail size={18} className="text-white" />
                       </div>
                       <div>
                         <p className="mb-0.5 text-[1.02rem] font-medium text-[#0f172a]">Email</p>
@@ -208,11 +230,17 @@ export default function ContactForm({ contact }) {
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  disabled={isSubmitting}
                   className="mt-5 inline-flex items-center justify-center gap-2 self-start rounded-full bg-white px-8 py-3.5 text-base font-semibold text-[#0a0b85] shadow-[0_16px_34px_rgba(255,255,255,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(255,255,255,0.24)]"
                 >
                   <Send size={16} />
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </motion.button>
+                {submitStatus.message ? (
+                  <p className={`text-sm font-medium ${submitStatus.type === 'success' ? 'text-green-200' : 'text-red-200'}`}>
+                    {submitStatus.message}
+                  </p>
+                ) : null}
               </form>
             </AnimatedSection>
           </div>

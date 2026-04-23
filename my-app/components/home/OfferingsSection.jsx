@@ -110,7 +110,6 @@ export default function OfferingsSection({ data }) {
           </div>
         </div>
       </div>
-      </div>
     </section>
   );
 }

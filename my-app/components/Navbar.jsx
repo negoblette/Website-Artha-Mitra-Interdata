@@ -87,12 +87,13 @@ export default function Navbar({ data }) {
 
           <div className="flex items-center justify-self-end gap-2">
             <motion.div
-              whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)' }}
+              className="rounded-full"
+              whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.12 }}
             >
               <Link
                 href="/contact"
-                className="group hidden md:inline-flex h-11 lg:h-12 items-center rounded-full bg-[#0a0b85] px-5 lg:px-7 text-sm lg:text-[15px] font-semibold text-white transition-colors hover:bg-[#1e1f92] shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+                className="group hidden md:inline-flex h-11 lg:h-12 items-center rounded-full bg-[#0a0b85] px-5 lg:px-7 text-sm lg:text-[15px] font-semibold text-white transition-colors hover:bg-[#1e1f92] shadow-[0_4px_10px_rgba(0,0,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0b85]/35 focus-visible:ring-offset-2"
               >
                 <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">Contact Us</span>
               </Link>

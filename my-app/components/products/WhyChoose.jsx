@@ -4,6 +4,8 @@ import { CheckCircle2 } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 export default function WhyChoose({ data }) {
+  const title = 'Why Choose AMI';
+
   return (
     <section className="relative mb-30 overflow-hidden py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#eef3ff]/40 to-transparent" />
@@ -42,7 +44,7 @@ export default function WhyChoose({ data }) {
                   Why Choose Us
                 </span>
                 <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  {data.title}
+                  {title}
                 </h2>
                 <p className="mt-5 max-w-lg text-sm font-semibold leading-7 text-white/80 sm:text-base">
                   {data.description}

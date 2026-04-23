@@ -3,6 +3,10 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function SolutionHero({ data }) {
+  const title = 'Solutions & Services';
+  const subtitle = 'IT Infrastructure & Security';
+  const description = 'We offer a wide range of solutions and services centered on IT Infrastructure and Security, designed to maximize impact and value to your business. To sum it up, our services are aimed at optimizing IT, in turn enabling and extending to further achieve your organizational objectives and success.';
+
   return (
     <section className="relative overflow-hidden h-screen min-h-[700px] flex items-center bg-transparent">
       
@@ -30,7 +34,7 @@ export default function SolutionHero({ data }) {
               {data.image ? (
                   <Image
                     src={data.image}
-                    alt={data.title}
+                    alt={title}
                     fill
                     sizes="(min-width: 1024px) 54vw, 100vw"
                     className="object-cover object-center"
@@ -48,13 +52,13 @@ export default function SolutionHero({ data }) {
           className="text-center lg:text-left order-1 lg:order-2"
         >
           <h1 className="text-4xl sm:text-5xl md:text-[64px] leading-[1.1] font-black text-[#111827] mb-3 tracking-tight">
-            {data.title}
+            {title}
           </h1>
           <h2 className="text-xl sm:text-2xl font-bold text-[#010268] mb-6">
-            {data.subtitle}
+            {subtitle}
           </h2>
           <p className="text-[#111827] text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
-            {data.description}
+            {description}
           </p>
         </motion.div>
 

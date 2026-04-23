@@ -42,7 +42,7 @@ export default function LifeAtAmi({ data }) {
       <div className="absolute bottom-0 left-0 right-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
-        <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">{data.title}</h2>
+        <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">Life At AMI</h2>
 
         <div className="mx-auto mt-8 w-full max-w-[1320px] overflow-visible">
           <div className="relative mx-auto h-[210px] w-[118%] max-w-[1320px] -translate-x-[9%] sm:h-[238px] lg:h-[260px]">

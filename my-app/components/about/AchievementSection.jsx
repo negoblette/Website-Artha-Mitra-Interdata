@@ -57,7 +57,7 @@ export default function AchievementSection({ data }) {
             <ChevronLeft size={20} />
           </button>
 
-          <h2 className="text-4xl font-black text-[rgba(13,27,94))] md:text-5xl">Our Achievements</h2>
+          <h2 className="text-4xl font-black text-[rgba(13,27,94))] md:text-5xl">Our Achievement</h2>
 
           <button
             type="button"

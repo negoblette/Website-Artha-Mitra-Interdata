@@ -1,14 +1,17 @@
 ﻿export default function HowItWorksSection({ data }) {
+  const sectionTitle = 'How We Optimize IT For You';
+  const sectionDescription = 'Our core focus has never wavered since our establishment in that we have always trusted in the partnership approach of shared responsibility and vision. This is how we differ from other IT Solutions Integrator and Provider, we hold ourselves accountable to what we set out to achieve.';
+
   return (
-    <section className="home-section bg-transparent overflow-hidden min-h-screen flex flex-col justify-center py-16 sm:py-20 lg:py-24">
+    <section className="relative bg-transparent overflow-hidden min-h-screen flex flex-col justify-center pt-8 sm:pt-10 lg:pt-12 pb-16 sm:pb-20 lg:pb-24">
       {/* We use max-w-[1500px] here so 5 cards can be HUGE side-by-side */}
       <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-6 text-center">
         
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[rgb(13,27,94)]">
-          {data.title}
+          {sectionTitle}
         </h2>
         <p className="mt-4 text-[rgb(13,27,94)] text-sm sm:text-base font-semibold max-w-3xl mx-auto leading-relaxed">
-          {data.description}
+          {sectionDescription}
         </p>
 
         <div className="mt-6 md:mt-8 grid grid-cols-2 md:grid-cols-5 gap-4">
