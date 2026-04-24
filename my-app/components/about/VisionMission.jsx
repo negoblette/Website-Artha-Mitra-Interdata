@@ -19,8 +19,8 @@ export default function VisionMission({ vision, mission }) {
           <h2 className="mt-5 text-4xl font-black tracking-tight text-[#0a0b85] sm:text-5xl">
             VISI MISI
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#111827]/75 sm:text-base">
-            The principles that shape how we grow, serve, and create long-term value for every partnership we build.
+          <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-black sm:text-base">
+            Be the company of choice as a technology solution integrator and provider to intensify customers' competitive edge.
           </p>
         </motion.div>
 

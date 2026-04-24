@@ -13,16 +13,42 @@ export default function AboutHero({ data }) {
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
           className="text-center lg:text-left"
         >
-          <h1 className="text-4xl font-black text-[#0a0b85] sm:text-5xl lg:text-[64px] lg:leading-[0.95]">{data.title}</h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-black/80 lg:mx-0">
-            Our core focus has never wavered since our establishment in what we have
-            always trusted in the partnership approach of shared responsibility and
-            vision. This is how we differ from other IT Solutions Integrator and
-            Provider, we hold ourselves accountable to what we set out to achieve.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <Link href="/contact" className="rounded-full border border-[#0a0b85] px-8 py-2.5 text-base font-semibold text-[#0a0b85] hover:bg-[#0a0b85] hover:text-white transition-colors">Contact Us</Link>
-            <Link href="#history" className="rounded-full border border-[#0a0b85] px-8 py-2.5 text-base font-semibold text-[#0a0b85] hover:bg-[#0a0b85] hover:text-white transition-colors">Learn More</Link>
+          {/* <span className="inline-block mb-3 px-4 py-1 text-m font-semibold bg-[rgb(13,27,94)]/10 text-[rgb(13,27,94)] rounded-full">
+            IT Solutions Integrator
+          </span> */}
+
+          <h1 className="text-5xl mt-15 font-extrabold text-[rgb(13,27,94)] sm:text-6xl lg:text-7xl xl:text-8xl lg:leading-[0.95]">
+            {data.title}
+          </h1>
+
+          {/* ga usah make segala "font-[family-name:var(--font-sora)]" orang udah jadi global.css inefficient */}
+
+          {/* <p className="mt-4 max-w-2xl font-semibold text-m text-black lg:mx-0">
+            Delivering reliable IT solutions through strong partnerships and innovation.
+          </p> */}
+
+          <ul className="mt-4 font-semibold space-y-2 text-xl text-[rgb(13,27,94)]">
+            <li>• Trusted IT Solutions Integrator</li>
+            <li>• Scalable digital infrastructure</li>
+            <li>• Long-term partnership focused</li>
+          </ul>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+            className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start"
+          >
+            <Link href="/contact" className="inline-flex min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-6 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors">
+              Contact Us
+            </Link>
+            <Link href="#history" className="inline-flex min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-6 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors">
+              Learn More
+            </Link>
+          </motion.div>
+          <div className="mt-15 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] text-white p-8 rounded-2xl max-w-auto">
+            <p className="text-xl font-semibold leading-relaxed">
+              At Artha Mitra Interdata, we believe in a partnership approach built on shared responsibility and vision. We work closely with our customers to deliver infrastructure and security solutions that create real value, building IT environments that are efficient, resilient, and ready to support long-term growth.
+            </p>
           </div>
         </motion.div>
 

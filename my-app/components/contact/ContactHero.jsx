@@ -52,7 +52,7 @@ export default function ContactHero() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          {/* <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#contact-form"
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#0a0b85] transition-colors hover:text-[#2439d8]"
@@ -63,7 +63,7 @@ export default function ContactHero() {
             <span className="text-sm text-[#64748b]">
               or email us at <span className="font-semibold text-[#0f172a]">hello@amit.co.id</span>
             </span>
-          </div>
+          </div> */}
         </motion.div>
 
         <motion.div

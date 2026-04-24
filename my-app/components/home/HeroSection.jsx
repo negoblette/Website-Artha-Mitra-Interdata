@@ -38,7 +38,7 @@ export default function HeroSection({ data }) {
         </h1>
 
         <p className="hero-fade-3 mt-8 mb-12 text-sm sm:text-base lg:text-lg text-[rgb(13,27,94)] max-w-3xl mx-auto leading-relaxed font-semibold">
-          {description}
+          {data.description}
         </p>
 
         <div className="hero-fade-4 flex flex-col sm:flex-row justify-center gap-4">
