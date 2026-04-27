@@ -10,7 +10,7 @@ export default function Navbar({ data }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const isTransparentTopPage = pathname === '/' || pathname === '/about' || pathname === '/insight' || pathname === '/solution';
+  const isTransparentTopPage = pathname === '/' || pathname === '/about' || pathname === '/insight' || pathname === '/solution' || pathname === '/contact';
   const showSolidNavbar = scrolled || !isTransparentTopPage;
   const navItems = data.nav;
 

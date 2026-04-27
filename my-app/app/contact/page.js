@@ -1,6 +1,5 @@
 import { getContent } from '@/lib/content';
 import ContactHero from '@/components/contact/ContactHero';
-import ContactForm from '@/components/contact/ContactForm';
 import ContactInfo from '@/components/contact/ContactInfo';
 
 export const metadata = {
@@ -14,8 +13,7 @@ export default function ContactPage() {
   return (
     <>
       <ContactHero />
-      <ContactForm contact={global.contact} />
-      {/* <ContactInfo contact={global.contact} mapUrl={global.contact.mapEmbedUrl} /> */}
+      <ContactInfo contact={global.contact} whatsapp={global.whatsapp} />
     </>
   );
 }
