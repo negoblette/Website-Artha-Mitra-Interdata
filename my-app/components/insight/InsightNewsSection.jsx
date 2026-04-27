@@ -9,7 +9,7 @@ function NewsCard({ item, index }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <AnimatedSection delay={index * 0.08}>
+      <AnimatedSection delay={index * 0.08}>
       <motion.article
         layout
         whileHover={{ y: -4 }}
@@ -17,10 +17,10 @@ function NewsCard({ item, index }) {
         className="gradient-border group cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="relative bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] rounded-2xl p-6 sm:p-7 h-full relative overflow-hidden">
+        <div className="relative flex min-h-[240px] flex-col overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] p-6 sm:p-7">
           <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-          <div className="relative">
+          <div className="relative flex flex-1 flex-col">
             <div className="flex items-center gap-3 mb-3">
               <span className="glass-card items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 border border-[#010268] text-white text-[10px] font-semibold tracking-wider uppercase">
                 {item.category}
@@ -133,7 +133,7 @@ export default function InsightNewsSection({ data }) {
       <div className="absolute inset-0 z-10 grid-pattern opacity-[0.02]" />
       <div className="absolute bottom-0 right-0 z-10 h-96 w-96 rounded-full bg-cyan-900/5 blur-[120px]" />
 
-      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative z-20 max-w-8xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="mb-14 text-center">
             <span className="inline-block bg-black/10 p-2 rounded-2xl text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-1">
@@ -148,7 +148,7 @@ export default function InsightNewsSection({ data }) {
           </div>
         </AnimatedSection>
 
-        <div className="mb-8 flex flex-wrap gap-2">
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
           {categories.map((category) => {
             const isActive = activeCategory === category;
 
@@ -171,16 +171,16 @@ export default function InsightNewsSection({ data }) {
               </button>
             );
           })}
-        </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-3">
           {paginatedItems.map((item, i) => (
             <NewsCard key={item.slug} item={item} index={i} />
           ))}
         </div>
 
         {filteredItems.length > itemsPerPage && (
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mx-auto mt-10 flex max-w-5xl flex-wrap items-center justify-center gap-3">
             <button
               type="button"
               onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
