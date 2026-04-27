@@ -32,7 +32,7 @@ const alegreyaSans = Alegreya_Sans({
 });
 
 export const metadata = {
-  title: "Artha Mitra Interdata - We Optimize IT for You",
+  title: "Artha Mitra Interdata",
   description: "IT Solutions Integrator and Provider. We partner with you in managing IT infrastructure and security by optimizing its efficiency.",
 };
 
