@@ -44,50 +44,13 @@ export default function SolutionHero({ data }) {
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
       <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
 
-<<<<<<< HEAD
-      <div className="relative z-10 mx-auto grid h-full w-full max-w-6xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
-        
-=======
       <div className="relative z-10 mx-auto flex min-h-[460px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
         <div className="max-w-3xl">
->>>>>>> 64a023a (hero section reworked solution & prodcuts)
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-<<<<<<< HEAD
-          <div className="rounded-2xl border border-[#b6c1ff] bg-gradient-to-br from-[#0b2c80] via-[#72a2f5] to-[#dbe8ff] p-1 shadow-[0_18px_44px_rgba(25,45,125,0.2)]">
-            <div className="relative h-60 overflow-hidden rounded-2xl bg-[linear-gradient(145deg,#dbe8ff,#eff5ff)] sm:h-72 lg:h-[340px]">
-              {data.image ? (
-                  <Image
-                    src={data.image}
-                    alt={title}
-                    fill
-                    sizes="(min-width: 1024px) 54vw, 100vw"
-                    className="object-cover object-center"
-                    priority
-                  />
-                ) : null}
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-center lg:text-left order-1 lg:order-2"
-        >
-          <h1 className="text-4xl sm:text-5xl md:text-[64px] leading-[1.1] font-black text-[#111827] mb-3 tracking-tight">
-            {title}
-          </h1>
-          <h2 className="text-xl sm:text-2xl font-bold text-[#010268] mb-6">
-            {subtitle}
-          </h2>
-          <p className="text-[#111827] text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
-            {description}
-=======
           {data.subtitle ? (
             <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#0a0b85]/55">
               {data.subtitle}
@@ -98,7 +61,6 @@ export default function SolutionHero({ data }) {
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
             {data.description}
->>>>>>> 64a023a (hero section reworked solution & prodcuts)
           </p>
         </motion.div>
         </div>
