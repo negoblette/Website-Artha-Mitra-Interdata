@@ -2,6 +2,9 @@
 import { motion } from 'framer-motion';
 
 export default function ProductsHero({ data }) {
+  const title = 'Technology Partners';
+  const description = 'Discover our world-class technology partners and the solutions they power.';
+
   return (
     <section className="relative pt-50 pb-27 overflow-hidden">
 
@@ -19,10 +22,10 @@ export default function ProductsHero({ data }) {
           transition={{ duration: 0.7 }}
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[rgb(19,27,94)] mb-4 tracking-tight">
-            {data.title}
+            {title}
           </h1>
           <p className="text-[#111827] text-sm sm:text-base font-semibold leading-relaxed max-w-3xl mx-auto">
-            {data.description}
+            {description}
           </p>
         </motion.div>
       </div>

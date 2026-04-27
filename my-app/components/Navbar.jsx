@@ -20,6 +20,17 @@ export default function Navbar({ data }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   return (
     <>
       <motion.nav
@@ -116,9 +127,12 @@ export default function Navbar({ data }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl"
+            className="fixed inset-0 z-40 overflow-y-auto bg-gradient-to-b from-white via-[#fafbfc] to-[#f6f7fa] backdrop-blur-2xl"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(1,2,104,0.08),_transparent_28%),radial-gradient(circle_at_bottom_left,_rgba(115,115,115,0.08),_transparent_24%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(17,24,39,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,24,39,0.04)_1px,transparent_1px)] bg-[size:34px_34px]" />
+
+            <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center gap-8 px-4 pb-10 pt-28 sm:px-6">
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.href}
@@ -126,10 +140,11 @@ export default function Navbar({ data }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: i * 0.08 }}
+                  className="text-center"
                 >
                   <Link
                     href={item.href}
-                    className={`text-3xl tracking-wide transition-colors ${
+                    className={`text-2xl sm:text-3xl tracking-wide transition-colors ${
                       pathname === item.href ? 'text-[#0a0b85] font-bold' : 'text-[#111827] hover:text-[#0a0b85]'
                     }`}
                   >
@@ -141,10 +156,11 @@ export default function Navbar({ data }) {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navItems.length * 0.08 }}
+                className="text-center"
               >
                 <Link
                   href="/contact"
-                  className="mt-4 inline-flex items-center gap-2 bg-[#0a0b85] text-white rounded-full px-8 py-3 text-sm font-semibold"
+                  className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0a0b85] px-8 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(10,11,133,0.18)]"
                 >
                   Contact Us
                 </Link>

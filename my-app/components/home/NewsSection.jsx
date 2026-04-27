@@ -1,19 +1,18 @@
 ﻿import Link from 'next/link';
 
-function NewsRow({ title, excerpt, reverse, tone, image }) {
+function NewsRow({ title, excerpt, reverse, tone, category }) {
   return (
-    <article className="bg-[#d9dadd] border border-[#e5e5e5] rounded-lg overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2">
-        {image ? (
-          <div className={`h-44 md:h-52 overflow-hidden ${reverse ? 'md:order-2' : ''}`}>
-            <img src={image} alt={title} className="w-full h-full object-cover" />
-          </div>
-        ) : (
-          <div className={`h-44 md:h-52 ${tone} ${reverse ? 'md:order-2' : ''}`} />
-        )}
-        <div className="p-4 md:p-5">
-          <h3 className="text-black text-[25px] font-black leading-tight">{title}</h3>
-          <p className="mt-2 text-black font-semibold text-sm sm:text-[18px] leading-relaxed max-w-xl">
+    <article className="group overflow-hidden rounded-[1.35rem] border border-slate-200/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.92)_0%,rgba(242,245,249,0.95)_100%)] shadow-[0_14px_34px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(15,23,42,0.12)]">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-stretch">
+        <div className={`relative h-40 md:h-full min-h-[10rem] overflow-hidden ${tone} ${reverse ? 'md:order-2' : ''}`} />
+        <div className={`p-4 md:p-5 lg:p-6 ${reverse ? 'md:order-1' : ''}`}>
+          <p className="inline-flex w-fit rounded-full border border-[#0a0b85]/15 bg-[#eceeff] px-2.5 py-0.75 text-[9px] font-bold uppercase tracking-[0.22em] text-[#0a0b85]">
+            {category}
+          </p>
+          <h3 className="mt-2.5 text-black text-xl sm:text-2xl font-black leading-tight tracking-tight">
+            {title}
+          </h3>
+          <p className="mt-2.5 text-black/78 text-[13px] sm:text-[14px] leading-relaxed max-w-xl">
             {excerpt}
           </p>
         </div>
@@ -23,40 +22,50 @@ function NewsRow({ title, excerpt, reverse, tone, image }) {
 }
 
 export default function NewsSection({ data }) {
-  const rows = [
-    { title: 'Data Hacked', tone: 'news-photo-1' },
-    { title: 'Malware', tone: 'news-photo-2', reverse: true },
-    { title: 'Data Breach', tone: 'news-photo-3' },
+  const visuals = [
+    { tone: 'news-photo-1' },
+    { tone: 'news-photo-2', reverse: true },
+    { tone: 'news-photo-3' },
   ];
+  const items = data?.items || [];
 
   return (
-    <section className="home-section relative bg-transparent overflow-hidden">
-      <div className="relative z-10 pb-30">
-        <h2 className= "text-center text-3xl sm:text-4xl lg:text-5xl font-black text-[rgb(13,27,94)] mb-4 md:mb-5">News & Articles</h2>
-        <div className="space-y-4 md:space-y-5">
-          {rows.map((row, i) => (
+    <section className="home-section mt-10 md:mt-12 relative bg-transparent overflow-hidden">
+      <div className="relative z-10">
+        <div className="text-center mb-4 md:mb-6">
+          <span className="inline-block text-[#737373] text-[11px] font-semibold tracking-[0.28em] uppercase mb-2.5">
+            Top Trending News
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">
+            {data?.title || 'News & Articles'}
+          </h2>
+          <p className="mt-2.5 text-sm sm:text-base text-black/75 max-w-2xl mx-auto">
+            {data?.subtitle || 'Stay updated with the latest in IT security and technology'}
+          </p>
+        </div>
+
+        <div className="space-y-3.5 md:space-y-4">
+          {items.slice(0, visuals.length).map((item, i) => (
             <NewsRow
-              key={row.title}
-              title={row.title}
-              reverse={row.reverse}
-              tone={row.tone}
-              image={data.items[i % data.items.length].image}
-              excerpt={data.items[i % data.items.length].excerpt}
+              key={item.slug || `${item.title}-${i}`}
+              title={item.title}
+              category={item.category}
+              reverse={visuals[i].reverse}
+              tone={visuals[i].tone}
+              excerpt={item.excerpt}
             />
           ))}
         </div>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6 sm:mt-8 flex justify-center px-4 sm:px-6">
           <Link
-            href="/insight"
-            className= "inline-flex rounded-full border-2 border-black px-6 py-2 text-black text-sm sm:text-base font-semibold hover:bg-[rgba(13,27,94)] hover:text-white transition-colors"
+            href={data?.cta?.href || '/insight'}
+            className="inline-flex items-center justify-center rounded-full border border-black px-6 py-2 text-sm sm:text-base font-semibold text-black bg-[#eceeff] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d7d9ff] hover:shadow-[0_12px_24px_rgba(10,11,133,0.12)]"
           >
-            Visit Articles Page
+            {data?.cta?.label || 'Visit Articles Page'}
           </Link>
         </div>
       </div>
     </section>
   );
 }
-
-

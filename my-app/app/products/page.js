@@ -2,7 +2,6 @@ import { getContent } from '@/lib/content';
 import ProductsHero from '@/components/products/ProductsHero';
 import ProductsCarousel from '@/components/products/ProductsCarousel';
 import BrandGrid from '@/components/products/BrandGrid';
-import WhyChoose from '@/components/products/WhyChoose';
 
 export const metadata = {
   title: 'Technology Partners — Artha Mitra Interdata',
@@ -28,7 +27,6 @@ export default function ProductsPage() {
       </div>
       <ProductsCarousel items={data.carousel} />
       <BrandGrid brands={data.brands} />
-      <WhyChoose data={data.whyChoose} />
       </div>
     </div>
   );

@@ -3,6 +3,10 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function SolutionHero({ data }) {
+  const title = 'Solutions & Services';
+  const subtitle = 'IT Infrastructure & Security';
+  const description = 'We offer a wide range of solutions and services centered on IT Infrastructure and Security, designed to maximize impact and value to your business. To sum it up, our services are aimed at optimizing IT, in turn enabling and extending to further achieve your organizational objectives and success.';
+
   return (
     <section className="relative overflow-hidden h-screen min-h-[700px] flex items-center bg-transparent">
       
@@ -17,7 +21,7 @@ export default function SolutionHero({ data }) {
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-35">
+      <div className="relative z-10 mx-auto grid h-full w-full max-w-6xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
         
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -30,7 +34,7 @@ export default function SolutionHero({ data }) {
               {data.image ? (
                   <Image
                     src={data.image}
-                    alt={data.title}
+                    alt={title}
                     fill
                     sizes="(min-width: 1024px) 54vw, 100vw"
                     className="object-cover object-center"
@@ -47,14 +51,14 @@ export default function SolutionHero({ data }) {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-center lg:text-left order-1 lg:order-2"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-[64px] leading-[1.1] text-[rgb(13,27,94)] font-bold text-[#111827] mb-3 tracking-tight">
-            {data.title}
+          <h1 className="text-4xl sm:text-5xl md:text-[64px] leading-[1.1] font-black text-[#111827] mb-3 tracking-tight">
+            {title}
           </h1>
           <h2 className="text-xl sm:text-2xl font-bold text-[#010268] mb-6">
-            {data.subtitle}
+            {subtitle}
           </h2>
-          <p className="text-[#111827] text-sm sm:text-base font-semibold leading-relaxed max-w-xl mx-auto lg:mx-0">
-            {data.description}
+          <p className="text-[#111827] text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
+            {description}
           </p>
         </motion.div>
 

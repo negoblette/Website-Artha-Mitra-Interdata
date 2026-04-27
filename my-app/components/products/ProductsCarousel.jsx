@@ -18,6 +18,7 @@ export default function ProductsCarousel({ items = {} }) {
   const CARD_RATIO = 0.3;
   const GAP = 20;
 
+  //  WIDTH
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -33,6 +34,7 @@ export default function ProductsCarousel({ items = {} }) {
   const cardWidth = containerWidth * CARD_RATIO;
   const step = cardWidth + GAP;
 
+  //  LOOP DATA 
   const loopPhotos = useMemo(() => {
     if (photos.length < 3) return photos;
 
@@ -45,6 +47,7 @@ export default function ProductsCarousel({ items = {} }) {
     ];
   }, [photos]);
 
+  //  INIT 
   useEffect(() => {
     if (!photos.length) return;
 
@@ -56,6 +59,7 @@ export default function ProductsCarousel({ items = {} }) {
     return () => cancelAnimationFrame(frame);
   }, [photos.length]);
 
+  //  AUTO SLIDE 
   useEffect(() => {
     if (!photos.length || isPaused) return;
 
@@ -66,24 +70,29 @@ export default function ProductsCarousel({ items = {} }) {
     return () => clearInterval(timer);
   }, [isPaused, photos.length]);
 
+  //  OFFSET 
   const offsetX = useMemo(() => {
     return containerWidth / 2 - cardWidth / 2 - trackIndex * step;
   }, [containerWidth, cardWidth, trackIndex, step]);
 
+  //  LOOP FIX 
   const handleSlideComplete = () => {
     if (photos.length <= 1) return;
 
+    // kanan (reset lebih cepat, hindari double)
     if (trackIndex === photos.length + 1) {
       setIsAnimating(false);
       setTrackIndex(2);
     }
 
+    // kiri
     if (trackIndex === 1) {
       setIsAnimating(false);
       setTrackIndex(photos.length + 1);
     }
   };
 
+  //  🔥 DOUBLE RAF FIX (smoothing transition)
   useEffect(() => {
     if (!isAnimating) {
       let raf1 = requestAnimationFrame(() => {
@@ -97,6 +106,7 @@ export default function ProductsCarousel({ items = {} }) {
     }
   }, [isAnimating]);
 
+  //  ACTIVE DOT
   const activeRealIndex = photos.length
     ? (trackIndex - 2 + photos.length) % photos.length
     : 0;
@@ -108,6 +118,7 @@ export default function ProductsCarousel({ items = {} }) {
 
   if (!photos.length) return null;
 
+  //  RENDER 
   return (
     <section className="relative overflow-hidden bg-transparent py-10">
       <div className="absolute inset-0 pointer-events-none bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.18)_0px,rgba(124,140,232,0.18)_2px,transparent_2px,transparent_24px)] opacity-30" />
@@ -123,7 +134,7 @@ export default function ProductsCarousel({ items = {} }) {
           <motion.div
             key={isAnimating ? 'animating' : 'static'}
             className="absolute top-0 flex items-center"
-            style={{ gap: GAP, willChange: 'transform' }}
+            style={{ gap: GAP, willChange: 'transform' }} // 🔥 GPU optimize
             animate={{ x: offsetX }}
             transition={
               isAnimating
@@ -183,6 +194,7 @@ export default function ProductsCarousel({ items = {} }) {
           </motion.div>
         </div>
 
+        {/* DOTS */}
         <div className="mt-8 flex justify-center gap-2">
           {photos.map((_, i) => (
             <button

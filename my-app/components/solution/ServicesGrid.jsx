@@ -13,7 +13,7 @@ export default function ServicesGrid({ services }) {
               Professional Services
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[rgb(13,27,94)] tracking-tight mb-3">
-              Our Services
+              Our Service
             </h2>
             <p className="text-[#111827] text-sm max-w-2xl font-semibold mx-auto">
               End-to-end professional services from assessment to ongoing support.
@@ -61,4 +61,3 @@ export default function ServicesGrid({ services }) {
     </section>
   );
 }
-

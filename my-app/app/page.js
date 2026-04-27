@@ -11,7 +11,7 @@ export default function Home() {
   const global = getContent('global');
 
   return (
-    <div className="home-reference-bg">
+    <div>
       <HeroSection data={data.hero} />
       <HowItWorksSection data={data.howItWorks} />
       <OfferingsSection data={data.offerings} />

@@ -13,11 +13,11 @@ export default function LifeAtAmi({ data }) {
   };
 
   const stripSlots = [
-    { offset: -2, x: '-94%', scale: 0.8, zIndex: 1, opacity: 0.76 },
-    { offset: -1, x: '-48%', scale: 0.9, zIndex: 2, opacity: 0.88 },
-    { offset: 0, x: '0%', scale: 1, zIndex: 5, opacity: 1 },
-    { offset: 1, x: '48%', scale: 0.9, zIndex: 2, opacity: 0.88 },
-    { offset: 2, x: '94%', scale: 0.8, zIndex: 1, opacity: 0.76 },
+    { offset: -2, x: '-112%', scale: 0.9, zIndex: 1, opacity: 0.76 },
+    { offset: -1, x: '-65%', scale: 0.99, zIndex: 2, opacity: 0.9 },
+    { offset: 0, x: '0%', scale: 1.12, zIndex: 5, opacity: 1 },
+    { offset: 1, x: '65%', scale: 0.99, zIndex: 2, opacity: 0.9 },
+    { offset: 2, x: '112%', scale: 0.9, zIndex: 1, opacity: 0.76 },
   ];
 
   useEffect(() => {
@@ -25,21 +25,27 @@ export default function LifeAtAmi({ data }) {
 
     const timerId = window.setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % photos.length);
-    }, 3500);
+    }, 2600);
 
     return () => window.clearInterval(timerId);
   }, [photos.length]);
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-transparent py-16">
+      <img
+        src="decor/lifeatamielements.svg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-[-rem] h-full w-full object-cover opacity-100"
+      />
       <div className="absolute left-0 right-0 top-8 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.22)_0px,rgba(124,140,232,0.22)_2px,transparent_2px,transparent_24px)] opacity-35" />
-      <div className="absolute left-0 right-0 bottom-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
+      <div className="absolute bottom-0 left-0 right-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
-        <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">{data.title}</h2>
+        <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">Life At AMI</h2>
 
-        <div className="mx-auto mt-8 w-full max-w-[1120px] overflow-hidden">
-          <div className="relative mx-auto h-[180px] w-full sm:h-[205px]">
+        <div className="mx-auto mt-8 w-full max-w-[1320px] overflow-visible">
+          <div className="relative mx-auto h-[210px] w-[118%] max-w-[1320px] -translate-x-[9%] sm:h-[238px] lg:h-[260px]">
             {stripSlots.map((slot, slotIndex) => {
               const photoIndex = getWrappedIndex(activeIndex + slot.offset);
               const isActive = slot.offset === 0;
@@ -51,8 +57,8 @@ export default function LifeAtAmi({ data }) {
                   onClick={() => setActiveIndex(photoIndex)}
                   className="absolute left-1/2 top-1/2 overflow-hidden rounded-xl border border-[#c9d2ff] bg-[#dfe6ff] shadow-[0_10px_22px_rgba(10,11,133,0.16)] transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]"
                   style={{
-                    width: 'clamp(180px, 24vw, 340px)',
-                    height: 'clamp(96px, 11vw, 170px)',
+                    width: 'clamp(220px, 28vw, 400px)',
+                    height: 'clamp(124px, 15vw, 210px)',
                     transform: `translate(-50%, -50%) translateX(${slot.x}) scale(${slot.scale})`,
                     zIndex: slot.zIndex,
                     opacity: slot.opacity,
@@ -93,4 +99,3 @@ export default function LifeAtAmi({ data }) {
     </section>
   );
 }
-

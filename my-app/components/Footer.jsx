@@ -10,7 +10,42 @@ const socialIcons = {
 };
 
 export default function Footer({ data, companyName, logo, tagline, contact }) {
-  const socials = data.socials.map((s) => ({ ...s, key: s.platform.toLowerCase() }));
+  const staticCompanyName = 'Artha Mitra Interdata';
+  const staticLogo = '/logo.png';
+  const staticTagline = 'We Optimize IT For You';
+  const staticContact = {
+    address: 'Jl. Dr. Makaliwe I No.24D, Jakarta 11450, Indonesia',
+    phone: '+6221-56975111/5222',
+    email: 'info@arthamitra.co.id',
+  };
+  const staticSocials = [
+    { platform: 'facebook', href: 'https://facebook.com/arthamitrainterdata' },
+    { platform: 'instagram', href: 'https://instagram.com/arthamitrainterdata' },
+    { platform: 'linkedin', href: 'https://linkedin.com/company/arthamitrainterdata' },
+  ];
+  const staticColumns = {
+    quickLinks: [
+      { href: '/', label: 'Home' },
+      { href: '/about', label: 'About Us' },
+      { href: '/products', label: 'Products' },
+      { href: '/activities', label: 'Activities' },
+      { href: '/insight', label: 'Insight' },
+      { href: '/contact', label: 'Contact' },
+    ],
+    solutions: [
+      { href: '/solution', label: 'Network Infrastructure' },
+      { href: '/solution', label: 'IT Security' },
+      { href: '/solution', label: 'Network Monitoring' },
+      { href: '/solution', label: 'Secure Access & VPN' },
+    ],
+    careers: [
+      { href: '/about', label: 'Life at AMI' },
+      { href: '/about', label: 'Join Us' },
+      { href: '/about', label: 'Open Roles' },
+    ],
+  };
+
+  const socials = staticSocials.map((s) => ({ ...s, key: s.platform.toLowerCase() }));
   const year = new Date().getFullYear();
 
   return (
@@ -20,11 +55,11 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
           <div className="md:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2.5">
               <div className="relative w-10 h-10 sm:w-11 sm:h-11">
-                <Image src={logo} alt={companyName} fill className="object-contain" />
+                <Image src={staticLogo} alt={staticCompanyName} fill className="object-contain" />
               </div>
               <div>
-                <p className="text-sm sm:text-[15px] font-bold leading-tight text-[#1a1a1a]">{companyName}</p>
-                <p className="text-[12px] leading-tight text-black/55">{tagline}</p>
+                <p className="text-sm sm:text-[15px] font-bold leading-tight text-[#1a1a1a]">{staticCompanyName}</p>
+                <p className="text-[12px] leading-tight text-black/55">{staticTagline}</p>
               </div>
             </Link>
             {/* <p className="mt-4 max-w-[280px] text-[12px] leading-relaxed text-black/60">Simply put, We Optimize IT For You.</p> */}
@@ -53,7 +88,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             <div>
               <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Quick Links</h4>
               <ul className="mt-3 space-y-2">
-                {data.columns[0].links.map((link) => (
+                {staticColumns.quickLinks.map((link) => (
                   <li key={link.href + link.label}>
                     <Link href={link.href} className="text-[12px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
                   </li>
@@ -64,7 +99,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             <div>
               <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Solutions</h4>
               <ul className="mt-3 space-y-2">
-                {data.columns[1].links.map((link) => (
+                {staticColumns.solutions.map((link) => (
                   <li key={link.href + link.label}>
                     <Link href={link.href} className="text-[12px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
                   </li>
@@ -75,7 +110,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             <div>
               <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Careers</h4>
               <ul className="mt-3 space-y-2">
-                {data.columns[4].links.map((link) => (
+                {staticColumns.careers.map((link) => (
                   <li key={link.href + link.label}>
                     <Link href={link.href} className="text-[12px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
                   </li>
@@ -86,16 +121,16 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             <div>
               <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Contact</h4>
               <div className="mt-3 space-y-2.5 text-[12px] leading-snug text-black/70">
-                <p className="flex items-start gap-2"><MapPin size={13} className="mt-0.5 flex-shrink-0" />{contact.address}</p>
-                <p className="flex items-start gap-2"><Phone size={13} className="mt-0.5 flex-shrink-0" />{contact.phone}</p>
-                <p className="flex items-start gap-2"><Mail size={13} className="mt-0.5 flex-shrink-0" />{contact.email}</p>
+                <p className="flex items-start gap-2"><MapPin size={13} className="mt-0.5 flex-shrink-0" />{staticContact.address}</p>
+                <p className="flex items-start gap-2"><Phone size={13} className="mt-0.5 flex-shrink-0" />{staticContact.phone}</p>
+                <p className="flex items-start gap-2"><Mail size={13} className="mt-0.5 flex-shrink-0" />{staticContact.email}</p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="mt-7 border-t border-[#ececec] pt-3 text-center text-[10px] text-black/45">
-          © {year} PT. {companyName}. All rights reserved.
+          © {year} PT. {staticCompanyName}. All rights reserved.
         </div>
       </div>
     </footer>
