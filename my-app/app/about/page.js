@@ -8,7 +8,7 @@ import LifeAtAmi from '@/components/about/LifeAtAmi';
 import CareersSection from '@/components/about/CareersSection';
 
 export const metadata = {
-  title: 'About Us — Artha Mitra Interdata',
+  title: 'About Artha Mitra Interdata',
   description: 'Learn about our vision, mission, history, and the team behind AMI.',
 };
 
