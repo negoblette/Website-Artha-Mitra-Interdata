@@ -22,9 +22,7 @@ export default function ProductsPage() {
         }}
       >
       <div className="relative z-10 flex flex-col gap-8">
-      <div className="max-h-[60vh] overflow-hidden">
-        <ProductsHero data={data.hero} />
-      </div>
+      <ProductsHero data={data.hero} />
       <ProductsCarousel items={data.carousel} />
       <BrandGrid brands={data.brands} />
       </div>

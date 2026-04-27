@@ -1,7 +1,9 @@
 {
   "hero": {
     "title": "Technology Partners",
-    "description": "We collaborate with world-class technology vendors to deliver enterprise-grade IT infrastructure and security solutions. As an authorized partner, we bring you certified expertise, priority support, and access to the latest innovations."
+    "description": "We collaborate with world-class technology vendors to deliver enterprise-grade IT infrastructure and security solutions. As an authorized partner, we bring you certified expertise, priority support, and access to the latest innovations.",
+    "image":"/images/producthero.jpg"
+ 
   },
   "brands": [
     {
