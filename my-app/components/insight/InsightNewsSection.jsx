@@ -89,7 +89,9 @@ function NewsCard({ item, index }) {
 export default function InsightNewsSection({ data }) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
+  const [categoryPage, setCategoryPage] = useState(1);
   const itemsPerPage = 6;
+  const categoriesPerPage = 10;
   const items = Array.from(
     new Map(
       (data?.items ?? [])
@@ -104,6 +106,11 @@ export default function InsightNewsSection({ data }) {
     ).values(),
   );
   const categories = ['All', ...new Set(items.map((item) => item.category).filter(Boolean))];
+  const totalCategoryPages = Math.max(1, Math.ceil(categories.length / categoriesPerPage));
+  const paginatedCategories = categories.slice(
+    (categoryPage - 1) * categoriesPerPage,
+    categoryPage * categoriesPerPage,
+  );
 
   const filteredItems =
     activeCategory === 'All'
@@ -135,7 +142,7 @@ export default function InsightNewsSection({ data }) {
 
       <div className="relative z-20 mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-20">
         <AnimatedSection>
-          <div className="mb-14 text-center">
+          <div className="mb-14 text-left">
             <div className="mb-1">
               <h2 className="text-[35px] uppercase sm:text-[50px] font-black gradient-text inline-block">
                 {data.title}
@@ -145,8 +152,8 @@ export default function InsightNewsSection({ data }) {
           </div>
         </AnimatedSection>
 
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
-          {categories.map((category) => {
+        <div className="mb-8 flex flex-wrap items-center justify-left gap-2">
+          {paginatedCategories.map((category) => {
             const isActive = activeCategory === category;
 
             return (
@@ -168,7 +175,29 @@ export default function InsightNewsSection({ data }) {
               </button>
             );
           })}
-      </div>
+
+        {categories.length > categoriesPerPage && (
+          <div className="ml-2 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setCategoryPage((page) => Math.max(1, page - 1))}
+              disabled={categoryPage === 1}
+              className="rounded-full border border-[#010268]/10 bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#010268] transition-colors hover:bg-[#f3f5ff] disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Prev
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setCategoryPage((page) => Math.min(totalCategoryPages, page + 1))}
+              disabled={categoryPage === totalCategoryPages}
+              className="rounded-full border border-[#010268]/10 bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#010268] transition-colors hover:bg-[#f3f5ff] disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </div>
+        )}
+        </div>
 
         <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-3">
           {paginatedItems.map((item, i) => (
