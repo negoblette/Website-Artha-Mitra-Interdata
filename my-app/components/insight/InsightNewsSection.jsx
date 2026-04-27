@@ -133,18 +133,15 @@ export default function InsightNewsSection({ data }) {
       <div className="absolute inset-0 z-10 grid-pattern opacity-[0.02]" />
       <div className="absolute bottom-0 right-0 z-10 h-96 w-96 rounded-full bg-cyan-900/5 blur-[120px]" />
 
-      <div className="relative z-20 max-w-8xl mx-auto px-4 sm:px-6">
+      <div className="relative z-20 mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-20">
         <AnimatedSection>
           <div className="mb-14 text-center">
-            <span className="inline-block bg-black/10 p-2 rounded-2xl text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-1">
-              Stay Updated
-            </span>
             <div className="mb-1">
-              <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-2">
+              <h2 className="text-[35px] uppercase sm:text-[50px] font-black gradient-text inline-block">
                 {data.title}
               </h2>
             </div>
-            <p className="text-[#111827] text-sm">{data.subtitle}</p>
+            <p className="text-[#111827]/55 font-semibold sm:text-[18px]">{data.subtitle}</p>
           </div>
         </AnimatedSection>
 
@@ -173,14 +170,14 @@ export default function InsightNewsSection({ data }) {
           })}
       </div>
 
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-3">
           {paginatedItems.map((item, i) => (
             <NewsCard key={item.slug} item={item} index={i} />
           ))}
         </div>
 
         {filteredItems.length > itemsPerPage && (
-          <div className="mx-auto mt-10 flex max-w-5xl flex-wrap items-center justify-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <button
               type="button"
               onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
