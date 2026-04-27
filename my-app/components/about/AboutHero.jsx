@@ -1,70 +1,57 @@
 'use client';
+
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import AnimatedSection from '@/components/AnimatedSection';
 
 export default function AboutHero({ data }) {
   return (
-    <section data-no-reveal="true" className="relative h-screen min-h-[700px] overflow-visible">
-      <div className="relative mx-auto grid h-full w-full max-w-6xl grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
-        <motion.div
-          initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center lg:text-left"
-        >
+    <section className="relative min-h-[460px] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
+      <div className="absolute inset-0 bg-white" />
 
-          <h1 className="text-5xl mt-15 font-extrabold text-[rgb(13,27,94)] sm:text-6xl lg:text-7xl xl:text-8xl lg:leading-[0.95]">
-            {data.title}
-          </h1>
+      <div className="absolute inset-0">
+        <div className="absolute inset-y-0 left-[24%] right-[-4rem] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] sm:left-[28%] sm:right-[-5rem] lg:left-[34%] lg:right-[-6rem]">
+          {data.image ? (
+            <Image
+              src={data.image}
+              alt={data.title}
+              fill
+              priority
+              sizes="(min-width: 1024px) 66vw, (min-width: 640px) 72vw, 78vw"
+              className="object-cover object-right"
+            />
+          ) : null}
+        </div>
+      </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-            className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start"
-          >
-            <Link href="/contact" className="inline-flex min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-6 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors">
-              Contact Us
-            </Link>
-            <Link href="#history" className="inline-flex min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-6 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors">
-              Learn More
-            </Link>
-          </motion.div>
-          <div className="mt-15 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] text-white p-8 rounded-2xl max-w-auto">
-            <p className="text-xl font-semibold leading-relaxed">
-              At Artha Mitra Interdata, we believe in a partnership approach built on shared responsibility and vision. We work closely with our customers to deliver infrastructure and security solutions that create real value, building IT environments that are efficient, resilient, and ready to support long-term growth.
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#ffffff_0%,rgba(250,251,254,0.995)_34%,rgba(243,245,250,0.96)_46%,rgba(238,241,248,0.88)_56%,rgba(255,255,255,0.28)_74%,rgba(255,255,255,0.08)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_70%,rgba(255,65,65,0.18),transparent_20%),radial-gradient(circle_at_72%_28%,rgba(5,128,255,0.10),transparent_18%)]" />
+      <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
+
+      <motion.div
+        className="absolute top-24 left-8 h-72 w-72 rounded-full bg-[#ff5d2b]/[0.12] blur-[130px]"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.28, 0.5, 0.28] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-10 right-10 h-80 w-80 rounded-full bg-[#9c1b59]/[0.14] blur-[140px]"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.35, 0.58, 0.35] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      <div className="relative z-10 mx-auto flex min-h-[460px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
+        <div className="max-w-3xl">
+          <AnimatedSection>
+            <h1 className="max-w-2xl text-5xl font-bold uppercase leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
+              {data.title}
+            </h1>
+
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
+              {data.description}
             </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 36, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-2xl border border-[#b6c1ff] bg-gradient-to-br from-[#0b2c80] via-[#1f4ca8] to-[#72a3f5] p-1 shadow-[0_18px_44px_rgba(25,45,125,0.2)]"
-        >
-          <div className="relative h-60 overflow-hidden rounded-2xl bg-[linear-gradient(145deg,#dbe8ff,#eff5ff)] sm:h-72 lg:h-[340px]">
-            {data.image ? (
-              <Image
-                src={data.image}
-                alt={data.title}
-                fill
-                sizes="(min-width: 1024px) 54vw, 100vw"
-                className="object-cover object-center"
-                priority
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-center">
-                <div>
-                  <p className="text-xs font-bold tracking-[0.18em] text-[#0a0b85]">SOLUSI IT TERPADU</p>
-                  <p className="mt-3 text-3xl font-black text-[#0a0b85]">AMI</p>
-                  <p className="mt-2 text-sm font-semibold text-[#0a0b85]/80">Your Technology Partner</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </motion.div>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   );

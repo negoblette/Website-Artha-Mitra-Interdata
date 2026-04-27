@@ -4,7 +4,7 @@ export default function HistorySection({ data }) {
   const footerDescription = 'Kami terus berkembang bersama pelanggan sebagai partner teknologi yang konsisten, adaptif, dan berorientasi pada dampak bisnis.';
 
   return (
-    <section id="history" className="relative flex min-h-screen items-center bg-transparent py-16">
+    <section id="history" className="relative bg-transparent py-14 md:py-16">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="history-intro mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-black text-[rgba(13,27,94)] md:text-5xl">{title}</h2>
