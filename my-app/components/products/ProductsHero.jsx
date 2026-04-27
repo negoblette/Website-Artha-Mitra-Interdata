@@ -7,7 +7,7 @@ export default function ProductsHero({ data }) {
   const description = 'Discover our world-class technology partners and the solutions they power.';
 
   return (
-    <section className="relative min-h-[520px] overflow-hidden pb-20 pt-28 sm:pt-32 lg:pt-36">
+    <section className="relative min-h-[460px] overflow-hidden pb-28 pt-20 sm:pt-32 lg:pt-13">
       <div className="absolute inset-0 bg-white" />
 
       <div className="absolute inset-0">
@@ -43,7 +43,7 @@ export default function ProductsHero({ data }) {
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[520px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
+      <div className="relative z-10 mx-auto flex min-h-[520px] w-full max-w-[1600px] items-center px-4 pt-23 sm:px-6 lg:px-40">
         <div className="max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
