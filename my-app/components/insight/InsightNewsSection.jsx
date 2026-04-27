@@ -141,7 +141,7 @@ export default function InsightNewsSection({ data }) {
                 {data.title}
               </h2>
             </div>
-            <p className="text-[#111827]/55 font-semibold sm:text-[18px]">{data.subtitle}</p>
+            <p className="text-[#111827]/65 font-semibold sm:text-[18px]">{data.subtitle}</p>
           </div>
         </AnimatedSection>
 
