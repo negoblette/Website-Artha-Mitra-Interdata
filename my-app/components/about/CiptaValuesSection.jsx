@@ -18,11 +18,8 @@ export default function CiptaValuesSection({ values = [] }) {
           transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <span className="block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-            Our Values
-          </span>
           <h2 className="text-4xl font-black tracking-tight text-[rgba(13,27,94)] sm:text-5xl">
-            CIPTA
+            Core Values
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-black sm:text-base">
             The principles that guide how we collaborate, deliver, and create lasting value for every client partnership.

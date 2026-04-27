@@ -13,25 +13,11 @@ export default function AboutHero({ data }) {
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
           className="text-center lg:text-left"
         >
-          {/* <span className="inline-block mb-3 px-4 py-1 text-m font-semibold bg-[rgb(13,27,94)]/10 text-[rgb(13,27,94)] rounded-full">
-            IT Solutions Integrator
-          </span> */}
 
           <h1 className="text-5xl mt-15 font-extrabold text-[rgb(13,27,94)] sm:text-6xl lg:text-7xl xl:text-8xl lg:leading-[0.95]">
             {data.title}
           </h1>
 
-          {/* ga usah make segala "font-[family-name:var(--font-sora)]" orang udah jadi global.css inefficient */}
-
-          {/* <p className="mt-4 max-w-2xl font-semibold text-m text-black lg:mx-0">
-            Delivering reliable IT solutions through strong partnerships and innovation.
-          </p> */}
-
-          <ul className="mt-4 font-semibold space-y-2 text-xl text-[rgb(13,27,94)]">
-            <li>• Trusted IT Solutions Integrator</li>
-            <li>• Scalable digital infrastructure</li>
-            <li>• Long-term partnership focused</li>
-          </ul>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, x: 0 }}

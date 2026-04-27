@@ -13,11 +13,8 @@ export default function VisionMission({ vision, mission }) {
           transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#0a0b85]/12 bg-white/80 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_8px_24px_rgba(10,11,133,0.08)] backdrop-blur-sm">
-            Core Direction
-          </span>
           <h2 className="mt-5 text-4xl font-black tracking-tight text-[#0a0b85] sm:text-5xl">
-            VISI MISI
+            Vision & Mission
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-black sm:text-base">
             Be the company of choice as a technology solution integrator and provider to intensify customers' competitive edge.
@@ -38,9 +35,6 @@ export default function VisionMission({ vision, mission }) {
             <div className="relative flex h-full flex-col">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <span className="inline-flex items-center rounded-full bg-[#0a0b85]/8 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#0a0b85]">
-                    Our Vision
-                  </span>
                   <h3 className="mt-4 text-3xl font-black text-[#0a0b85]">Vision</h3>
                 </div>
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#0a0b85] text-white shadow-[0_16px_28px_rgba(10,11,133,0.22)]">
@@ -54,11 +48,6 @@ export default function VisionMission({ vision, mission }) {
                 {vision}
               </p>
 
-              <div className="mt-auto pt-8">
-                <div className="rounded-2xl border border-[#0a0b85]/10 bg-white/80 px-4 py-3 text-left text-sm font-semibold text-[#0a0b85]/80 shadow-[0_10px_24px_rgba(10,11,133,0.06)]">
-                  A long-view perspective that keeps our innovation aligned with client growth.
-                </div>
-              </div>
             </div>
           </motion.article>
 
@@ -75,9 +64,6 @@ export default function VisionMission({ vision, mission }) {
             <div className="relative flex h-full flex-col">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/80">
-                    Our Mission
-                  </span>
                   <h3 className="mt-4 text-3xl font-black text-white">Mission</h3>
                 </div>
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-white shadow-[0_16px_28px_rgba(0,0,0,0.16)] ring-1 ring-white/15">
@@ -91,11 +77,6 @@ export default function VisionMission({ vision, mission }) {
                 {mission}
               </p>
 
-              <div className="mt-auto pt-8">
-                <div className="rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-left text-sm font-semibold text-white/80 shadow-[0_10px_24px_rgba(0,0,0,0.14)] backdrop-blur-sm">
-                  A practical commitment to service excellence, partnership, and measurable impact.
-                </div>
-              </div>
             </div>
           </motion.article>
         </div>
