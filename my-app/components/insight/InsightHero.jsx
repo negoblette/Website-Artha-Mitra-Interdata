@@ -11,11 +11,7 @@ export default function InsightHero({ data }) {
       <div className="absolute inset-0">
         <div className="absolute inset-y-0 left-[24%] right-[-4rem] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] sm:left-[28%] sm:right-[-5rem] lg:left-[34%] lg:right-[-6rem]">
           <Image
-<<<<<<< HEAD
             src="/images/insight.jpeg"
-=======
-            src="/images/insight.jpg"
->>>>>>> 64a023a (hero section reworked solution & prodcuts)
             alt="Insight hero background"
             fill
             priority
@@ -50,11 +46,7 @@ export default function InsightHero({ data }) {
               </span>
             </div> */}
 
-<<<<<<< HEAD
             <h1 className="max-w-2xl text-5xl font-bold uppercase leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
-=======
-            <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
->>>>>>> 64a023a (hero section reworked solution & prodcuts)
               {data.title}
             </h1>
 
