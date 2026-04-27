@@ -36,21 +36,21 @@ export default function InsightHero({ data }) {
         animate={{ scale: [1, 1.12, 1], opacity: [0.35, 0.58, 0.35] }}
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
+  
 
-      <div className="relative z-10 mx-auto flex min-h-[460px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
+      <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
           <AnimatedSection>
-            {/* <div className="mb-4">
-              <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.32em] text-white/75">
-                {data.subtitle}
-              </span>
-            </div> */}
-
-            <h1 className="max-w-2xl text-5xl font-bold uppercase leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
+            <h1 className="text-5xl font-black uppercase tracking-tight sm:text-6xl lg:text-[5.4rem] text-[#0a0b85] ">
               {data.title}
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
+            <div className="absolute left-[15rem] bottom-1 flex items-center gap-2 sm:left-19 sm:bottom-32  lg:left-[24rem]">
+              <span className="h-15 w-4.5 skew-x-[18deg] rounded-[2px] bg-[#0a0b85]/95" />
+              <span className="h-15 w-4.5 skew-x-[18deg] rounded-[2px] bg-[#0a0b85]/55" />
+            </div>
+
+            <p className="mt-6 max-w-xl text-[16px] font-semibold leading-8 text-text-[#111827]/88 sm:text-[19px] ">
               {data.description}
             </p>
           </AnimatedSection>
