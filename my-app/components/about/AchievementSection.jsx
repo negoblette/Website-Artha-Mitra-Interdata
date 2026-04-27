@@ -44,7 +44,7 @@ export default function AchievementSection({ data }) {
   };
 
   return (
-    <section className="relative flex min-h-screen items-center bg-transparent py-16">
+    <section className="relative bg-transparent py-14 md:py-16">
       <div className="mx-auto w-full max-w-6xl px-4 text-center sm:px-6">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3">
           <button

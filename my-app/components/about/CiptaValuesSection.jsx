@@ -7,7 +7,7 @@ export default function CiptaValuesSection({ values = [] }) {
   if (!values.length) return null;
 
   return (
-    <section className="relative overflow-hidden py-8 sm:py-12">
+    <section className="relative overflow-hidden py-14 md:py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f6f8ff]/55 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
