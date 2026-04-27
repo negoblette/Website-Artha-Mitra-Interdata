@@ -1,39 +1,60 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import AnimatedSection from '@/components/AnimatedSection';
 
 export default function InsightHero({ data }) {
   return (
-    <section className="relative pt-36 pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)]" />
+    <section className="relative min-h-[460px] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
+      <div className="absolute inset-0 bg-white" />
+
+      <div className="absolute inset-0">
+        <div className="absolute inset-y-0 left-[24%] right-[-4rem] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] sm:left-[28%] sm:right-[-5rem] lg:left-[34%] lg:right-[-6rem]">
+          <Image
+            src="/images/insight.jpeg"
+            alt="Insight hero background"
+            fill
+            priority
+            sizes="(min-width: 1024px) 66vw, (min-width: 640px) 72vw, 78vw"
+            className="object-cover object-right"
+          />
+        </div>
+      </div>
+
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#ffffff_0%,rgba(250,251,254,0.995)_34%,rgba(243,245,250,0.96)_46%,rgba(238,241,248,0.88)_56%,rgba(255,255,255,0.28)_74%,rgba(255,255,255,0.08)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_70%,rgba(255,65,65,0.18),transparent_20%),radial-gradient(circle_at_72%_28%,rgba(5,128,255,0.10),transparent_18%)]" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
-      <div className="absolute inset-0 grid-pattern opacity-[0.045]" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
 
       <motion.div
-        className="absolute top-20 left-10 w-72 h-72 bg-[#010268]/[0.04] rounded-full blur-[120px]"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
+        className="absolute top-24 left-8 h-72 w-72 rounded-full bg-[#ff5d2b]/[0.12] blur-[130px]"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.28, 0.5, 0.28] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-10 right-10 w-80 h-60 bg-[#737373]/8 rounded-full blur-[120px]"
-        animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-10 right-10 h-80 w-80 rounded-full bg-[#9c1b59]/[0.14] blur-[140px]"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.35, 0.58, 0.35] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
-        <AnimatedSection>
-          <div className="mb-4">
-            <span className="inline-block text-[#d9dbde] text-xs font-semibold tracking-[0.3em] uppercase">
-              {data.subtitle}
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white inline-block mb-5">
-            {data.title}
-          </h1>
-          <p className="text-white text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            {data.description}
-          </p>
-        </AnimatedSection>
+      <div className="relative z-10 mx-auto flex min-h-[460px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
+        <div className="max-w-3xl">
+          <AnimatedSection>
+            {/* <div className="mb-4">
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.32em] text-white/75">
+                {data.subtitle}
+              </span>
+            </div> */}
+
+            <h1 className="max-w-2xl text-5xl font-bold uppercase leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
+              {data.title}
+            </h1>
+
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
+              {data.description}
+            </p>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   );

@@ -116,7 +116,7 @@ function FeaturedArticle({ item }) {
     <AnimatedSection>
       <motion.article
         layout
-        className="group mx-auto grid max-w-5xl gap-8 rounded-[2rem] border border-[#a9abd6]/100 bg-white p-4 shadow-[0_28px_80px_rgba(10,11,133,0.08)] sm:p-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
+        className="group mx-auto grid max-w-7xl gap-8 rounded-[2rem] border border-[#a9abd6]/100 bg-white p-4 shadow-[0_28px_80px_rgba(10,11,133,0.08)] sm:p-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
       >
         <div className="relative min-h-[280px] overflow-hidden border-[#a9abd6] rounded-[1.7rem] bg-[linear-gradient(135deg,#eef2ff_0%,#dfe8ff_50%,#f8fbff_100%)] sm:min-h-[340px]">
           {hasImage ? (
@@ -241,18 +241,15 @@ export default function ArticlesSection({ data }) {
       </div>
       <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-[#737373]/10 blur-[120px]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="mb-8 sm:mb-10 text-center">
-            <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-1">
-              Expert Insights
-            </span>
             <div className="mb-1">
-              <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block">
+              <h2 className="text-[35px] sm:text-[50px] font-bold gradient-text inline-block">
                 {data.title}
               </h2>
             </div>
-            <p className="text-[#111827] text-sm">{data.subtitle}</p>
+            <p className="text-[#111827] sm:text-[18px]">{data.subtitle}</p>
           </div>
         </AnimatedSection>
 
@@ -280,7 +277,7 @@ export default function ArticlesSection({ data }) {
 
         {headlineItem && <FeaturedArticle item={headlineItem} />}
 
-        <div className="mx-auto mt-8 grid max-w-5xl items-start grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-8 grid max-w-7xl items-start grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {paginatedItems.map((item, i) => (
             <ArticleCard
               key={item.slug}

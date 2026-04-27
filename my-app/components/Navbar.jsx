@@ -10,7 +10,7 @@ export default function Navbar({ data }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const isTransparentTopPage = pathname === '/' || pathname === '/about';
+  const isTransparentTopPage = pathname === '/' || pathname === '/about' || pathname === '/insight' || pathname === '/solution';
   const showSolidNavbar = scrolled || !isTransparentTopPage;
   const navItems = data.nav;
 
@@ -36,81 +36,87 @@ export default function Navbar({ data }) {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           showSolidNavbar
-            ? 'bg-gradient-to-b from-white/96 via-[#fafbfc]/95 to-[#f6f7fa]/94 backdrop-blur-xl py-3 shadow-sm'
-            : 'bg-transparent py-4'
+            ? 'bg-white/96 backdrop-blur-xl py-3 shadow-sm'
+            : 'px-0 pt-0 pb-0'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-3 md:gap-4">
-          <Link href="/" className="flex items-center group justify-self-start">
-            <motion.div
-              className="relative h-11 w-32 overflow-hidden sm:h-12 sm:w-40 lg:h-14 lg:w-48"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Image src={data.logo} alt={data.companyName} fill className="object-contain object-left" priority />
-            </motion.div>
-          </Link>
+        <div className="relative w-full">
+          {!showSolidNavbar && (
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-full border-b border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.16)_42%,rgba(255,255,255,0.10)_100%)] backdrop-blur-2xl shadow-[0_10px_24px_rgba(255,255,255,0.12)] ring-1 ring-white/20" />
+          )}
 
-          <motion.div className="absolute left-1/2 top-1/2 hidden h-12 max-w-max -translate-x-1/2 -translate-y-1/2 items-center gap-0.5 rounded-full bg-[#0a0b85] px-2 shadow-[0_4px_10px_rgba(0,0,0,0.25)] lg:flex">
-            {navItems.map((item) => (
+          <div
+            className={`relative z-10 mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3 ${
+              showSolidNavbar ? 'px-4 sm:px-6' : 'px-4 sm:px-6 py-2.5'
+            }`}
+          >
+            <Link href="/" className="flex items-center group justify-self-start">
               <motion.div
-                key={item.href}
-                className="rounded-full"
+                className="relative w-44 sm:w-48 h-12 sm:h-14 overflow-hidden"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Image src={data.logo} alt={data.companyName} fill sizes="180px" className="object-contain object-left" priority />
+              </motion.div>
+            </Link>
+
+            <motion.div
+              className="hidden xl:flex h-12 items-center gap-0.5 bg-[rgb(13,27,94)] rounded-full px-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+            >
+              {navItems.map((item) => (
+                <motion.div
+                  key={item.href}
+                  className="rounded-full"
+                  whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)' }}
+                  transition={{ duration: 0.12 }}
+                >
+                  <Link
+                    href={item.href}
+                    className={`group relative inline-flex h-10 items-center px-5 rounded-full text-[13px] font-semibold transition-colors ${
+                      pathname === item.href
+                        ? 'text-white'
+                        : 'text-white hover:text-white'
+                    }`}
+                  >
+                    <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">
+                      {item.label}
+                    </span>
+                    <span
+                      className={`pointer-events-none absolute left-5 right-5 bottom-1 h-0.5 origin-center rounded-full transition-transform duration-200 ${
+                        pathname === item.href
+                          ? 'scale-x-100 bg-white'
+                          : 'scale-x-0 bg-white/90 group-hover:scale-x-100'
+                      }`}
+                    />
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <div className="flex items-center justify-self-end gap-2">
+              <motion.div
                 whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)' }}
                 transition={{ duration: 0.12 }}
               >
                 <Link
-                  href={item.href}
-                  className={`group relative inline-flex h-10 items-center px-3 xl:px-5 rounded-full text-sm xl:text-[15px] font-semibold transition-colors ${
-                    pathname === item.href
-                      ? 'text-white'
-                      : 'text-white hover:text-white'
-                  }`}
+                  href="/contact"
+                  className="group hidden sm:inline-flex h-12 items-center bg-[rgb(13,27,94)] text-white hover:bg-[#1e1f92] rounded-full px-8 text-[13px] font-semibold transition-colors shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
                 >
-                  <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">
-                    {item.label}
-                  </span>
-                  <span
-                    className={`pointer-events-none absolute left-3 right-3 bottom-1 h-0.5 origin-center rounded-full transition-transform duration-200 xl:left-5 xl:right-5 ${
-                      pathname === item.href
-                        ? 'scale-x-100 bg-white'
-                        : 'scale-x-0 bg-white/90 group-hover:scale-x-100'
-                    }`}
-                  />
+                  <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">Contact Us</span>
                 </Link>
               </motion.div>
-            ))}
-          </motion.div>
 
-          <div className="flex items-center justify-self-end gap-2">
-            <motion.div
-              className="rounded-full"
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.12 }}
-            >
-              <Link
-                href="/contact"
-                className="group hidden md:inline-flex h-11 lg:h-12 items-center rounded-full bg-[#0a0b85] px-5 lg:px-7 text-sm lg:text-[15px] font-semibold text-white transition-colors hover:bg-[#1e1f92] shadow-[0_4px_10px_rgba(0,0,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a0b85]/35 focus-visible:ring-offset-2"
+              <motion.button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                whileTap={{ scale: 0.9 }}
+                className="xl:hidden p-2.5 text-[#111827] hover:bg-[#0a0b85] hover:text-white rounded-full transition-colors"
               >
-                <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">Contact Us</span>
-              </Link>
-            </motion.div>
-
-            <motion.button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              whileTap={{ scale: 0.9 }}
-              className={`lg:hidden rounded-full p-2.5 transition-colors ${
-                showSolidNavbar
-                  ? 'text-[#111827] hover:bg-[#0a0b85] hover:text-white'
-                  : 'text-[#0a0b85] bg-white/85 backdrop-blur hover:bg-[#0a0b85] hover:text-white'
-              }`}
-              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </motion.button>
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.nav>
