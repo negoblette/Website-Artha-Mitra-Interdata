@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function VisionMission({ vision, mission }) {
   return (
-    <section data-no-reveal="true" className="relative overflow-visible py-20">
+    <section data-no-reveal="true" className="relative overflow-visible py-14 md:py-16">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}

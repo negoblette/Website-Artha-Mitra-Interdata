@@ -31,7 +31,7 @@ export default function LifeAtAmi({ data }) {
   }, [photos.length]);
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-transparent py-16">
+    <section className="relative overflow-hidden bg-transparent py-14 md:py-16">
       <img
         src="decor/lifeatamielements.svg"
         alt=""

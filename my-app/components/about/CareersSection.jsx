@@ -20,7 +20,7 @@ export default function CareersSection({ data }) {
   };
 
   return (
-    <section id="careers" className="relative flex min-h-screen items-center bg-transparent py-16">
+    <section id="careers" className="relative bg-transparent py-14 md:py-16">
       <img 
         src="decor/careerelements.svg" 
         alt="" 
