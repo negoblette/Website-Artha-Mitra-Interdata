@@ -43,7 +43,7 @@ export default function WhyChoose({ data }) {
                 <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   {title}
                 </h2>
-                <p className="mt-5 max-w-lg text-[17px] font-base leading-7 text-white/80 sm:text-base">
+                <p className="mt-5 max-w-lg text-[17px] font- leading-7 text-white/80 sm:text-base">
                   {data.description}
                 </p>
 

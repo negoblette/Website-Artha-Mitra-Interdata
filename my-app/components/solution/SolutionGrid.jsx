@@ -18,7 +18,7 @@ function SolutionCard({ solution, index }) {
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        <div className="relative flex min-h-[320px] flex-col overflow-hidden rounded-2xl order border-white/10 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-5 transition-all duration-500 group-hover:border-white/25 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)] sm:min-h-[300px] sm:p-6">
+        <div className="relative flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-5 transition-all duration-500 group-hover:border-white/25 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)] sm:min-h-[300px] sm:p-6">
 
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
@@ -85,8 +85,8 @@ function SolutionCard({ solution, index }) {
                   transition={{ duration: 0.24, ease: 'easeOut' }}
                   className="overflow-hidden"
                 >
-                  <div className="mb-3 rounded-2xl bg-white/20 px-5 py-5 shadow-[0_40px_80px_rgba(3,6,53,0.52)] backdrop-blur-xl">
-                    <p className="mb-4 text-[17px] leading-relaxed text-white/80">
+                  <div className="mt-2 border-t border-white/10 pt-4">
+                    <p className="text-white/80 text-[17px] font-base leading-relaxed mb-4">
                       {solution.fullDescription}
                     </p>
                     <div className="mb-4">
@@ -119,7 +119,7 @@ function SolutionCard({ solution, index }) {
                       {solution.features.map((feature, i) => (
                         <div key={i} className="flex items-center gap-2">
                           <div className="w-1.5 h-1.5 rounded-full bg-white/60 flex-shrink-0" />
-                          <span className="text-[17px] text-white/80">{feature}</span>
+                          <span className="text-white/80 font-base text-[17px]">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -163,7 +163,7 @@ export default function SolutionGrid({ solutions }) {
           backgroundImage: "url('/images/reference/solution-page-solutiongrid.svg')",
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100%',
-          backgroundPosition: 'center top',
+          backgroundPosition: 'center bottom',
         }}
       />
       <div className="absolute inset-0" />
