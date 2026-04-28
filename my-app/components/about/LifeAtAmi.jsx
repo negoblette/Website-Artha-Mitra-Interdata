@@ -31,15 +31,9 @@ export default function LifeAtAmi({ data }) {
   }, [photos.length]);
 
   return (
-    <section className="relative overflow-hidden bg-transparent py-14 md:py-16">
-      <img
-        src="decor/lifeatamielements.svg"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute left-0 top-[-rem] h-full w-full object-cover opacity-100"
-      />
-      <div className="absolute left-0 right-0 top-8 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.22)_0px,rgba(124,140,232,0.22)_2px,transparent_2px,transparent_24px)] opacity-35" />
-      <div className="absolute bottom-0 left-0 right-0 h-56 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.3)_0px,rgba(124,140,232,0.3)_2px,transparent_2px,transparent_24px)] opacity-35" />
+    <section className="relative isolate overflow-hidden py-14 md:py-16" style={{ background: 'linear-gradient(180deg, rgba(243,244,248,0.6) 0%, rgba(235,238,250,0.85) 40%, rgba(235,238,250,0.85) 60%, rgba(243,244,248,0.6) 100%)' }}>
+      {/* Subtle dot accent – top only */}
+      <div className="pointer-events-none absolute left-0 right-0 top-0 h-40 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.15)_0px,rgba(124,140,232,0.15)_1.5px,transparent_1.5px,transparent_28px)] opacity-25" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
         <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">Life At AMI</h2>

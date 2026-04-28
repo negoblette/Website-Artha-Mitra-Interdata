@@ -22,13 +22,8 @@ export default function CareersSection({ data }) {
   };
 
   return (
-    <section id="careers" className="relative bg-transparent py-14 md:py-16">
-      <img 
-        src="decor/careerelements.svg" 
-        alt="" 
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 left-0 w-full h-full object-cover opacity-100"
-      />
+    <section id="careers" className="relative isolate overflow-hidden py-14 md:py-16" style={{ background: 'linear-gradient(180deg, rgba(243,244,248,0.6) 0%, rgba(230,234,250,0.9) 50%, rgba(243,244,248,0.7) 100%)' }}>
+
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <h2 className="text-center text-4xl font-black text-[rgba(13,27,94)] ">Be Our Team!</h2>
 
