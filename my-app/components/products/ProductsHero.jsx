@@ -7,11 +7,7 @@ export default function ProductsHero({ data }) {
   const description = 'Discover our world-class technology partners and the solutions they power.';
 
   return (
-<<<<<<< HEAD
-    <section className="relative min-h-[460px] overflow-hidden pb-28 pt-20 sm:pt-32 lg:pt-13">
-=======
     <section className="relative min-h-[520px] overflow-hidden pb-20 pt-28 sm:pt-32 lg:pt-36">
->>>>>>> devandra-dev
       <div className="absolute inset-0 bg-white" />
 
       <div className="absolute inset-0">

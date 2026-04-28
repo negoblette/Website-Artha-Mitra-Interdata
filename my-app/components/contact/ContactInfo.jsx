@@ -56,7 +56,6 @@ function normalizePhone(value = '') {
   return value.replace(/[^\d+]/g, '');
 }
 
->>>>>>> devandra-dev
 function stripLeadingPlus(value = '') {
   return value.replace(/^\+/, '');
 }
@@ -65,14 +64,23 @@ function formatWhatsAppHref(value = '') {
   return stripLeadingPlus(normalizePhone(value));
 }
 
+const footerLinks = {
+  Product: [
+    { label: 'Products', href: '/products' },
+    { label: 'Solution', href: '/solution' },
+    { label: 'Insight', href: '/insight' },
+  ],
+  Company: [
+    { label: 'About us', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ],
+};
+
 export default function ContactInfo({ contact, whatsapp }) {
   const officePhone = contact?.phone?.split('/')?.[0] ?? contact?.phone ?? '';
   const officePhoneHref = normalizePhone(officePhone);
   const whatsappHref = formatWhatsAppHref(whatsapp || contact?.whatsapp || officePhone);
   const mapHref = contact?.mapLink || contact?.mapEmbedUrl || '#';
-  const officeAddress =
-    contact?.address ||
-    'Wisma Interdata, JL. Dr. Makaliwe I, No.24D, RT.6/RW.6, Grogol, Kec. Grogol Petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11450';
 
   return (
     <section className="relative overflow-hidden bg-[#eef3ff] pb-0">
@@ -170,31 +178,6 @@ export default function ContactInfo({ contact, whatsapp }) {
                   </a>
                 </div>
               </div>
-
-              <div className="mt-10 flex flex-wrap gap-4">
-                <a
-                  href={`tel:${officePhoneHref}`}
-                  className="inline-flex items-center gap-3 rounded-full bg-[#2f54eb] px-7 py-4 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(47,84,235,0.28)] transition-transform hover:-translate-y-0.5"
-                >
-                  <Phone className="h-4 w-4" />
-                  Request a call
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-
-                <a
-                  href={`https://wa.me/${whatsappHref}?text=${encodeURIComponent(
-                    'Hello Artha Mitra Interdata, I would like to discuss a project.',
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-3 rounded-full bg-[#2f54eb] px-7 py-4 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(47,84,235,0.28)] transition-transform hover:-translate-y-0.5"
-                >
-                  <MessageCircle className="h-4 w-4 text-white" />
-                  WhatsApp us
-                </a>
-              </div>
-
-              
             </div>
           </AnimatedSection>
 
@@ -256,7 +239,3 @@ export default function ContactInfo({ contact, whatsapp }) {
     </section>
   );
 }
-<<<<<<< HEAD
-=======
->>>>>>> 1ddc4a1 (update contact + insight)
->>>>>>> devandra-dev

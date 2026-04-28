@@ -13,6 +13,7 @@
   scroll-behavior: smooth;
 }
 
+<<<<<<< Updated upstream
 body {
   margin: 0;
   background: var(--background);
@@ -23,6 +24,8 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+=======
+>>>>>>> Stashed changes
 section.scroll-reveal {
   opacity: 0;
   transform: translateY(42px) scale(0.995);
