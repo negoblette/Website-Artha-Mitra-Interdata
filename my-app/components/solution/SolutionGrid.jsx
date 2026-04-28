@@ -14,12 +14,12 @@ function SolutionCard({ solution, index }) {
     <AnimatedSection delay={index * 0.08}>
       <motion.div
         layout
-        className="group cursor-pointer"
+        className="group h-full cursor-pointer"
         onClick={() => setExpanded(!expanded)}
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="rounded-2xl p-5 sm:p-6 relative overflow-hidden bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] border border-white/10 group-hover:border-white/25 transition-all duration-500 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)]">
+        <div className="relative flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-5 transition-all duration-500 group-hover:border-white/25 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)] sm:min-h-[340px] sm:p-6">
 
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
@@ -28,7 +28,7 @@ function SolutionCard({ solution, index }) {
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-400/10 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-indigo-400/10 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-          <div className="relative">
+          <div className="relative flex h-full flex-col">
             <div className="flex items-start gap-3.5 mb-3.5">
               <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
                 <Icon className="w-4.5 h-4.5 text-white" />
@@ -43,30 +43,32 @@ function SolutionCard({ solution, index }) {
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5 mb-3.5 flex-wrap">
+            <div className="mb-3.5 min-h-[72px]">
               <span className="text-[10px] text-white/60 uppercase tracking-wider font-bold">Partners:</span>
-              {solution.brands.map((brand, i) => {
-                const useOriginalLogo = /netscout|fluke/i.test(brand.name || '');
-                return (
-                  <Link
-                    key={i}
-                    href={brand.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="bg-white/10 border border-white/20 rounded-xl px-3 hover:bg-white/15 hover:scale-105 transition-all duration-200"
-                    title={`Visit ${brand.name}`}
-                  >
-                    <Image
-                      src={brand.logo}
-                      alt={brand.name}
-                      width={80}
-                      height={28}
-                      className={`h-8 w-auto object-contain ${useOriginalLogo ? '' : 'brightness-0 invert'}`}
-                    />
-                  </Link>
-                );
-              })}
+              <div className="mt-2 flex flex-wrap items-center gap-2.5 content-start">
+                {solution.brands.map((brand, i) => {
+                  const useOriginalLogo = /netscout|fluke/i.test(brand.name || '');
+                  return (
+                    <Link
+                      key={i}
+                      href={brand.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="bg-white/10 border border-white/20 rounded-xl px-3 hover:bg-white/15 hover:scale-105 transition-all duration-200"
+                      title={`Visit ${brand.name}`}
+                    >
+                      <Image
+                        src={brand.logo}
+                        alt={brand.name}
+                        width={80}
+                        height={28}
+                        className={`h-8 w-auto object-contain ${useOriginalLogo ? '' : 'brightness-0 invert'}`}
+                      />
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
             <AnimatePresence>
@@ -78,7 +80,7 @@ function SolutionCard({ solution, index }) {
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
-                  <div className="border-t border-white/10 pt-4 mt-2">
+                  <div className="mt-2 border-t border-white/10 pt-4">
                     <p className="text-white/80 text-sm font-semibold leading-relaxed mb-4">
                       {solution.fullDescription}
                     </p>
@@ -95,7 +97,7 @@ function SolutionCard({ solution, index }) {
               )}
             </AnimatePresence>
 
-            <div className="flex items-center justify-between pt-2 border-t border-white/10">
+            <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-2">
               <button
                 className="text-white/60 text-xs flex items-center gap-1 font-semibold hover:text-white transition-colors"
                 onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
@@ -124,6 +126,16 @@ function SolutionCard({ solution, index }) {
 export default function SolutionGrid({ solutions }) {
   return (
     <section className="relative py-20 overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/images/reference/solution-page-background.svg')",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+        }}
+      />
+      <div className="absolute inset-0 bg-white/78" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>

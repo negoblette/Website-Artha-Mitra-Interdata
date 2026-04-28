@@ -1,61 +1,41 @@
 ﻿'use client';
 import Link from 'next/link';
-import { Alegreya_Sans } from 'next/font/google';
-
-const alegreyaSans = Alegreya_Sans({
-  subsets: ['latin'],
-  weight: ['700', '800'],
-});
+import WaveCanvas from './WaveCanvas';
 
 export default function HeroSection({ data }) {
-  const title = 'we optimize IT for you';
-  const description = 'With technology continuing to grow and play a bigger role than ever in our lives, so do the complexities and costs of managing it. Artha Mitra Interdata is built to partner with you in managing IT infrastructure and security by optimizing its efficiency.';
-  const accentWord = 'optimize';
-  const accentPattern = accentWord ? new RegExp(`\\b${accentWord}\\b`) : null;
-  const titleParts = accentPattern ? title.split(accentPattern) : [title];
+  const words = data.title.split(' ');
 
   return (
-    <section className="home-panel relative overflow-visible bg-transparent pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-24 lg:pb-24">
-      <img 
-        src="/decor/heroelements.svg" 
-        alt="" 
-        aria-hidden="true"
-        className="pointer-events-none absolute top-20 bottom-[-40px] z-0 w-full object-cover opacity-100 max-[639px]:left-1/2 max-[639px]:top-[14rem] max-[639px]:bottom-auto max-[639px]:w-[860px] max-[639px]:max-w-none max-[639px]:-translate-x-1/2 max-[639px]:object-contain min-[640px]:max-[1023px]:left-1/2 min-[640px]:max-[1023px]:top-16 min-[640px]:max-[1023px]:bottom-auto min-[640px]:max-[1023px]:w-[1080px] min-[640px]:max-[1023px]:max-w-none min-[640px]:max-[1023px]:-translate-x-1/2 min-[640px]:max-[1023px]:object-contain"
-      />
-      <div className="hero-content-shell mt-2 relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
-        <span className="relative -top-18 sm:-top-20 lg:-top-30 inline-flex items-center rounded-full bg-[#21057e] px-7 py-2 text-[11px] tracking-widest text-white font-semibold uppercase">
-          <span
-            className="mr-3.5 h-2 w-2 rounded-full bg-[#22c55e] shadow-[0_0_0_2px_rgba(34,197,94,0.22),0_0_10px_rgba(34,197,94,0.9)] animate-pulse"
-            aria-hidden="true"
-          />
-          IT Solutions Integrator and Provider
-        </span>
+    <section className="home-panel relative overflow-hidden bg-white min-h-screen flex flex-col items-center justify-center">
+      <WaveCanvas />
 
-        <h1 className={`${alegreyaSans.className} hero-readable-title mt-8 sm:mt-12 lg:mt-14 text-[3.9rem] sm:text-[5.9rem] lg:text-[6.8rem] leading-[0.9] text-black font-bold`}>
-          {titleParts[0]}
-          {accentWord ? <span className="text-[#0a0b85] font-extrabold">{accentWord}</span> : null}
-          {titleParts[1]}
+      <div className="hero-content-shell relative z-10 w-full max-w-10xl mx-auto px-6 sm:px-8 lg:px-10 text-center">
+
+        <h1 className="hero-fade-2 mb-2 max-w-6xl mx-auto text-5xl sm:text-7xl lg:text-8xl xl:text-9xl leading-[1.05] lg:leading-[0.95] text-[rgb(107,107,184)] font-bold">
+          {words[0]} <span className="text-[rgb(13,27,94)] font-extrabold">{words[1]}</span> {words[2]} {words[3]}<br />{words[4]}
         </h1>
 
-        <p className="hero-fade-3 mt-6 mb-8 text-base sm:text-lg lg:text-xl text-[rgb(13,27,94)] max-w-4xl mx-auto leading-relaxed font-semibold">
+        <p className="hero-fade-3 mt-8 mb-12 text-3xl sm:text-base lg:text-2xl text-[rgb(13,27,94)] max-w-5xl mx-auto leading-relaxed font-semibold">
           {data.description}
         </p>
 
-        <div className="hero-fade-4 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        <div className="hero-fade-4 flex flex-col sm:flex-row justify-center gap-4">
           <Link
-            href="/about"
+            href={data.cta.href}
             className="inline-flex min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-6 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors"
           >
             Get to Know Us
           </Link>
           <Link
             href="/contact"
-            className="inline-flex min-w-48 items-center justify-center rounded-full border-2 border-black text-black px-8 py-2.5 text-base sm:text-lg font-semibold hover:bg-[#0a0b85] hover:text-white transition-colors"
+            className="inline-flex min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-6 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors"
           >
             Contact Us
           </Link>
         </div>
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none z-20" />
     </section>
   );
 }
