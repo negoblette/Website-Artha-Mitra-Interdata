@@ -50,10 +50,10 @@ export default function ProductsHero({ data }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
+          <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[rgb(13,27,94)] sm:text-6xl lg:text-[5rem]">
             {data.title}
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
+          <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-lg">
             {data.description}
           </p>
         </motion.div>

@@ -135,16 +135,13 @@ export default function BrandGrid({ brands }) {
   });
 
   return (
-    <section className="relative py-24 pb-8 overflow-visible">
+    <section className="relative py-24 pb-24 overflow-visible">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f5f8ff]/75 to-transparent" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-[0.04]" />
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-14">
-            <span className="block text-[#737373] text-sm font-semibold tracking-[0.3em] uppercase mb-4">
-              Our Partners
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-3 text-[rgb(19,27,94)]">
+            <h2 className="mt-5 text-4xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
               World-Class Technology Brands
             </h2>
           </div>
@@ -158,10 +155,10 @@ export default function BrandGrid({ brands }) {
           <div className="relative">
             <div className="mb-6 flex flex-col gap-4 border-b border-[#d8e2ff]/80 pb-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85]/55">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[rgb(13,27,94)]/55">
                   Partner Catalog
                 </p>
-                <h3 className="mt-2 text-xl font-bold tracking-tight text-[rgb(19,27,94)] sm:text-2xl">
+                <h3 className="mt-2 text-xl font-bold tracking-tight text-[rgb(13,27,94)] sm:text-2xl">
                   Explore Solutions by Principal
                 </h3>
                 <p className="mt-2 max-w-xl text-sm font-medium leading-6 text-[#111827]/72">
@@ -170,10 +167,10 @@ export default function BrandGrid({ brands }) {
               </div>
 
               <div className="rounded-2xl border border-[#d6e0ff] bg-white/70 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)]">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#0a0b85]/50">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[rgb(13,27,94)]/50">
                   Showing
                 </p>
-                <p className="mt-1 text-base font-bold text-[rgb(19,27,94)]">
+                <p className="mt-1 text-base font-bold text-[rgb(13,27,94)]">
                   {filteredBrands.length}
                   <span className="ml-1 text-sm font-medium text-[#111827]/55">
                     of {brands.length} partners
@@ -196,13 +193,13 @@ export default function BrandGrid({ brands }) {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search by brand, capability, or solution"
-                  className="w-full bg-transparent text-sm font-semibold text-[rgb(19,27,94)] outline-none placeholder:text-[rgb(19,27,94)]/38"
+                  className="w-full bg-transparent text-sm font-semibold text-[rgb(13,27,94)] outline-none placeholder:text-[rgb(13,27,94)]/38"
                 />
                 {query ? (
                   <button
                     type="button"
                     onClick={() => setQuery('')}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[rgb(19,27,94)]/55 transition-colors hover:bg-[#0a0b85]/6 hover:text-[rgb(19,27,94)]"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[rgb(13,27,94)]/55 transition-colors hover:bg-[#0a0b85]/6 hover:text-[rgb(13,27,94)]"
                     aria-label="Clear search"
                   >
                     <X className="h-4 w-4" />
@@ -238,7 +235,7 @@ export default function BrandGrid({ brands }) {
                   </div>
                 ) : (
                   <div className="rounded-2xl border border-dashed border-[#cdd4ea] bg-white/70 px-6 py-16 text-center">
-                    <p className="text-base font-bold text-[rgb(19,27,94)]">No brands found</p>
+                    <p className="text-base font-bold text-[rgb(13,27,94)]">No brands found</p>
                     <p className="mt-2 text-sm font-medium text-[#111827]/70">
                       Try another keyword or clear the search to see all brand cards.
                     </p>
