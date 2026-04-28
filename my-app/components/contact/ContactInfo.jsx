@@ -69,10 +69,10 @@ export default function ContactInfo({ contact, whatsapp }) {
                       <Mail className="h-5 w-5" />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[11px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
+                      <span className="block text-[16px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
                         Email
                       </span>
-                      <span className="mt-1 block break-all text-[1.4rem] font-bold leading-[1.15] sm:text-[1.7rem]">
+                      <span className="mt-1 block break-all text-[23px] font-bold leading-[1.15] sm:text-[25px]">
                         {contact?.email}
                       </span>
                     </span>
@@ -86,10 +86,10 @@ export default function ContactInfo({ contact, whatsapp }) {
                       <Phone className="h-5 w-5" />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[11px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
+                      <span className="block text-[16px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
                         Phone
                       </span>
-                      <span className="mt-1 block text-[1.4rem] font-bold leading-[1.15] sm:text-[1.7rem]">
+                      <span className="mt-1 block text-[23px] font-bold leading-[1.15] sm:text-[25px]">
                         {contact?.phone}
                       </span>
                     </span>
@@ -107,10 +107,10 @@ export default function ContactInfo({ contact, whatsapp }) {
                       <MessageCircle className="h-5 w-5" />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[11px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
+                      <span className="block text-[16px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
                         WhatsApp
                       </span>
-                      <span className="mt-1 block text-[1.4rem] font-bold leading-[1.15] sm:text-[1.7rem]">
+                      <span className="mt-1 block text-[23px] font-bold leading-[1.15] sm:text-[25px]">
                         {whatsapp || contact?.phone}
                       </span>
                     </span>
