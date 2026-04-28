@@ -13,7 +13,7 @@ export default function CareersSection({ data }) {
   const careerEmail = data.careerEmail || 'career@arthamitra.co.id';
 
   const handleApply = (positionTitle) => {
-    const subject = encodeURIComponent(`Job Application - ${positionTitle} AMI`);
+    const subject = encodeURIComponent(`Job Application - ${positionTitle} Artha Mitra Interdata`);
     const to = encodeURIComponent(careerEmail);
     window.open(
       `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}`,
