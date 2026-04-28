@@ -14,21 +14,11 @@ export default function SolutionPage() {
   const products = getContent('products');
 
   return (
-    <div
-      className="relative min-h-screen overflow-hidden"
-      style={{
-        backgroundImage: "url('/images/reference/solution-page-background.svg')",
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'top center',
-      }}
-    >
-      <div className="relative z-10">
-        <SolutionHero data={data.hero} />
-        <SolutionGrid solutions={data.solutions} />
-        <ServicesGrid services={data.services} />
-        <WhyChoose data={products.whyChoose} />
-      </div>
+    <div className="relative z-10">
+      <SolutionHero data={data.hero} />
+      <SolutionGrid solutions={data.solutions} />
+      <ServicesGrid services={data.services} />
+      <WhyChoose data={products.whyChoose} />
     </div>
   );
 }
