@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { Facebook, Instagram, Linkedin, MapPin } from 'lucide-react';
@@ -14,8 +14,8 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="home-section section-last relative bg-transparent overflow-hidden -mt-6 md:-mt-8 pt-8 md:pt-10 pb-10 md:pb-12">
-      <div className="relative z-10 max-w-6xl mx-auto pt-20 pb-50 px-4 sm:px-6 grid grid-cols-1 md:grid-cols-[0.95fr_1.35fr_1fr] gap-6 md:gap-8 items-start">
+    <section id="contact" className="relative bg-transparent overflow-hidden pt-10 md:pt-14 pb-10 md:pb-12">
+      <div className="relative z-10 max-w-6xl mx-auto pt-6 pb-16 px-4 sm:px-6 grid grid-cols-1 md:grid-cols-[0.95fr_1.35fr_1fr] gap-6 md:gap-8 items-start">
         <div className="pt-1">
           <p className="text-xs tracking-[0.16em] font-bold text-black">CONTACT US</p>
           <h2 className="mt-2 text-4xl sm:text-5xl leading-[0.92] font-black text-black">GET IN TOUCH<br />WITH US</h2>

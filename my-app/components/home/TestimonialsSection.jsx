@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
@@ -113,11 +113,11 @@ export default function TestimonialsSection({ data }) {
   if (!items.length) return null;
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-transparent">
+    <section className="relative overflow-hidden bg-transparent py-10 md:py-14">
       <div className="pointer-events-none absolute top-0 left-1/2 h-full w-[115vw] -translate-x-1/2">
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-center px-4 py-0 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-6xl flex flex-col justify-center px-4 sm:px-6">
         <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl text-[rgba(13,27,94)] font-black">
           {data?.title || "Testimonials"}
         </h2>

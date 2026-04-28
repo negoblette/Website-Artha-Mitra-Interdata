@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 
 function NewsRow({ title, excerpt, reverse, tone, image }) {
   return (
@@ -30,8 +30,8 @@ export default function NewsSection({ data }) {
   ];
 
   return (
-    <section className="home-section relative bg-transparent overflow-hidden">
-      <div className="relative z-10 pb-30">
+    <section className="relative bg-transparent overflow-hidden py-10 md:py-14">
+      <div className="relative z-10 pb-10">
         <h2 className= "text-center text-3xl sm:text-4xl lg:text-5xl font-black text-[rgb(13,27,94)] mb-4 md:mb-5">News & Articles</h2>
         <div className="space-y-4 md:space-y-5">
           {rows.map((row, i) => (

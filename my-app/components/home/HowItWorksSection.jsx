@@ -1,7 +1,7 @@
-﻿export default function HowItWorksSection({ data }) {
+export default function HowItWorksSection({ data }) {
   return (
-    <section className="home-section bg-transparent overflow-hidden md:h-[calc(100svh-98px)] md:py-0">
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center md:h-full md:flex md:flex-col md:justify-start md:pt-8 lg:pt-10">
+    <section className="bg-transparent overflow-hidden py-10 md:py-14">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[rgb(13,27,94)]">{data.title}</h2>
         <p className="mt-4 text-[rgb(13,27,94)] font-semibold text-lg sm:text-xl max-w-4xl mx-auto leading-snug">{data.description}</p>
 

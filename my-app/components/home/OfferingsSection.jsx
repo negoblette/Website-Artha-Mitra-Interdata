@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -71,7 +71,7 @@ export default function OfferingsSection({ data }) {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section className="relative w-full bg-transparent border-t border-[#bebebe73] md:h-[calc(100svh-98px)]">
+    <section className="relative w-full bg-transparent border-t border-[#bebebe73] md:h-[70svh]">
       <div className="w-full h-full border-y border-[#dbdbdb] bg-white/22 backdrop-blur-[2px] overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 h-full">
           <div

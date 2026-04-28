@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import Link from 'next/link';
 import WaveCanvas from './WaveCanvas';
 
@@ -7,9 +7,39 @@ export default function HeroSection({ data }) {
 
   return (
     <section className="home-panel relative overflow-hidden bg-white min-h-screen flex flex-col items-center justify-center">
+      <style>{`
+        @keyframes heroBadgePulse {
+          0%, 100% { transform: scale(1); opacity: 0.75; }
+          50% { transform: scale(1.8); opacity: 0; }
+        }
+      `}</style>
       <WaveCanvas />
 
       <div className="hero-content-shell relative z-10 w-full max-w-10xl mx-auto px-6 sm:px-8 lg:px-10 text-center">
+
+        <div className="hero-fade-1 flex justify-center mb-6">
+          <span
+            className="inline-flex items-center gap-2.5 rounded-full px-6 py-2.5 text-xs sm:text-sm font-semibold tracking-[0.15em] uppercase text-white"
+            style={{ background: 'linear-gradient(135deg, rgb(10, 11, 133), rgb(20, 20, 80))' }}
+          >
+            <span
+              className="relative flex h-2.5 w-2.5"
+            >
+              <span
+                className="absolute inline-flex h-full w-full rounded-full opacity-75"
+                style={{
+                  backgroundColor: '#22c55e',
+                  animation: 'heroBadgePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                }}
+              />
+              <span
+                className="relative inline-flex rounded-full h-2.5 w-2.5"
+                style={{ backgroundColor: '#22c55e' }}
+              />
+            </span>
+            Your 24/7 IT Consultant
+          </span>
+        </div>
 
         <h1 className="hero-fade-2 mb-2 max-w-6xl mx-auto text-5xl sm:text-7xl lg:text-8xl xl:text-9xl leading-[1.05] lg:leading-[0.95] text-[rgb(107,107,184)] font-bold">
           {words[0]} <span className="text-[rgb(13,27,94)] font-extrabold">{words[1]}</span> {words[2]} {words[3]}<br />{words[4]}
