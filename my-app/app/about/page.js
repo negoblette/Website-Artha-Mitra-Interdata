@@ -17,15 +17,17 @@ export default function AboutPage() {
   const homepage = getContent('homepage');
 
   return (
-    <div
-      className="relative min-h-screen overflow-hidden bg-[#f3f4f8]"
-      style={{
-        backgroundImage: "url('/images/reference/about-page-background.svg')",
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'top center',
-      }}
-    >
+    <div className="relative min-h-screen overflow-hidden bg-[#f3f4f8]">
+      {/* Page background - subtle */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-40"
+        style={{
+          backgroundImage: "url('/images/reference/about-page-background.svg')",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'top center',
+        }}
+      />
       <div className="relative z-10">
         <AboutHero data={data.hero} />
         <VisionMission vision={data.vision} mission={data.mission} />

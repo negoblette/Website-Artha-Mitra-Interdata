@@ -11,16 +11,14 @@ export default function AboutHero({ data }) {
 
       <div className="absolute inset-0">
         <div className="absolute inset-y-0 left-[24%] right-[-4rem] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] sm:left-[28%] sm:right-[-5rem] lg:left-[34%] lg:right-[-6rem]">
-          {data.image ? (
-            <Image
-              src={data.image}
-              alt={data.title}
-              fill
-              priority
-              sizes="(min-width: 1024px) 66vw, (min-width: 640px) 72vw, 78vw"
-              className="object-cover object-right"
-            />
-          ) : null}
+          <Image
+            src="/images/about-hero-bg.jpg"
+            alt={data.title}
+            fill
+            priority
+            sizes="(min-width: 1024px) 66vw, (min-width: 640px) 72vw, 78vw"
+            className="object-cover object-right"
+          />
         </div>
       </div>
 

@@ -18,7 +18,7 @@ export default function Home() {
       <OfferingsSection data={data.offerings} />
       <TestimonialsSection data={data.testimonials} />
       <NewsSection data={data.news} />
-      <ContactSection data={data.contactSection} contact={global.contact} socials={global.footer?.socials} />
+      <ContactSection data={data.contactSection} contact={global.contact} socials={global.footer?.socials} whatsapp={global.whatsapp} />
       {global.whatsapp && <WhatsAppButton phoneNumber={global.whatsapp} />}
     </div>
   );

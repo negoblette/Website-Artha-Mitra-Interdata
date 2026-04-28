@@ -57,7 +57,7 @@ function OfferColumn({ eyebrow, title, items, icons }) {
         })}
       </div>
 
-      <p className="text-center mt-3 text-base font-bold text-[rgb(13,27,94)]">scroll for more</p>
+      <p className="text-center mt-3 text-base font-bold text-[rgb(13,27,94)]">Scroll For More</p>
       <div className="text-center mt-2">
         <Link href="/solution" className="inline-flex rounded-full border-2 border-black px-6 py-1.5 text-black text-sm sm:text-base font-semibold hover:bg-[rgba(13,27,94)] hover:text-white transition-colors">
           Learn More
