@@ -5,6 +5,7 @@ import OfferingsSection from '@/components/home/OfferingsSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import NewsSection from '@/components/home/NewsSection';
 import ContactSection from '@/components/home/ContactSection';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 export default function Home() {
   const data = getContent('homepage');
@@ -18,6 +19,7 @@ export default function Home() {
       <TestimonialsSection data={data.testimonials} />
       <NewsSection data={data.news} />
       <ContactSection data={data.contactSection} contact={global.contact} socials={global.footer?.socials} />
+      {global.whatsapp && <WhatsAppButton phoneNumber={global.whatsapp} />}
     </div>
   );
 }

@@ -56,15 +56,10 @@ export default function CiptaValuesSection({ values = [] }) {
                   </span>
                 </div>
 
-                <div className="absolute inset-0 rounded-xl border border-[#0a0b85]/25 bg-gradient-to-br from-[#05063f] via-[#090b66] to-[#020212] p-4 text-center shadow-[0_18px_40px_rgba(10,11,133,0.22)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
-                  <div className="flex h-full flex-col items-center rounded-[0.85rem] border border-white/10 bg-white/5 px-4 py-5 backdrop-blur-[2px]">
-                    <span className="rounded-full border border-white/15 bg-white/8 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-white/65">
-                      {card.title}
-                    </span>
-                    <p className="my-auto max-w-[25ch] text-[10px] leading-[1.4] text-white/82">
+                <div className="absolute inset-0 flex items-center justify-center rounded-xl border border-[#0a0b85]/25 bg-gradient-to-br from-[#05063f] via-[#090b66] to-[#020212] px-5 py-5 text-center shadow-[0_18px_40px_rgba(10,11,133,0.22)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                    <p className="max-w-[25ch] text-[13px] leading-[1.5] text-white/90">
                       {card.description}
                     </p>
-                  </div>
                 </div>
               </div>
               <p className="mt-2 text-center font-bold text-black">{card.title}</p>

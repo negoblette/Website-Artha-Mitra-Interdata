@@ -1,22 +1,24 @@
 'use client';
 import { useState } from 'react';
-import { Briefcase, Upload } from 'lucide-react';
+import { Briefcase, Mail, Phone, MessageCircle } from 'lucide-react';
 
 export default function CareersSection({ data }) {
-  const [cvForm, setCvForm] = useState({ name: '', email: '' });
   const [expandedSlug, setExpandedSlug] = useState(null);
   const [showAllPositions, setShowAllPositions] = useState(false);
-  const [selectedFileName, setSelectedFileName] = useState('No file selected');
 
   const displayedPositions = showAllPositions
     ? data.positions
     : data.positions.slice(0, 3);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Thank you! Your CV has been submitted.');
-    setCvForm({ name: '', email: '' });
-    setSelectedFileName('No file selected');
+  const careerEmail = data.careerEmail || 'career@arthamitra.co.id';
+
+  const handleApply = (positionTitle) => {
+    const subject = encodeURIComponent(`Job Application - ${positionTitle} AMI`);
+    const to = encodeURIComponent(careerEmail);
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}`,
+      '_blank'
+    );
   };
 
   return (
@@ -60,7 +62,7 @@ export default function CareersSection({ data }) {
 
                   <div
                     className={`overflow-hidden transition-all duration-300 ${
-                      expandedSlug === pos.slug ? 'mt-2 max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                      expandedSlug === pos.slug ? 'mt-2 max-h-60 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
                     <div className="rounded-md border border-white/15 bg-black/25 px-3 py-2.5 text-left">
@@ -70,6 +72,14 @@ export default function CareersSection({ data }) {
                       <p className="mt-1 text-[11px] leading-relaxed text-white/88">
                         {pos.summary || 'This position is open for professionals who are passionate about technology and collaboration.'}
                       </p>
+                      <button
+                        type="button"
+                        onClick={() => handleApply(pos.title)}
+                        className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-[11px] font-bold text-[#0a0b85] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e9eeff] hover:shadow-[0_8px_16px_rgba(0,0,0,0.24)] active:translate-y-0 active:scale-[0.98]"
+                      >
+                        <Mail size={12} />
+                        Apply this Job
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -91,50 +101,66 @@ export default function CareersSection({ data }) {
             </button>
           </article>
 
-          <article className="careers-panel careers-panel-right rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-4 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)]">
-            <h3 className="text-2xl font-black">{data.cvForm.title}</h3>
-            <p className="mt-2 text-[11px] leading-relaxed text-white/85">{data.cvForm.description}</p>
+          <article className="careers-panel careers-panel-right rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-6 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)] flex flex-col justify-center">
+            <h3 className="text-2xl font-black">Get In Touch</h3>
+            <p className="mt-2 text-[12px] leading-relaxed text-white/80">
+              Interested in joining our team? Reach out through the channel that suits you best.
+            </p>
 
-            <form onSubmit={handleSubmit} className="mt-4 space-y-2.5">
-              <input
-                type="text"
-                placeholder="Enter Your Name Here"
-                value={cvForm.name}
-                onChange={(e) => setCvForm({ ...cvForm, name: e.target.value })}
-                required
-                className="w-full rounded-md border border-[#d1d5ff] bg-white px-3 py-2 text-xs text-[#0a0b85] placeholder:text-[#0a0b85]/45 focus:outline-none"
-              />
-              <input
-                type="email"
-                placeholder="Enter Your Email Here"
-                value={cvForm.email}
-                onChange={(e) => setCvForm({ ...cvForm, email: e.target.value })}
-                required
-                className="w-full rounded-md border border-[#d1d5ff] bg-white px-3 py-2 text-xs text-[#0a0b85] placeholder:text-[#0a0b85]/45 focus:outline-none"
-              />
+            <div className="mt-6 space-y-5">
+              <a
+                href={`mailto:${careerEmail}`}
+                className="group flex items-center gap-4 transition-colors"
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition-transform group-hover:scale-105 group-hover:bg-white/15">
+                  <Mail className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/55">
+                    Email
+                  </span>
+                  <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
+                    {careerEmail}
+                  </span>
+                </span>
+              </a>
 
-              <p className="text-[10px] leading-relaxed text-white/80">{data.cvForm.note}</p>
+              <a
+                href="tel:+622156975111"
+                className="group flex items-center gap-4 transition-colors"
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition-transform group-hover:scale-105 group-hover:bg-white/15">
+                  <Phone className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/55">
+                    Phone
+                  </span>
+                  <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
+                    +6221-56975111/5222
+                  </span>
+                </span>
+              </a>
 
-              <div className="flex items-center gap-2">
-                <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-white/20 bg-black/35 px-3 py-2 text-[10px] font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-black/55 hover:shadow-[0_8px_16px_rgba(0,0,0,0.25)] active:translate-y-0 active:scale-[0.98] focus-within:outline-none focus-within:ring-2 focus-within:ring-white/60">
-                  <Upload size={12} />
-                  Choose File
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept=".pdf,.doc,.docx,.jpeg,.jpg"
-                    onChange={(e) => setSelectedFileName(e.target.files?.[0]?.name || 'No file selected')}
-                  />
-                </label>
-                <span className="text-[10px] text-white/70">{selectedFileName} (Max {data.cvForm.maxFileSize})</span>
-                <button
-                  type="submit"
-                  className="ml-auto rounded-md bg-black px-4 py-2 text-[10px] font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#050505] hover:shadow-[0_8px_16px_rgba(0,0,0,0.35)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                >
-                  Send
-                </button>
-              </div>
-            </form>
+              <a
+                href="https://wa.me/628164850082?text=Hello%20Artha%20Mitra%20Interdata%2C%20I%20would%20like%20to%20discuss%20a%20career%20opportunity."
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center gap-4 transition-colors"
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#22c55e] ring-1 ring-white/15 transition-transform group-hover:scale-105 group-hover:bg-white/15">
+                  <MessageCircle className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/55">
+                    WhatsApp
+                  </span>
+                  <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
+                    +628164850082
+                  </span>
+                </span>
+              </a>
+            </div>
           </article>
         </div>
       </div>

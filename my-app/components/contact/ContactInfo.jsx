@@ -1,5 +1,5 @@
 'use client';
-import { ArrowRight, Clock, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { ArrowRight, Mail, MessageCircle, Phone } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 function normalizePhone(value = '') {
@@ -19,9 +19,7 @@ export default function ContactInfo({ contact, whatsapp }) {
   const officePhoneHref = normalizePhone(officePhone);
   const whatsappHref = formatWhatsAppHref(whatsapp || contact?.whatsapp || officePhone);
   const mapHref = contact?.mapLink || contact?.mapEmbedUrl || '#';
-  const officeAddress =
-    contact?.address ||
-    'Wisma Interdata, JL. Dr. Makaliwe I, No.24D, RT.6/RW.6, Grogol, Kec. Grogol Petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11450';
+  const officeAddress = contact?.address ?? '';
 
   return (
     <section className="relative overflow-hidden bg-[#eef3ff] pb-0">
@@ -119,31 +117,6 @@ export default function ContactInfo({ contact, whatsapp }) {
                   </a>
                 </div>
               </div>
-
-              <div className="mt-10 flex flex-wrap gap-4">
-                <a
-                  href={`tel:${officePhoneHref}`}
-                  className="inline-flex items-center gap-3 rounded-full bg-[#2f54eb] px-7 py-4 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(47,84,235,0.28)] transition-transform hover:-translate-y-0.5"
-                >
-                  <Phone className="h-4 w-4" />
-                  Request a call
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-
-                <a
-                  href={`https://wa.me/${whatsappHref}?text=${encodeURIComponent(
-                    'Hello Artha Mitra Interdata, I would like to discuss a project.',
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-3 rounded-full bg-[#2f54eb] px-7 py-4 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(47,84,235,0.28)] transition-transform hover:-translate-y-0.5"
-                >
-                  <MessageCircle className="h-4 w-4 text-white" />
-                  WhatsApp us
-                </a>
-              </div>
-
-              
             </div>
           </AnimatedSection>
 
