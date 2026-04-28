@@ -1,50 +1,56 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import AnimatedSection from '@/components/AnimatedSection';
 
 export default function ActivitiesHero({ data }) {
   return (
-    <section className="relative overflow-hidden bg-transparent pt-28 pb-40 sm:pt-32 lg:pb-48">
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, x: -30, y: 12 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="relative mx-auto w-full max-w-[760px] lg:mx-0 lg:translate-y-26"
-        >
-          <div className="relative overflow-hidden bg-transparent">
-            <div className="relative aspect-[850/582] w-full">
-              <Image
-                src="/images/reference/Activities_hero.png"
-                alt="Activities hero illustration"
-                fill
-                priority
-                className="object-contain bg-transparent"
-                sizes="(min-width: 1024px) 52vw, 100vw"
-              />
-            </div>
-          </div>
-        </motion.div>
+    <section className="relative min-h-[460px] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
+      <div className="absolute inset-0 bg-white" />
 
-        <motion.div
-          initial={{ opacity: 0, x: 30, y: 12 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.08 }}
-          className="mx-auto w-full max-w-xl lg:mx-0 lg:justify-self-end "
-        >
-          <div className="text-center lg:text-center lg:translate-y-15">
-            <span className="mb-4 bg-black/13 p-2 rounded-2xl inline-block text-xs font-semibold uppercase tracking-[0.3em] text-[#737373]">
-              Activities
-            </span>
-            <h1 className="mx-auto max-w-lg text-4xl font-bold tracking-tight text-[#010268] sm:text-5xl md:text-6xl">
+      <div className="absolute inset-0">
+        <div className="absolute inset-y-0 left-[24%] right-[-4rem] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] sm:left-[28%] sm:right-[-5rem] lg:left-[34%] lg:right-[-6rem]">
+          <Image
+            src="/images/activities.jpeg"
+            alt="Activities hero background"
+            fill
+            priority
+            sizes="(min-width: 1024px) 66vw, (min-width: 640px) 72vw, 78vw"
+            className="object-cover object-right"
+          />
+        </div>
+      </div>
+
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#ffffff_0%,rgba(250,251,254,0.995)_34%,rgba(243,245,250,0.96)_46%,rgba(238,241,248,0.88)_56%,rgba(255,255,255,0.28)_74%,rgba(255,255,255,0.08)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_70%,rgba(255,65,65,0.18),transparent_20%),radial-gradient(circle_at_72%_28%,rgba(5,128,255,0.10),transparent_18%)]" />
+      <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
+
+      <motion.div
+        className="absolute top-24 left-8 h-72 w-72 rounded-full bg-[#ff5d2b]/[0.12] blur-[130px]"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.28, 0.5, 0.28] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-10 right-10 h-80 w-80 rounded-full bg-[#9c1b59]/[0.14] blur-[140px]"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.35, 0.58, 0.35] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
+        <div className="max-w-3xl">
+          <AnimatedSection>
+            <h1 className="text-5xl font-black tracking-tight text-[#0a0b85] sm:text-6xl lg:text-[5.4rem]">
               {data.title}
             </h1>
-            <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-[#111827]/85 sm:text-base">
+
+  
+            <p className="mt-6 max-w-xl text-[16px] font-semibold leading-8 text-[#111827]/58 sm:text-[19px]">
               {data.description}
             </p>
-          </div>
-        </motion.div>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   );

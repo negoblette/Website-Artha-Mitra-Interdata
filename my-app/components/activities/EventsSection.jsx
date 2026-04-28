@@ -166,15 +166,12 @@ export default function EventsSection({ data }) {
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <AnimatedSection>
           <div className="mb-4 sm:mb-5 max-w-2xl">
-            <span className="mb-1 inline-block text-xs font-semibold uppercase tracking-[0.3em] text-[#737373]">
-              Events
-            </span>
             <div>
-              <h2 className="gradient-text mb-2 inline-block text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="text-[35px] uppercase sm:text-[50px] font-black gradient-text inline-block">
                 {data?.title}
               </h2>
             </div>
-            <p className="text-sm leading-7 text-[#475569]">{data?.subtitle}</p>
+            <p className="text-[#111827]/65 font-semibold sm:text-[18px]">{data?.subtitle}</p>
           </div>
         </AnimatedSection>
 
