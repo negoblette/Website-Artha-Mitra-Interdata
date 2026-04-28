@@ -182,7 +182,7 @@ export default function InsightNewsSection({ data }) {
               type="button"
               onClick={() => setCategoryPage((page) => Math.max(1, page - 1))}
               disabled={categoryPage === 1}
-              className="rounded-full border border-[#010268]/10 bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#010268] transition-colors hover:bg-[#f3f5ff] disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-full border border-white/50 bg-[#010268] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#2d2e7d] disabled:cursor-not-allowed disabled:opacity-40"
             >
               Prev
             </button>
@@ -191,7 +191,7 @@ export default function InsightNewsSection({ data }) {
               type="button"
               onClick={() => setCategoryPage((page) => Math.min(totalCategoryPages, page + 1))}
               disabled={categoryPage === totalCategoryPages}
-              className="rounded-full border border-[#010268]/10 bg-white px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#010268] transition-colors hover:bg-[#f3f5ff] disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-full border border-white/50 bg-[#010268] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#2d2e7d] disabled:cursor-not-allowed disabled:opacity-40"
             >
               Next
             </button>

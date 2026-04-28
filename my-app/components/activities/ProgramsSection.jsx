@@ -2,89 +2,133 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mountain, ChevronDown } from 'lucide-react';
+import { Mountain, ChevronDown, ArrowUpRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 function ProgramCard({ program, index }) {
   const [expanded, setExpanded] = useState(false);
+  const images = program.images ?? [];
+  const primaryImage = images[0];
+  const galleryImages = images.slice(1, 4);
 
   return (
     <AnimatedSection delay={index * 0.1} className="self-start">
       <motion.div
         layout
         whileHover={{ y: -6 }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.25 }}
         className="w-full self-start cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="group relative flex w-full min-h-[200px] flex-col overflow-hidden rounded-[1.9rem] border border-white/60 bg-white/80 p-6 shadow-[0_22px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm transition-shadow hover:shadow-[0_30px_80px_rgba(10,11,133,0.15)] md:min-h-[250px]">
-          <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(135deg,#eef3ff_0%,#dfe8ff_50%,#f8fbff_100%)]" />
-          <div className="absolute -top-16 right-[-1rem] h-36 w-36 rounded-full bg-[#0a0b85]/10 blur-[60px] opacity-70 transition-opacity duration-700 group-hover:opacity-100" />
+        <div className="group relative overflow-hidden rounded-[2rem] border border-white/70 bg-[#f7f8fb] shadow-[0_30px_90px_rgba(10,11,133,0.16)] transition-all duration-500 hover:shadow-[0_36px_100px_rgba(10,11,133,0.22)]">
+          <div className="absolute inset-0 rounded-[2rem] border border-[#0a0b85]/8 pointer-events-none" />
 
-          <div className="relative flex w-full flex-col">
-            <div className="mb-5 flex gap-3 overflow-x-auto pb-1">
-              {program.images.map((imageSrc, j) => (
-                <div
-                  key={j}
-                  className="relative h-20 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-white/88 shadow-md shadow-[#0a0b85]/8 transition-shadow group-hover:shadow-lg"
-                >
-                  {imageSrc ? (
-                    <Image
-                      src={imageSrc}
-                      alt={`${program.name} image ${j + 1}`}
-                      fill
-                      sizes="96px"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-[#f3f6ff]">
-                      <Mountain className="text-[#0a0b85] transition-transform duration-500 group-hover:scale-110" size={20} />
-                    </div>
-                  )}
+          <div className="relative grid min-h-[200px] grid-cols-1 md:min-h-[100px] md:grid-cols-[1.05fr_0.95fr]">
+            <div className="relative z-10 flex flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] px-5 py-6 sm:px-6 sm:py-7 lg:px-7 lg:py-8">
+              <div className="absolute inset-y-0 right-[-40px] hidden w-[88px] bg-white [clip-path:polygon(24%_0%,100%_0%,76%_100%,0%_100%)] md:block" />
+
+              <div className="relative max-w-xl">
+                <span className="inline-flex rounded-full border border-[#00a86b]/15 bg-[#00a86b]/8 px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#00a86b] sm:text-xs">
+                  Program
+                </span>
+
+                <h3 className="mt-4 text-2xl font-black uppercase leading-tight text-[#111a5b] sm:text-[1.95rem] lg:text-[2.2rem]">
+                  {program.name}
+                </h3>
+
+                <p className={`mt-4 max-w-md text-sm leading-6 text-[#4b556b] sm:text-[15px] ${expanded ? '' : 'line-clamp-4'}`}>
+                  {program.description}
+                </p>
+
+                <div className="mt-5 space-y-2 text-xs text-[#29324f] sm:text-sm">
+                  <p className="font-bold">Part of AMI activities</p>
+                  <p>
+                    <span className="font-semibold text-[#00a86b]">Focus:</span> community engagement and professional development
+                  </p>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <span className="inline-flex rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85]">
-                Program
-              </span>
-            </div>
-
-            <h3 className="line-clamp-2 min-h-[3.5rem] text-lg font-bold text-[#111827] transition-colors group-hover:text-[#0a0b85]">
-              {program.name}
-            </h3>
-            <p className={`mt-[-1rem] min-h-[5.25rem] text-sm leading-5 text-[#475569] ${expanded ? '' : 'line-clamp-3'}`}>
-              {program.description}
-            </p>
-
-            <AnimatePresence>
-              {expanded && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
+              <div className="relative mt-6 flex flex-wrap items-center gap-3">
+                <button
+                  className="inline-flex items-center gap-2 rounded-2xl bg-[#1fb92f] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_16px_35px_rgba(31,185,47,0.28)] transition-all duration-300 hover:bg-[#18a528]"
+                  onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
                 >
-                  <div className="mt-2 mb-6 rounded-2xl border border-[#0a0b85]/8 bg-[#f8fbff] p-4">
-                    <p className="text-xs leading-6 text-[#64748b]">
-                      This program is part of AMI&apos;s commitment to community engagement and professional development in the IT industry across Indonesia.
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <span>{expanded ? 'Hide Details' : 'Explore Details'}</span>
+                  <motion.span
+                    animate={{ rotate: expanded ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </motion.span>
+                </button>
 
-            <button
-              className="mt-[-0.2rem] inline-flex items-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#f3f6ff] px-3 py-1.5 text-[11px] font-semibold text-[#0a0b85] transition-colors hover:bg-[#e8eeff]"
-              onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
-            >
-              <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                <ChevronDown className="w-3.5 h-3.5" />
-              </motion.span>
-              {expanded ? 'Less' : 'More details'}
-            </button>
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a0b85]">
+                  AMI Activity
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </span>
+              </div>
+
+              <AnimatePresence>
+                {expanded && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative z-10 overflow-hidden"
+                  >
+                    <div className="mt-5 max-w-md rounded-[1.35rem] border border-[#0a0b85]/8 bg-[#f4f7ff] p-4">
+                      <p className="text-sm leading-6 text-[#5b6b82]">
+                        This program is part of AMI&apos;s commitment to community engagement and professional development in the IT industry across Indonesia.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <div className="relative min-h-[240px] overflow-hidden bg-[radial-gradient(circle_at_50%_36%,rgba(80,255,132,0.78),rgba(80,255,132,0.18)_20%,transparent_36%),linear-gradient(180deg,#071745_0%,#0b2f7c_42%,#163c14_100%)] md:min-h-full">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_14%,rgba(255,232,122,0.85),transparent_12%),radial-gradient(circle_at_16%_72%,rgba(26,185,255,0.18),transparent_18%)]" />
+              <div className="absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(180deg,rgba(124,197,38,0)_0%,rgba(136,214,49,0.34)_18%,rgba(124,197,38,0.96)_100%)]" />
+              <div className="absolute inset-x-0 bottom-0 h-[1px] bg-white/20" />
+
+              <div className="relative flex h-full items-end justify-center px-4 pt-8">
+                {primaryImage ? (
+                  <div className="relative h-[220px] w-full max-w-[250px] sm:h-[260px] sm:max-w-[290px] lg:h-[300px] lg:max-w-[320px]">
+                    <Image
+                      src={primaryImage}
+                      alt={`${program.name} cover`}
+                      fill
+                      sizes="(min-width: 1024px) 22vw, (min-width: 768px) 28vw, 90vw"
+                      className="object-contain drop-shadow-[0_24px_45px_rgba(0,0,0,0.35)] transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex h-[190px] w-[190px] items-center justify-center rounded-full border border-white/18 bg-white/10 backdrop-blur-sm sm:h-[220px] sm:w-[220px]">
+                    <Mountain className="h-14 w-14 text-white/85" />
+                  </div>
+                )}
+              </div>
+
+              {galleryImages.length > 0 && (
+                <div className="absolute bottom-3 right-3 flex gap-2">
+                  {galleryImages.map((imageSrc, j) => (
+                    <div
+                      key={j}
+                      className="relative h-11 w-11 overflow-hidden rounded-lg border border-white/25 bg-white/10 backdrop-blur-sm sm:h-12 sm:w-12"
+                    >
+                      <Image
+                        src={imageSrc}
+                        alt={`${program.name} image ${j + 2}`}
+                        fill
+                        sizes="56px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </motion.div>
@@ -104,22 +148,19 @@ export default function ProgramsSection({ data }) {
       <div className="absolute inset-0 bg-transparent" />
       <div className="absolute inset-0 dot-pattern opacity-[0.03]" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-20">
         <AnimatedSection>
           <div className="mb-5 sm:mb-7 max-w-2xl">
-            <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-1">
-              Programs
-            </span>
             <div className="mb-1 ">
-              <h2 className="text-3xl sm:text-4xl font-bold gradient-text inline-block mb-2 tracking-tight">
+              <h2 className="text-[35px] uppercase sm:text-[50px] font-black gradient-text inline-block">
                 {data.title}
               </h2>
             </div>
-            <p className="text-[#475569] text-sm leading-7">{data.subtitle}</p>
+            <p className="text-[#111827]/65 font-semibold sm:text-[18px]">{data.subtitle}</p>
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 items-start md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
           {paginatedItems.map((program, i) => (
             <ProgramCard key={i} program={program} index={i} />
           ))}

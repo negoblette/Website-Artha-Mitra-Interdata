@@ -41,16 +41,16 @@ export default function InsightHero({ data }) {
       <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
           <AnimatedSection>
-            <h1 className="text-5xl font-black uppercase tracking-tight sm:text-6xl lg:text-[5.4rem] text-[#0a0b85] ">
+            <h1 className="text-5xl font-black  tracking-tight sm:text-6xl lg:text-[5.4rem] text-[#0a0b85] ">
               {data.title}
             </h1>
 
-            <div className="absolute left-[15rem] bottom-1 flex items-center gap-2 sm:left-19 sm:bottom-32  lg:left-[24rem]">
+            <div className="absolute left-[10rem] bottom-1 flex items-center gap-2 sm:left-15 sm:bottom-31  lg:left-[20rem]">
               <span className="h-15 w-4.5 skew-x-[18deg] rounded-[2px] bg-[#0a0b85]/95" />
               <span className="h-15 w-4.5 skew-x-[18deg] rounded-[2px] bg-[#0a0b85]/55" />
             </div>
 
-            <p className="mt-6 max-w-xl text-[16px] font-semibold leading-8 text-text-[#111827]/88 sm:text-[19px] ">
+            <p className="mt-6 max-w-xl text-[16px] font-semibold leading-8 text-[#111827]/58 sm:text-[19px] ">
               {data.description}
             </p>
           </AnimatedSection>
