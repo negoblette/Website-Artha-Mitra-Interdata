@@ -43,11 +43,7 @@ export default function ProductsHero({ data }) {
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-<<<<<<< HEAD
-      <div className="relative z-10 mx-auto flex min-h-[520px] w-full max-w-[1600px] items-center px-4 pt-23 sm:px-6 lg:px-40">
-=======
       <div className="relative z-10 mx-auto flex min-h-[520px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
->>>>>>> devandra-dev
         <div className="max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
