@@ -14,12 +14,12 @@
         "description": "Hands-on training covering enterprise firewall configuration, intrusion detection, and network threat mitigation using solutions from Juniper Networks and Hillstone."
       },
       {
-        "images": ["", ""],
+        "images": ["/images/IT_summit.jpg", ""],
         "name": "Cybersecurity Awareness Training",
         "description": "Comprehensive security awareness program designed for enterprise teams, covering phishing prevention, data protection best practices, and incident response procedures."
       },
       {
-        "images": ["", ""],
+        "images": ["/images/IT_summit.jpg", ""],
         "name": "IT Infrastructure Assessment",
         "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
       },

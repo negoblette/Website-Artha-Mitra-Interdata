@@ -17,7 +17,7 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
         className="group h-full w-full text-left [perspective:1600px]"
       >
         <div
-          className={`relative min-h-[520px] rounded-[1.85rem] [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+          className={`relative min-h-[520px] rounded-[1.85rem] max-w-[600px] [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
             isFlipped ? '[transform:rotateY(180deg)]' : ''
           }`}
         >
@@ -163,7 +163,7 @@ export default function EventsSection({ data }) {
       <div className="absolute inset-0 bg-transparent" />
       {/* <div className="absolute inset-0 mesh-gradient-accent opacity-0" /> */}
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] lg:px-20 px-4 sm:px-6">
         <AnimatedSection>
           <div className="mb-4 sm:mb-5 max-w-2xl">
             <div>
@@ -198,7 +198,7 @@ export default function EventsSection({ data }) {
         </div>
 
         <div
-          className={`achievement-track mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-3 ${
+          className={`achievement-track mx-auto grid max-w-[1600px] grid-cols-1 gap-6 sm:grid-cols-3 ${
             isSliding
               ? slideDirection === 'next'
                 ? 'achievement-track-slide-next'
