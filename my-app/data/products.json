@@ -7,6 +7,38 @@
   },
   "brands": [
     {
+      "name": "CyberArk",
+      "slug": "cyberark",
+      "logo": "/images/principals/cyberark.png",
+      "website": "https://www.cyberark.com",
+      "description": "Identity security and privileged access solutions focused on protecting critical accounts, credentials, and infrastructure.",
+      "solutions": [
+        { "name": "IT Security", "slug": "it-security" },
+        { "name": "Secure Access & VPN", "slug": "secure-access" }
+      ]
+    },
+    {
+      "name": "Palo Alto Networks",
+      "slug": "palo-alto",
+      "logo": "/images/principals/paloalto.png",
+      "website": "https://www.paloaltonetworks.com",
+      "description": "Network, cloud, and SOC security platforms designed to secure modern enterprise environments end to end.",
+      "solutions": [
+        { "name": "IT Security", "slug": "it-security" }
+      ]
+    },
+    {
+      "name": "Fortinet",
+      "slug": "fortinet",
+      "logo": "/images/principals/fortinet.png",
+      "website": "https://www.fortinet.com",
+      "description": "Integrated cybersecurity solutions spanning firewalls, secure networking, and protection across branch, campus, and cloud.",
+      "solutions": [
+        { "name": "IT Security", "slug": "it-security" },
+        { "name": "Network Infrastructure", "slug": "network-infrastructure" }
+      ]
+    },
+    {
       "name": "Juniper Networks",
       "slug": "juniper",
       "logo": "/images/principals/juniper.png",
@@ -15,27 +47,6 @@
       "solutions": [
         { "name": "Network Infrastructure", "slug": "network-infrastructure" },
         { "name": "IT Security", "slug": "it-security" }
-      ]
-    },
-    {
-      "name": "Barracuda Networks",
-      "slug": "barracuda",
-      "logo": "/images/principals/barracuda.png",
-      "website": "https://www.barracuda.com",
-      "description": "Cloud-enabled security and data protection solutions including email protection, application security, and backup.",
-      "solutions": [
-        { "name": "Email & Spam Protection", "slug": "email-protection" }
-      ]
-    },
-    {
-      "name": "A10 Networks",
-      "slug": "a10",
-      "logo": "/images/principals/a10.png",
-      "website": "https://www.a10networks.com",
-      "description": "Application networking, security, and cloud solutions with high-performance load balancing and DDoS protection.",
-      "solutions": [
-        { "name": "Application Delivery", "slug": "application-delivery" },
-        { "name": "Bandwidth Management", "slug": "bandwidth-management" }
       ]
     },
     {
@@ -49,44 +60,76 @@
       ]
     },
     {
-      "name": "Hillstone Networks",
-      "slug": "hillstone",
-      "logo": "/images/principals/hillstone.png",
-      "website": "https://www.hillstonenet.com",
-      "description": "Intelligent next-generation firewall solutions with advanced threat detection for enterprises of all sizes.",
+      "name": "DAS Security",
+      "slug": "das-security",
+      "logo": "/images/principals/das.png",
+      "website": "https://www.dbappsecurity.com",
+      "description": "Security-focused solutions supporting resilient enterprise protection, visibility, and operational defense.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" }
       ]
     },
     {
-      "name": "Pulse Secure",
-      "slug": "pulsesecure",
-      "logo": "/images/principals/pulsesecure.png",
-      "website": "https://www.pulsesecure.net",
-      "description": "Secure access and zero-trust security solutions enabling safe connectivity for the modern hybrid workforce.",
+      "name": "Gigamon",
+      "slug": "gigamon",
+      "logo": "/images/principals/gigamon.png",
+      "website": "https://www.gigamon.com",
+      "description": "Deep observability and network visibility solutions that help teams monitor, secure, and optimize traffic flows.",
       "solutions": [
-        { "name": "Secure Access & VPN", "slug": "secure-access" }
+        { "name": "Network Monitoring", "slug": "network-monitoring" },
+        { "name": "IT Security", "slug": "it-security" }
       ]
     },
     {
-      "name": "DataBlink",
-      "slug": "datablink",
-      "logo": "/images/principals/datablink.png",
-      "website": "https://www.datablink.com",
-      "description": "Network visibility, monitoring, and analytics solutions for real-time infrastructure performance insights.",
+      "name": "CrowdStrike",
+      "slug": "crowdstrike",
+      "logo": "/images/principals/crowdstrike.png",
+      "website": "https://www.crowdstrike.com/en-us/",
+      "description": "Cloud-native endpoint, identity, and threat intelligence capabilities for real-time cyber defense.",
       "solutions": [
-        { "name": "Network Monitoring", "slug": "network-monitoring" }
+        { "name": "IT Security", "slug": "it-security" }
       ]
     },
     {
-      "name": "Fluke Networks",
-      "slug": "fluke",
+      "name": "NETSCOUT",
+      "slug": "netscout",
       "logo": "/images/principals/fluke.png",
-      "website": "https://www.flukenetworks.com",
-      "description": "Industry-leading network testing, cable certification, and troubleshooting tools for IT professionals.",
+      "website": "https://www.netscout.com",
+      "description": "Performance management, visibility, and cybersecurity intelligence solutions for complex enterprise networks.",
       "solutions": [
-        { "name": "Network Infrastructure", "slug": "network-infrastructure" },
-        { "name": "Network Monitoring", "slug": "network-monitoring" }
+        { "name": "Network Monitoring", "slug": "network-monitoring" },
+        { "name": "IT Security", "slug": "it-security" }
+      ]
+    },
+    {
+      "name": "GTB Technologies",
+      "slug": "gtb-technology",
+      "logo": "/images/principals/gtb.png",
+      "website": "https://gttb.com",
+      "description": "Data loss prevention and insider risk controls aimed at protecting sensitive enterprise information.",
+      "solutions": [
+        { "name": "IT Security", "slug": "it-security" }
+      ]
+    },
+    {
+      "name": "Genians",
+      "slug": "genians",
+      "logo": "/images/principals/genians.png",
+      "website": "https://www.genians.com",
+      "description": "Network access control and device visibility solutions for secure onboarding and policy-driven access.",
+      "solutions": [
+        { "name": "Secure Access & VPN", "slug": "secure-access" },
+        { "name": "IT Security", "slug": "it-security" }
+      ]
+    },
+    {
+      "name": "Tenable",
+      "slug": "tenable",
+      "logo": "/images/principals/tenable.png",
+      "website": "http://tenable.com",
+      "description": "Exposure management and vulnerability assessment platforms that help reduce cyber risk across modern environments.",
+      "solutions": [
+        { "name": "IT Security", "slug": "it-security" }
       ]
     }
   ],
@@ -105,14 +148,18 @@
     "title": "Products Carousel",
     "subtitle": "Artha Mitra Interdata",
     "images": [
-      "/images/principals/a10.png",
-      "/images/principals/barracuda.png",
-      "/images/principals/datablink.png",
-      "/images/principals/fluke.png",
-      "/images/principals/hillstone.png",
-      "/images/principals/juniper.png",
-      "/images/principals/pulsesecure.png",
-      "/images/principals/rapid7.png"
+      { "name": "CyberArk", "logo": "/images/principals/cyberark.png" },
+      { "name": "Palo Alto Networks", "logo": "/images/principals/paloalto.png" },
+      { "name": "Fortinet", "logo": "/images/principals/fortinet.png" },
+      { "name": "Juniper Networks", "logo": "/images/principals/juniper.png" },
+      { "name": "Rapid7", "logo": "/images/principals/rapid7.png" },
+      { "name": "DAS Security", "logo": "/images/principals/das.png" },
+      { "name": "Gigamon", "logo": "/images/principals/gigamon.png" },
+      { "name": "CrowdStrike", "logo": "/images/principals/crowdstrike.png" },
+      { "name": "NETSCOUT", "logo": "/images/principals/fluke.png" },
+      { "name": "GTB Technologies", "logo": "/images/principals/gtb.png" },
+      { "name": "Genians", "logo": "/images/principals/genians.png" },
+      { "name": "Tenable", "logo": "/images/principals/tenable.png" }
     ]
   }
 }

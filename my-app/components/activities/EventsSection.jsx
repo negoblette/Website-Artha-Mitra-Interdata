@@ -37,9 +37,6 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
                 </div>
               )}
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.96),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(10,11,133,0.10),transparent_28%),linear-gradient(135deg,rgba(10,11,133,0.06),transparent_58%)]" />
-              <div className="absolute left-5 top-5 rounded-full border border-white/75 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#0a0b85] shadow-[0_10px_20px_rgba(10,11,133,0.08)] backdrop-blur-sm">
-                Event
-              </div>
               <div className="absolute -right-10 top-8 h-28 w-28 rounded-full bg-[#0a0b85]/10 blur-3xl" />
               <div className="absolute -left-8 bottom-0 h-20 w-20 rounded-full bg-white/40 blur-2xl" />
               {!hasImage && (
@@ -57,7 +54,7 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
               <h4 className="mt-3 text-[1.02rem] font-bold tracking-tight text-[#111827] transition-colors group-hover:text-[#0a0b85]">
                 {event.name}
               </h4>
-              <p className="mt-2 line-clamp-3 text-sm leading-7 text-[#526076]">
+              <p className="mt-2 line-clamp-3  max-w-xl text-sm font-medium leading-6 text-[#111827]/72">
                 {event.description}
               </p>
               <div className="mt-auto pt-6">
@@ -167,11 +164,11 @@ export default function EventsSection({ data }) {
         <AnimatedSection>
           <div className="mb-4 sm:mb-5 max-w-2xl">
             <div>
-              <h2 className="text-[35px] uppercase sm:text-[50px] font-black gradient-text inline-block">
+              <h2 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
                 {data?.title}
               </h2>
             </div>
-            <p className="text-[#111827]/65 font-semibold sm:text-[18px]">{data?.subtitle}</p>
+            <p className="text-[#111827] text-[13px] font-base sm:text-lg max-w-2xl">{data?.subtitle}</p>
           </div>
         </AnimatedSection>
 

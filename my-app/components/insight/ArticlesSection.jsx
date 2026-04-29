@@ -252,11 +252,11 @@ export default function ArticlesSection({ data }) {
         <AnimatedSection>
           <div className="mb-8 sm:mb-10 text-left">
             <div className="mb-1">
-              <h2 className="text-[35px] uppercase sm:text-[50px] font-black gradient-text inline-block">
+              <h2 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
                 {data.title}
               </h2>
             </div>
-            <p className="text-[#111827]/65 font-semibold sm:text-[18px]">{data.subtitle}</p>
+            <p className="text-[#111827] text-[13px] font-base sm:text-lg max-w-2xl">{data.subtitle}</p>
           </div>
         </AnimatedSection>
 
