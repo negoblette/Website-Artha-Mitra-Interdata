@@ -153,7 +153,7 @@ export default function BrandGrid({ brands }) {
     <section className="relative py-24 pb-24 overflow-visible">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f5f8ff]/75 to-transparent" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-[0.04]" />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-[1750px] px-4 sm:px-6 lg:px-40">
         <AnimatedSection>
           <div className="text-center mb-14">
             <h2 className="mt-5 text-4xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
