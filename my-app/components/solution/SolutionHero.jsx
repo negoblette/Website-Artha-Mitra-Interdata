@@ -45,7 +45,7 @@ export default function SolutionHero({ data }) {
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
       <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
 
-      <div className="relative z-10 mx-auto flex min-h-[460px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
+      <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -53,7 +53,11 @@ export default function SolutionHero({ data }) {
           transition={{ duration: 0.7 }}
         >
 
+<<<<<<< HEAD
           <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[rgb(13,27,94)] sm:text-6xl lg:text-[5rem]">
+=======
+          <h1 className="-5xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-6xl lg:text-[5.4rem]">
+>>>>>>> devandra-dev
             {data.title}
           </h1>
           <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-lg">

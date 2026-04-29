@@ -10,7 +10,11 @@ export default function Navbar({ data }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+<<<<<<< HEAD
   const isTransparentTopPage = pathname === '/' || pathname === '/about' || pathname === '/insight' || pathname === '/solution'  || pathname === '/products' || pathname === '/activities';
+=======
+  const isTransparentTopPage = pathname === '/' || pathname === '/about' || pathname === '/insight' || pathname === '/solution' || pathname === '/activities' || pathname === '/products';
+>>>>>>> devandra-dev
   const showSolidNavbar = scrolled || !isTransparentTopPage;
   const navItems = data.nav;
 
