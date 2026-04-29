@@ -16,7 +16,7 @@ export default function ProductsCarousel({ items = {} }) {
     <section className="relative overflow-hidden py-8 sm:py-2">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f6f8ff]/55 to-transparent" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-8xl px-4 sm:px-6">
         {/* <div className="mb-6 text-center">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#0a0b85]/50">
             Principal Network
@@ -38,7 +38,7 @@ export default function ProductsCarousel({ items = {} }) {
             {loopedLogos.map((src, index) => (
               <div
                 key={`${src}-${index}`}
-                className="relative flex h-14 w-[148px] shrink-0 items-center justify-center opacity-55 grayscale transition-opacity duration-300 hover:opacity-80"
+                className="relative flex h-20 w-[148px] shrink-0 items-center justify-center opacity-55 grayscale transition-opacity duration-300 hover:opacity-80"
               >
                 <Image
                   src={src}
