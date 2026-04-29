@@ -156,7 +156,7 @@ export default function EventsSection({ data }) {
   };
 
   return (
-    <section className="relative py-28">
+    <section className="relative z-10 py-28">
       <div className="absolute inset-0 bg-transparent" />
       {/* <div className="absolute inset-0 mesh-gradient-accent opacity-0" /> */}
 
