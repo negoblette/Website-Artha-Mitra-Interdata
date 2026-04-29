@@ -20,18 +20,19 @@ export default function ContactHero() {
 
         
 
-          <div className="absolute left-20 bottom-10 max-w-2xl text-white sm:left-30 sm:bottom-20 lg:left-50">
-            
-            <div className="absolute left-[20rem] bottom-1 flex items-center gap-2 sm:left-12 sm:bottom-22.5  lg:left-[31rem]">
-              <span className="h-15 w-4.5 skew-x-[18deg] rounded-[2px] bg-white/95" />
-              <span className="h-15 w-4.5 skew-x-[18deg] rounded-[2px] bg-white/55" />
-            </div>
+          <div className="absolute left-6 bottom-10 max-w-2xl text-white sm:left-12 sm:bottom-20 lg:left-20 xl:left-49">
+            <div className="relative z-10 inline-flex items-end gap-2.5 sm:gap-4 md:gap-5 lg:gap-6">
+              <h1 className="mt-2 sm:mt-3 product-hero-title-light">
+                Let&apos;s Talk
+              </h1>
 
-            <h1 className="mt-3 text-5xl font-black uppercase tracking-tight text-white sm:text-6xl lg:text-[5.4rem]">
-              Let&apos;s Talk
-            </h1>
+              <div className="mb-1 flex shrink-0 items-center gap-1.5 sm:gap-2 md:mb-2 lg:mb-1">
+                <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/95 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-14 lg:w-4" />
+                <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/55 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-14 lg:w-4" />
+              </div>
+            </div>
             
-            <p className="mt-4 max-w-xl text-[16px] font-semibold leading-8 text-white/75 sm:text-[19px]">
+            <p className="relative z-10 product-hero-copy-light">
               We&apos;re here to help and answer any questions you might have.
               <br />
               Feel free to reach out - we&apos;d love to hear from you.

@@ -37,18 +37,18 @@ function ProgramCard({ program, index }) {
                   Program
                 </span> */}
 
-                <h3 className="mt-4 text-2xl font-black uppercase leading-tight text-[#111a5b] sm:text-[1.95rem] lg:text-[2.2rem]">
+                <h3 className="mt-4 font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
                   {program.name}
                 </h3>
 
-                <p className={`mt-4 max-w-md text-sm leading-6 text-[#4b556b] sm:text-[15px] ${expanded ? '' : 'line-clamp-4'}`}>
+                <p className={`mt-4 max-w-xl text-sm font-medium leading-6 text-[#111827]/72 ${expanded ? '' : 'line-clamp-4'}`}>
                   {program.description}
                 </p>
 
                 <div className="mt-5 space-y-2 text-xs text-[#29324f] sm:text-sm">
-                  <p className="font-bold">Part of AMI activities</p>
+                  <p className="font-bold">{program.summaryLabel}</p>
                   <p>
-                    <span className="font-semibold text-[#00a86b]">Focus:</span> community engagement and professional development
+                    <span className="font-semibold text-[#00a86b]">{program.focusLabel}</span> {program.focusText}
                   </p>
                 </div>
               </div>
@@ -74,7 +74,7 @@ function ProgramCard({ program, index }) {
                   >
                     <div className="mt-5 max-w-md rounded-[1.35rem] border border-[#0a0b85]/8 bg-[#f4f7ff] p-4">
                       <p className="text-sm leading-6 text-[#5b6b82]">
-                        This program is part of AMI&apos;s commitment to community engagement and professional development in the IT industry across Indonesia.
+                        {program.detail}
                       </p>
                     </div>
                   </motion.div>
@@ -139,10 +139,10 @@ export default function ProgramsSection({ data }) {
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-20">
         <AnimatedSection>
           <div className="mb-5 sm:mb-7 max-w-2xl">
-            <h2 className="text-[35px] uppercase sm:text-[50px] font-black gradient-text inline-block">
+            <h2 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
               {data.title}
             </h2>
-            <p className="text-[#111827]/65 font-semibold sm:text-[18px]">
+            <p className="text-[#111827] text-[13px] font-base sm:text-lg max-w-2xl">
               {data.subtitle}
             </p>
           </div>

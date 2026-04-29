@@ -11,32 +11,56 @@
       {
         "images": ["/images/IT_summit.jpg", ""],
         "name": "Network Security Workshop",
-        "description": "Hands-on training covering enterprise firewall configuration, intrusion detection, and network threat mitigation using solutions from Juniper Networks and Hillstone."
+        "description": "Hands-on training covering enterprise firewall configuration, intrusion detection, and network threat mitigation using solutions from Juniper Networks and Hillstone.",
+        "summaryLabel": "Part of AMI activities",
+        "focusLabel": "Focus:",
+        "focusText": "community engagement and professional development",
+        "detail": "This program is part of AMI's commitment to community engagement and professional development in the IT industry across Indonesia."
       },
       {
         "images": ["/images/IT_summit.jpg", ""],
         "name": "Cybersecurity Awareness Training",
-        "description": "Comprehensive security awareness program designed for enterprise teams, covering phishing prevention, data protection best practices, and incident response procedures."
+        "description": "Comprehensive security awareness program designed for enterprise teams, covering phishing prevention, data protection best practices, and incident response procedures.",
+        "summaryLabel": "Part of AMI activities",
+        "focusLabel": "Focus:",
+        "focusText": "community engagement and professional development",
+        "detail": "This program is part of AMI's commitment to community engagement and professional development in the IT industry across Indonesia."
       },
       {
         "images": ["/images/IT_summit.jpg", ""],
         "name": "IT Infrastructure Assessment",
-        "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
+        "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance.",
+        "summaryLabel": "Part of AMI activities",
+        "focusLabel": "Focus:",
+        "focusText": "community engagement and professional development",
+        "detail": "This program is part of AMI's commitment to community engagement and professional development in the IT industry across Indonesia."
       },
       {
         "images": ["/images/activities.jpeg", ""],
         "name": "Partner Certification Training",
-        "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
+        "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia.",
+        "summaryLabel": "Part of AMI activities",
+        "focusLabel": "Focus:",
+        "focusText": "community engagement and professional development",
+        "detail": "This program is part of AMI's commitment to community engagement and professional development in the IT industry across Indonesia."
       },
       {
         "images": ["/images/activities.jpeg", ""],
         "name": "Partner Certification Training",
-        "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
+        "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia.",
+        "summaryLabel": "Part of AMI activities",
+        "focusLabel": "Focus:",
+        "focusText": "community engagement and professional development",
+        "detail": "This program is part of AMI's commitment to community engagement and professional development in the IT industry across Indonesia."
       },
       {
         "images": ["/images/activities.jpeg", ""],
         "name": "IT Infrastructure Assessment",
-        "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
+        "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance.",
+        "summaryLabel": "Part of AMI activities",
+        "focusLabel": "Focus:",
+        "focusText": "community engagement and professional development",
+        "detail": "This program is part of AMI's commitment to community engagement and professional development in the IT industry across Indonesia."
       }
     ]
   },
