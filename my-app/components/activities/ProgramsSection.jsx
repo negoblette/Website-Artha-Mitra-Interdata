@@ -2,32 +2,34 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mountain, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
+
+const PROGRAM_FALLBACK_IMAGE = '/images/activities.jpeg';
 
 function ProgramCard({ program, index }) {
   const [expanded, setExpanded] = useState(false);
   const images = (program.images ?? []).filter(Boolean);
-  const primaryImage = images[0];
+  const primaryImage = images[0] || PROGRAM_FALLBACK_IMAGE;
   const galleryImages = images.slice(1, 4);
 
   return (
-    <AnimatedSection delay={index * 0.1} className="self-start">
+    <AnimatedSection delay={index * 0.1} className="mb-6 break-inside-avoid">
       <motion.div
         layout
         whileHover={{ y: -6 }}
         transition={{ duration: 0.25 }}
-        className="w-full self-start cursor-pointer"  
+        className="h-full w-full cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <div className="group relative overflow-hidden rounded-[2rem] border border-white/70 bg-[#f7f8fb] shadow-[0_30px_90px_rgba(10,11,133,0.16)] transition-all duration-500 hover:shadow-[0_36px_100px_rgba(10,11,133,0.22)]">
+        <div className="group relative h-full overflow-hidden rounded-[2rem] border border-white/70 bg-[#f7f8fb] shadow-[0_30px_90px_rgba(10,11,133,0.16)] transition-all duration-500 hover:shadow-[0_36px_100px_rgba(10,11,133,0.22)]">
           <div className="absolute inset-0 rounded-[2rem] border border-[#0a0b85]/8 pointer-events-none" />
 
           {/* GRID */}
-          <div className="relative grid min-h-[200px] grid-cols-1 md:min-h-[100px] md:grid-cols-[1.05fr_0.95fr]">
+          <div className="relative flex min-h-[200px] flex-col md:min-h-[100px] md:flex-row">
 
             {/* LEFT */}
-            <div className="relative z-10 flex flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] px-5 py-6 sm:px-6 sm:py-7 lg:px-7 lg:py-8">
+            <div className="relative z-10 flex flex-1 flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] px-5 py-6 sm:px-6 sm:py-7 md:w-[52.5%] lg:px-7 lg:py-8">
               <div className="absolute inset-y-0 right-[-40px] hidden w-[88px] bg-white [clip-path:polygon(24%_0%,100%_0%,76%_100%,0%_100%)] md:block" />
 
               <div className="relative max-w-xl">
@@ -81,9 +83,8 @@ function ProgramCard({ program, index }) {
             </div>
 
             {/* RIGHT (FULL IMAGE FIX) */}
-            <div className="relative min-h-[240px] md:min-h-full overflow-hidden">
-              
-              {primaryImage ? (
+            <div className="relative min-h-[240px] overflow-hidden md:min-h-0 md:w-[47.5%] md:flex-none md:self-stretch">
+              <div className="absolute inset-0">
                 <Image
                   src={primaryImage}
                   alt={`${program.name} cover`}
@@ -91,11 +92,7 @@ function ProgramCard({ program, index }) {
                   sizes="(min-width: 640px) 22vw, (min-width: 320px) 28vw, 90vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center bg-black">
-                  <Mountain className="h-14 w-14 text-white/85" />
-                </div>
-              )}
+              </div>
 
               {/* overlay biar lebih estetik */}
               <div className="absolute inset-0 bg-black/10" />
@@ -151,7 +148,7 @@ export default function ProgramsSection({ data }) {
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
+        <div className="columns-1 gap-6 md:columns-2">
           {paginatedItems.map((program, i) => (
             <ProgramCard key={i} program={program} index={i} />
           ))}
