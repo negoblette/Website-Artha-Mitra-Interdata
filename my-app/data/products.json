@@ -156,7 +156,7 @@
       { "name": "DAS Security", "logo": "/images/principals/das.png" },
       { "name": "Gigamon", "logo": "/images/principals/gigamon.png" },
       { "name": "CrowdStrike", "logo": "/images/principals/crowdstrike.png" },
-      { "name": "NETSCOUT", "logo": "/images/principals-products/fluke.png" },
+      { "name": "NETSCOUT", "logo": "/images/principals/fluke.png" },
       { "name": "GTB Technologies", "logo": "/images/principals/gtb.png" },
       { "name": "Genians", "logo": "/images/principals/genians.png" },
       { "name": "Tenable", "logo": "/images/principals/tenable.png" }

@@ -16,9 +16,6 @@ const FILTER_CHIPS = [
 function BrandCard({ brand, index }) {
   const [expanded, setExpanded] = useState(false);
   const hasLogo = Boolean(brand.logo);
-  const logoPlateClass = /netscout/i.test(brand.name || '')
-    ? 'bg-[#eef2f7]'
-    : 'bg-white';
 
   return (
     <AnimatedSection delay={index * 0.08}>
@@ -38,14 +35,14 @@ function BrandCard({ brand, index }) {
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-indigo-400/10 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative flex h-full flex-col">
-            <div className={`${logoPlateClass} rounded-xl rounded-b-none -mx-6 -mt-6 mb-5 flex items-center justify-center h-24 overflow-hidden`}>
+            <div className="bg-white rounded-xl rounded-b-none -mx-6 -mt-6 mb-5 flex h-24 items-center justify-center overflow-hidden px-5 py-3">
               {hasLogo ? (
                 <Image
                   src={brand.logo}
                   alt={brand.name}
                   width={160}
                   height={56}
-                  className="h-[80px] w-auto object-contain"
+                  className="max-h-[54px] w-auto max-w-full object-contain"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center px-6 text-center">
