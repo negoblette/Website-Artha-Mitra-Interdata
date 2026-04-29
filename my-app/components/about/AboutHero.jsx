@@ -41,11 +41,11 @@ export default function AboutHero({ data }) {
       <div className="relative z-10 mx-auto flex min-h-[460px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
         <div className="max-w-3xl">
           <AnimatedSection>
-            <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
+            <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[rgb(13,27,94)] sm:text-6xl lg:text-[5rem]">
               {data.title}
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
+            <p className="mt-6 max-w-xl text-base font-semibold leading-relaxed text-[#111827]/88 sm:text-lg">
               {data.description}
             </p>
           </AnimatedSection>
