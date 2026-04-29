@@ -7,7 +7,7 @@ export default function WhyChoose({ data }) {
   const title = 'Why Choose AMI';
 
   return (
-    <section className="relative mb-30 overflow-hidden py-20">
+    <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#eef3ff]/40 to-transparent" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-[0.06]" />
       <div className="absolute left-[-5rem] top-10 h-52 w-52 rounded-full bg-[#8cb8ff]/18 blur-3xl" />
@@ -40,13 +40,10 @@ export default function WhyChoose({ data }) {
 
             <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div className="max-w-xl">
-                <span className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/78">
-                  Why Choose Us
-                </span>
                 <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   {title}
                 </h2>
-                <p className="mt-5 max-w-lg text-sm font-semibold leading-7 text-white/80 sm:text-base">
+                <p className="mt-5 max-w-lg text-[17px] font-base leading-7 text-white/80 sm:text-base">
                   {data.description}
                 </p>
 

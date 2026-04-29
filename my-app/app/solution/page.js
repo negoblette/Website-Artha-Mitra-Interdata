@@ -2,7 +2,7 @@ import { getContent } from '@/lib/content';
 import SolutionHero from '@/components/solution/SolutionHero';
 import SolutionGrid from '@/components/solution/SolutionGrid';
 import ServicesGrid from '@/components/solution/ServicesGrid';
-import WhyChoose from '@/components/products/WhyChoose';
+import WhyChoose from '@/components/solution/WhyChoose';
 
 export const metadata = {
   title: 'Solutions & Services — Artha Mitra Interdata',

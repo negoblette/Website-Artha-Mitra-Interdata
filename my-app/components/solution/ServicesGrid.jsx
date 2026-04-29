@@ -9,19 +9,16 @@ export default function ServicesGrid({ services }) {
       <div className="relative z-10 mb-14 max-w-6xl mx-auto px-4 sm:px-6">
         <AnimatedSection>
           <div className="text-center mb-14">
-            <span className="inline-block text-[#737373] text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-              Professional Services
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[rgb(13,27,94)] tracking-tight mb-3">
-              Our Service
+            <h2 className="mt-5 text-4xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
+              Services
             </h2>
-            <p className="text-[#111827] text-sm max-w-2xl font-semibold mx-auto">
+            <p className="text-[#111827] text-[13px] font-base sm:text-lg max-w-2xl mx-auto">
               End-to-end professional services from assessment to ongoing support.
             </p>
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((service, i) => {
             const Icon = LucideIcons[service.icon] || LucideIcons.Cog;
             return (
@@ -31,7 +28,7 @@ export default function ServicesGrid({ services }) {
                   transition={{ duration: 0.3, ease: 'easeOut' }}
                   className="group cursor-pointer"
                 >
-                  <div className="rounded-2xl p-6 relative overflow-hidden h-full bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] border border-white/10 group-hover:border-white/25 transition-all duration-500 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)]">
+                  <div className="rounded-2xl min-h-[260px] p-6 relative overflow-hidden h-full bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] border border-white/10 group-hover:border-white/25 transition-all duration-500 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)]">
 
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
@@ -44,10 +41,10 @@ export default function ServicesGrid({ services }) {
                       <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center mb-4 group-hover:bg-white/15 transition-colors duration-300">
                         <Icon className="w-5 h-5 text-white" />
                       </div>
-                      <h3 className="text-base font-bold text-white mb-2">
+                      <h3 className="text-[20px] font-bold text-white mb-2">
                         {service.name}
                       </h3>
-                      <p className="text-white/80 font-semibold text-sm leading-relaxed">
+                      <p className="text-white/80 font-base text-[17px] leading-relaxed">
                         {service.description}
                       </p>
                     </div>

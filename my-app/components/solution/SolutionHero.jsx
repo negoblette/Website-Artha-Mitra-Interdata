@@ -41,6 +41,7 @@ export default function SolutionHero({ data }) {
         animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
+      
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
       <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
 
@@ -51,15 +52,11 @@ export default function SolutionHero({ data }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          {data.subtitle ? (
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#0a0b85]/55">
-              {data.subtitle}
-            </p>
-          ) : null}
-          <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[#0a0b85] sm:text-6xl lg:text-[5rem]">
+
+          <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[rgb(13,27,94)] sm:text-6xl lg:text-[5rem]">
             {data.title}
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
+          <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-lg">
             {data.description}
           </p>
         </motion.div>
