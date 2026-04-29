@@ -10,7 +10,7 @@
       "name": "CyberArk",
       "slug": "cyberark",
       "logo": "/images/principals/cyberark.png",
-      "website": "",
+      "website": "https://www.cyberark.com",
       "description": "Identity security and privileged access solutions focused on protecting critical accounts, credentials, and infrastructure.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" },
@@ -21,7 +21,7 @@
       "name": "Palo Alto Networks",
       "slug": "palo-alto",
       "logo": "/images/principals/paloalto.png",
-      "website": "",
+      "website": "https://www.paloaltonetworks.com",
       "description": "Network, cloud, and SOC security platforms designed to secure modern enterprise environments end to end.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" }
@@ -31,7 +31,7 @@
       "name": "Fortinet",
       "slug": "fortinet",
       "logo": "/images/principals/fortinet.png",
-      "website": "",
+      "website": "https://www.fortinet.com",
       "description": "Integrated cybersecurity solutions spanning firewalls, secure networking, and protection across branch, campus, and cloud.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" },
@@ -63,7 +63,7 @@
       "name": "DAS Security",
       "slug": "das-security",
       "logo": "/images/principals/das.png",
-      "website": "",
+      "website": "https://www.dbappsecurity.com",
       "description": "Security-focused solutions supporting resilient enterprise protection, visibility, and operational defense.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" }
@@ -73,7 +73,7 @@
       "name": "Gigamon",
       "slug": "gigamon",
       "logo": "/images/principals/gigamon.png",
-      "website": "",
+      "website": "https://www.gigamon.com",
       "description": "Deep observability and network visibility solutions that help teams monitor, secure, and optimize traffic flows.",
       "solutions": [
         { "name": "Network Monitoring", "slug": "network-monitoring" },
@@ -84,7 +84,7 @@
       "name": "CrowdStrike",
       "slug": "crowdstrike",
       "logo": "/images/principals/crowdstrike.png",
-      "website": "",
+      "website": "https://www.crowdstrike.com/en-us/",
       "description": "Cloud-native endpoint, identity, and threat intelligence capabilities for real-time cyber defense.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" }
@@ -94,7 +94,7 @@
       "name": "NETSCOUT",
       "slug": "netscout",
       "logo": "/images/principals/fluke.png",
-      "website": "",
+      "website": "https://www.netscout.com",
       "description": "Performance management, visibility, and cybersecurity intelligence solutions for complex enterprise networks.",
       "solutions": [
         { "name": "Network Monitoring", "slug": "network-monitoring" },
@@ -105,7 +105,7 @@
       "name": "GTB Technologies",
       "slug": "gtb-technology",
       "logo": "/images/principals/gtb.png",
-      "website": "",
+      "website": "https://gttb.com",
       "description": "Data loss prevention and insider risk controls aimed at protecting sensitive enterprise information.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" }
@@ -115,7 +115,7 @@
       "name": "Genians",
       "slug": "genians",
       "logo": "/images/principals/genians.png",
-      "website": "",
+      "website": "https://www.genians.com",
       "description": "Network access control and device visibility solutions for secure onboarding and policy-driven access.",
       "solutions": [
         { "name": "Secure Access & VPN", "slug": "secure-access" },
@@ -126,7 +126,7 @@
       "name": "Tenable",
       "slug": "tenable",
       "logo": "/images/principals/tenable.png",
-      "website": "",
+      "website": "http://tenable.com",
       "description": "Exposure management and vulnerability assessment platforms that help reduce cyber risk across modern environments.",
       "solutions": [
         { "name": "IT Security", "slug": "it-security" }
