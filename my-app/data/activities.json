@@ -24,17 +24,17 @@
         "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
       },
       {
-        "images": ["", ""],
+        "images": ["/images/activities.jpeg", ""],
         "name": "Partner Certification Training",
         "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
       },
       {
-        "images": ["", ""],
+        "images": ["/images/activities.jpeg", ""],
         "name": "Partner Certification Training",
         "description": "Technical certification programs in collaboration with our principals — Juniper Networks, Barracuda, Rapid7 — to upskill IT professionals across Indonesia."
       },
       {
-        "images": ["", ""],
+        "images": ["/images/activities.jpeg", ""],
         "name": "IT Infrastructure Assessment",
         "description": "On-site assessment programs helping organizations evaluate their current network infrastructure, identify vulnerabilities, and plan strategic upgrades for optimal performance."
       }
