@@ -13,7 +13,7 @@ export default function VisionMission({ vision, mission }) {
           transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <h2 className="mt-5 text-4xl font-black tracking-tight text-[#0a0b85] sm:text-5xl">
+          <h2 className="mt-5 text-4xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
             Vision & Mission
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-black sm:text-base">
