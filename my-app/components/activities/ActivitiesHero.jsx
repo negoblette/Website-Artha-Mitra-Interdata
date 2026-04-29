@@ -41,12 +41,12 @@ export default function ActivitiesHero({ data }) {
       <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
           <AnimatedSection>
-            <h1 className="text-5xl font-black tracking-tight text-[#0a0b85] sm:text-6xl lg:text-[5.4rem]">
+            <h1 className="product-hero-title">
               {data.title}
             </h1>
 
   
-            <p className="mt-6 max-w-xl text-[16px] font-semibold leading-8 text-[#111827]/58 sm:text-[19px]">
+            <p className="product-hero-copy">
               {data.description}
             </p>
           </AnimatedSection>

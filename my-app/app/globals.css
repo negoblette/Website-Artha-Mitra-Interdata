@@ -178,6 +178,72 @@ section.scroll-reveal.in-view {
     0 0 8px rgba(255, 255, 255, 0.55);
 }
 
+.product-hero-title {
+  max-width: 42rem;
+  color: rgb(13, 27, 94);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 0.94;
+}
+
+.product-hero-copy {
+  margin-top: 1.5rem;
+  max-width: 36rem;
+  color: rgba(17, 24, 39, 0.88);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.625;
+}
+
+@media (min-width: 640px) {
+  .product-hero-title {
+    font-size: 3.75rem;
+  }
+
+  .product-hero-copy {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-hero-title {
+    font-size: 5rem;
+  }
+}
+
+.product-hero-title-light {
+  max-width: 42rem;
+  color: rgb(255, 255, 255);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 0.94;
+}
+
+.product-hero-copy-light {
+  margin-top: 1rem;
+  max-width: 36rem;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+@media (min-width: 640px) {
+  .product-hero-title-light {
+    font-size: 3.75rem;
+  }
+
+  .product-hero-copy-light {
+    font-size: 1.1875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-hero-title-light {
+    font-size: 5.4rem;
+  }
+}
+
 .vision-card {
   transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;

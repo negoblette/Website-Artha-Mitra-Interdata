@@ -42,7 +42,7 @@ export default function ContactInfo({ contact, whatsapp }) {
             <div className="relative max-w-2xl   lg:pt-4">
               
 
-              <h2 className="mt-5 max-w-lg lg:text-[4.5rem] uppercase font-black leading-[0.94] tracking-tight text-[#16305f]">
+              <h2 className="mt-5 max-w-lg text-5xl font-black leading-[0.94] tracking-tight text-[#16305f] sm:text-6xl lg:text-[5.4rem]">
                 Let&apos;s create
                 <br />
                 something
@@ -125,8 +125,8 @@ export default function ContactInfo({ contact, whatsapp }) {
               <div className="pointer-events-none absolute -right-10 top-6 h-48 w-48 rounded-full bg-[#2f54eb]/10 blur-[100px]" />
               <div className="pointer-events-none absolute right-0 top-20 h-64 w-64 rounded-full bg-white/60 blur-[120px]" />
 
-              <h3 className="mt-5 max-w-lg lg:text-[4.5rem] uppercase font-black leading-[0.94] tracking-tight text-[#16305f]">
-                HEAD OFFICE
+              <h3 className="mt-5 max-w-lg text-5xl font-black leading-[0.94] tracking-tight text-[#16305f] sm:text-6xl lg:text-[5.4rem]">
+                Head Office
               </h3>
               <div className="mt-3 h-1.5 w-24 rounded-full bg-[#2f54eb]" />
 
