@@ -132,8 +132,17 @@ export default function ProgramsSection({ data }) {
   );
 
   return (
-    <section className="relative mt-14 py-28 sm:mt-20 lg:mt-24">
+    <section className="relative z-20 mt-14 py-28 sm:mt-20 lg:mt-24">
       <div className="absolute inset-0 bg-transparent" />
+      
+     <div className="absolute left-[-30rem] top-[-95px] w-[150%] h-[105%] pointer-events-none ">
+      <Image
+        src="/decor/activities1.svg"
+        alt=""
+        fill
+        className="w-full h-auto opacity-100"
+      />
+    </div>
       <div className="absolute inset-0 dot-pattern opacity-[0.03]" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-20">
