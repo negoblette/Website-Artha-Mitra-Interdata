@@ -15,6 +15,10 @@ const FILTER_CHIPS = [
 
 function BrandCard({ brand, index }) {
   const [expanded, setExpanded] = useState(false);
+  const hasLogo = Boolean(brand.logo);
+  const logoPlateClass = /netscout/i.test(brand.name || '')
+    ? 'bg-[#eef2f7]'
+    : 'bg-white';
 
   return (
     <AnimatedSection delay={index * 0.08}>
@@ -34,14 +38,22 @@ function BrandCard({ brand, index }) {
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-indigo-400/10 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative flex h-full flex-col">
-            <div className="bg-white rounded-xl rounded-b-none -mx-6 -mt-6 mb-5 flex items-center justify-center h-24 overflow-hidden">
-              <Image
-                src={brand.logo}
-                alt={brand.name}
-                width={160}
-                height={56}
-                className="h-[80px] w-auto object-contain"
-              />
+            <div className={`${logoPlateClass} rounded-xl rounded-b-none -mx-6 -mt-6 mb-5 flex items-center justify-center h-24 overflow-hidden`}>
+              {hasLogo ? (
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  width={160}
+                  height={56}
+                  className="h-[80px] w-auto object-contain"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center px-6 text-center">
+                  <span className="text-sm font-bold uppercase tracking-[0.22em] text-[#0a0b85]/75">
+                    {brand.name}
+                  </span>
+                </div>
+              )}
             </div>
 
             <h3 className="text-base font-bold text-white mb-2">
@@ -100,16 +112,22 @@ function BrandCard({ brand, index }) {
                 {expanded ? 'Less' : 'Details'}
               </button>
               
-              <a
-                href={brand.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-white/80 hover:text-white transition-colors group/link"
-              >
-                Visit Website
-                <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-              </a>
+              {brand.website ? (
+                <a
+                  href={brand.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-white/80 hover:text-white transition-colors group/link"
+                >
+                  Visit Website
+                  <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                </a>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white/45">
+                  Logo pending
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -138,7 +156,7 @@ export default function BrandGrid({ brands }) {
     <section className="relative py-24 pb-24 overflow-visible">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f5f8ff]/75 to-transparent" />
       <div className="absolute inset-0 mesh-gradient-accent opacity-[0.04]" />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-[1750px] px-4 sm:px-6 lg:px-40">
         <AnimatedSection>
           <div className="text-center mb-14">
             <h2 className="mt-5 text-4xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
@@ -228,7 +246,7 @@ export default function BrandGrid({ brands }) {
             <div className="relative overflow-hidden rounded-[1.75rem] border border-[#d8e2ff]/80 bg-white/42 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
               <div className="max-h-[68vh] overflow-y-auto px-1 pb-3 pt-3 brand-grid-scrollbar">
                 {filteredBrands.length > 0 ? (
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     {filteredBrands.map((brand, i) => (
                       <BrandCard key={brand.slug} brand={brand} index={i} />
                     ))}
