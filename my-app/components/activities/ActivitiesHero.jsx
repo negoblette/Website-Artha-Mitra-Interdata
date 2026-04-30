@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function ActivitiesHero({ data }) {
   return (
-    <section className="relative min-h-[460px] overflow-visible pt-28 pb-20 sm:pt-32 lg:pt-36">
+    <section className="relative min-h-[460px] z-10 overflow-visible pt-28 pb-20 sm:pt-32 lg:pt-36">
       <div className="absolute inset-0 bg-white" />
 
       <div className="absolute inset-0">

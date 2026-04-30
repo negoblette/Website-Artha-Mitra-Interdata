@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Mountain } from 'lucide-react';
@@ -17,18 +17,18 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
         className="group h-full w-full text-left [perspective:1600px]"
       >
         <div
-          className={`relative min-h-[520px] rounded-[1.85rem] max-w-[600px] [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+          className={`relative mx-auto min-h-[470px] w-full max-w-[600px] rounded-[1.85rem] [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] sm:min-h-[500px] lg:min-h-[520px] ${
             isFlipped ? '[transform:rotateY(180deg)]' : ''
           }`}
         >
           <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-white/65 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm [backface-visibility:hidden]">
-            <div className="relative flex h-52 w-full items-center justify-center overflow-hidden bg-[linear-gradient(135deg,#eef4ff_0%,#d8e4ff_46%,#f7faff_100%)]">
+            <div className="relative flex h-44 w-full items-center justify-center overflow-hidden bg-[linear-gradient(135deg,#eef4ff_0%,#d8e4ff_46%,#f7faff_100%)] sm:h-48 lg:h-52">
               {hasImage ? (
                 <Image
                   src={event.image}
                   alt={event.name}
                   fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 45vw, 92vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
@@ -46,12 +46,12 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
               )}
             </div>
 
-            <div className="relative flex min-h-[258px] flex-col p-5 sm:p-6">
+            <div className="relative flex min-h-[250px] flex-col p-5 sm:min-h-[270px] sm:p-6">
               <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(10,11,133,0.22),transparent)]" />
               <span className="inline-flex w-fit rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.06)]">
                 {event.category}
               </span>
-              <h4 className="mt-3 text-[1.02rem] font-bold tracking-tight text-[#111827] transition-colors group-hover:text-[#0a0b85]">
+              <h4 className="mt-3 text-[1rem] font-bold tracking-tight text-[#111827] transition-colors group-hover:text-[#0a0b85] sm:text-[1.02rem]">
                 {event.name}
               </h4>
               <p className="mt-2 line-clamp-3  max-w-xl text-sm font-medium leading-6 text-[#111827]/72">
@@ -72,13 +72,13 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
             </div>
           </div>
 
-          <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-[#0a0b85]/15 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] p-6 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
+          <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-[#0a0b85]/15 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] p-5 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] [transform:rotateY(180deg)] [backface-visibility:hidden] sm:p-6">
               <div className="flex h-full flex-col">
               <span className="inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-white/90">
                 Event Details
               </span>
 
-              <h4 className="mt-4 text-2xl font-bold tracking-tight">
+              <h4 className="mt-4 text-xl font-bold tracking-tight sm:text-2xl">
                 {event.name}
               </h4>
 
@@ -86,7 +86,7 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
                 {event.description}
               </p>
 
-              <div className="mt-15 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+              <div className="mt-8 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm sm:mt-10">
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
                   Category
                 </p>
@@ -120,12 +120,35 @@ export default function EventsSection({ data }) {
   const [startIndex, setStartIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState('');
   const [isSliding, setIsSliding] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   const events = data?.items || [];
   const totalCards = events.length;
-  const visibleCount = Math.min(3, totalCards || 0);
 
-  const visibleIndices = Array.from({ length: visibleCount }, (_, offset) =>
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth >= 1024) {
+        setVisibleCount(3);
+        return;
+      }
+
+      if (window.innerWidth >= 640) {
+        setVisibleCount(2);
+        return;
+      }
+
+      setVisibleCount(1);
+    };
+
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+
+    return () => window.removeEventListener('resize', updateVisibleCount);
+  }, []);
+
+  const clampedVisibleCount = Math.min(visibleCount, totalCards || 0);
+
+  const visibleIndices = Array.from({ length: clampedVisibleCount }, (_, offset) =>
     (startIndex + offset) % totalCards
   );
 
@@ -134,10 +157,10 @@ export default function EventsSection({ data }) {
   };
 
   const goPrev = () => {
-    if (totalCards <= visibleCount || isSliding) return;
+    if (totalCards <= clampedVisibleCount || isSliding) return;
     setSlideDirection('prev');
     setIsSliding(true);
-    setStartIndex((prev) => (prev - visibleCount + totalCards) % totalCards);
+    setStartIndex((prev) => (prev - clampedVisibleCount + totalCards) % totalCards);
     window.setTimeout(() => {
       setIsSliding(false);
       setSlideDirection('');
@@ -145,10 +168,10 @@ export default function EventsSection({ data }) {
   };
 
   const goNext = () => {
-    if (totalCards <= visibleCount || isSliding) return;
+    if (totalCards <= clampedVisibleCount || isSliding) return;
     setSlideDirection('next');
     setIsSliding(true);
-    setStartIndex((prev) => (prev + visibleCount) % totalCards);
+    setStartIndex((prev) => (prev + clampedVisibleCount) % totalCards);
     window.setTimeout(() => {
       setIsSliding(false);
       setSlideDirection('');
@@ -156,7 +179,7 @@ export default function EventsSection({ data }) {
   };
 
   return (
-    <section className="relative z-10 py-28">
+    <section className="relative z-10 pt-20 pb-24">
       <div className="absolute inset-0 bg-transparent" />
       {/* <div className="absolute inset-0 mesh-gradient-accent opacity-0" /> */}
 
@@ -176,7 +199,7 @@ export default function EventsSection({ data }) {
           <button
             type="button"
             onClick={goPrev}
-            disabled={totalCards <= visibleCount || isSliding}
+            disabled={totalCards <= clampedVisibleCount || isSliding}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
             aria-label="Previous events"
           >
@@ -186,7 +209,7 @@ export default function EventsSection({ data }) {
           <button
             type="button"
             onClick={goNext}
-            disabled={totalCards <= visibleCount || isSliding}
+            disabled={totalCards <= clampedVisibleCount || isSliding}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
             aria-label="Next events"
           >
@@ -195,7 +218,7 @@ export default function EventsSection({ data }) {
         </div>
 
         <div
-          className={`achievement-track mx-auto grid max-w-[1600px] grid-cols-1 gap-6 sm:grid-cols-3 ${
+          className={`achievement-track mx-auto grid max-w-[1600px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 ${
             isSliding
               ? slideDirection === 'next'
                 ? 'achievement-track-slide-next'

@@ -23,12 +23,14 @@ export default function AnimatedSection({
     ? { opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }
     : { ...(variants[direction] || variants.up), filter: 'blur(4px)' };
 
+  const targetState = { opacity: 1, x: 0, y: 0, filter: 'blur(0px)' };
+
   return (
     <motion.div
       initial={initialState}
-      animates={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
-      whileInView={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once, amount: 0.18, margin: '0px 0px -8% 0px' }}
+      animate={shouldReduceMotion ? targetState : undefined}
+      whileInView={targetState}
+      viewport={{ once, amount: 0.12, margin: '0px 0px -4% 0px' }}
       transition={{ duration: shouldReduceMotion ? 0.4 : duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
