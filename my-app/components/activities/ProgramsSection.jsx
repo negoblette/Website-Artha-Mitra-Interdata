@@ -37,7 +37,7 @@ function ProgramCard({ program, index }) {
                   Program
                 </span> */}
 
-                <h3 className="mt-4 font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
+                <h3 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
                   {program.name}
                 </h3>
 
