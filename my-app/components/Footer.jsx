@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
@@ -19,9 +19,9 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
     email: 'info@arthamitra.co.id',
   };
   const staticSocials = [
-    { platform: 'facebook', href: 'https://facebook.com/arthamitrainterdata' },
-    { platform: 'instagram', href: 'https://instagram.com/arthamitrainterdata' },
-    { platform: 'linkedin', href: 'https://linkedin.com/company/arthamitrainterdata' },
+    { platform: 'facebook', href: 'https://www.facebook.com/arthamitrainterdatapt' },
+    { platform: 'instagram', href: 'https://www.instagram.com/arthamitrainterdata?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==' },
+    { platform: 'linkedin', href: 'https://www.linkedin.com/company/artha-mitra-interdata/' },
   ];
   const staticColumns = {
     quickLinks: [
