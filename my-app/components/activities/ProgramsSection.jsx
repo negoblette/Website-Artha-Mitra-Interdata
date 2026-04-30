@@ -135,14 +135,20 @@ export default function ProgramsSection({ data }) {
     <section className="relative z-20 mt-14 py-28 sm:mt-20 lg:mt-24">
       <div className="absolute inset-0 bg-transparent" />
       
-     <div className="absolute left-[-30rem] top-[-95px] w-[150%] h-[105%] pointer-events-none ">
-      <Image
-        src="/decor/activities1.svg"
-        alt=""
-        fill
-        className="w-full h-auto opacity-100"
-      />
-    </div>
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div 
+          className="absolute left-[-30rem] top-[-95px] w-[1400px] h-[900px]"
+          style={ { transform: 'translateZ(0)' } }
+        >
+          <Image
+            src="/decor/activities1.svg"
+            alt=""
+            width={1400}
+            height={900}
+            className="w-full h-full object-contain"
+          />
+        </div>
+      </div>
       <div className="absolute inset-0 dot-pattern opacity-[0.03]" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-20">
@@ -157,7 +163,7 @@ export default function ProgramsSection({ data }) {
           </div>
         </AnimatedSection>
 
-        <div className="columns-1 gap-6 md:columns-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 items-start">
           {paginatedItems.map((program, i) => (
             <ProgramCard key={i} program={program} index={i} />
           ))}
