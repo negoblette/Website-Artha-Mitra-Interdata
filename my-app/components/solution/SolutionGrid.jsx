@@ -18,7 +18,7 @@ function SolutionCard({ solution, index }) {
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        <div className="relative flex min-h-[320px] flex-col overflow-hidden rounded-2xl order border-white/10 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-5 transition-all duration-500 group-hover:border-white/25 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)] sm:min-h-[300px] sm:p-6">
+        <div className="relative flex min-h-[320px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-5 transition-all duration-500 group-hover:border-white/25 group-hover:shadow-[0_8px_32px_rgba(0,0,80,0.4),0_0_0_1px_rgba(255,255,255,0.08)] sm:min-h-[300px] sm:p-6">
 
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
@@ -45,8 +45,9 @@ function SolutionCard({ solution, index }) {
             <div className="mb-3.5 min-h-[72px]">
               <span className="text-[13px] text-white/60 uppercase tracking-wider font-bold">Partners:</span>
               <div className="mt-2 flex flex-wrap items-center gap-2.5 content-start">
-                {solution.brands.map((brand, i) => {
-                  const useOriginalLogo = /fluke/i.test(brand.name || '');
+                {solution.brands
+                  .slice(0, solution.brands.length > 4 ? 3 : 4)
+                  .map((brand, i) => {
                   return (
                     <Link
                       key={i}
@@ -88,6 +89,32 @@ function SolutionCard({ solution, index }) {
                     <p className="mb-4 text-[17px] leading-relaxed text-white/80">
                       {solution.fullDescription}
                     </p>
+                    <div className="mb-4">
+                      <span className="text-[13px] font-bold uppercase tracking-wider text-white/60">
+                        Partners
+                      </span>
+                      <div className="mt-2 flex flex-wrap items-center gap-2.5">
+                        {solution.brands.map((brand, i) => (
+                          <Link
+                            key={`${brand.name}-${i}`}
+                            href={brand.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex h-11 w-[96px] items-center justify-center rounded-xl border border-white/20 bg-white/10 px-3 transition-all duration-200 hover:scale-105 hover:bg-white/15"
+                            title={`Visit ${brand.name}`}
+                          >
+                            <Image
+                              src={brand.logo}
+                              alt={brand.name}
+                              width={80}
+                              height={28}
+                              className="h-6 w-auto max-w-full object-contain brightness-0 invert"
+                            />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                     <div className="grid grid-cols-2 gap-2">
                       {solution.features.map((feature, i) => (
                         <div key={i} className="flex items-center gap-2">
