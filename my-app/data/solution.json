@@ -27,9 +27,9 @@
           "website": "https://www.juniper.net"
         },
         {
-          "name": "Fluke Networks",
-          "logo": "/images/principals/fluke.png",
-          "website": "https://www.flukenetworks.com"
+          "name": "Fortinet",
+          "logo": "/images/principals/fortinet.png",
+          "website": "https://www.fortinet.com"
         }
       ]
     },
@@ -49,19 +49,44 @@
       ],
       "brands": [
         {
-          "name": "Hillstone Networks",
-          "logo": "/images/principals/hillstone.png",
-          "website": "https://www.hillstonenet.com"
+          "name": "CyberArk",
+          "logo": "/images/principals/cyberark.png",
+          "website": "https://www.cyberark.com"
         },
         {
-          "name": "Juniper Networks",
-          "logo": "/images/principals/juniper.png",
-          "website": "https://www.juniper.net"
+          "name": "Palo Alto Networks",
+          "logo": "/images/principals/paloalto.png",
+          "website": "https://www.paloaltonetworks.com"
+        },
+        {
+          "name": "Fortinet",
+          "logo": "/images/principals/fortinet.png",
+          "website": "https://www.fortinet.com"
         },
         {
           "name": "Rapid7",
           "logo": "/images/principals/rapid7.png",
           "website": "https://www.rapid7.com"
+        },
+        {
+          "name": "DAS Security",
+          "logo": "/images/principals/das.png",
+          "website": "https://www.dbappsecurity.com"
+        },
+        {
+          "name": "CrowdStrike",
+          "logo": "/images/principals/crowdstrike.png",
+          "website": "https://www.crowdstrike.com/en-us/"
+        },
+        {
+          "name": "GTB Technologies",
+          "logo": "/images/principals/gtb.png",
+          "website": "https://gttb.com"
+        },
+        {
+          "name": "Tenable",
+          "logo": "/images/principals/tenable.png",
+          "website": "http://tenable.com"
         }
       ]
     },
@@ -81,14 +106,14 @@
       ],
       "brands": [
         {
-          "name": "DataBlink",
-          "logo": "/images/principals/datablink.png",
-          "website": "https://www.datablink.com"
+          "name": "Gigamon",
+          "logo": "/images/principals/gigamon.png",
+          "website": "https://www.gigamon.com"
         },
         {
-          "name": "Fluke Networks",
+          "name": "NETSCOUT",
           "logo": "/images/principals/fluke.png",
-          "website": "https://www.flukenetworks.com"
+          "website": "https://www.netscout.com"
         }
       ]
     },
@@ -108,9 +133,14 @@
       ],
       "brands": [
         {
-          "name": "A10 Networks",
-          "logo": "/images/principals/a10.png",
-          "website": "https://www.a10networks.com"
+          "name": "Palo Alto Networks",
+          "logo": "/images/principals/paloalto.png",
+          "website": "https://www.paloaltonetworks.com"
+        },
+        {
+          "name": "Fortinet",
+          "logo": "/images/principals/fortinet.png",
+          "website": "https://www.fortinet.com"
         }
       ]
     },
@@ -130,9 +160,19 @@
       ],
       "brands": [
         {
-          "name": "Pulse Secure",
-          "logo": "/images/principals/pulsesecure.png",
-          "website": "https://www.pulsesecure.net"
+          "name": "CyberArk",
+          "logo": "/images/principals/cyberark.png",
+          "website": "https://www.cyberark.com"
+        },
+        {
+          "name": "Palo Alto Networks",
+          "logo": "/images/principals/paloalto.png",
+          "website": "https://www.paloaltonetworks.com"
+        },
+        {
+          "name": "Genians",
+          "logo": "/images/principals/genians.png",
+          "website": "https://www.genians.com"
         }
       ]
     },
@@ -152,9 +192,14 @@
       ],
       "brands": [
         {
-          "name": "Barracuda Networks",
-          "logo": "/images/principals/barracuda.png",
-          "website": "https://www.barracuda.com"
+          "name": "Fortinet",
+          "logo": "/images/principals/fortinet.png",
+          "website": "https://www.fortinet.com"
+        },
+        {
+          "name": "GTB Technologies",
+          "logo": "/images/principals/gtb.png",
+          "website": "https://gttb.com"
         }
       ]
     },
@@ -174,9 +219,14 @@
       ],
       "brands": [
         {
-          "name": "A10 Networks",
-          "logo": "/images/principals/a10.png",
-          "website": "https://www.a10networks.com"
+          "name": "Juniper Networks",
+          "logo": "/images/principals/juniper.png",
+          "website": "https://www.juniper.net"
+        },
+        {
+          "name": "NETSCOUT",
+          "logo": "/images/principals/fluke.png",
+          "website": "https://www.netscout.com"
         }
       ]
     }

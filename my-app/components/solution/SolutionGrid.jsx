@@ -45,8 +45,9 @@ function SolutionCard({ solution, index }) {
             <div className="mb-3.5 min-h-[72px]">
               <span className="text-[13px] text-white/60 uppercase tracking-wider font-bold">Partners:</span>
               <div className="mt-2 flex flex-wrap items-center gap-2.5 content-start">
-                {solution.brands.map((brand, i) => {
-                  const useOriginalLogo = /fluke/i.test(brand.name || '');
+                {solution.brands
+                  .slice(0, solution.brands.length > 4 ? 3 : 4)
+                  .map((brand, i) => {
                   return (
                     <Link
                       key={i}
@@ -54,7 +55,7 @@ function SolutionCard({ solution, index }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="bg-white/10 border border-white/20 rounded-xl px-3 hover:bg-white/15 hover:scale-105 transition-all duration-200"
+                      className="flex h-11 w-[96px] items-center justify-center rounded-xl border border-white/20 bg-white/10 px-3 transition-all duration-200 hover:scale-105 hover:bg-white/15"
                       title={`Visit ${brand.name}`}
                     >
                       <Image
@@ -62,11 +63,16 @@ function SolutionCard({ solution, index }) {
                         alt={brand.name}
                         width={80}
                         height={28}
-                        className={`h-8 w-auto object-contain ${useOriginalLogo ? '' : 'brightness-0 invert'}`}
+                        className="h-6 w-auto max-w-full object-contain brightness-0 invert"
                       />
                     </Link>
                   );
                 })}
+                {solution.brands.length > 4 ? (
+                  <span className="inline-flex h-11 w-[96px] items-center justify-center rounded-xl border border-white/14 bg-white/6 px-3 text-[12px] font-semibold text-white/70">
+                    +{solution.brands.length - 3} more
+                  </span>
+                ) : null}
               </div>
             </div>
 
@@ -83,6 +89,32 @@ function SolutionCard({ solution, index }) {
                     <p className="mb-4 text-[17px] leading-relaxed text-white/80">
                       {solution.fullDescription}
                     </p>
+                    <div className="mb-4">
+                      <span className="text-[13px] font-bold uppercase tracking-wider text-white/60">
+                        Partners
+                      </span>
+                      <div className="mt-2 flex flex-wrap items-center gap-2.5">
+                        {solution.brands.map((brand, i) => (
+                          <Link
+                            key={`${brand.name}-${i}`}
+                            href={brand.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex h-11 w-[96px] items-center justify-center rounded-xl border border-white/20 bg-white/10 px-3 transition-all duration-200 hover:scale-105 hover:bg-white/15"
+                            title={`Visit ${brand.name}`}
+                          >
+                            <Image
+                              src={brand.logo}
+                              alt={brand.name}
+                              width={80}
+                              height={28}
+                              className="h-6 w-auto max-w-full object-contain brightness-0 invert"
+                            />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                     <div className="grid grid-cols-2 gap-2">
                       {solution.features.map((feature, i) => (
                         <div key={i} className="flex items-center gap-2">
