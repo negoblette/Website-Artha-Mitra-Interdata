@@ -41,7 +41,6 @@ export default function SolutionHero({ data }) {
         animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
-      
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
       <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
 
@@ -56,7 +55,7 @@ export default function SolutionHero({ data }) {
           <h1 className="-5xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-6xl lg:text-[5.4rem]">
             {data.title}
           </h1>
-          <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-xl">
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#111827]/88 sm:text-lg">
             {data.description}
           </p>
         </motion.div>
