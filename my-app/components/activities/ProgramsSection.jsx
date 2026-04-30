@@ -14,48 +14,47 @@ function ProgramCard({ program, index }) {
   const galleryImages = images.slice(1, 4);
 
   return (
-    <AnimatedSection delay={index * 0.1} className="mb-6 break-inside-avoid">
-      <motion.div
-        layout
-        whileHover={{ y: -6 }}
-        transition={{ duration: 0.25 }}
-        className="h-full w-full cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
-      >
-        <div className="group relative h-full overflow-hidden rounded-[2rem] border border-white/70 bg-[#f7f8fb] shadow-[0_30px_90px_rgba(10,11,133,0.16)] transition-all duration-500 hover:shadow-[0_36px_100px_rgba(10,11,133,0.22)]">
+    <AnimatedSection delay={index * 0.1} className="mb-5 break-inside-avoid sm:mb-6">
+      <div className="h-full w-full cursor-pointer" onClick={() => setExpanded(!expanded)}>
+        <motion.div
+          whileHover={{ y: -6 }}
+          transition={{ duration: 0.25 }}
+          className="group relative h-full overflow-hidden rounded-[2rem] border border-white/70 bg-[#f7f8fb] shadow-[0_30px_90px_rgba(10,11,133,0.16)] transition-all duration-500 hover:shadow-[0_36px_100px_rgba(10,11,133,0.22)]"
+        >
           <div className="absolute inset-0 rounded-[2rem] border border-[#0a0b85]/8 pointer-events-none" />
 
           {/* GRID */}
-          <div className="relative flex min-h-[200px] flex-col md:min-h-[100px] md:flex-row">
+          <div className="relative flex min-h-[200px] flex-col xl:min-h-[100px] xl:flex-row">
 
             {/* LEFT */}
-            <div className="relative z-10 flex flex-1 flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] px-5 py-6 sm:px-6 sm:py-7 md:w-[52.5%] lg:px-7 lg:py-8">
-              <div className="absolute inset-y-0 right-[-40px] hidden w-[88px] bg-white [clip-path:polygon(24%_0%,100%_0%,76%_100%,0%_100%)] md:block" />
+            <div className="relative z-10 flex flex-1 flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] px-5 py-5 sm:px-6 sm:py-6 xl:w-[52.5%] xl:px-7 xl:py-8">
+              <div className="absolute inset-y-0 right-[-40px] hidden w-[88px] bg-white [clip-path:polygon(24%_0%,100%_0%,76%_100%,0%_100%)] xl:block" />
 
-              <div className="relative max-w-xl">
+              <div className="relative max-w-xl space-y-4 sm:space-y-5">
                 {/* <span className="inline-flex rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#0a0b85] sm:text-xs">
                   Program
                 </span> */}
 
-                <h3 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
+                <h3 className="inline-block max-w-[12ch] text-[1.55rem] font-black leading-[1.05] tracking-tight text-[rgb(13,27,94)] sm:max-w-none sm:text-[1.9rem] xl:text-5xl">
                   {program.name}
                 </h3>
 
-                <p className={`mt-4 max-w-xl text-sm font-medium leading-6 text-[#111827]/72 ${expanded ? '' : 'line-clamp-4'}`}>
+                <p className={`max-w-xl text-[13px] font-medium leading-6 text-[#111827]/72 sm:text-sm ${expanded ? '' : 'line-clamp-4 sm:line-clamp-4'}`}>
                   {program.description}
                 </p>
 
-                <div className="mt-5 space-y-2 text-xs text-[#29324f] sm:text-sm">
-                  <p className="font-bold">{program.summaryLabel}</p>
-                  <p>
-                    <span className="font-semibold text-[#00a86b]">{program.focusLabel}</span> {program.focusText}
+                <div className="space-y-2 rounded-[1.15rem] border border-[#0a0b85]/8 bg-[#f8faff] px-4 py-3 text-[11px] text-[#29324f] sm:text-sm">
+                  <p className="font-bold leading-5 text-[rgb(13,27,94)]">{program.summaryLabel}</p>
+                  <p className="leading-6">
+                    <span className="font-semibold text-[#00a86b]">{program.focusLabel}</span>{' '}
+                    {program.focusText}
                   </p>
                 </div>
               </div>
 
-              <div className="relative mt-6 flex flex-wrap items-center gap-3">
+              <div className="relative mt-5 flex flex-wrap items-center gap-3 sm:mt-6">
                 <button
-                  className="inline-flex items-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a0b85]"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a0b85] sm:w-auto"
                   onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
                 >
                   <span>{expanded ? 'Hide Details' : 'Explore Details'}</span>
@@ -65,14 +64,16 @@ function ProgramCard({ program, index }) {
                 </button>
               </div>
 
-              <AnimatePresence>
+              <AnimatePresence initial={false}>
                 {expanded && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
+                    initial={{ height: 0 }}
+                    animate={{ height: 'auto' }}
+                    exit={{ height: 0 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                    className="overflow-hidden"
                   >
-                    <div className="mt-5 max-w-md rounded-[1.35rem] border border-[#0a0b85]/8 bg-[#f4f7ff] p-4">
+                    <div className="mt-5 max-w-full rounded-[1.35rem] border border-[#0a0b85]/8 bg-[#f4f7ff] p-4 sm:max-w-md sm:p-5">
                       <p className="text-sm leading-6 text-[#5b6b82]">
                         {program.detail}
                       </p>
@@ -83,13 +84,13 @@ function ProgramCard({ program, index }) {
             </div>
 
             {/* RIGHT (FULL IMAGE FIX) */}
-            <div className="relative min-h-[240px] overflow-hidden md:min-h-0 md:w-[47.5%] md:flex-none md:self-stretch">
+            <div className="relative min-h-[220px] overflow-hidden sm:min-h-[260px] xl:min-h-0 xl:w-[47.5%] xl:flex-none xl:self-stretch">
               <div className="absolute inset-0">
                 <Image
                   src={primaryImage}
                   alt={`${program.name} cover`}
                   fill
-                  sizes="(min-width: 640px) 22vw, (min-width: 320px) 28vw, 90vw"
+                  sizes="(min-width: 1280px) 22vw, (min-width: 640px) 80vw, 92vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -100,7 +101,7 @@ function ProgramCard({ program, index }) {
               {galleryImages.length > 0 && (
                 <div className="absolute bottom-3 right-3 flex gap-2">
                   {galleryImages.map((imageSrc, j) => (
-                    <div key={j} className="relative h-11 w-11 overflow-hidden rounded-lg border border-white/25">
+                    <div key={j} className="relative h-10 w-10 overflow-hidden rounded-lg border border-white/25 sm:h-11 sm:w-11">
                       <Image
                         src={imageSrc}
                         alt={`${program.name} image ${j + 2}`}
@@ -114,15 +115,15 @@ function ProgramCard({ program, index }) {
             </div>
 
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </AnimatedSection>
   );
 }
 
 export default function ProgramsSection({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 2;
   const programs = data?.items ?? [];
 
   const totalPages = Math.max(1, Math.ceil(programs.length / itemsPerPage));
@@ -132,23 +133,8 @@ export default function ProgramsSection({ data }) {
   );
 
   return (
-    <section className="relative z-20 mt-14 py-28 sm:mt-20 lg:mt-24">
+    <section className="relative z-10 mt-14  pt-20 pb-10 sm:mt-20 lg:mt-24">
       <div className="absolute inset-0 bg-transparent" />
-      
-      <div className="absolute inset-0 pointer-events-none overflow-visible">
-        <div 
-          className="absolute left-[-30rem] top-[-340px] w-[2600px] h-[1920px]"
-          style={ { transform: 'translateZ(0)' } }
-        >
-          <Image
-            src="/decor/activities1.svg"
-            alt=""
-            width={1920}
-            height={1080}
-            className="w-full h-full object-contain"
-          />
-        </div>
-      </div>
       <div className="absolute inset-0 dot-pattern opacity-[0.03]" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-20">
@@ -163,7 +149,7 @@ export default function ProgramsSection({ data }) {
           </div>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 items-start">
+        <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-2 xl:gap-6">
           {paginatedItems.map((program, i) => (
             <ProgramCard key={i} program={program} index={i} />
           ))}

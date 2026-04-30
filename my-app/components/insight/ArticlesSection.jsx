@@ -1,20 +1,18 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, ChevronDown, Tag, User, Calendar } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import Image from 'next/image';
 
-function ArticleCard({ item, index, expanded, onToggle }) {
+function ArticleCard({ item, index }) {
+  const [expanded, setExpanded] = useState(false);
   const hasImage = typeof item.image === 'string' && item.image.trim().length > 0;
 
   return (
-      <AnimatedSection delay={index * 0.08}>
-      <motion.article
-        layout
-        className="group w-full self-start text-left [perspective:1600px]"
-      >
-        <div className="relative flex min-h-[520px] flex-col overflow-hidden rounded-[1.85rem] border border-white/65 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm transition-shadow duration-300 group-hover:shadow-[0_24px_70px_rgba(10,11,133,0.18)]">
+      <div className="w-full self-start">
+      <article className="group w-full self-start text-left [perspective:1600px]">
+        <div className="relative flex min-h-[520px] flex-col overflow-hidden rounded-[1.85rem] border border-white/65 bg-[linear-gradient(135deg,rgb(20,40,120)_0%,rgb(15,30,95)_45%,rgb(10,20,70)_100%)] shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm transition-shadow duration-300 group-hover:shadow-[0_24px_70px_rgba(10,11,133,0.18)]">
           <div className="relative flex h-52 w-full items-center justify-center overflow-hidden bg-white">
             {hasImage ? (
               <Image
@@ -56,13 +54,13 @@ function ArticleCard({ item, index, expanded, onToggle }) {
               {item.excerpt}
             </p>
 
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
               {expanded && item.content && (
                 <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ height: 0 }}
+                  animate={{ height: 'auto' }}
+                  exit={{ height: 0 }}
+                  transition={{ duration: 0.24, ease: 'easeOut' }}
                   className="overflow-hidden"
                 >
                   <div className="mt-4 border-t border-[#0a0b85]/10 pt-4">
@@ -92,7 +90,7 @@ function ArticleCard({ item, index, expanded, onToggle }) {
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-white"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onToggle();
+                  setExpanded((current) => !current);
                 }}
                 type="button"
               >
@@ -104,8 +102,8 @@ function ArticleCard({ item, index, expanded, onToggle }) {
             </div>
           </div>
         </div>
-      </motion.article>
-    </AnimatedSection>
+      </article>
+    </div>
   );
 }
 
@@ -114,10 +112,7 @@ function FeaturedArticle({ item }) {
 
   return (
     <AnimatedSection>
-      <motion.article
-        layout
-        className="group grid w-full gap-8 rounded-[2rem] border border-[#a9abd6]/100 bg-white p-4 shadow-[0_28px_80px_rgba(10,11,133,0.08)] sm:p-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
-      >
+      <article className="group grid w-full gap-8 rounded-[2rem] border border-[#a9abd6]/100 bg-white p-4 shadow-[0_28px_80px_rgba(10,11,133,0.08)] sm:p-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div className="relative min-h-[280px] overflow-hidden border-[#a9abd6] rounded-[1.7rem] bg-[linear-gradient(135deg,#eef2ff_0%,#dfe8ff_50%,#f8fbff_100%)] sm:min-h-[340px]">
           {hasImage ? (
             <Image
@@ -175,7 +170,7 @@ function FeaturedArticle({ item }) {
             </div>
           </div>
         </div>
-      </motion.article>
+      </article>
     </AnimatedSection>
   );
 }
@@ -184,8 +179,7 @@ export default function ArticlesSection({ data }) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [categoryPage, setCategoryPage] = useState(1);
-  const [expandedArticle, setExpandedArticle] = useState(null);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const categoriesPerPage = 10;
   const items = Array.from(
     new Map(
@@ -219,19 +213,44 @@ export default function ArticlesSection({ data }) {
   );
   const headlineItem = data?.headline;
 
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth >= 1280) {
+        setItemsPerPage(3);
+        return;
+      }
+
+      if (window.innerWidth >= 640) {
+        setItemsPerPage(2);
+        return;
+      }
+
+      setItemsPerPage(1);
+    };
+
+    updateItemsPerPage();
+    window.addEventListener('resize', updateItemsPerPage);
+
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage, activeCategory]);
+
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
-    setCurrentPage(1);
-    setExpandedArticle(null);
   };
 
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="absolute inset-0 bg-white" />
-      <div className="absolute inset-0 mesh-gradient-accent opacity-[0.08]" />
-      <div className="absolute inset-0 dot-pattern opacity-15" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[980px] overflow-hidden sm:h-[1080px] xl:h-[1200px]">
+        <div className="absolute inset-0 mesh-gradient-accent opacity-[0.08]" />
+        <div className="absolute inset-0 dot-pattern opacity-15" />
+      </div>
       <div
-        className="pointer-events-none absolute inset-x-0 inset-y-0 z-0 overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[980px] overflow-hidden sm:h-[1080px] xl:h-[1200px]"
         style={{
           WebkitMaskImage:
             'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.12) 8%, black 22%, black 74%, rgba(0,0,0,0.18) 90%, transparent 100%)',
@@ -306,16 +325,12 @@ export default function ArticlesSection({ data }) {
 
         {headlineItem && <FeaturedArticle item={headlineItem} />}
 
-        <div className="mt-8 grid items-start grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid items-start grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {paginatedItems.map((item, i) => (
             <ArticleCard
               key={item.slug}
               item={item}
               index={i}
-              expanded={expandedArticle === item.slug}
-              onToggle={() =>
-                setExpandedArticle((current) => (current === item.slug ? null : item.slug))
-              }
             />
           ))}
         </div>
