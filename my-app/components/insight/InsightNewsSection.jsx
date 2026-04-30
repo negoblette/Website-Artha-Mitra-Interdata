@@ -17,8 +17,7 @@ function NewsCard({ item, index }) {
         className="w-full"
       >
       <article
-        className="gradient-border group relative flex min-h-[240px] cursor-pointer flex-col overflow-hidden rounded-2xl bg-[linear-gradient(135deg,rgb(20,40,120)_0%,rgb(15,30,95)_45%,rgb(10,20,70)_100%)] p-6 shadow-[0_24px_70px_rgba(15,23,42,0.16)] transition-shadow duration-300 group-hover:shadow-[0_30px_85px_rgba(10,20,70,0.28)] sm:p-7"
-        onClick={() => setExpanded((current) => !current)}
+        className="gradient-border group relative flex min-h-[240px] flex-col overflow-hidden rounded-2xl bg-[linear-gradient(135deg,rgb(20,40,120)_0%,rgb(15,30,95)_45%,rgb(10,20,70)_100%)] p-6 shadow-[0_24px_70px_rgba(15,23,42,0.16)] transition-shadow duration-300 group-hover:shadow-[0_30px_85px_rgba(10,20,70,0.28)] sm:p-7"
       >
           <div className="absolute inset-0 hidden shimmer opacity-0 transition-opacity duration-500 md:block group-hover:opacity-100" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.14),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(132,169,255,0.14),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.04),transparent_58%)]" />

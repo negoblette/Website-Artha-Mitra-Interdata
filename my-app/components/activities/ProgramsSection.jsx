@@ -15,7 +15,7 @@ function ProgramCard({ program, index }) {
 
   return (
     <AnimatedSection delay={index * 0.1} className="mb-5 break-inside-avoid sm:mb-6">
-      <div className="h-full w-full cursor-pointer" onClick={() => setExpanded(!expanded)}>
+      <div className="h-full w-full">
         <motion.div
           whileHover={{ y: -6 }}
           transition={{ duration: 0.25 }}
