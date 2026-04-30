@@ -26,9 +26,10 @@ export default function AnimatedSection({
   return (
     <motion.div
       initial={initialState}
+      animates={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
       whileInView={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
       viewport={{ once, amount: 0.18, margin: '0px 0px -8% 0px' }}
-      transition={{ duration: shouldReduceMotion ? 0 : duration, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: shouldReduceMotion ? 0.4 : duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
