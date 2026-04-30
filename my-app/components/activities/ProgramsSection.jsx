@@ -135,16 +135,16 @@ export default function ProgramsSection({ data }) {
     <section className="relative z-20 mt-14 py-28 sm:mt-20 lg:mt-24">
       <div className="absolute inset-0 bg-transparent" />
       
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-visible">
         <div 
-          className="absolute left-[-30rem] top-[-95px] w-[1400px] h-[900px]"
+          className="absolute left-[-30rem] top-[-340px] w-[2600px] h-[1920px]"
           style={ { transform: 'translateZ(0)' } }
         >
           <Image
             src="/decor/activities1.svg"
             alt=""
-            width={1400}
-            height={900}
+            width={1920}
+            height={1080}
             className="w-full h-full object-contain"
           />
         </div>
