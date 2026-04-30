@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import AnimatedSection from '@/components/AnimatedSection';
+// import AnimatedSection from '@/components/AnimatedSection';
 
 export default function ActivitiesHero({ data }) {
   return (
@@ -40,16 +40,20 @@ export default function ActivitiesHero({ data }) {
 
       <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
-          <AnimatedSection>
-            <h1 className="product-hero-title">
+          <motion.div
+            initial = {{ opacity: 0, y:30}}
+            animate = {{ opacity: 1, y:0 }}
+            transition = {{ duration: 0.7 }}
+          >
+            <h1 className="text-5xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-6xl lg:text-[5.4rem]itle">
               {data.title}
             </h1>
 
-  
-            <p className="product-hero-copy">
+            <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-lg">
               {data.description}
             </p>
-          </AnimatedSection>
+
+          </motion.div>
         </div>
       </div>
     </section>
