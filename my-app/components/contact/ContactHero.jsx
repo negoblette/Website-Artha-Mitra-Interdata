@@ -27,8 +27,8 @@ export default function ContactHero() {
               </h1>
 
               <div className="mb-1 flex shrink-0 items-center gap-1.5 sm:gap-2 md:mb-2 lg:mb-1">
-                <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/95 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-14 lg:w-4" />
-                <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/55 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-14 lg:w-4" />
+                <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/95 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-16 lg:w-6" />
+                <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/55 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-16 lg:w-6" />
               </div>
             </div>
             
