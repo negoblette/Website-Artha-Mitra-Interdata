@@ -53,7 +53,7 @@ export default function ProductsHero({ data }) {
           <h1 className="text-5xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-6xl lg:text-[5.4rem]">
             {data.title}
           </h1>
-          <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-lg">
+          <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-xl">
             {data.description}
           </p>
         </motion.div>
