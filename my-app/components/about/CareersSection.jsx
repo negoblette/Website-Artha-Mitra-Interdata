@@ -104,7 +104,9 @@ export default function CareersSection({ data }) {
 
             <div className="mt-6 space-y-5">
               <a
-                href={`mailto:${careerEmail}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(careerEmail)}&su=${encodeURIComponent('Career Inquiry - Artha Mitra Interdata')}`}
+                target="_blank"
+                rel="noreferrer"
                 className="group flex items-center gap-4 transition-colors"
               >
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition-transform group-hover:scale-105 group-hover:bg-white/15">
