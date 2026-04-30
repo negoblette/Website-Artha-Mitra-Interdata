@@ -2,11 +2,10 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import AnimatedSection from '@/components/AnimatedSection';
 
 export default function AboutHero({ data }) {
   return (
-    <section className="relative min-h-[460px] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
+    <section className="relative min-h-[520px] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
       <div className="absolute inset-0 bg-white" />
 
       <div className="absolute inset-0">
@@ -38,17 +37,20 @@ export default function AboutHero({ data }) {
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[460px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-40">
+      <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
-          <AnimatedSection>
-            <h1 className="max-w-2xl text-5xl font-black leading-[0.94] text-[rgb(13,27,94)] sm:text-6xl lg:text-[5rem]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <h1 className="text-5xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-6xl lg:text-[5.4rem]">
               {data.title}
             </h1>
-
-            <p className="mt-6 max-w-xl text-base font-semibold leading-relaxed text-[#111827]/88 sm:text-lg">
+            <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-lg">
               {data.description}
             </p>
-          </AnimatedSection>
+          </motion.div>
         </div>
       </div>
     </section>
