@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿import { Sora } from "next/font/google";
+=======
+﻿import {  Sora } from "next/font/google";
+>>>>>>> ac7f51d (font revising and resizing)
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 import { getContent } from "@/lib/content";
@@ -9,6 +13,10 @@ const sora = Sora({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac7f51d (font revising and resizing)
 export const metadata = {
   title: "Artha Mitra Interdata",
   description: "IT Solutions Integrator and Provider. We partner with you in managing IT infrastructure and security by optimizing its efficiency.",
