@@ -18,6 +18,20 @@
   },
   "howItWorks": {
     "title": "How We Optimize IT For You",
+    "left" : {
+      "title": "Building Resilient & Future-Ready IT Solutions",
+      "description": "At Artha Mitra Interdata, optimizing IT means ensuring that technology consistently supports and strengthens your business objectives. We work closely with our customers as trusted partners, taking the time to understand their priorities so that every solution we design delivers practical, measurable value. From infrastructure to security, our focus is on building IT environments that are stable, efficient, and able to adapt as your business evolves." 
+    },
+    "right" : {
+      "title": "Aligned IT With Your Business Goals",
+      "description": "Our approach is guided by a clear vision to become the technology partner of choice, and a mission to help customers achieve their competitive goals through strong leadership and professional service. Guided by our core values of Commitment, Integrity, Professionalism, Teamwork, and Advancement (CIPTA), we cultivate a culture of accountability, collaboration, and continuous improvement. These principles shape how we engage, how we deliver, and how we help our customers transform IT into a sustained competitive advantage."
+    }, 
+    "stats": [
+      { "value" : "15+", "label": "Years of Experience" },
+      { "value" : "500+", "label": "Trusted Clients" },
+      { "value" : "98%", "label": "Customer Satisfaction" },
+      { "value" : "24/7", "label": "Support" }
+    ],
 "description": "At Artha Mitra Interdata, optimizing IT means ensuring that technology consistently supports and strengthens your business objectives. We work closely with our customers as trusted partners, taking the time to understand their priorities so that every solution we design delivers practical, measurable value. From infrastructure to security, our focus is on building IT environments that are stable, efficient, and able to adapt as your business evolves.\n\nOur approach is guided by a clear vision to become the technology partner of choice, and a mission to help customers achieve their competitive goals through strong leadership and professional service. Guided by our core values of Commitment, Integrity, Professionalism, Teamwork, and Advancement (CIPTA), we cultivate a culture of accountability, collaboration, and continuous improvement. These principles shape how we engage, how we deliver, and how we help our customers transform IT into a sustained competitive advantage.",
     "values": [
       {
