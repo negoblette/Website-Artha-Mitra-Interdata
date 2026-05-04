@@ -6,6 +6,9 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+
+const MotionLink = motion(Link);
+
 export default function Navbar({ data }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,6 +16,7 @@ export default function Navbar({ data }) {
   const isTransparentTopPage = pathname === '/' || pathname === '/about' || pathname === '/insight' || pathname === '/solution' || pathname === '/activities' || pathname === '/products';
   const showSolidNavbar = scrolled || !isTransparentTopPage;
   const navItems = data.nav;
+  
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -97,17 +101,17 @@ export default function Navbar({ data }) {
             </motion.div>
 
             <div className="flex items-center justify-self-end gap-2">
-              <motion.div
-                whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)' }}
+              <MotionLink
+                href="/contact"
+                whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)'}}
                 transition={{ duration: 0.12 }}
+                className="group hidden sm:inline-flex h-12 items-center rounded-full bg-[rgb(13,27,94)] px-8 text-[13px] font-semibold text-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#1e1f92]"
               >
-                <Link
-                  href="/contact"
-                  className="group hidden sm:inline-flex h-12 items-center bg-[rgb(13,27,94)] text-white hover:bg-[#1e1f92] rounded-full px-8 text-[13px] font-semibold transition-colors shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
-                >
-                  <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">Contact Us</span>
-                </Link>
-              </motion.div>
+                <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">
+                  Contact Us
+                </span>
+              
+              </MotionLink>
 
               <motion.button
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -152,19 +156,16 @@ export default function Navbar({ data }) {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navItems.length * 0.08 }}
-                className="text-center"
+              <MotionLink
+                href="/contact"
+                whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)'}}
+                transition={{ duration: 0.12 }}
+                className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#0a0b85] px-8 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(10,11,133,0.18)]"
               >
-                <Link
-                  href="/contact"
-                  className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0a0b85] px-8 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(10,11,133,0.18)]"
-                >
-                  Contact Us
-                </Link>
-              </motion.div>
+                
+                Contact Us
+             
+              </MotionLink>
             </div>
           </motion.div>
         )}
