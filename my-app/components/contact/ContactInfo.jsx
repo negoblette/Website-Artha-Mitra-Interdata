@@ -22,7 +22,7 @@ export default function ContactInfo({ contact, whatsapp }) {
   const officeAddress = contact?.address ?? '';
 
   return (
-    <section className="relative overflow-hidden bg-[#eef3ff] pb-0">
+    <section className="relative overflow-hidden bg-[#eef3ff]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(47,84,235,0.10),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.68)_0%,rgba(238,243,255,0.92)_100%)]" />
 
       <div
@@ -36,7 +36,7 @@ export default function ContactInfo({ contact, whatsapp }) {
         <div className="absolute bottom-0 left-[3rem] h-56 w-56 rounded-full bg-[#2f54eb]/8 blur-[140px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[98rem] px-2 py-16 sm:px-8 lg:px-3 lg:py-20 xl:px-5">
+      <div className="mx-auto w-full max-w-[1600px] px-4 py-16 sm:px-6 sm:py-20 lg:px-20 lg:py-24">
         <div className="grid gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">
           <AnimatedSection>
             <div className="relative max-w-2xl   lg:pt-4">

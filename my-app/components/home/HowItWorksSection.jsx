@@ -164,9 +164,9 @@ export default function HowItWorksSection({ data }) {
         <div className="mt-10 -mx-14 rounded-[2rem] border border-[rgba(92,77,220,0.08)] bg-white/85 px-4 py-6 shadow-[0_24px_60px_rgba(46,34,125,0.08)] backdrop-blur-sm sm:px-6 lg:mt-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[1.3fr_2fr] lg:items-center">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.08em] text-[#6c58f8] sm:text-base">
+              {/* <p className="text-sm font-black uppercase tracking-[0.08em] text-[#6c58f8] sm:text-base">
                 Our Commitment
-              </p>
+              </p> */}
               <h3 className="mt-3 text-3xl font-black tracking-[-0.04em] text-[#0d1364] sm:text-[2.5rem]">
                 Driving Value Through Optimization
               </h3>
