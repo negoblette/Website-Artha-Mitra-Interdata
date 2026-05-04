@@ -1,4 +1,4 @@
-﻿import {  Sora } from "next/font/google";
+﻿import { Sora } from "next/font/google";
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 import { getContent } from "@/lib/content";
@@ -8,7 +8,6 @@ const sora = Sora({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
 });
-
 
 export const metadata = {
   title: "Artha Mitra Interdata",
