@@ -27,7 +27,7 @@ function PuzzleDisk() {
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white via-[#eef0ff] to-[#c8c3ff] shadow-[0_28px_70px_rgba(71,60,182,0.2)]" />
       <div className="absolute inset-[10px] rounded-full border border-white/80 bg-gradient-to-br from-[#fcfcff] to-[#d8d4ff]" />
       <div className="absolute bottom-[16px] left-[16px] right-[16px] top-[16px] overflow-hidden rounded-full shadow-inner">
-        <div className="absolute inset-y-0 left-0 w-1/2 rounded-l-full bg-gradient-to-br from-[#7f70ff] via-[#5948d4] to-[#3f33b0]" />
+        <div className="absolute inset-y-0 left-0 w-1/2 rounded-l-full bg-gradient-to-br from-[#5948d4] via-[#080d63] to-[#080d63]" />
         <div className="absolute inset-y-0 right-0 w-1/2 rounded-r-full bg-gradient-to-br from-[#fcfcff] via-[#f0efff] to-[#d7d3ff]" />
 
         <div className="absolute left-1/2 top-1/2 h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f5f5ff] shadow-[0_0_0_10px_rgba(255,255,255,0.9)]" />
@@ -78,7 +78,7 @@ export default function HowItWorksSection({ data }) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white px-6 py-2 sm:px-8 lg:px-10 lg:py-20">
+     <section className="relative overflow-hidden bg-white px-6 py-2 sm:px-8 lg:px-10 lg:py-20">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-x-[8%] top-10 h-28 rounded-full bg-[radial-gradient(circle,rgba(95,80,255,0.12),transparent_72%)] blur-3xl" />
         <div className="absolute left-[-20px] top-[26%] h-[58%] w-[51%] rounded-r-[3rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.14))]" />
@@ -92,12 +92,12 @@ export default function HowItWorksSection({ data }) {
         </h2>
 
         <div className="mt-6 grid items-center gap-10 lg:grid-cols-[1fr_minmax(380px,1.2fr)_1fr] lg:gap-8 xl:gap-10">
-          <article className="max-w-md lg:pl-2 xl:-ml-5">
+          <article className="w-full px-1 sm:px-2 lg:pr-1 xl:pr-[1px]">
             <div className="mb-6 h-24 w-56 rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.04))]" />
-            <h3 className="max-w-md text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] sm:text-[2.25rem]">
+            <h3 className="max-w-none text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] sm:text-[2.25rem]">
               {left.title}
             </h3>
-            <p className="mt-6 max-w-md text-black font-semibold text-lg leading-[1.5] text-[#111827]">
+            <p className="mt-6 max-w-none text-black font-semibold text-lg leading-[1.5] text-[#111827]">
               {left.description}
             </p>
           </article>
@@ -105,38 +105,38 @@ export default function HowItWorksSection({ data }) {
           <div className="relative flex min-h-[430px] items-center justify-center sm:min-h-[520px] lg:min-h-[600px]">
             <div className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(120,103,255,0.18),rgba(120,103,255,0.03)_55%,transparent_72%)] blur-2xl" />
 
-            <div className="absolute left-[8%] top-[14%] rounded-[2rem] bg-[linear-gradient(180deg,#6354db,#2e277b)] p-5 text-white shadow-[0_28px_50px_rgba(54,43,156,0.32)]">
+            <div className="absolute left-[8%] top-[14%] rounded-[2rem] bg-[linear-gradient(180deg,#080d63,#2e277b)] p-5 text-white shadow-[0_28px_50px_rgba(54,43,156,0.32)]">
               <Cloud size={58} strokeWidth={1.8} />
             </div>
 
-            <div className="absolute left-[6%] top-[36%] rounded-[2rem] bg-[linear-gradient(180deg,#5043bf,#241f69)] p-5 text-white shadow-[0_26px_44px_rgba(52,41,150,0.34)]">
+            <div className="absolute left-[6%] top-[36%] rounded-[2rem] bg-[linear-gradient(180deg,#080d63,#2e277b)] p-5 text-white shadow-[0_26px_44px_rgba(52,41,150,0.34)]">
               <div className="space-y-2.5">
                 {[0, 1, 2].map((row) => (
                   <div
                     key={row}
                     className="flex w-[92px] items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2"
                   >
-                    <div className="h-3 w-3 rounded-full bg-[#9d92ff]" />
+                    <div className="h-3 w-3 rounded-full bg-white" />
                     <div className="h-1.5 flex-1 rounded-full bg-white/50" />
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="absolute left-[14%] top-[72%] rounded-2xl bg-[linear-gradient(180deg,#6f60f2,#4739bf)] p-3 text-white shadow-[0_18px_30px_rgba(69,58,174,0.26)]">
+            <div className="absolute left-[14%] top-[72%] rounded-2xl bg-[linear-gradient(180deg,#080d63,#2e277b)] p-3 text-white shadow-[0_18px_30px_rgba(69,58,174,0.26)]">
               <Cog size={36} strokeWidth={2} />
             </div>
 
-            <div className="absolute right-[16%] top-[18%] rounded-[2rem] bg-white/80 p-5 text-[#745eff] shadow-[0_24px_50px_rgba(80,69,175,0.14)] backdrop-blur-sm">
+            <div className="absolute right-[16%] top-[18%] rounded-[2rem] bg-white/80 p-5 text-[#080d63] shadow-[0_24px_50px_rgba(80,69,175,0.14)] backdrop-blur-sm">
               <ChartColumnIncreasing size={78} strokeWidth={1.8} />
             </div>
 
-            <div className="absolute right-[7%] top-[34%] rounded-[2rem] bg-white/85 p-4 text-[#6d56ff] shadow-[0_22px_44px_rgba(80,69,175,0.16)] backdrop-blur-sm">
+            <div className="absolute right-[7%] top-[34%] rounded-[2rem] bg-white/85 p-4 text-[#080d63] shadow-[0_22px_44px_rgba(80,69,175,0.16)] backdrop-blur-sm">
               <Target size={52} strokeWidth={2} />
             </div>
 
             <div className="absolute right-[7%] top-[59%] rotate-[-10deg] rounded-[2rem] bg-[linear-gradient(180deg,#fefeff,#d9d5ff)] p-4 shadow-[0_30px_55px_rgba(86,74,184,0.18)]">
-              <LaptopMinimal size={94} strokeWidth={1.6} className="text-[#5f4ce1]" />
+              <LaptopMinimal size={94} strokeWidth={1.6} className="text-[#080d63]" />
             </div>
 
             <div className="absolute inset-x-[24%] top-[34%] hidden h-px bg-[linear-gradient(90deg,transparent,rgba(98,87,220,0.5),transparent)] lg:block" />
@@ -150,18 +150,18 @@ export default function HowItWorksSection({ data }) {
             <PuzzleDisk />
           </div>
 
-          <article className="max-w-md lg:justify-self-end lg:pr-2 xl:-mr-5">
+          <article className="w-full px-1 sm:px-2 lg:justify-self-end lg:pl-2 lg:pr-1 xl:pl-3 xl:pr-2">
             
-            <h3 className="max-w-md mt-14 text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] sm:text-[2.25rem]">
+            <h3 className="max-w-none mt-14 text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] sm:text-[2.25rem]">
               {right.title}
             </h3>
-            <p className="mt-6 max-w-md text-black font-semibold text-lg leading-[1.5] text-[#111827]">
+            <p className="mt-6 max-w-none text-black font-semibold text-lg leading-[1.5] text-[#111827]">
               {right.description}
             </p>
           </article>
         </div>
 
-        <div className="mt-10 -mx-14 rounded-[2rem] border border-[rgba(92,77,220,0.08)] bg-white/85 px-4 py-6 shadow-[0_24px_60px_rgba(46,34,125,0.08)] backdrop-blur-sm sm:px-6 lg:mt-6 lg:px-8">
+        <div className="mt-10 mx-0 rounded-[2rem] border border-[rgba(92,77,220,0.08)] bg-white/85 px-4 py-6 shadow-[0_24px_60px_rgba(46,34,125,0.08)] backdrop-blur-sm sm:px-6 lg:mt-6 lg:-mx-8 lg:px-8 xl:-mx-14">
           <div className="grid gap-8 lg:grid-cols-[1.3fr_2fr] lg:items-center">
             <div>
               {/* <p className="text-sm font-black uppercase tracking-[0.08em] text-[#6c58f8] sm:text-base">
