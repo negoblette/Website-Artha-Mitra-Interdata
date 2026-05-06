@@ -27,7 +27,7 @@ function NewsTimelineItems({ item, index, isActive}) {
         <div
           className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-full border text-xl font-black transition-all ${
             isActive 
-              ? 'border-[#2554f4] bg-[#2554f4] text-white shadow-[0_10px_30px_rgba(37,84,244,0.28)]'
+              ? 'border-[#2554f4] bg-[#0d1364] text-white shadow-[0_10px_30px_rgba(37,84,244,0.28)]'
               : 'border-[#d8dced] bg-white text-[#111a4a] shadow-[0_8px_24px_rgba(15,23,42,0.08)]'
           }`}
         >
@@ -42,7 +42,7 @@ function NewsTimelineItems({ item, index, isActive}) {
       
       {/* content */}
       <div className="pt-1">
-        <p className="text-sm font-black uppercase tracking-[0.08em] text-[#2554f4]">
+        <p className="text-sm font-black uppercase tracking-[0.08em] text-[#0d1364]">
           {item.category || 'Technology'}
         </p>
 
@@ -87,8 +87,8 @@ export default function NewsSection({ data }) {
           
           {/* heading */}
           <div className="text-center">
-            <h2 className="text-4xl font-black tracking-[-0.06em] text-[-#09124d] sm:text-5xl lg:text-[5rem]">
-              News & <span className="text-[#2554f4]">Article</span>
+            <h2 className="text-4xl font-black tracking-[-0.06em] text-[#0d1364] sm:text-5xl lg:text-[5rem]">
+              News & Article
             </h2>
 
             <div className="mx-auto mt-5 flex items-center justify-center gap-2">
@@ -152,7 +152,7 @@ export default function NewsSection({ data }) {
         <div className="mt-12 flex items-center justify-center gap-4 sm:mt-14">
           <Link 
             href={data?.cta?.href || '/insight'}
-            className="inline-flex items-center gap-3 rounded-full bg-[#2554f4] px-8 py-4 text-lg font-bold text-white shadow-[0_18px_40px_rgba(37,84,244,0.32)] transition hover:-translate-y-0.5 hover:bg-[#1948ec]"
+            className="inline-flex items-center gap-3 rounded-full bg-[#0d1364] px-8 py-4 text-lg font-bold text-white shadow-[0_18px_40px_rgba(37,84,244,0.32)] transition hover:-translate-y-0.5 hover:bg-[#0f1675]"
           >
             {data?.cta?.label || 'View All Articles'}
             <ArrowRight size={22}/>
