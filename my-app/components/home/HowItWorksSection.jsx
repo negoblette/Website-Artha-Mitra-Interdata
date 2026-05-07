@@ -23,7 +23,7 @@ function splitLabel(label) {
 
 function PuzzleDisk() {
   return (
-    <div className="relative mx-auto h-[220px] w-[220px] sm:h-[280px] sm:w-[280px] lg:h-[340px] lg:w-[340px]">
+    <div className="relative mx-auto h-[180px] w-[180px] sm:h-[280px] sm:w-[280px] lg:h-[340px] lg:w-[340px]">
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white via-[#eef0ff] to-[#c8c3ff] shadow-[0_28px_70px_rgba(71,60,182,0.2)]" />
       <div className="absolute inset-[10px] rounded-full border border-white/80 bg-gradient-to-br from-[#fcfcff] to-[#d8d4ff]" />
       <div className="absolute bottom-[16px] left-[16px] right-[16px] top-[16px] overflow-hidden rounded-full shadow-inner">
@@ -49,15 +49,16 @@ function StatsCard({ stat, index }) {
   const labelLines = splitLabel(stat.label);
 
   return (
-    <div className="flex items-center gap-4 px-4 py-3 sm:px-5 sm:py-4">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[rgba(120,103,255,0.1)] text-[#2f2d9f] shadow-[inset_0_0_0_1px_rgba(120,103,255,0.08)]">
-        <Icon size={23} strokeWidth={2.1} />
+    <div className="flex items-center gap-3 sm:gap-4 px-3 py-2.5 sm:px-5 sm:py-4">
+      <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-[rgba(120,103,255,0.1)] text-[#2f2d9f] shadow-[inset_0_0_0_1px_rgba(120,103,255,0.08)]">
+        <Icon size={20} strokeWidth={2.1} className="sm:hidden" />
+        <Icon size={23} strokeWidth={2.1} className="hidden sm:block" />
       </div>
       <div className="min-w-0">
-        <p className="text-[1.95rem] font-black leading-none tracking-[-0.04em] text-[#0d1364]">
+        <p className="text-xl sm:text-[1.95rem] font-black leading-none tracking-[-0.04em] text-[#0d1364]">
           {stat.value}
         </p>
-        <div className="mt-1 text-sm font-medium leading-tight text-[#1f2a59]">
+        <div className="mt-0.5 sm:mt-1 text-xs sm:text-sm font-medium leading-tight text-[#1f2a59]">
           {labelLines.map((line) => (
             <p key={line}>{line}</p>
           ))}
@@ -78,7 +79,7 @@ export default function HowItWorksSection({ data }) {
   };
 
   return (
-     <section className="relative overflow-hidden bg-white px-6 py-2 sm:px-8 lg:px-10 lg:py-20">
+     <section className="relative overflow-hidden bg-white px-4 py-8 sm:px-8 lg:px-10 lg:py-20">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-x-[8%] top-10 h-28 rounded-full bg-[radial-gradient(circle,rgba(95,80,255,0.12),transparent_72%)] blur-3xl" />
         <div className="absolute left-[-20px] top-[26%] h-[58%] w-[51%] rounded-r-[3rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.14))]" />
@@ -87,22 +88,23 @@ export default function HowItWorksSection({ data }) {
       </div>
 
       <div className="relative mx-auto max-w-[1440px]">
-        <h2 className="translate-y-18 mx-auto max-w-5xl text-center text-4xl font-black tracking-[-0.05em] text-[#080d63] sm:text-5xl lg:text-[4.2rem] lg:leading-[1.05]">
+        <h2 className="mx-auto max-w-5xl text-center text-2xl sm:text-4xl font-black tracking-[-0.05em] text-[#080d63] lg:text-[4.2rem] lg:leading-[1.05]">
           {data.title}
         </h2>
 
-        <div className="mt-6 grid items-center gap-10 lg:grid-cols-[1fr_minmax(380px,1.2fr)_1fr] lg:gap-8 xl:gap-10">
+        <div className="mt-6 grid items-center gap-8 lg:grid-cols-[1fr_minmax(380px,1.2fr)_1fr] lg:gap-8 xl:gap-10">
           <article className="w-full px-1 sm:px-2 lg:pr-1 xl:pr-[1px]">
-            <div className="mb-6 h-24 w-56 rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.04))]" />
-            <h3 className="max-w-none text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] sm:text-[2.25rem]">
+            <div className="mb-4 sm:mb-6 h-16 sm:h-24 w-40 sm:w-56 rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.04))]" />
+            <h3 className="max-w-none text-xl sm:text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] lg:text-[2.25rem]">
               {left.title}
             </h3>
-            <p className="mt-6 max-w-none text-black font-semibold text-lg leading-[1.5] text-[#111827]">
+            <p className="mt-4 sm:mt-6 max-w-none text-black font-semibold text-sm sm:text-lg leading-[1.5] text-[#111827]">
               {left.description}
             </p>
           </article>
 
-          <div className="relative flex min-h-[430px] items-center justify-center sm:min-h-[520px] lg:min-h-[600px]">
+          {/* Center visualization - hidden on mobile, shown on lg+ */}
+          <div className="relative hidden lg:flex min-h-[430px] items-center justify-center sm:min-h-[520px] lg:min-h-[600px]">
             <div className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(120,103,255,0.18),rgba(120,103,255,0.03)_55%,transparent_72%)] blur-2xl" />
 
             <div className="absolute left-[8%] top-[14%] rounded-[2rem] bg-[linear-gradient(180deg,#080d63,#2e277b)] p-5 text-white shadow-[0_28px_50px_rgba(54,43,156,0.32)]">
@@ -150,29 +152,31 @@ export default function HowItWorksSection({ data }) {
             <PuzzleDisk />
           </div>
 
+          {/* Mobile-only simplified puzzle disk */}
+          <div className="relative flex lg:hidden min-h-[220px] items-center justify-center">
+            <div className="absolute left-1/2 top-1/2 h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(120,103,255,0.12),transparent_72%)] blur-2xl" />
+            <PuzzleDisk />
+          </div>
+
           <article className="w-full px-1 sm:px-2 lg:justify-self-end lg:pl-2 lg:pr-1 xl:pl-3 xl:pr-2">
-            
-            <h3 className="max-w-none mt-14 text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] sm:text-[2.25rem]">
+            <h3 className="max-w-none text-xl sm:text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] lg:mt-14 lg:text-[2.25rem]">
               {right.title}
             </h3>
-            <p className="mt-6 max-w-none text-black font-semibold text-lg leading-[1.5] text-[#111827]">
+            <p className="mt-4 sm:mt-6 max-w-none text-black font-semibold text-sm sm:text-lg leading-[1.5] text-[#111827]">
               {right.description}
             </p>
           </article>
         </div>
 
-        <div className="mt-10 mx-0 rounded-[2rem] border border-[rgba(92,77,220,0.08)] bg-white/85 px-4 py-6 shadow-[0_24px_60px_rgba(46,34,125,0.08)] backdrop-blur-sm sm:px-6 lg:mt-6 lg:-mx-8 lg:px-8 xl:-mx-14">
-          <div className="grid gap-8 lg:grid-cols-[1.3fr_2fr] lg:items-center">
+        <div className="mt-8 lg:mt-6 mx-0 rounded-2xl sm:rounded-[2rem] border border-[rgba(92,77,220,0.08)] bg-white/85 px-3 py-4 sm:px-6 sm:py-6 shadow-[0_24px_60px_rgba(46,34,125,0.08)] backdrop-blur-sm lg:-mx-8 lg:px-8 xl:-mx-14">
+          <div className="grid gap-6 lg:grid-cols-[1.3fr_2fr] lg:items-center lg:gap-8">
             <div>
-              {/* <p className="text-sm font-black uppercase tracking-[0.08em] text-[#6c58f8] sm:text-base">
-                Our Commitment
-              </p> */}
-              <h3 className="mt-3 text-3xl font-black tracking-[-0.04em] text-[#0d1364] sm:text-[2.5rem]">
+              <h3 className="mt-1 sm:mt-3 text-xl sm:text-3xl font-black tracking-[-0.04em] text-[#0d1364] lg:text-[2.5rem]">
                 Driving Value Through Optimization
               </h3>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-0">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 xl:grid-cols-4 xl:gap-0">
               {data.stats?.map((stat, index) => (
                 <div
                   key={`${stat.value}-${stat.label}`}
@@ -187,48 +191,4 @@ export default function HowItWorksSection({ data }) {
       </div>
     </section>
   );
-
-
-  //  <section className="bg-transparent overflow-hidden py-10 md:py-14">
-  //     <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
-  //       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[rgb(13,27,94)]">{data.title}</h2>
-  //       <p className="mt-4 text-[rgb(13,27,94)] font-semibold text-lg sm:text-xl max-w-4xl mx-auto leading-snug">{data.description}</p>
-
-        {/* <div className="mt-6 md:mt-8 grid grid-cols-2 md:grid-cols-5 gap-4">
-          {data.values.map((card, index) => (
-            <article key={card.title} className="group [perspective:1200px]">
-              <div className="relative h-44 rounded-xl [transform-style:preserve-3d] transition-transform duration-700 group-hover:[transform:rotateY(180deg)]">
-                <div className={`absolute inset-0 rounded-xl overflow-hidden border border-[#e2e2e2] shadow-sm card-grad-${index} [backface-visibility:hidden]`}>
-                  <div className="absolute inset-0 bg-black/30" />
-                  <span className="absolute inset-0 flex items-center justify-center text-white text-7xl font-black tracking-wider">
-                    {card.letter}
-                  </span>
-                </div>
-
-                <div className="absolute inset-0 rounded-xl border border-[#0a0b85]/25 bg-gradient-to-br from-[#05063f] via-[#090b66] to-[#020212] p-4 text-center shadow-[0_18px_40px_rgba(10,11,133,0.22)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
-                  <div className="flex h-full flex-col items-center rounded-[0.85rem] border border-white/10 bg-white/5 px-4 py-5 backdrop-blur-[2px]">
-                    <span className="rounded-full border border-white/15 bg-white/8 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-white/65">
-                      {card.title}
-                    </span>
-                    <p className="my-auto max-w-[25ch] text-[10px] leading-[1.4] text-white/82">
-                      {card.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <p className="mt-2 text-black font-bold">{card.title}</p>
-            </article>
-          ))}
-        </div> */}
-  //     </div>
-  //   </section>
-  // );
-
-
-
-
-
-
-
-
 }
