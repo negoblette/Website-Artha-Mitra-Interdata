@@ -185,49 +185,16 @@
     "title": "What People Says",
     "items": [
       {
-        "image": "/images/principals/juniper.png",
-        "text": "Juniper Networks delivers high-performance networking and cybersecurity solutions that AMI integrates to help clients build secure, AI-driven enterprise networks.",
-        "author": "Juniper Networks"
+        "logo": "/logo.png",
+        "text": "PT Artha Mitra Interdata is the kind of integrator partner every company hopes for. They're committed, they're reliable, and they actually care about the results as much as we do. At PT Sysware Indonesia, we value expertise and transparency, and PT Artha Mitra Interdata always delivers both with a great attitude every single time.",
+        "author": "Mr. Tonny Lim",
+        "role": "President Director of PT Sysware Indonesia"
       },
       {
-        "image": "/images/principals/barracuda.png",
-        "text": "Barracuda provides cloud-enabled security solutions trusted by organizations worldwide. AMI deploys Barracuda's email protection, application security, and data protection for clients across Indonesia.",
-        "author": "Barracuda Networks"
-      },
-      {
-        "image": "/images/principals/rapid7.png",
-        "text": "Rapid7 empowers organizations to reduce risk across their entire connected environment. Through this partnership, AMI delivers advanced vulnerability management and incident detection capabilities.",
-        "author": "Rapid7"
-      },
-      {
-        "image": "/images/principals/juniper.png",
-        "text": "Dummy testimonial 1: AMI helped our team modernize network operations with smoother implementation and excellent post-deployment support.",
-        "author": "PT Nusantara Teknologi"
-      },
-      {
-        "image": "/images/principals/barracuda.png",
-        "text": "Dummy testimonial 2: Their security assessment gave us practical recommendations that significantly improved visibility and response speed.",
-        "author": "CV Data Pratama"
-      },
-      {
-        "image": "/images/principals/rapid7.png",
-        "text": "Dummy testimonial 3: The rollout was structured and professional, and the team communicated clearly at every stage.",
-        "author": "PT Aksara Digital"
-      },
-      {
-        "image": "/images/principals/juniper.png",
-        "text": "Dummy testimonial 4: We appreciated the proactive support model and fast turnaround whenever technical issues appeared.",
-        "author": "PT Sinar Sistem"
-      },
-      {
-        "image": "/images/principals/barracuda.png",
-        "text": "Dummy testimonial 5: AMI provided a solid balance between strategic planning and hands-on execution for our infrastructure program.",
-        "author": "PT Mitra Solusi"
-      },
-      {
-        "image": "/images/principals/rapid7.png",
-        "text": "Dummy testimonial 6: Their team was responsive, detail-oriented, and reliable throughout our end-to-end security upgrade.",
-        "author": "PT Awan Integrasi"
+        "logo": "/logo.png",
+        "text": "Our Partnership with PT Artha Mitra Interdata represents the ideal convergence of security and scalability. Beyond the technology, this relationship is rooted in deep-seated business commitment and mutual trust; values that are indispensable in today's volatile digital landscape. We especially recognize PT Artha Mitra Interdata's unwavering commitment to deliver our security suite with precision and integrity. Their team consistently goes beyond mere sales, ensuring that our solutions are implemented and optimised to solve each and every client's unique challenges. By aligning our long-term visions and leveraging their excellence in service delivery, we empower enterprises with the confidence to grow, knowing their security infrastructure are fortified by industry-leading standards and a partnership that stands the test of time.",
+        "author": "Mr. Susanto Lee",
+        "role": "President Director of PT Secure Pasifik Teknologi"
       }
     ]
   },
