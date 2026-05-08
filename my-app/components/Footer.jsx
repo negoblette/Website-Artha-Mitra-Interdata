@@ -12,7 +12,7 @@ const socialIcons = {
 export default function Footer({ data, companyName, logo, tagline, contact }) {
   const staticCompanyName = 'Artha Mitra Interdata';
   const staticLogo = '/logo.png';
-  const staticTagline = 'We Optimize IT For You';
+  const staticTagline = 'we optimize IT for you';
   const staticContact = {
     address: 'Jl. Dr. Makaliwe I No.24D, Jakarta 11450, Indonesia',
     phone: '+6221-56975111/5222',
@@ -53,16 +53,12 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-9 md:pt-10 pb-2 md:pb-2 md:min-h-[300px] flex flex-col justify-between">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           <div className="md:col-span-4">
-            <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11">
-                <Image src={staticLogo} alt={staticCompanyName} fill sizes="44px" className="object-contain" />
-              </div>
-              <div>
-                <p className="text-sm sm:text-[15px] font-bold leading-tight text-[#1a1a1a]">{staticCompanyName}</p>
-                <p className="text-[12px] leading-tight text-black/55">{staticTagline}</p>
+            <Link href="/" className="inline-block">
+              <div className="relative w-44 sm:w-48 h-12 sm:h-14">
+                <Image src={staticLogo} alt={staticCompanyName} fill sizes="180px" className="object-contain object-left" />
               </div>
             </Link>
-            {/* <p className="mt-4 max-w-[280px] text-[12px] leading-relaxed text-black/60">Simply put, We Optimize IT For You.</p> */}
+            <p className="mt-2 text-[11px] sm:text-xs font-medium text-black/50">{staticTagline}</p>
 
             <div className="mt-5 flex gap-3 text-black/90">
               {socials.map((social) => {
@@ -86,41 +82,41 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
 
           <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-7">
             <div>
-              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Quick Links</h4>
+              <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Quick Links</h4>
               <ul className="mt-3 space-y-2">
                 {staticColumns.quickLinks.map((link) => (
                   <li key={link.href + link.label}>
-                    <Link href={link.href} className="text-[12px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
+                    <Link href={link.href} className="text-[14px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Solutions</h4>
+              <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Solutions</h4>
               <ul className="mt-3 space-y-2">
                 {staticColumns.solutions.map((link) => (
                   <li key={link.href + link.label}>
-                    <Link href={link.href} className="text-[12px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
+                    <Link href={link.href} className="text-[14px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Careers</h4>
+              <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Careers</h4>
               <ul className="mt-3 space-y-2">
                 {staticColumns.careers.map((link) => (
                   <li key={link.href + link.label}>
-                    <Link href={link.href} className="text-[12px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
+                    <Link href={link.href} className="text-[14px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h4 className="text-[12px] font-bold uppercase tracking-wide text-black">Contact</h4>
-              <div className="mt-3 space-y-2.5 text-[12px] leading-snug text-black/70">
+              <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Contact</h4>
+              <div className="mt-3 space-y-2.5 text-[14px] leading-snug text-black/70">
                 <p className="flex items-start gap-2"><MapPin size={13} className="mt-0.5 flex-shrink-0" />{staticContact.address}</p>
                 <p className="flex items-start gap-2"><Phone size={13} className="mt-0.5 flex-shrink-0" />{staticContact.phone}</p>
                 <p className="flex items-start gap-2"><Mail size={13} className="mt-0.5 flex-shrink-0" />{staticContact.email}</p>
