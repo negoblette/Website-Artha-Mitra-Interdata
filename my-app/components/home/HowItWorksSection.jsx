@@ -79,7 +79,7 @@ export default function HowItWorksSection({ data }) {
   };
 
   return (
-     <section className="relative overflow-hidden bg-white px-4 py-8 sm:px-8 lg:px-10 lg:py-20">
+     <section className="relative overflow-hidden bg-white px-4 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-x-[8%] top-10 h-28 rounded-full bg-[radial-gradient(circle,rgba(95,80,255,0.12),transparent_72%)] blur-3xl" />
         <div className="absolute left-[-20px] top-[26%] h-[58%] w-[51%] rounded-r-[3rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.14))]" />
@@ -92,13 +92,13 @@ export default function HowItWorksSection({ data }) {
           {data.title}
         </h2>
 
-        <div className="mt-6 grid items-center gap-8 lg:grid-cols-[1fr_minmax(380px,1.2fr)_1fr] lg:gap-8 xl:gap-10">
+        <div className="mt-6 grid items-start gap-8 lg:grid-cols-[1fr_minmax(380px,1.2fr)_1fr] lg:gap-8 xl:gap-10">
           <article className="w-full px-1 sm:px-2 lg:pr-1 xl:pr-[1px]">
-            <div className="mb-4 sm:mb-6 h-16 sm:h-24 w-40 sm:w-56 rounded-[1.75rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.04))]" />
+
             <h3 className="max-w-none text-xl sm:text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] lg:text-[2.25rem]">
               {left.title}
             </h3>
-            <p className="mt-4 sm:mt-6 max-w-none text-black font-semibold text-sm sm:text-lg leading-[1.5] text-[#111827]">
+            <p className="mt-4 sm:mt-6 max-w-none text-black font-semibold text-sm sm:text-lg leading-[1.5] text-[#111827] text-justify">
               {left.description}
             </p>
           </article>
@@ -159,10 +159,10 @@ export default function HowItWorksSection({ data }) {
           </div>
 
           <article className="w-full px-1 sm:px-2 lg:justify-self-end lg:pl-2 lg:pr-1 xl:pl-3 xl:pr-2">
-            <h3 className="max-w-none text-xl sm:text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] lg:mt-14 lg:text-[2.25rem]">
+            <h3 className="max-w-none text-xl sm:text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] lg:text-[2.25rem]">
               {right.title}
             </h3>
-            <p className="mt-4 sm:mt-6 max-w-none text-black font-semibold text-sm sm:text-lg leading-[1.5] text-[#111827]">
+            <p className="mt-4 sm:mt-6 max-w-none text-black font-semibold text-sm sm:text-lg leading-[1.5] text-[#111827] text-justify">
               {right.description}
             </p>
           </article>

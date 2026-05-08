@@ -73,7 +73,7 @@ export default function NewsSection({ data }) {
   const featured = items[0];
 
     return (
-      <section className="relative overflow-hidden bg-white px-4 py-10 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
+      <section className="relative overflow-hidden bg-white px-4 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
 
         {/* Background Glow */}
         <div className ="pointer-events-none absolute inset-0">
@@ -90,10 +90,7 @@ export default function NewsSection({ data }) {
               News & Article
             </h2>
 
-            <div className="mx-auto mt-3 sm:mt-5 flex items-center justify-center gap-2">
-              <div className="h-[4px] sm:h-[6px] w-14 sm:w-20 rounded-full bg-[#2554f4]"/>
-              <div className="h-[4px] sm:h-[6px] w-[4px] sm:w-[6px] rounded-full bg-[#2554f4]"/>
-            </div>
+
           </div>
         
 

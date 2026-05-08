@@ -55,7 +55,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
           <div className="md:col-span-4">
             <Link href="/" className="inline-flex items-center gap-2.5">
               <div className="relative w-10 h-10 sm:w-11 sm:h-11">
-                <Image src={staticLogo} alt={staticCompanyName} fill className="object-contain" />
+                <Image src={staticLogo} alt={staticCompanyName} fill sizes="44px" className="object-contain" />
               </div>
               <div>
                 <p className="text-sm sm:text-[15px] font-bold leading-tight text-[#1a1a1a]">{staticCompanyName}</p>

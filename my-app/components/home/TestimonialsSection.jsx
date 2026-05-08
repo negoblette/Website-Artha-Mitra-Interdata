@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useMemo } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const EMPTY_ITEMS = [];
 
@@ -113,7 +113,7 @@ export default function TestimonialsSection({ data }) {
   if (!items.length) return null;
 
   return (
-    <section className="relative overflow-hidden bg-transparent py-10 md:py-14">
+    <section className="relative overflow-hidden bg-transparent py-12 sm:py-16 lg:py-24">
       <div className="pointer-events-none absolute top-0 left-1/2 h-full w-[115vw] -translate-x-1/2">
       </div>
 
@@ -128,7 +128,7 @@ export default function TestimonialsSection({ data }) {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <motion.div
+          <m.div
             className="flex"
             animate={{ x: -(trackIndex * step) }}
             transition={
@@ -152,7 +152,7 @@ export default function TestimonialsSection({ data }) {
                 </article>
               </div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
 
         <div className="flex justify-center mt-8 gap-2 pb-0">
