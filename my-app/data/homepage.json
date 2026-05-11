@@ -78,6 +78,14 @@
             "description": "Defending networks from threats, intrusion, and unauthorized access."
           },
           {
+            "name": "Network Infrastructure",
+            "description": "Core networking foundations that keep systems connected and reliable."
+          },
+          {
+            "name": "Network Monitoring",
+            "description": "Continuous visibility into network health, traffic, and performance."
+          },
+          {
             "name": "Data Security",
             "description": "Protecting sensitive data at rest, in transit, and in use."
           },
@@ -96,6 +104,10 @@
           {
             "name": "Security Management",
             "description": "Monitoring, managing, and improving security operations."
+          },
+          {
+            "name": "Secure Access & VPN",
+            "description": "Protected remote access with encrypted tunnels and policy control."
           },
           {
             "name": "Cloud Security",

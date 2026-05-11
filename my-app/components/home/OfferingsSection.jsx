@@ -29,11 +29,14 @@ const rightIcons = [Handshake, Rocket, Headphones, Search, Cloud, Cpu, Shield, C
 
 const solutionIconMap = {
   "Network Security": Network,
+  "Network Infrastructure": Server,
+  "Network Monitoring": Siren,
   "Data Security": Database,
   "Application Security": ShieldCheck,
   "Endpoint Security": Cpu,
   "Information Security": FileWarning,
   "Security Management": Shield,
+  "Secure Access & VPN": Lock,
   "Cloud Security": Cloud,
 };
 
