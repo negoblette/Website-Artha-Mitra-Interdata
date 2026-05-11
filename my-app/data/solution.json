@@ -30,72 +30,20 @@
           "name": "Fortinet",
           "logo": "/images/principals/fortinet.png",
           "website": "https://www.fortinet.com"
+        },
+        {
+          "name": "Gigamon",
+          "logo": "/images/principals/gigamon.png",
+          "website": "https://www.gigamon.com"
         }
       ]
     },
     {
-      "slug": "it-security",
-      "name": "IT Security",
-      "icon": "Shield",
-      "shortDescription": "Comprehensive cybersecurity solutions including next-gen firewalls, intrusion detection, and access control to protect your digital assets.",
-      "fullDescription": "Our security solutions provide multi-layered protection for your organization. We implement industry-leading firewalls, intrusion detection systems, and access controls to safeguard your critical data and infrastructure against evolving threats.",
-      "features": [
-        "Next-Generation Firewall Management",
-        "Intrusion Detection & Prevention",
-        "Vulnerability Assessment",
-        "Security Auditing",
-        "Access Control Systems",
-        "Data Loss Prevention"
-      ],
-      "brands": [
-        {
-          "name": "CyberArk",
-          "logo": "/images/principals/cyberark.png",
-          "website": "https://www.cyberark.com"
-        },
-        {
-          "name": "Palo Alto Networks",
-          "logo": "/images/principals/paloalto.png",
-          "website": "https://www.paloaltonetworks.com"
-        },
-        {
-          "name": "Fortinet",
-          "logo": "/images/principals/fortinet.png",
-          "website": "https://www.fortinet.com"
-        },
-        {
-          "name": "Rapid7",
-          "logo": "/images/principals/rapid7.png",
-          "website": "https://www.rapid7.com"
-        },
-        {
-          "name": "DAS Security",
-          "logo": "/images/principals/das.png",
-          "website": "https://www.dbappsecurity.com"
-        },
-        {
-          "name": "CrowdStrike",
-          "logo": "/images/principals/crowdstrike.png",
-          "website": "https://www.crowdstrike.com/en-us/"
-        },
-        {
-          "name": "GTB Technologies",
-          "logo": "/images/principals/gtb.png",
-          "website": "https://gttb.com"
-        },
-        {
-          "name": "Tenable",
-          "logo": "/images/principals/tenable.png",
-          "website": "http://tenable.com"
-        }
-      ]
-    },
-    {
-      "slug": "network-monitoring",
-      "name": "Network Monitoring",
+      "slug": "network-performance-monitoring",
+      "name": "Network Performance Monitoring",
       "icon": "Activity",
-      "shortDescription": "24/7 real-time network monitoring and proactive issue resolution to maximize uptime and performance across your infrastructure.",
-      "fullDescription": "Stay ahead of network issues with our comprehensive monitoring solutions. Our systems identify potential problems before they impact your operations, ensuring maximum uptime and performance across your entire infrastructure.",
+      "shortDescription": "Real-time visibility and performance monitoring that helps you detect issues faster and maintain network stability at scale.",
+      "fullDescription": "We help you monitor critical network traffic, detect anomalies, and maintain operational visibility across complex environments. Our approach focuses on performance insight, uptime assurance, and faster troubleshooting for business-critical infrastructure.",
       "features": [
         "Real-time Performance Monitoring",
         "Automated Alert Management",
@@ -106,11 +54,6 @@
       ],
       "brands": [
         {
-          "name": "Gigamon",
-          "logo": "/images/principals/gigamon.png",
-          "website": "https://www.gigamon.com"
-        },
-        {
           "name": "NETSCOUT",
           "logo": "/images/principals/netscout.png",
           "website": "https://www.netscout.com"
@@ -118,18 +61,18 @@
       ]
     },
     {
-      "slug": "application-delivery",
-      "name": "Application Delivery",
+      "slug": "network-security",
+      "name": "Network Security",
       "icon": "Zap",
-      "shortDescription": "High-performance application delivery controllers, load balancing, and DDoS protection for optimal application availability.",
-      "fullDescription": "Ensure your critical applications perform at their best with our application delivery solutions. From intelligent load balancing to DDoS mitigation, we help you maintain application availability, speed, and security at scale.",
+      "shortDescription": "Layered network protection built to secure users, traffic, branch connectivity, and perimeter controls across modern environments.",
+      "fullDescription": "We design and deploy network security architectures that help protect your organization from evolving threats while maintaining performance and operational control. This includes segmentation, access enforcement, next-generation firewalling, and secure connectivity across distributed environments.",
       "features": [
-        "Application Load Balancing",
-        "SSL Offloading",
-        "DDoS Protection",
-        "Web Application Firewall",
-        "Traffic Optimization",
-        "Application Analytics"
+        "Next-Generation Firewall Management",
+        "Threat Prevention",
+        "Network Segmentation",
+        "Secure Branch Connectivity",
+        "Policy Enforcement",
+        "Zero Trust Access Control"
       ],
       "brands": [
         {
@@ -141,33 +84,16 @@
           "name": "Fortinet",
           "logo": "/images/principals/fortinet.png",
           "website": "https://www.fortinet.com"
-        }
-      ]
-    },
-    {
-      "slug": "secure-access",
-      "name": "Secure Access & VPN",
-      "icon": "Lock",
-      "shortDescription": "Secure remote access and zero-trust network access solutions for the modern hybrid workforce.",
-      "fullDescription": "Enable your workforce to connect securely from anywhere with our secure access solutions. We implement zero-trust architectures, VPN solutions, and network access control to protect your organization while maintaining productivity.",
-      "features": [
-        "SSL VPN Solutions",
-        "Zero Trust Network Access",
-        "Network Access Control",
-        "Multi-Factor Authentication",
-        "Remote Desktop Gateway",
-        "Mobile Security"
-      ],
-      "brands": [
-        {
-          "name": "CyberArk",
-          "logo": "/images/principals/cyberark.png",
-          "website": "https://www.cyberark.com"
         },
         {
-          "name": "Palo Alto Networks",
-          "logo": "/images/principals/paloalto.png",
-          "website": "https://www.paloaltonetworks.com"
+          "name": "Juniper Networks",
+          "logo": "/images/principals/juniper.png",
+          "website": "https://www.juniper.net"
+        },
+        {
+          "name": "DAS Security",
+          "logo": "/images/principals/das.png",
+          "website": "https://www.dbappsecurity.com"
         },
         {
           "name": "Genians",
@@ -177,24 +103,24 @@
       ]
     },
     {
-      "slug": "email-protection",
-      "name": "Email & Spam Protection",
-      "icon": "Mail",
-      "shortDescription": "Enterprise-grade email security, anti-spam filtering, and phishing protection to keep your communications clean and safe.",
-      "fullDescription": "Protect your email communications with enterprise-grade anti-spam and email security solutions. Our multi-layered approach blocks threats before they reach your inbox while ensuring legitimate emails are delivered promptly.",
+      "slug": "data-security",
+      "name": "Data Security",
+      "icon": "Lock",
+      "shortDescription": "Controls and safeguards designed to protect sensitive enterprise data from misuse, leakage, and privileged abuse.",
+      "fullDescription": "We help organizations secure sensitive information through stronger control of privileged access, data handling, and policy enforcement. Our data security approach focuses on protecting critical assets while maintaining the access and workflows your teams need.",
       "features": [
-        "Email Filtering & Scanning",
-        "Phishing Protection",
-        "Malware Detection",
-        "Quarantine Management",
-        "Email Encryption",
-        "Compliance Reporting"
+        "Privileged Access Protection",
+        "Sensitive Data Controls",
+        "Data Loss Prevention",
+        "Access Governance",
+        "User Activity Oversight",
+        "Policy-Based Protection"
       ],
       "brands": [
         {
-          "name": "Fortinet",
-          "logo": "/images/principals/fortinet.png",
-          "website": "https://www.fortinet.com"
+          "name": "CyberArk",
+          "logo": "/images/principals/cyberark.png",
+          "website": "https://www.cyberark.com"
         },
         {
           "name": "GTB Technologies",
@@ -204,41 +130,169 @@
       ]
     },
     {
-      "slug": "bandwidth-management",
-      "name": "Bandwidth Management",
-      "icon": "BarChart3",
-      "shortDescription": "Intelligent bandwidth management and traffic shaping to maximize network efficiency and reduce operational costs.",
-      "fullDescription": "Maximize your network efficiency with intelligent bandwidth management solutions. We help you allocate resources effectively, prioritize critical applications, and ensure consistent performance across your organization.",
+      "slug": "application-security",
+      "name": "Application Security",
+      "icon": "Mail",
+      "shortDescription": "Security for business-critical applications through vulnerability insight, risk reduction, and stronger application-layer resilience.",
+      "fullDescription": "We support application security initiatives by helping organizations identify weaknesses, improve resilience, and reduce risk across business-critical systems. Our focus is on strengthening the security posture of applications without compromising operational performance.",
       "features": [
-        "Traffic Shaping & QoS",
-        "Bandwidth Allocation",
-        "Application Prioritization",
-        "Usage Analytics & Reporting",
-        "Cost Optimization",
-        "Load Balancing"
+        "Application Risk Visibility",
+        "Vulnerability Prioritization",
+        "Threat Detection Support",
+        "Policy Alignment",
+        "Secure Delivery Practices",
+        "Operational Security Insight"
       ],
       "brands": [
         {
-          "name": "Juniper Networks",
-          "logo": "/images/principals/juniper.png",
-          "website": "https://www.juniper.net"
+          "name": "OpenText",
+          "logo": "/images/principals/opentext.png",
+          "website": "https://www.opentext.com"
         },
         {
-          "name": "NETSCOUT",
-          "logo": "/images/principals/netscout.png",
-          "website": "https://www.netscout.com"
+          "name": "Rapid7",
+          "logo": "/images/principals/rapid7.png",
+          "website": "https://www.rapid7.com"
+        }
+      ]
+    },
+    {
+      "slug": "endpoint-security",
+      "name": "Endpoint Security",
+      "icon": "BarChart3",
+      "shortDescription": "Modern endpoint protection designed to defend workstations, servers, and user devices from advanced threats.",
+      "fullDescription": "We help secure endpoints across the enterprise with protection strategies that combine prevention, visibility, and rapid response. This supports safer user environments, stronger device hygiene, and better resilience against evolving attacks.",
+      "features": [
+        "Endpoint Protection",
+        "Threat Detection",
+        "Device Visibility",
+        "Incident Response Readiness",
+        "Malware Defense",
+        "Cross-Environment Coverage"
+      ],
+      "brands": [
+        {
+          "name": "Palo Alto Networks",
+          "logo": "/images/principals/paloalto.png",
+          "website": "https://www.paloaltonetworks.com"
+        },
+        {
+          "name": "Bitdefender",
+          "logo": "/images/principals/bitdefender.png",
+          "website": "https://www.bitdefender.com/en-id/"
+        },
+        {
+          "name": "CrowdStrike",
+          "logo": "/images/principals/crowdstrike.png",
+          "website": "https://www.crowdstrike.com/en-us/"
+        }
+      ]
+    },
+    {
+      "slug": "information-security",
+      "name": "Information Security",
+      "icon": "FileLock2",
+      "shortDescription": "Governance and protection strategies that help preserve the confidentiality, integrity, and availability of business information.",
+      "fullDescription": "Our information security approach is designed to help organizations protect critical information assets through stronger controls, clearer visibility, and disciplined governance. We align technology and policy so security supports both compliance and business confidence.",
+      "features": [
+        "Information Protection Controls",
+        "Data Governance Support",
+        "Security Policy Alignment",
+        "Access Risk Reduction",
+        "Compliance Readiness",
+        "Operational Oversight"
+      ],
+      "brands": [
+        {
+          "name": "CyberArk",
+          "logo": "/images/principals/cyberark.png",
+          "website": "https://www.cyberark.com"
+        },
+        {
+          "name": "GTB Technologies",
+          "logo": "/images/principals/gtb.png",
+          "website": "https://gttb.com"
+        }
+      ]
+    },
+    {
+      "slug": "security-management",
+      "name": "Security Management",
+      "icon": "ShieldCheck",
+      "shortDescription": "Centralized oversight and operational security management to help teams maintain control, visibility, and response readiness.",
+      "fullDescription": "We help organizations strengthen day-to-day security management through improved visibility, stronger control frameworks, and better operational coordination. The goal is to make security programs easier to manage, measure, and improve over time.",
+      "features": [
+        "Security Operations Oversight",
+        "Control Management",
+        "Risk Visibility",
+        "Incident Readiness",
+        "Policy Administration",
+        "Operational Reporting"
+      ],
+      "brands": [
+        {
+          "name": "Palo Alto Networks",
+          "logo": "/images/principals/paloalto.png",
+          "website": "https://www.paloaltonetworks.com"
+        },
+        {
+          "name": "CyberArk",
+          "logo": "/images/principals/cyberark.png",
+          "website": "https://www.cyberark.com"
+        },
+        {
+          "name": "Fortinet",
+          "logo": "/images/principals/fortinet.png",
+          "website": "https://www.fortinet.com"
+        },
+        {
+          "name": "Rapid7",
+          "logo": "/images/principals/rapid7.png",
+          "website": "https://www.rapid7.com"
+        }
+      ]
+    },
+    {
+      "slug": "cloud-security",
+      "name": "Cloud Security",
+      "icon": "Cloud",
+      "shortDescription": "Protection strategies that help secure cloud workloads, users, and data across modern hybrid environments.",
+      "fullDescription": "We help organizations strengthen cloud security by improving visibility, access control, and threat resilience across cloud-hosted environments. Our focus is on helping you adopt cloud with stronger security posture and operational confidence.",
+      "features": [
+        "Cloud Threat Protection",
+        "Workload Visibility",
+        "Secure Access Policies",
+        "Posture Improvement",
+        "Hybrid Environment Coverage",
+        "Risk Reduction"
+      ],
+      "brands": [
+        {
+          "name": "Palo Alto Networks",
+          "logo": "/images/principals/paloalto.png",
+          "website": "https://www.paloaltonetworks.com"
+        },
+        {
+          "name": "Bitdefender",
+          "logo": "/images/principals/bitdefender.png",
+          "website": "https://www.bitdefender.com/en-id/"
+        },
+        {
+          "name": "CrowdStrike",
+          "logo": "/images/principals/crowdstrike.png",
+          "website": "https://www.crowdstrike.com/en-us/"
         }
       ]
     }
   ],
   "services": [
     {
-      "name": "Network Assessment",
+      "name": "Assessment",
       "icon": "Search",
       "description": "Comprehensive evaluation of your existing network infrastructure to identify bottlenecks, vulnerabilities, and optimization opportunities."
     },
     {
-      "name": "Network Design",
+      "name": "Design",
       "icon": "PenTool",
       "description": "Custom network architecture design tailored to your business requirements, ensuring scalability, security, and performance."
     },
@@ -253,14 +307,24 @@
       "description": "Ongoing system maintenance, firmware updates, health monitoring, and priority technical support to keep your infrastructure running."
     },
     {
+      "name": "Training",
+      "icon": "GraduationCap",
+      "description": "Technical training programs to empower your IT team with the knowledge and skills to manage and optimize your infrastructure."
+    },
+    {
       "name": "Security Audit",
       "icon": "ShieldCheck",
       "description": "In-depth security assessment and penetration testing to evaluate your organization's security posture and compliance readiness."
     },
     {
-      "name": "Training",
-      "icon": "GraduationCap",
-      "description": "Technical training programs to empower your IT team with the knowledge and skills to manage and optimize your infrastructure."
+      "name": "Asset Disposal Service",
+      "icon": "Recycle",
+      "description": "Structured and secure disposal support for retired IT assets, aligned with operational, security, and environmental considerations."
+    },
+    {
+      "name": "Awareness Event",
+      "icon": "Users",
+      "description": "Awareness sessions and event support designed to strengthen security culture, user readiness, and stakeholder engagement."
     }
   ]
 }
