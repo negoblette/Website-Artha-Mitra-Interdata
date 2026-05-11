@@ -106,8 +106,8 @@
             "description": "Monitoring, managing, and improving security operations."
           },
           {
-            "name": "Secure Access & VPN",
-            "description": "Protected remote access with encrypted tunnels and policy control."
+            "name": "Network Performance Monitoring",
+            "description": "Tracking latency, throughput, and uptime to optimize performance."
           },
           {
             "name": "Cloud Security",

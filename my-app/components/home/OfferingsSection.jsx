@@ -36,7 +36,7 @@ const solutionIconMap = {
   "Endpoint Security": Cpu,
   "Information Security": FileWarning,
   "Security Management": Shield,
-  "Secure Access & VPN": Lock,
+  "Network Performance Monitoring": Siren,
   "Cloud Security": Cloud,
 };
 
