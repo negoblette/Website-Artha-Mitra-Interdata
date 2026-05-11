@@ -8,16 +8,38 @@ const EMPTY_ITEMS = [];
 export default function TestimonialsSection({ data }) {
   const items = data?.items ?? EMPTY_ITEMS;
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDir, setTransitionDir] = useState("next");
   const scrollCooldown = useRef(false);
   const leftPanelRef = useRef(null);
+  const transitionTimeoutRef = useRef(null);
+  const autoIntervalRef = useRef(null);
+  const isHoveringRef = useRef(false);
 
   const goNext = useCallback(() => {
+    setTransitionDir("next");
     setActiveIndex((prev) => (prev + 1) % items.length);
   }, [items.length]);
 
   const goPrev = useCallback(() => {
+    setTransitionDir("prev");
     setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
   }, [items.length]);
+
+  useEffect(() => {
+    setIsTransitioning(true);
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+    }
+    transitionTimeoutRef.current = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 360);
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, [activeIndex]);
 
   // Attach wheel listener with { passive: false } so preventDefault works
   useEffect(() => {
@@ -43,11 +65,35 @@ export default function TestimonialsSection({ data }) {
     return () => el.removeEventListener("wheel", handleWheel);
   }, [goNext, goPrev]);
 
+  useEffect(() => {
+    if (!items.length) return;
+
+    if (autoIntervalRef.current) {
+      clearInterval(autoIntervalRef.current);
+    }
+
+    autoIntervalRef.current = setInterval(() => {
+      if (isHoveringRef.current) return;
+      goNext();
+    }, 5000);
+
+    return () => {
+      if (autoIntervalRef.current) {
+        clearInterval(autoIntervalRef.current);
+      }
+    };
+  }, [items.length, goNext]);
+
   if (!items.length) return null;
 
   const prevIdx = (activeIndex - 1 + items.length) % items.length;
   const nextIdx = (activeIndex + 1) % items.length;
   const activeItem = items[activeIndex];
+  const textMotion = isTransitioning
+    ? transitionDir === "next"
+      ? "opacity-0 translate-y-3"
+      : "opacity-0 -translate-y-3"
+    : "opacity-100 translate-y-0";
 
   const slots = [
     { index: prevIdx, position: "top" },
@@ -64,7 +110,15 @@ export default function TestimonialsSection({ data }) {
         </h2>
 
         {/* Main content grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 lg:gap-10 xl:gap-14">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 lg:gap-10 xl:gap-14"
+          onMouseEnter={() => {
+            isHoveringRef.current = true;
+          }}
+          onMouseLeave={() => {
+            isHoveringRef.current = false;
+          }}
+        >
           {/* ── Left: fixed-height vertical reviewer selector ── */}
           <div
             ref={leftPanelRef}
@@ -78,6 +132,12 @@ export default function TestimonialsSection({ data }) {
             {slots.map(({ index, position }) => {
               const item = items[index];
               const isActive = position === "middle";
+              const positionMotion =
+                position === "top"
+                  ? "lg:-translate-y-8 lg:scale-[0.92]"
+                  : position === "bottom"
+                    ? "lg:translate-y-8 lg:scale-[0.92]"
+                    : "lg:translate-y-0 lg:scale-100";
 
               return (
                 <button
@@ -86,7 +146,7 @@ export default function TestimonialsSection({ data }) {
                     if (position === "top") goPrev();
                     else if (position === "bottom") goNext();
                   }}
-                  className={`relative z-10 flex items-center gap-4 transition-all duration-500 ease-out w-full
+                  className={`relative z-10 flex items-center gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] w-full ${positionMotion}
                     ${position === "middle"
                       ? "lg:my-5 lg:flex-1 cursor-default"
                       : "lg:my-0 cursor-pointer"
@@ -96,7 +156,7 @@ export default function TestimonialsSection({ data }) {
                 >
                   {/* Logo circle */}
                   <div
-                    className={`relative shrink-0 rounded-full bg-white overflow-hidden flex items-center justify-center transition-all duration-500
+                    className={`relative shrink-0 rounded-full bg-white overflow-hidden flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
                       ${isActive
                         ? "w-[88px] h-[88px] border-2 border-[#0d1364] shadow-[0_8px_24px_rgba(13,19,100,0.14)]"
                         : "w-[52px] h-[52px] border border-[#d4d4d8]"
@@ -104,7 +164,7 @@ export default function TestimonialsSection({ data }) {
                     `}
                   >
                     <div
-                      className={`relative transition-all duration-500 ${isActive ? "w-[60px] h-[60px]" : "w-[34px] h-[34px]"} ${item.logoClassName ?? ""}`}
+                      className={`relative transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive ? "w-[60px] h-[60px]" : "w-[34px] h-[34px]"} ${item.logoClassName ?? ""}`}
                     >
                       <Image
                         src={item.logo || item.image || "/logo.png"}
@@ -117,9 +177,9 @@ export default function TestimonialsSection({ data }) {
                   </div>
 
                   {/* Name & role */}
-                  <div className={`text-left transition-all duration-500 min-w-0 ${isActive ? "" : "hidden sm:block"}`}>
+                  <div className={`text-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] min-w-0 ${isActive ? "" : "hidden sm:block"}`}>
                     <p
-                      className={`font-bold text-[#0d1364] leading-tight transition-all duration-500
+                      className={`font-bold text-[#0d1364] leading-tight transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
                         ${isActive ? "text-[15px] sm:text-lg" : "text-xs"}
                       `}
                     >
@@ -127,7 +187,7 @@ export default function TestimonialsSection({ data }) {
                     </p>
                     {item.role && (
                       <p
-                        className={`text-black/40 leading-snug mt-0.5 transition-all duration-500
+                        className={`text-black/40 leading-snug mt-0.5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
                           ${isActive ? "text-xs sm:text-[13px]" : "text-[10px]"}
                         `}
                       >
@@ -154,7 +214,7 @@ export default function TestimonialsSection({ data }) {
             </span>
 
             {/* Testimonial content */}
-            <div className="pt-3 sm:pt-5 flex flex-col justify-center">
+            <div className={`pt-3 sm:pt-5 flex flex-col justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${textMotion}`}>
               <p className="text-sm sm:text-[15px] lg:text-base font-normal italic leading-[1.75] sm:leading-[1.85] text-[#444] max-w-xl text-justify">
                 {activeItem.text}
               </p>
