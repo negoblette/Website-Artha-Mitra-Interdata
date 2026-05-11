@@ -27,7 +27,28 @@ import {
 const leftIcons = [Server, Shield, Phone, Cpu, Database, Network, ShieldAlert, ShieldCheck, Siren, FileWarning, GitBranch];
 const rightIcons = [Handshake, Rocket, Headphones, Search, Cloud, Cpu, Shield, CloudCog, ShieldPlus, Lock];
 
-function OfferColumn({ eyebrow, title, items, icons }) {
+const solutionIconMap = {
+  "Network Security": Network,
+  "Data Security": Database,
+  "Application Security": ShieldCheck,
+  "Endpoint Security": Cpu,
+  "Information Security": FileWarning,
+  "Security Management": Shield,
+  "Cloud Security": Cloud,
+};
+
+const serviceIconMap = {
+  "Assessment": Search,
+  "Design": GitBranch,
+  "Implementation": Rocket,
+  "Maintenance & Support": Headphones,
+  "Training": Handshake,
+  "Security Audit": ShieldAlert,
+  "Asset Disposal Service": Server,
+  "Awareness Event": ShieldPlus,
+};
+
+function OfferColumn({ eyebrow, title, items, icons, iconMap }) {
   const normalizedItems = items.map((item) =>
     typeof item === 'string'
       ? { name: item, description: 'Enterprise-grade support tailored for your operations.' }
@@ -43,7 +64,7 @@ function OfferColumn({ eyebrow, title, items, icons }) {
 
       <div className="no-scrollbar mt-1.5 space-y-3 sm:space-y-4 overflow-y-auto sm:pl-50 sm:pr-50 flex-1 min-h-0">
         {normalizedItems.map((item, i) => {
-          const Icon = icons[i % icons.length];
+          const Icon = iconMap?.[item.name] ?? icons[i % icons.length];
 
           return (
             <div key={`${item.name}-${i}`}>
@@ -85,6 +106,7 @@ export default function OfferingsSection({ data }) {
               title="Solutions"
               items={data.tabs[0].items}
               icons={leftIcons}
+              iconMap={solutionIconMap}
             />
           </div>
           <div
@@ -97,6 +119,7 @@ export default function OfferingsSection({ data }) {
               title="Services"
               items={data.tabs[1].items}
               icons={rightIcons}
+              iconMap={serviceIconMap}
             />
           </div>
         </div>

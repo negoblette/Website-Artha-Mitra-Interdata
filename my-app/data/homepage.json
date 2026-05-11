@@ -74,48 +74,32 @@
         "label": "Solutions",
         "items": [
           {
-            "name": "Network Hardware",
-            "description": "Enterprise-grade architectural foundations built for resilient scalability."
+            "name": "Network Security",
+            "description": "Defending networks from threats, intrusion, and unauthorized access."
           },
           {
-            "name": "Firewall",
-            "description": "Intelligent security perimeters that adapt to evolving threat landscapes."
-          },
-          {
-            "name": "VoIP",
-            "description": "Next-generation voice communication integrated seamlessly into your stack."
-          },
-          {
-            "name": "Edge Computing",
-            "description": "Distributed processing power at the periphery of your operational environment."
-          },
-          {
-            "name": "Storage Arrays",
-            "description": "High-density data clusters optimized for rapid retrieval and redundancy."
-          },
-          {
-            "name": "SD-WAN",
-            "description": "Software-defined networking for dynamic load balancing across global sites."
+            "name": "Data Security",
+            "description": "Protecting sensitive data at rest, in transit, and in use."
           },
           {
             "name": "Application Security",
-            "description": "Protecting software from vulnerabilities and attacks throughout its lifecycle."
+            "description": "Securing applications across development, deployment, and runtime."
           },
           {
-            "name": "Security Management",
-            "description": "Planning, implementing, and maintaining security policies and controls."
-          },
-          {
-            "name": "Incident Management",
-            "description": "Identifying, responding to, and resolving security incidents quickly."
+            "name": "Endpoint Security",
+            "description": "Hardening endpoints to prevent malware and lateral movement."
           },
           {
             "name": "Information Security",
-            "description": "Safeguarding data from unauthorized access, use, or damage."
+            "description": "Establishing controls to safeguard information assets."
           },
           {
-            "name": "Problem Management",
-            "description": "Identifying root causes of incidents to prevent future issues."
+            "name": "Security Management",
+            "description": "Monitoring, managing, and improving security operations."
+          },
+          {
+            "name": "Cloud Security",
+            "description": "Securing cloud workloads, identities, and configurations."
           }
         ],
         "description": "We offer a wide range of solutions centered on IT Infrastructure and Security, designed to maximize impact and value to your business. Our solutions cover everything from network hardware and software to advanced security measures, bandwidth optimization, and communication systems."
@@ -125,52 +109,36 @@
         "label": "Services",
         "items": [
           {
-            "name": "Strategic Consulting",
-            "description": "Tailored roadmaps that align technological precision with business goals."
+            "name": "Assessment",
+            "description": "Baseline review to identify gaps, risks, and priorities."
+          },
+          {
+            "name": "Design",
+            "description": "Security architecture and solution design tailored to needs."
           },
           {
             "name": "Implementation",
-            "description": "Zero-friction integration executed by veteran engineering teams."
+            "description": "End-to-end deployment with validated configurations."
           },
           {
-            "name": "24/7 Support",
-            "description": "Always-on concierge assistance ensuring perpetual operational continuity."
+            "name": "Maintenance & Support",
+            "description": "Ongoing monitoring, updates, and technical assistance."
           },
           {
-            "name": "CyberSecurity Audit",
-            "description": "Deep-tissue diagnostics of your digital posture and vulnerability assessment."
+            "name": "Training",
+            "description": "Hands-on enablement for teams and administrators."
           },
           {
-            "name": "Managed IT",
-            "description": "Full-spectrum oversight of your technological ecosystem, from cloud to local."
+            "name": "Security Audit",
+            "description": "Audit readiness, compliance checks, and remediation guidance."
           },
           {
-            "name": "Infrastructure Review",
-            "description": "Rigorous analysis of legacy systems to identify optimization paths."
+            "name": "Asset Disposal Service",
+            "description": "Secure decommissioning and disposal of IT assets."
           },
           {
-            "name": "Data Security",
-            "description": "Protecting data from unauthorized access, breaches, or loss."
-          },
-          {
-            "name": "Cloud Security",
-            "description": "Securing cloud-based systems, data, and infrastructure."
-          },
-          {
-            "name": "DR",
-            "description": "Restoring systems and data after failures or disasters."
-          },
-          {
-            "name": "GRC",
-            "description": "Managing policies, risks, and regulatory compliance."
-          },
-          {
-            "name": "GRData Security",
-            "description": "Managing policies, risks, and regulatory compliance."
-          },
-          {
-            "name": "Managed IT",
-            "description": "Managing policies, risks, and regulatory compliance."
+            "name": "Awareness Event",
+            "description": "Programs to build security culture and user awareness."
           }
         ],
         "description": "We offer a wide range of services centered on IT Infrastructure and Security, designed to maximize impact and value to your business. Our services are aimed at optimizing IT, enabling and extending to further achieve your organizational objectives and success."
