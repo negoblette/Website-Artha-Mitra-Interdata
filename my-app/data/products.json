@@ -13,8 +13,9 @@
       "website": "https://www.cyberark.com",
       "description": "Identity security and privileged access solutions focused on protecting critical accounts, credentials, and infrastructure.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" },
-        { "name": "Secure Access & VPN", "slug": "secure-access" }
+        { "name": "Data Security", "slug": "data-security" },
+        { "name": "Information Security", "slug": "information-security" },
+        { "name": "Security Management", "slug": "security-management" }
       ]
     },
     {
@@ -24,7 +25,10 @@
       "website": "https://www.paloaltonetworks.com",
       "description": "Network, cloud, and SOC security platforms designed to secure modern enterprise environments end to end.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Network Security", "slug": "network-security" },
+        { "name": "Endpoint Security", "slug": "endpoint-security" },
+        { "name": "Security Management", "slug": "security-management" },
+        { "name": "Cloud Security", "slug": "cloud-security" }
       ]
     },
     {
@@ -34,8 +38,9 @@
       "website": "https://www.fortinet.com",
       "description": "Integrated cybersecurity solutions spanning firewalls, secure networking, and protection across branch, campus, and cloud.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" },
-        { "name": "Network Infrastructure", "slug": "network-infrastructure" }
+        { "name": "Network Infrastructure", "slug": "network-infrastructure" },
+        { "name": "Network Security", "slug": "network-security" },
+        { "name": "Security Management", "slug": "security-management" }
       ]
     },
     {
@@ -46,7 +51,7 @@
       "description": "AI-driven enterprise networking and cybersecurity solutions for data center, campus, and cloud environments.",
       "solutions": [
         { "name": "Network Infrastructure", "slug": "network-infrastructure" },
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Network Security", "slug": "network-security" }
       ]
     },
     {
@@ -56,7 +61,8 @@
       "website": "https://www.rapid7.com",
       "description": "Security analytics, automation, and vulnerability management for comprehensive threat detection and response.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Application Security", "slug": "application-security" },
+        { "name": "Security Management", "slug": "security-management" }
       ]
     },
     {
@@ -66,7 +72,7 @@
       "website": "https://www.dbappsecurity.com",
       "description": "Security-focused solutions supporting resilient enterprise protection, visibility, and operational defense.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Network Security", "slug": "network-security" }
       ]
     },
     {
@@ -76,8 +82,7 @@
       "website": "https://www.gigamon.com",
       "description": "Deep observability and network visibility solutions that help teams monitor, secure, and optimize traffic flows.",
       "solutions": [
-        { "name": "Network Monitoring", "slug": "network-monitoring" },
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Network Infrastructure", "slug": "network-infrastructure" }
       ]
     },
     {
@@ -87,7 +92,8 @@
       "website": "https://www.crowdstrike.com/en-us/",
       "description": "Cloud-native endpoint, identity, and threat intelligence capabilities for real-time cyber defense.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Endpoint Security", "slug": "endpoint-security" },
+        { "name": "Cloud Security", "slug": "cloud-security" }
       ]
     },
     {
@@ -97,8 +103,7 @@
       "website": "https://www.netscout.com",
       "description": "Performance management, visibility, and cybersecurity intelligence solutions for complex enterprise networks.",
       "solutions": [
-        { "name": "Network Monitoring", "slug": "network-monitoring" },
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Network Performance Monitoring", "slug": "network-performance-monitoring" }
       ]
     },
     {
@@ -108,7 +113,8 @@
       "website": "https://gttb.com",
       "description": "Data loss prevention and insider risk controls aimed at protecting sensitive enterprise information.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Data Security", "slug": "data-security" },
+        { "name": "Information Security", "slug": "information-security" }
       ]
     },
     {
@@ -118,18 +124,28 @@
       "website": "https://www.genians.com",
       "description": "Network access control and device visibility solutions for secure onboarding and policy-driven access.",
       "solutions": [
-        { "name": "Secure Access & VPN", "slug": "secure-access" },
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Network Security", "slug": "network-security" }
       ]
     },
     {
-      "name": "Tenable",
-      "slug": "tenable",
-      "logo": "/images/principals/tenable.png",
-      "website": "http://tenable.com",
-      "description": "Exposure management and vulnerability assessment platforms that help reduce cyber risk across modern environments.",
+      "name": "Bitdefender",
+      "slug": "bitdefender",
+      "logo": "/images/principals/bitdefender.png",
+      "website": "https://www.bitdefender.com/en-id/",
+      "description": "Endpoint and cloud security solutions focused on threat prevention, detection, and resilience across distributed environments.",
       "solutions": [
-        { "name": "IT Security", "slug": "it-security" }
+        { "name": "Endpoint Security", "slug": "endpoint-security" },
+        { "name": "Cloud Security", "slug": "cloud-security" }
+      ]
+    },
+    {
+      "name": "OpenText",
+      "slug": "opentext",
+      "logo": "/images/principals/opentext.png",
+      "website": "https://www.opentext.com",
+      "description": "Enterprise information and application security capabilities supporting safer digital operations and risk-aware application environments.",
+      "solutions": [
+        { "name": "Application Security", "slug": "application-security" }
       ]
     }
   ],
@@ -159,7 +175,8 @@
       { "name": "NETSCOUT", "logo": "/images/principals/netscout.png" },
       { "name": "GTB Technologies", "logo": "/images/principals/gtb.png" },
       { "name": "Genians", "logo": "/images/principals/genians.png" },
-      { "name": "Tenable", "logo": "/images/principals/tenable.png" }
+      { "name": "Bitdefender", "logo": "/images/principals/bitdefender.png" },
+      { "name": "OpenText", "logo": "/images/principals/opentext.png" }
     ]
   }
 }
