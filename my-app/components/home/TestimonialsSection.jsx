@@ -98,17 +98,19 @@ export default function TestimonialsSection({ data }) {
                   <div
                     className={`relative shrink-0 rounded-full bg-white overflow-hidden flex items-center justify-center transition-all duration-500
                       ${isActive
-                        ? "w-[72px] h-[72px] border-2 border-[#0d1364] shadow-[0_8px_24px_rgba(13,19,100,0.14)]"
-                        : "w-11 h-11 border border-[#d4d4d8]"
+                        ? "w-[88px] h-[88px] border-2 border-[#0d1364] shadow-[0_8px_24px_rgba(13,19,100,0.14)]"
+                        : "w-[52px] h-[52px] border border-[#d4d4d8]"
                       }
                     `}
                   >
-                    <div className={`relative transition-all duration-500 ${isActive ? "w-11 h-11" : "w-6 h-6"}`}>
+                    <div
+                      className={`relative transition-all duration-500 ${isActive ? "w-[60px] h-[60px]" : "w-[34px] h-[34px]"} ${item.logoClassName ?? ""}`}
+                    >
                       <Image
                         src={item.logo || item.image || "/logo.png"}
                         alt={item.author}
                         fill
-                        sizes={isActive ? "44px" : "24px"}
+                        sizes={isActive ? "60px" : "34px"}
                         className="object-contain"
                       />
                     </div>

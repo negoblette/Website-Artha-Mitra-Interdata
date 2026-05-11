@@ -185,16 +185,17 @@
     "title": "What People Says",
     "items": [
       {
-        "logo": "/logo.png",
+        "logo": "/images/clients/sysware.png",
         "text": "PT Artha Mitra Interdata is the kind of integrator partner every company hopes for. They're committed, they're reliable, and they actually care about the results as much as we do. At PT Sysware Indonesia, we value expertise and transparency, and PT Artha Mitra Interdata always delivers both with a great attitude every single time.",
         "author": "Mr. Tonny Lim",
         "role": "President Director of PT Sysware Indonesia"
       },
       {
-        "logo": "/logo.png",
+        "logo": "/images/clients/secure-pacific.png",
         "text": "Our Partnership with PT Artha Mitra Interdata represents the ideal convergence of security and scalability. Beyond the technology, this relationship is rooted in deep-seated business commitment and mutual trust; values that are indispensable in today's volatile digital landscape. We especially recognize PT Artha Mitra Interdata's unwavering commitment to deliver our security suite with precision and integrity. Their team consistently goes beyond mere sales, ensuring that our solutions are implemented and optimised to solve each and every client's unique challenges. By aligning our long-term visions and leveraging their excellence in service delivery, we empower enterprises with the confidence to grow, knowing their security infrastructure are fortified by industry-leading standards and a partnership that stands the test of time.",
         "author": "Mr. Susanto Lee",
-        "role": "President Director of PT Secure Pasifik Teknologi"
+        "role": "President Director of PT Secure Pasifik Teknologi",
+        "logoClassName": "scale-[1.25]"
       }
     ]
   },
