@@ -23,19 +23,19 @@ function splitLabel(label) {
 
 function PuzzleDisk() {
   return (
-    <div className="relative mx-auto h-[180px] w-[180px] sm:h-[280px] sm:w-[280px] lg:h-[340px] lg:w-[340px]">
+    <div className="relative mx-auto h-[50vw] w-[50vw] sm:h-[36vw] sm:w-[36vw] lg:h-[22vw] lg:w-[22vw]">
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white via-[#eef0ff] to-[#c8c3ff] shadow-[0_28px_70px_rgba(71,60,182,0.2)]" />
-      <div className="absolute inset-[10px] rounded-full border border-white/80 bg-gradient-to-br from-[#fcfcff] to-[#d8d4ff]" />
-      <div className="absolute bottom-[16px] left-[16px] right-[16px] top-[16px] overflow-hidden rounded-full shadow-inner">
+      <div className="absolute inset-[0.625rem] rounded-full border border-white/80 bg-gradient-to-br from-[#fcfcff] to-[#d8d4ff]" />
+      <div className="absolute bottom-[1rem] left-[1rem] right-[1rem] top-[1rem] overflow-hidden rounded-full shadow-inner">
         <div className="absolute inset-y-0 left-0 w-1/2 rounded-l-full bg-gradient-to-br from-[#5948d4] via-[#080d63] to-[#080d63]" />
         <div className="absolute inset-y-0 right-0 w-1/2 rounded-r-full bg-gradient-to-br from-[#fcfcff] via-[#f0efff] to-[#d7d3ff]" />
 
         <div className="absolute left-1/2 top-1/2 h-[28%] w-[28%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f5f5ff] shadow-[0_0_0_10px_rgba(255,255,255,0.9)]" />
 
-        <div className="absolute left-[calc(50%-14px)] top-[36px] h-[44px] w-[28px] rounded-b-full bg-[#4c3cc0]" />
-        <div className="absolute bottom-[36px] left-[calc(50%-14px)] h-[44px] w-[28px] rounded-t-full bg-[#ffffff]" />
-        <div className="absolute left-[70px] top-[calc(50%-14px)] h-[28px] w-[44px] rounded-r-full bg-[#6d5cf1]" />
-        <div className="absolute right-[70px] top-[calc(50%-14px)] h-[28px] w-[44px] rounded-l-full bg-[#ece9ff]" />
+        <div className="absolute left-[calc(50%-0.875rem)] top-[2.25rem] h-[2.75rem] w-[1.75rem] rounded-b-full bg-[#4c3cc0]" />
+        <div className="absolute bottom-[2.25rem] left-[calc(50%-0.875rem)] h-[2.75rem] w-[1.75rem] rounded-t-full bg-[#ffffff]" />
+        <div className="absolute left-[4.375rem] top-[calc(50%-0.875rem)] h-[1.75rem] w-[2.75rem] rounded-r-full bg-[#6d5cf1]" />
+        <div className="absolute right-[4.375rem] top-[calc(50%-0.875rem)] h-[1.75rem] w-[2.75rem] rounded-l-full bg-[#ece9ff]" />
 
         <div className="absolute inset-y-[12%] left-1/2 w-px -translate-x-1/2 bg-[rgba(90,72,215,0.2)]" />
         <div className="absolute left-[12%] right-[12%] top-1/2 h-px -translate-y-1/2 bg-[rgba(90,72,215,0.16)]" />
@@ -79,7 +79,7 @@ export default function HowItWorksSection({ data }) {
   };
 
   return (
-     <section className="relative overflow-hidden bg-white px-4 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
+    <section className="relative overflow-hidden bg-white px-4 py-[clamp(3.5rem,8vh,6rem)] sm:px-8 lg:px-10">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-x-[8%] top-10 h-28 rounded-full bg-[radial-gradient(circle,rgba(95,80,255,0.12),transparent_72%)] blur-3xl" />
         <div className="absolute left-[-20px] top-[26%] h-[58%] w-[51%] rounded-r-[3rem] bg-[linear-gradient(180deg,rgba(108,94,255,0.08),rgba(108,94,255,0.14))]" />
@@ -87,13 +87,13 @@ export default function HowItWorksSection({ data }) {
         <div className="absolute right-[2%] top-[20%] h-[53%] w-[24%] rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(120,103,255,0.04),rgba(255,255,255,0))]" />
       </div>
 
-      <div className="relative mx-auto max-w-[1440px]">
+      <div className="relative mx-auto max-w-[92vw]">
         <h2 className="mx-auto max-w-5xl text-center text-2xl sm:text-4xl font-black tracking-[-0.05em] text-[#080d63] lg:text-[4.2rem] lg:leading-[1.05]">
           {data.title}
         </h2>
 
-        <div className="mt-6 grid items-start gap-8 lg:grid-cols-[1fr_minmax(380px,1.2fr)_1fr] lg:gap-8 xl:gap-10">
-          <article className="w-full px-1 sm:px-2 lg:pr-1 xl:pr-[1px]">
+        <div className="mt-6 grid items-start gap-8 lg:grid-cols-[1fr_minmax(28vw,1.2fr)_1fr] lg:gap-8 xl:gap-10">
+          <article className="w-full px-1 sm:px-2 lg:pr-1 xl:pr-[0.0625rem]">
 
             <h3 className="max-w-none text-xl sm:text-3xl font-black leading-[1.18] tracking-[-0.04em] text-[#0d1364] lg:text-[2.25rem]">
               {left.title}
@@ -104,7 +104,7 @@ export default function HowItWorksSection({ data }) {
           </article>
 
           {/* Center visualization - hidden on mobile, shown on lg+ */}
-          <div className="relative hidden lg:flex min-h-[430px] items-center justify-center sm:min-h-[520px] lg:min-h-[600px]">
+          <div className="relative hidden lg:flex min-h-[50vh] items-center justify-center sm:min-h-[58vh] lg:min-h-[66vh]">
             <div className="absolute left-1/2 top-1/2 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(120,103,255,0.18),rgba(120,103,255,0.03)_55%,transparent_72%)] blur-2xl" />
 
             <div className="absolute left-[8%] top-[14%] rounded-[2rem] bg-[linear-gradient(180deg,#080d63,#2e277b)] p-5 text-white shadow-[0_28px_50px_rgba(54,43,156,0.32)]">
@@ -116,7 +116,7 @@ export default function HowItWorksSection({ data }) {
                 {[0, 1, 2].map((row) => (
                   <div
                     key={row}
-                    className="flex w-[92px] items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2"
+                    className="flex w-[5.75rem] items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2"
                   >
                     <div className="h-3 w-3 rounded-full bg-white" />
                     <div className="h-1.5 flex-1 rounded-full bg-white/50" />
@@ -153,7 +153,7 @@ export default function HowItWorksSection({ data }) {
           </div>
 
           {/* Mobile-only simplified puzzle disk */}
-          <div className="relative flex lg:hidden min-h-[220px] items-center justify-center">
+          <div className="relative flex lg:hidden min-h-[28vh] items-center justify-center">
             <div className="absolute left-1/2 top-1/2 h-[90%] w-[90%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(120,103,255,0.12),transparent_72%)] blur-2xl" />
             <PuzzleDisk />
           </div>

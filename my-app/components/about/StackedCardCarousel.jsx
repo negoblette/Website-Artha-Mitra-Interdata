@@ -47,7 +47,7 @@ export default function StackedCardCarousel({
   };
 
   return (
-    <div className="relative h-[420px] w-full overflow-hidden">
+    <div className="relative h-[52vh] w-full overflow-hidden">
       {items.map((item, index) => {
         let offset = index - activeIndex;
 
@@ -68,7 +68,7 @@ export default function StackedCardCarousel({
               willChange: 'transform',
               ...style,
             }}
-            className="w-[320px] h-[220px] rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-blue-700 to-blue-400"
+            className="w-[24vw] h-[18vh] rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-blue-700 to-blue-400"
           >
             <img
               src={item.image}

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function VisionMission({ vision, mission }) {
   return (
-    <section data-no-reveal="true" className="relative overflow-visible py-14 md:py-16">
+    <section data-no-reveal="true" className="relative overflow-visible py-[clamp(3.5rem,8vh,6rem)]">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
@@ -27,7 +27,7 @@ export default function VisionMission({ vision, mission }) {
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, amount: 0.22 }}
             transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-            className="vision-card relative flex min-h-[360px] flex-col overflow-hidden rounded-[2rem] border border-[#d6ddff] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(234,240,255,0.96)_100%)] p-7 shadow-[0_20px_48px_rgba(10,11,133,0.12)] md:min-h-[420px] md:p-9"
+            className="vision-card relative flex min-h-[40vh] flex-col overflow-hidden rounded-[2rem] border border-[#d6ddff] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(234,240,255,0.96)_100%)] p-7 shadow-[0_20px_48px_rgba(10,11,133,0.12)] md:min-h-[46vh] md:p-9"
           >
             <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-[#bac9ff]/45 blur-3xl" />
             <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(10,11,133,0.28),transparent)]" />
@@ -44,7 +44,7 @@ export default function VisionMission({ vision, mission }) {
 
               <div className="mt-8 h-px w-full bg-[linear-gradient(90deg,rgba(10,11,133,0.18),rgba(10,11,133,0.04))]" />
 
-              <p className="relative mt-8 text-[15px] leading-8 text-[#111827]/82 md:text-base text-justify">
+              <p className="relative mt-8 text-[0.9375rem] leading-8 text-[#111827]/82 md:text-base text-justify">
                 {vision}
               </p>
 
@@ -56,7 +56,7 @@ export default function VisionMission({ vision, mission }) {
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, amount: 0.22 }}
             transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="vision-card relative flex min-h-[360px] flex-col overflow-hidden rounded-[2rem] border border-[#d6ddff] bg-[linear-gradient(180deg,#0a0b85_0%,#10248f_58%,#15349d_100%)] p-7 text-white shadow-[0_24px_54px_rgba(10,11,133,0.26)] md:min-h-[420px] md:p-9"
+            className="vision-card relative flex min-h-[40vh] flex-col overflow-hidden rounded-[2rem] border border-[#d6ddff] bg-[linear-gradient(180deg,#0a0b85_0%,#10248f_58%,#15349d_100%)] p-7 text-white shadow-[0_24px_54px_rgba(10,11,133,0.26)] md:min-h-[46vh] md:p-9"
           >
             <div className="absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
             <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent)]" />
@@ -73,7 +73,7 @@ export default function VisionMission({ vision, mission }) {
 
               <div className="mt-8 h-px w-full bg-[linear-gradient(90deg,rgba(255,255,255,0.28),rgba(255,255,255,0.06))]" />
 
-              <p className="relative mt-8 text-[15px] leading-8 text-white/88 md:text-base text-justify">
+              <p className="relative mt-8 text-[0.9375rem] leading-8 text-white/88 md:text-base text-justify">
                 {mission}
               </p>
 

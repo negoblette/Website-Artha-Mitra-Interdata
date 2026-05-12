@@ -102,7 +102,7 @@ export default function TestimonialsSection({ data }) {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-white py-12 sm:py-16 lg:py-24">
+    <section className="relative overflow-hidden bg-white py-[clamp(3.5rem,8vh,6rem)]">
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         {/* Section title — centered, matching HowItWorks heading size */}
         <h2 className="mx-auto max-w-5xl text-center text-2xl sm:text-4xl font-black tracking-[-0.05em] text-[#080d63] lg:text-[4.2rem] lg:leading-[1.05] mb-8 sm:mb-12">
@@ -111,7 +111,7 @@ export default function TestimonialsSection({ data }) {
 
         {/* Main content grid */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 lg:gap-10 xl:gap-14"
+          className="grid grid-cols-1 lg:grid-cols-[22vw_1fr] gap-6 lg:gap-10 xl:gap-14"
           onMouseEnter={() => {
             isHoveringRef.current = true;
           }}
@@ -122,12 +122,12 @@ export default function TestimonialsSection({ data }) {
           {/* ── Left: fixed-height vertical reviewer selector ── */}
           <div
             ref={leftPanelRef}
-            className="relative flex flex-row lg:flex-col items-center justify-center lg:h-[320px] select-none"
+            className="relative flex flex-row lg:flex-col items-center justify-center lg:h-[32vh] select-none"
           >
             {/* Vertical connecting line (desktop) */}
-            <div className="hidden lg:block absolute left-[36px] top-[24px] bottom-[24px] w-px bg-gradient-to-b from-[#e4e4e7] via-[#cdcdd4] to-[#e4e4e7]" />
+            <div className="hidden lg:block absolute left-[2.25rem] top-[1.5rem] bottom-[1.5rem] w-px bg-gradient-to-b from-[#e4e4e7] via-[#cdcdd4] to-[#e4e4e7]" />
             {/* Horizontal connecting line (mobile) */}
-            <div className="lg:hidden absolute top-[34px] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#d4d4d8] to-transparent" />
+            <div className="lg:hidden absolute top-[2.125rem] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#d4d4d8] to-transparent" />
 
             {slots.map(({ index, position }) => {
               const item = items[index];
@@ -158,13 +158,13 @@ export default function TestimonialsSection({ data }) {
                   <div
                     className={`relative shrink-0 rounded-full bg-white overflow-hidden flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
                       ${isActive
-                        ? "w-[88px] h-[88px] border-2 border-[#0d1364] shadow-[0_8px_24px_rgba(13,19,100,0.14)]"
-                        : "w-[52px] h-[52px] border border-[#d4d4d8]"
+                        ? "w-[5.5rem] h-[5.5rem] border-2 border-[#0d1364] shadow-[0_8px_24px_rgba(13,19,100,0.14)]"
+                        : "w-[3.25rem] h-[3.25rem] border border-[#d4d4d8]"
                       }
                     `}
                   >
                     <div
-                      className={`relative transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive ? "w-[60px] h-[60px]" : "w-[34px] h-[34px]"} ${item.logoClassName ?? ""}`}
+                      className={`relative transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive ? "w-[3.75rem] h-[3.75rem]" : "w-[2.125rem] h-[2.125rem]"} ${item.logoClassName ?? ""}`}
                     >
                       <Image
                         src={item.logo || item.image || "/logo.png"}
@@ -180,7 +180,7 @@ export default function TestimonialsSection({ data }) {
                   <div className={`text-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] min-w-0 ${isActive ? "" : "hidden sm:block"}`}>
                     <p
                       className={`font-bold text-[#0d1364] leading-tight transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-                        ${isActive ? "text-[15px] sm:text-lg" : "text-xs"}
+                        ${isActive ? "text-[0.9375rem] sm:text-lg" : "text-xs"}
                       `}
                     >
                       {item.author}
@@ -188,7 +188,7 @@ export default function TestimonialsSection({ data }) {
                     {item.role && (
                       <p
                         className={`text-black/40 leading-snug mt-0.5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-                          ${isActive ? "text-xs sm:text-[13px]" : "text-[10px]"}
+                          ${isActive ? "text-xs sm:text-[0.8125rem]" : "text-[0.625rem]"}
                         `}
                       >
                         {item.role}
@@ -200,14 +200,14 @@ export default function TestimonialsSection({ data }) {
             })}
 
             {/* Scroll hint (desktop) */}
-            <div className="hidden lg:flex absolute -bottom-7 left-0 right-0 items-center justify-center gap-1.5 text-[10px] text-black/25 font-medium tracking-wide">
+            <div className="hidden lg:flex absolute -bottom-7 left-0 right-0 items-center justify-center gap-1.5 text-[0.625rem] text-black/25 font-medium tracking-wide">
               <svg className="w-3 h-3 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
               scroll to navigate
             </div>
           </div>
 
           {/* ── Right: testimonial text ── */}
-          <div className="relative flex items-start lg:min-h-[320px]">
+          <div className="relative flex items-start lg:min-h-[32vh]">
             {/* Large quotation marks */}
             <span className="select-none text-[4rem] sm:text-[5rem] leading-none font-serif text-black -mt-2 sm:-mt-3 mr-1 sm:mr-3 shrink-0">
               &ldquo;
@@ -215,7 +215,7 @@ export default function TestimonialsSection({ data }) {
 
             {/* Testimonial content */}
             <div className={`pt-3 sm:pt-5 flex flex-col justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${textMotion}`}>
-              <p className="text-sm sm:text-[15px] lg:text-base font-normal italic leading-[1.75] sm:leading-[1.85] text-[#444] max-w-xl text-justify">
+              <p className="text-sm sm:text-[0.9375rem] lg:text-base font-normal italic leading-[1.75] sm:leading-[1.85] text-[#444] max-w-xl text-justify">
                 {activeItem.text}
               </p>
 
@@ -227,7 +227,7 @@ export default function TestimonialsSection({ data }) {
               <div className="mt-5 lg:hidden">
                 <p className="font-bold text-[#0d1364] text-sm">{activeItem.author}</p>
                 {activeItem.role && (
-                  <p className="text-[11px] text-black/40 mt-0.5">{activeItem.role}</p>
+                  <p className="text-[0.6875rem] text-black/40 mt-0.5">{activeItem.role}</p>
                 )}
               </div>
             </div>

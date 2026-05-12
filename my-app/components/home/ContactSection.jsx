@@ -8,7 +8,7 @@ export default function ContactSection({ data, contact, socials, whatsapp }) {
   const waHref = `https://wa.me/${waNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hello Artha Mitra Interdata, I would like to discuss a project.')}`;
 
   return (
-    <section id="contact" className="relative bg-transparent overflow-hidden py-12 sm:py-16 lg:py-24">
+    <section id="contact" className="relative bg-transparent overflow-hidden py-[clamp(3.5rem,8vh,6rem)]">
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
         {/* Label */}
 

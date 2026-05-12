@@ -61,7 +61,7 @@ function OfferColumn({ eyebrow, title, items, icons, iconMap }) {
   return (
     <div className="h-full min-h-0 flex flex-col px-3 sm:px-7 py-4 sm:py-6">
       <div className="sticky top-0 z-10 bg-[#f4f5f7]/92 backdrop-blur-sm pb-3">
-        <p className="text-[10px] sm:pl-50 font-bold tracking-[0.22em] text-[rgb(13,27,94)] uppercase">{eyebrow}</p>
+        <p className="text-[0.625rem] sm:pl-50 font-bold tracking-[0.22em] text-[rgb(13,27,94)] uppercase">{eyebrow}</p>
         <h3 className="mt-1.5 text-2xl sm:text-4xl md:text-5xl sm:pl-50 font-extrabold text-[rgb(13,27,94)]">{title}</h3>
       </div>
 
@@ -74,9 +74,9 @@ function OfferColumn({ eyebrow, title, items, icons, iconMap }) {
               <p className="flex items-start gap-2 sm:gap-2.5 font-bold text-[rgb(13,27,94)] leading-tight">
                 <Icon size={16} className="mt-1 text-[#007f99] sm:hidden flex-shrink-0" />
                 <Icon size={19} className="mt-1 text-[#007f99] hidden sm:block flex-shrink-0" />
-                <span className="text-[15px] sm:text-[18px] md:text-[21px]">{item.name}</span>
+                <span className="text-[0.9375rem] sm:text-[1.125rem] md:text-[1.3125rem]">{item.name}</span>
               </p>
-              <p className="ml-6 sm:ml-7 text-[11px] sm:text-[14px] text-black mt-0.5 leading-snug">{item.description}</p>
+              <p className="ml-6 sm:ml-7 text-[0.6875rem] sm:text-[0.875rem] text-black mt-0.5 leading-snug">{item.description}</p>
             </div>
           );
         })}
@@ -96,8 +96,8 @@ export default function OfferingsSection({ data }) {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section className="relative w-full bg-transparent border-t border-[#bebebe73] md:h-[70svh]">
-      <div className="w-full h-full border-y border-[#dbdbdb] bg-white/22 backdrop-blur-[2px] overflow-hidden">
+    <section className="relative w-full bg-transparent border-t border-[#bebebe73] py-[clamp(3.5rem,8vh,6rem)] md:h-[70svh] md:py-0 md:my-[clamp(3.5rem,8vh,6rem)]">
+      <div className="w-full h-full border-y border-[#dbdbdb] bg-white/22 backdrop-blur-[0.125rem] overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 h-full">
           <div
             className={`border-b md:border-b-0 md:border-r border-[#dbdbdb] bg-[#f4f5f7]/82 h-full min-h-0 transition-all duration-300 ${hovered === 'right' ? 'md:opacity-45' : 'md:opacity-100'}`}

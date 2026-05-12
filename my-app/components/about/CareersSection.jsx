@@ -22,14 +22,14 @@ export default function CareersSection({ data }) {
   };
 
   return (
-    <section id="careers" className="relative isolate overflow-hidden py-14 md:py-16" style={{ background: 'linear-gradient(180deg, rgba(243,244,248,0.6) 0%, rgba(230,234,250,0.9) 50%, rgba(243,244,248,0.7) 100%)' }}>
+    <section id="careers" className="relative isolate overflow-hidden py-[clamp(3.5rem,8vh,6rem)]" style={{ background: 'linear-gradient(180deg, rgba(243,244,248,0.6) 0%, rgba(230,234,250,0.9) 50%, rgba(243,244,248,0.7) 100%)' }}>
 
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <h2 className="text-center text-4xl font-black text-[rgba(13,27,94)] ">Be Our Team!</h2>
 
         <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
           <article className="careers-panel careers-panel-left rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-4 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)]">
-            <div className={`space-y-2.5 ${showAllPositions ? 'max-h-[290px] overflow-y-auto pr-1' : ''}`}>
+            <div className={`space-y-2.5 ${showAllPositions ? 'max-h-[36vh] overflow-y-auto pr-1' : ''}`}>
               {displayedPositions.map((pos, index) => (
                 <div
                   key={pos.slug}
@@ -43,13 +43,13 @@ export default function CareersSection({ data }) {
                       </span>
                       <div>
                         <p className="text-xs font-semibold">{pos.title}</p>
-                        <p className="text-[10px] text-white/70">{pos.type}</p>
+                        <p className="text-[0.625rem] text-white/70">{pos.type}</p>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => setExpandedSlug((prev) => (prev === pos.slug ? null : pos.slug))}
-                      className="rounded-full border border-white/20 bg-black/35 px-3 py-1 text-[10px] font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-black/55 hover:shadow-[0_8px_16px_rgba(0,0,0,0.25)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                      className="rounded-full border border-white/20 bg-black/35 px-3 py-1 text-[0.625rem] font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:bg-black/55 hover:shadow-[0_8px_16px_rgba(0,0,0,0.25)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                     >
                       {expandedSlug === pos.slug ? 'Hide Details' : 'View Details'}
                     </button>
@@ -61,16 +61,16 @@ export default function CareersSection({ data }) {
                     }`}
                   >
                     <div className="rounded-md border border-white/15 bg-black/25 px-3 py-2.5 text-left">
-                      <p className="text-[10px] font-semibold text-white/80">
+                      <p className="text-[0.625rem] font-semibold text-white/80">
                         {pos.location || 'Jakarta'} • {pos.experience || '2+ years'}
                       </p>
-                      <p className="mt-1 text-[11px] leading-relaxed text-white/88">
+                      <p className="mt-1 text-[0.6875rem] leading-relaxed text-white/88">
                         {pos.summary || 'This position is open for professionals who are passionate about technology and collaboration.'}
                       </p>
                       <button
                         type="button"
                         onClick={() => handleApply(pos.title)}
-                        className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-[11px] font-bold text-[#0a0b85] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e9eeff] hover:shadow-[0_8px_16px_rgba(0,0,0,0.24)] active:translate-y-0 active:scale-[0.98]"
+                        className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-[0.6875rem] font-bold text-[#0a0b85] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e9eeff] hover:shadow-[0_8px_16px_rgba(0,0,0,0.24)] active:translate-y-0 active:scale-[0.98]"
                       >
                         <Mail size={12} />
                         Apply this Job
@@ -90,7 +90,7 @@ export default function CareersSection({ data }) {
                   return next;
                 });
               }}
-              className="mt-3 rounded-full bg-white px-4 py-1.5 text-[10px] font-bold text-[#0a0b85] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e9eeff] hover:shadow-[0_8px_16px_rgba(0,0,0,0.24)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+              className="mt-3 rounded-full bg-white px-4 py-1.5 text-[0.625rem] font-bold text-[#0a0b85] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e9eeff] hover:shadow-[0_8px_16px_rgba(0,0,0,0.24)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
             >
               {showAllPositions ? 'View Less' : 'View More'}
             </button>
@@ -98,7 +98,7 @@ export default function CareersSection({ data }) {
 
           <article className="careers-panel careers-panel-right rounded-xl bg-gradient-to-br from-[rgb(20,40,120)] to-[rgb(10,20,70)] p-6 text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)] flex flex-col justify-center">
             <h3 className="text-2xl font-black">Get In Touch</h3>
-            <p className="mt-2 text-[12px] leading-relaxed text-white/80">
+            <p className="mt-2 text-[0.75rem] leading-relaxed text-white/80">
               Interested in joining our team? Reach out through the channel that suits you best.
             </p>
 
@@ -113,7 +113,7 @@ export default function CareersSection({ data }) {
                   <Mail className="h-5 w-5" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/55">
+                  <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.25em] text-white/55">
                     Email
                   </span>
                   <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
@@ -130,7 +130,7 @@ export default function CareersSection({ data }) {
                   <Phone className="h-5 w-5" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/55">
+                  <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.25em] text-white/55">
                     Phone
                   </span>
                   <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
@@ -149,7 +149,7 @@ export default function CareersSection({ data }) {
                   <MessageCircle className="h-5 w-5" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/55">
+                  <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.25em] text-white/55">
                     WhatsApp
                   </span>
                   <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">

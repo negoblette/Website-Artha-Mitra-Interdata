@@ -31,15 +31,15 @@ export default function LifeAtAmi({ data }) {
   }, [photos.length]);
 
   return (
-    <section className="relative isolate overflow-hidden py-14 md:py-16" style={{ background: 'linear-gradient(180deg, rgba(243,244,248,0.6) 0%, rgba(235,238,250,0.85) 40%, rgba(235,238,250,0.85) 60%, rgba(243,244,248,0.6) 100%)' }}>
+    <section className="relative isolate overflow-hidden py-[clamp(3.5rem,8vh,6rem)]" style={{ background: 'linear-gradient(180deg, rgba(243,244,248,0.6) 0%, rgba(235,238,250,0.85) 40%, rgba(235,238,250,0.85) 60%, rgba(243,244,248,0.6) 100%)' }}>
       {/* Subtle dot accent – top only */}
       <div className="pointer-events-none absolute left-0 right-0 top-0 h-40 bg-[repeating-radial-gradient(ellipse_at_center,rgba(124,140,232,0.15)_0px,rgba(124,140,232,0.15)_1.5px,transparent_1.5px,transparent_28px)] opacity-25" />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-4 text-center sm:px-6">
         <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">Life At AMI</h2>
 
-        <div className="mx-auto mt-8 w-full max-w-[1320px] overflow-visible">
-          <div className="relative mx-auto h-[210px] w-[118%] max-w-[1320px] -translate-x-[9%] sm:h-[238px] lg:h-[260px]">
+        <div className="mx-auto mt-8 w-full max-w-[92vw] overflow-visible">
+          <div className="relative mx-auto h-[28vh] w-[118%] max-w-[92vw] -translate-x-[9%] sm:h-[30vh] lg:h-[32vh]">
             {stripSlots.map((slot, slotIndex) => {
               const photoIndex = getWrappedIndex(activeIndex + slot.offset);
               const isActive = slot.offset === 0;
@@ -51,8 +51,8 @@ export default function LifeAtAmi({ data }) {
                   onClick={() => setActiveIndex(photoIndex)}
                   className="absolute left-1/2 top-1/2 overflow-hidden rounded-xl border border-[#c9d2ff] bg-[#dfe6ff] shadow-[0_10px_22px_rgba(10,11,133,0.16)] transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]"
                   style={{
-                    width: 'clamp(220px, 28vw, 400px)',
-                    height: 'clamp(124px, 15vw, 210px)',
+                    width: 'clamp(22vw, 28vw, 34vw)',
+                    height: 'clamp(14vw, 16vw, 20vw)',
                     transform: `translate(-50%, -50%) translateX(${slot.x}) scale(${slot.scale})`,
                     zIndex: slot.zIndex,
                     opacity: slot.opacity,
@@ -75,7 +75,7 @@ export default function LifeAtAmi({ data }) {
           </div>
         </div>
 
-        <div className="mt-6 flex justify-center gap-2">
+        <div className="mt-[max(2rem,3vh)] flex justify-center gap-2">
           {photos.map((_, i) => (
             <button
               key={i}

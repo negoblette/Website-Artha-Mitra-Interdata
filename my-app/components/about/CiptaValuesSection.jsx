@@ -7,7 +7,7 @@ export default function CiptaValuesSection({ values = [] }) {
   if (!values.length) return null;
 
   return (
-    <section className="relative overflow-hidden py-14 md:py-16">
+    <section className="relative overflow-hidden py-[clamp(3.5rem,8vh,6rem)]">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#f6f8ff]/55 to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
@@ -57,7 +57,7 @@ export default function CiptaValuesSection({ values = [] }) {
                 </div>
 
                 <div className="absolute inset-0 flex items-center justify-center rounded-xl border border-[#0a0b85]/25 bg-gradient-to-br from-[#05063f] via-[#090b66] to-[#020212] px-5 py-5 text-center shadow-[0_18px_40px_rgba(10,11,133,0.22)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
-                    <p className="max-w-[25ch] text-[13px] leading-[1.5] text-white/90">
+                    <p className="max-w-[25ch] text-[0.8125rem] leading-[1.5] text-white/90">
                       {card.description}
                     </p>
                 </div>

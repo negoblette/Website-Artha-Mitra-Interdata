@@ -18,7 +18,7 @@ function formatReadTime(value){
 function NewsTimelineItems({ item, index, isActive}) {
   return (
 
-    <article className="relative grid grid-cols-[40px_1fr] sm:grid-cols-[64px_1fr] gap-3 sm:gap-6 pb-8 sm:pb-12 last:pb-0">
+    <article className="relative grid grid-cols-[2.5rem_1fr] sm:grid-cols-[4rem_1fr] gap-3 sm:gap-6 pb-8 sm:pb-12 last:pb-0">
       
       {/* Timeline Circle */}
       <div className ="relative flex justify-center">
@@ -52,7 +52,7 @@ function NewsTimelineItems({ item, index, isActive}) {
           {item.excerpt}
         </p>
 
-        <div className="mt-3 sm:mt-5 flex flex-wrap items-center gap-4 text-xs sm:text-[15px] font-medium text-[#6b728a]">
+        <div className="mt-3 sm:mt-5 flex flex-wrap items-center gap-4 text-xs sm:text-[0.9375rem] font-medium text-[#6b728a]">
           <span className="inline-flex items-center gap-2">
             <CalendarDays size={15} className="sm:hidden" />
             <CalendarDays size={17} className="hidden sm:block" />
@@ -73,7 +73,7 @@ export default function NewsSection({ data }) {
   const featured = items[0];
 
     return (
-      <section className="relative overflow-hidden bg-white px-4 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
+      <section className="relative overflow-hidden bg-white px-4 py-[clamp(3.5rem,8vh,6rem)] sm:px-8 lg:px-10">
 
         {/* Background Glow */}
         <div className ="pointer-events-none absolute inset-0">
@@ -82,7 +82,7 @@ export default function NewsSection({ data }) {
           <div className="absolute inset-x-[18%] bottom-0 h-32 bg-[radial-gradient(circle,rgba(37, 84, 244, 0.08),transparent_72%))"/>
         </div>
 
-        <div className="relative mx-auto max-w-[1440px]">
+        <div className="relative mx-auto max-w-[92vw]">
           
           {/* heading */}
           <div className="text-center">
@@ -113,7 +113,7 @@ export default function NewsSection({ data }) {
           <div className="order-1 overflow-hidden rounded-xl sm:rounded-[2rem] border border-[#dbe4ff] bg-white shadow-[0_24px_60px_rgba(37,84,244,0.12)] lg:order-2">
 
             {/* Image */}
-            <div className="h-[180px] sm:h-[260px] w-full bg-[linear-gradient(135deg,#263d90_0%,#4b67c8_30%,#c12337_68%,#09134d_100%)] lg:h-[320px]">
+            <div className="h-[22vh] sm:h-[28vh] w-full bg-[linear-gradient(135deg,#263d90_0%,#4b67c8_30%,#c12337_68%,#09134d_100%)] lg:h-[34vh]">
               {featured?.image? (
                 <img 
                   src={featured.image}
@@ -129,7 +129,7 @@ export default function NewsSection({ data }) {
 
             {/* Content */}
             <div className="p-4 sm:p-8 lg:p-9">
-              <span className ="inline-flex rounded-full bg-[#edf3ff] px-3 py-1 text-[10px] sm:text-xs font-black uppercase tracking-[0.08em] text-[#2554f4]">
+              <span className ="inline-flex rounded-full bg-[#edf3ff] px-3 py-1 text-[0.625rem] sm:text-xs font-black uppercase tracking-[0.08em] text-[#2554f4]">
                 Featured Article
               </span>
 
