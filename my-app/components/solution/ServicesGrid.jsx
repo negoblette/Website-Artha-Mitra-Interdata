@@ -44,7 +44,7 @@ export default function ServicesGrid({ services }) {
                       <h3 className="text-[20px] font-bold text-white mb-2">
                         {service.name}
                       </h3>
-                      <p className="text-white/80 font-base text-[17px] leading-relaxed">
+                      <p className="text-white/80 font-base text-justify text-[17px] leading-relaxed">
                         {service.description}
                       </p>
                     </div>

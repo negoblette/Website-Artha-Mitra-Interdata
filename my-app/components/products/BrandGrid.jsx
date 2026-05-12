@@ -8,9 +8,14 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 const FILTER_CHIPS = [  
   'Network Infrastructure',
-  'IT Security',
-  'Network Monitoring',
-  'Secure Access & VPN',
+  'Network Performance Monitoring',
+  'Network Security',
+  'Data Security',
+  'Application Security',
+  'Endpoint Security',
+  'Information Security',
+  'Security Management',
+  'Cloud Security',
 ];
 
 function BrandCard({ brand, index }) {

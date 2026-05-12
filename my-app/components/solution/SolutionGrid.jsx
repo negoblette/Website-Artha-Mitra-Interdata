@@ -36,7 +36,7 @@ function SolutionCard({ solution, index }) {
                 <h3 className="text-[20px] font-bold text-white mb-1">
                   {solution.name}
                 </h3>
-                <p className="text-white/80 text-[17px] font-base leading-relaxed">
+                <p className="text-white/80 text-[17px] text-justify font-base leading-relaxed">
                   {solution.shortDescription}
                 </p>
               </div>
@@ -85,7 +85,7 @@ function SolutionCard({ solution, index }) {
                   transition={{ duration: 0.24, ease: 'easeOut' }}
                   className="overflow-hidden"
                 >
-                  <div className="mb-3 rounded-2xl bg-white/20 px-5 py-5 shadow-[0_40px_80px_rgba(3,6,53,0.52)] backdrop-blur-xl">
+                  <div className="mb-3 rounded-2xl text-justify bg-white/20 px-5 py-5 shadow-[0_40px_80px_rgba(3,6,53,0.52)] backdrop-blur-xl">
                     <p className="mb-4 text-[17px] leading-relaxed text-white/80">
                       {solution.fullDescription}
                     </p>

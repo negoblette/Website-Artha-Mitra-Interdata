@@ -7,7 +7,7 @@ export default function ProductsHero({ data }) {
   const description = 'Discover our world-class technology partners and the solutions they power.';
 
   return (
-    <section className="relative min-h-[clamp(28rem,48vw,38rem)] overflow-hidden pb-[clamp(3.5rem,6vw,5rem)] pt-28 sm:pt-32 lg:pt-36">
+    <section className="relative min-h-[460px] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
       <div className="absolute inset-0 bg-white" />
 
       <div className="absolute inset-0">
@@ -43,17 +43,17 @@ export default function ProductsHero({ data }) {
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[clamp(25rem,40vw,33rem)] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
+      <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="max-w-[11ch] text-[clamp(3rem,6vw,5.4rem)] font-black leading-[0.96] tracking-[-0.04em] text-[rgb(13,27,94)]">
+          <h1 className="text-5xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-6xl lg:text-[5.4rem]">
             {data.title}
           </h1>
-          <p className="mt-6 max-w-[38rem] text-[clamp(1rem,1.45vw,1.125rem)] font-semibold leading-relaxed text-[#111827]/88">
+          <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-lg">
             {data.description}
           </p>
         </motion.div>

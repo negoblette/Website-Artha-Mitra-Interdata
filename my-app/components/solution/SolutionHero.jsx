@@ -8,7 +8,7 @@ export default function SolutionHero({ data }) {
   const description = 'We offer a wide range of solutions and services centered on IT Infrastructure and Security, designed to maximize impact and value to your business. To sum it up, our services are aimed at optimizing IT, in turn enabling and extending to further achieve your organizational objectives and success.';
 
   return (
-    <section className="relative min-h-[clamp(30rem,52vw,40rem)] overflow-hidden pb-[clamp(3.5rem,6vw,5rem)] pt-28 sm:pt-32 lg:pt-36">
+    <section className="relative min-h-[520px] overflow-hidden pb-20 pt-28 sm:pt-32 lg:pt-36">
       <div className="absolute inset-0 bg-white" />
 
       <div className="absolute inset-0">
@@ -44,7 +44,7 @@ export default function SolutionHero({ data }) {
       <div className="absolute inset-0 mesh-gradient-accent opacity-10" />
       <div className="absolute inset-0 grid-pattern opacity-[0.035]" />
 
-      <div className="relative z-10 mx-auto flex min-h-[clamp(26rem,42vw,34rem)] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
+      <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1600px] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -52,10 +52,10 @@ export default function SolutionHero({ data }) {
           transition={{ duration: 0.7 }}
         >
 
-          <h1 className="max-w-[11ch] text-[clamp(3rem,6vw,5.4rem)] font-black leading-[0.96] tracking-[-0.04em] text-[rgb(13,27,94)]">
+          <h1 className="-5xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-6xl lg:text-[5.4rem]">
             {data.title} 
           </h1> 
-          <p className="mt-6 max-w-[38rem] text-[clamp(1rem,1.45vw,1.125rem)] font-semibold leading-relaxed text-[#111827]/88">
+          <p className="mt-6 max-w-xl text-base font-semibold leading-relaxed text-[#111827]/88 sm:text-lg">
             {data.description}
           </p>
         </motion.div>
