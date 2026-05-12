@@ -25,10 +25,6 @@ export default function Navbar({ data }) {
   }, []);
 
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
@@ -53,13 +49,13 @@ export default function Navbar({ data }) {
           )}
 
           <div
-            className={`relative z-10 mx-auto grid max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-3 ${
-              showSolidNavbar ? 'px-4 sm:px-6' : 'px-4 sm:px-6 py-2.5'
+            className={`relative z-10 mx-auto grid w-full max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-3 ${
+              showSolidNavbar ? 'px-4 sm:px-6 lg:px-10' : 'px-4 py-2.5 sm:px-6 lg:px-10'
             }`}
           >
-            <Link href="/" className="flex items-center group justify-self-start">
+            <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center group justify-self-start">
               <motion.div
-                className="relative w-44 sm:w-48 h-12 sm:h-14 overflow-hidden"
+                className="relative h-11 w-[clamp(9rem,12vw,12rem)] overflow-hidden sm:h-12 lg:h-14"
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.2 }}
               >
@@ -68,7 +64,7 @@ export default function Navbar({ data }) {
             </Link>
 
             <motion.div
-              className="hidden xl:flex h-12 items-center gap-0.5 bg-[rgb(13,27,94)] rounded-full px-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+              className="hidden xl:flex h-[clamp(2.75rem,3.2vw,3rem)] items-center gap-0.5 rounded-full bg-[rgb(13,27,94)] px-[clamp(0.4rem,0.9vw,0.75rem)] shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
             >
               {navItems.map((item) => (
                 <motion.div
@@ -79,7 +75,8 @@ export default function Navbar({ data }) {
                 >
                   <Link
                     href={item.href}
-                    className={`group relative inline-flex h-10 items-center px-5 rounded-full text-[13px] font-semibold transition-colors ${
+                    onClick={() => setMobileOpen(false)}
+                    className={`group relative inline-flex h-[clamp(2.25rem,2.8vw,2.5rem)] items-center rounded-full px-[clamp(0.9rem,1.35vw,1.25rem)] text-[clamp(0.72rem,0.85vw,0.82rem)] font-semibold transition-colors ${
                       pathname === item.href
                         ? 'text-white'
                         : 'text-white hover:text-white'
@@ -103,9 +100,10 @@ export default function Navbar({ data }) {
             <div className="flex items-center justify-self-end gap-2">
               <MotionLink
                 href="/contact"
+                onClick={() => setMobileOpen(false)}
                 whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)'}}
                 transition={{ duration: 0.12 }}
-                className="group hidden sm:inline-flex h-12 items-center rounded-full bg-[rgb(13,27,94)] px-8 text-[13px] font-semibold text-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#1e1f92]"
+                className="group hidden h-[clamp(2.75rem,3.2vw,3rem)] items-center rounded-full bg-[rgb(13,27,94)] px-[clamp(1.4rem,2vw,2rem)] text-[clamp(0.72rem,0.85vw,0.82rem)] font-semibold text-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#1e1f92] sm:inline-flex"
               >
                 <span className="inline-block transition-transform duration-150 group-hover:-translate-y-0.5">
                   Contact Us
@@ -148,6 +146,7 @@ export default function Navbar({ data }) {
                 >
                   <Link
                     href={item.href}
+                    onClick={() => setMobileOpen(false)}
                     className={`text-2xl sm:text-3xl tracking-wide transition-colors ${
                       pathname === item.href ? 'text-[#0a0b85] font-bold' : 'text-[#111827] hover:text-[#0a0b85]'
                     }`}
@@ -158,6 +157,7 @@ export default function Navbar({ data }) {
               ))}
               <MotionLink
                 href="/contact"
+                onClick={() => setMobileOpen(false)}
                 whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)'}}
                 transition={{ duration: 0.12 }}
                 className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-[#0a0b85] px-8 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(10,11,133,0.18)]"

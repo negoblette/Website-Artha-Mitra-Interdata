@@ -15,7 +15,7 @@ export default function HeroSection({ data }) {
       `}</style>
       <WaveCanvas />
 
-      <div className="hero-content-shell relative z-10 w-full max-w-10xl mx-auto px-4 sm:px-6 lg:px-10 text-center">
+      <div className="hero-content-shell relative z-10 mx-auto w-full max-w-[1600px] px-4 text-center sm:px-6 lg:px-10">
 
         <div className="hero-fade-1 flex justify-center mb-4 sm:mb-6">
           <span
@@ -41,24 +41,24 @@ export default function HeroSection({ data }) {
           </span>
         </div>
 
-        <h1 className="hero-fade-2 mb-2 max-w-7xl mx-auto text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl leading-[1.1] sm:leading-[1.05] lg:leading-[0.95] text-[rgb(107,107,184)] font-bold">
+        <h1 className="hero-fade-2 mx-auto mb-2 max-w-[14ch] text-[clamp(2.8rem,8vw,8.4rem)] font-bold leading-[0.95] tracking-[-0.04em] text-[rgb(107,107,184)] sm:max-w-[13ch]">
           {words[0]} <span className="text-[rgb(13,27,94)] font-extrabold">{words[1]}</span> {words[2]} {words[3]}<br />{words[4]}
         </h1>
 
-        <p className="hero-fade-3 mt-4 sm:mt-8 mb-8 sm:mb-12 text-sm sm:text-base lg:text-2xl text-[rgb(13,27,94)] max-w-5xl mx-auto leading-relaxed font-semibold px-2 sm:px-0">
+        <p className="hero-fade-3 mx-auto mt-4 mb-8 max-w-[min(65rem,92vw)] px-2 text-[clamp(1rem,1.85vw,2rem)] font-semibold leading-[1.45] text-[rgb(13,27,94)] sm:mt-8 sm:mb-12 sm:px-0">
           {data.description}
         </p>
 
         <div className="hero-fade-4 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 sm:px-0">
           <Link
             href={data.cta.href}
-            className="inline-flex min-w-[140px] sm:min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-5 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors"
+            className="inline-flex min-w-[140px] items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] px-[clamp(1.2rem,2vw,2rem)] py-[clamp(0.65rem,1vw,0.9rem)] text-[clamp(0.92rem,1vw,1rem)] font-semibold text-[rgb(19,27,94)] transition-colors hover:bg-[rgb(19,27,94)] hover:text-white sm:min-w-44"
           >
             Get to Know Us
           </Link>
           <Link
             href="/contact"
-            className="inline-flex min-w-[140px] sm:min-w-44 items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] text-[rgb(19,27,94)] px-5 sm:px-8 py-2.5 text-sm sm:text-base font-semibold hover:bg-[rgb(19,27,94)] hover:text-white transition-colors"
+            className="inline-flex min-w-[140px] items-center justify-center rounded-full border-2 border-[rgb(19,27,94)] px-[clamp(1.2rem,2vw,2rem)] py-[clamp(0.65rem,1vw,0.9rem)] text-[clamp(0.92rem,1vw,1rem)] font-semibold text-[rgb(19,27,94)] transition-colors hover:bg-[rgb(19,27,94)] hover:text-white sm:min-w-44"
           >
             Contact Us
           </Link>
