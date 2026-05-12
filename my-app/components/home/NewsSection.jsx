@@ -48,7 +48,7 @@ function NewsTimelineItems({ item, index, isActive}) {
           {item.title}
         </h3>
 
-        <p className="mt-2 sm:mt-3 max-w-[34rem] text-sm sm:text-lg font-medium leading-[1.5] sm:leading-[1.65] text-[#505a78]">
+        <p className="mt-2 sm:mt-3 max-w-[34rem] text-sm sm:text-lg font-medium leading-[1.5] sm:leading-[1.65] text-[#505a78] text-justify">
           {item.excerpt}
         </p>
 
@@ -137,7 +137,7 @@ export default function NewsSection({ data }) {
                 {featured?.title || 'Featured Article'}
               </h3>
 
-              <p className="mt-3 sm:mt-4 text-sm sm:text-lg font-medium leading-[1.6] sm:leading-[1.7] text-[#515b79]">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-lg font-medium leading-[1.6] sm:leading-[1.7] text-[#515b79] text-justify">
                 {featured?.excerpt || 'Default excerpt...'}
               </p>
             </div>

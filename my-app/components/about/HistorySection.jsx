@@ -1,7 +1,7 @@
 export default function HistorySection({ data }) {
   const title = 'History & Journey';
-  const topDescription = 'Perjalanan AMI dibangun melalui komitmen jangka panjang, kolaborasi yang kuat, dan fokus pada hasil yang terukur.';
-  const footerDescription = 'Kami terus berkembang bersama pelanggan sebagai partner teknologi yang konsisten, adaptif, dan berorientasi pada dampak bisnis.';
+  const topDescription = 'AMI\'s journey is built on long-term commitment, strong collaboration, and a focus on measurable results.';
+  const footerDescription = 'We continue to grow with customers as a consistent, adaptive technology partner focused on business impact.';
 
   return (
     <section id="history" className="relative isolate bg-transparent py-14 md:py-16">

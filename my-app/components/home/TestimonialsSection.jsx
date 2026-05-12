@@ -208,8 +208,8 @@ export default function TestimonialsSection({ data }) {
 
           {/* ── Right: testimonial text ── */}
           <div className="relative flex items-start lg:min-h-[320px]">
-            {/* Large quotation mark */}
-            <span className="select-none text-[4rem] sm:text-[5rem] leading-none font-serif text-[#0d1364]/8 -mt-2 sm:-mt-3 mr-1 sm:mr-3 shrink-0">
+            {/* Large quotation marks */}
+            <span className="select-none text-[4rem] sm:text-[5rem] leading-none font-serif text-black -mt-2 sm:-mt-3 mr-1 sm:mr-3 shrink-0">
               &ldquo;
             </span>
 
@@ -219,6 +219,10 @@ export default function TestimonialsSection({ data }) {
                 {activeItem.text}
               </p>
 
+              <span className="mt-2 sm:mt-3 self-end text-[4rem] sm:text-[5rem] leading-none font-serif text-black">
+                &rdquo;
+              </span>
+
               {/* Author (mobile only — desktop shows on left) */}
               <div className="mt-5 lg:hidden">
                 <p className="font-bold text-[#0d1364] text-sm">{activeItem.author}</p>
@@ -227,6 +231,7 @@ export default function TestimonialsSection({ data }) {
                 )}
               </div>
             </div>
+
           </div>
         </div>
       </div>

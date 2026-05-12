@@ -16,7 +16,7 @@ export default function VisionMission({ vision, mission }) {
           <h2 className="mt-5 text-4xl font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl">
             Vision & Mission
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-black sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-black sm:text-base text-justify">
             The following vision and mission reflects the company's purpose and direction.
           </p>
         </motion.div>
@@ -44,7 +44,7 @@ export default function VisionMission({ vision, mission }) {
 
               <div className="mt-8 h-px w-full bg-[linear-gradient(90deg,rgba(10,11,133,0.18),rgba(10,11,133,0.04))]" />
 
-              <p className="relative mt-8 text-[15px] leading-8 text-[#111827]/82 md:text-base">
+              <p className="relative mt-8 text-[15px] leading-8 text-[#111827]/82 md:text-base text-justify">
                 {vision}
               </p>
 
@@ -73,7 +73,7 @@ export default function VisionMission({ vision, mission }) {
 
               <div className="mt-8 h-px w-full bg-[linear-gradient(90deg,rgba(255,255,255,0.28),rgba(255,255,255,0.06))]" />
 
-              <p className="relative mt-8 text-[15px] leading-8 text-white/88 md:text-base">
+              <p className="relative mt-8 text-[15px] leading-8 text-white/88 md:text-base text-justify">
                 {mission}
               </p>
 
