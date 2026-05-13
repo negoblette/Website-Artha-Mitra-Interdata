@@ -48,7 +48,7 @@ function NewsTimelineItems({ item, index, isActive}) {
           {item.title}
         </h3>
 
-        <p className="mt-2 sm:mt-3 max-w-[34rem] text-sm sm:text-lg font-medium leading-[1.5] sm:leading-[1.65] text-[#505a78] text-justify">
+        <p className="mt-2 sm:mt-3 max-w-full text-sm sm:text-lg font-medium leading-[1.5] sm:leading-[1.65] text-[#505a78] text-justify">
           {item.excerpt}
         </p>
 
