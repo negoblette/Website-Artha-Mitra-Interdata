@@ -72,25 +72,25 @@
         "image": "/images/IT_summit.jpg",
         "category": "Conference",
         "name": "Indonesia IT Security Summit",
-        "description": "Annual gathering of IT security professionals discussing the latest threats, solutions, and strategies for enterprise cybersecurity."
+        "description": "Annual gathering of IT security professionals discussing the latest threats, solutions, and strategies for enterprise cybersecurity, with panel sessions, case studies, and networking opportunities for technology leaders across Indonesia."
       },
       {
         "image": "",
         "category": "Exhibition",
         "name": "Jakarta Network Expo",
-        "description": "Showcasing the latest in network infrastructure technology, featuring live demos from our principal partners and hands-on experience."
+        "description": "Showcasing the latest in network infrastructure technology, featuring live demos from our principal partners, hands-on product experience, and solution showcases tailored for modern enterprise connectivity and security needs."
       },
       {
         "image": "",
         "category": "Seminar",
         "name": "Cyber Threat Intelligence Briefing",
-        "description": "Expert-led sessions on emerging cyber threats, vulnerability trends, and proactive defense strategies for Indonesian enterprises."
+        "description": "Expert-led sessions on emerging cyber threats, vulnerability trends, and proactive defense strategies for Indonesian enterprises, including practical guidance on preparedness, response planning, and security operations improvement."
       },
       {
         "image": "",
         "category": "Workshop",
         "name": "Enterprise Firewall Masterclass",
-        "description": "Deep-dive technical workshop on next-generation firewall deployment, configuration, and management for enterprise environments."
+        "description": "Deep-dive technical workshop on next-generation firewall deployment, configuration, and management for enterprise environments, complete with implementation walkthroughs, policy design discussions, and operational best practices."
       }
     ]
   }

@@ -54,7 +54,7 @@ export default function ContactInfo({ contact, whatsapp }) {
                 </span>
               </h2>
 
-              <p className="mt-6 max-w-xl text-[16px] font-semibold leading-8 text-[#34415f] sm:text-[19px]">
+              <p className="mt-6 max-w-[485px] text-[16px] text-justify font-semibold leading-8 text-[#34415f] sm:text-[19px]">
                 We&apos;re here to help with questions, projects, and collaboration ideas.
                 Reach out through the channel that feels most comfortable for you.
               </p>

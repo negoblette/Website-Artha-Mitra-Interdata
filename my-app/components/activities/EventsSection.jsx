@@ -54,7 +54,7 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
               <h4 className="mt-3 text-[1rem] font-bold tracking-tight text-[#111827] transition-colors group-hover:text-[#0a0b85] sm:text-[1.02rem]">
                 {event.name}
               </h4>
-              <p className="mt-2 line-clamp-3  max-w-xl text-sm font-medium leading-6 text-[#111827]/72">
+              <p className="mt-2 max-w-xl text-justify text-sm font-medium leading-6 text-[#111827]/72 line-clamp-4">
                 {event.description}
               </p>
               <div className="mt-auto pt-6">
@@ -185,37 +185,39 @@ export default function EventsSection({ data }) {
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] lg:px-20 px-4 sm:px-6">
         <AnimatedSection>
-          <div className="mb-4 sm:mb-5 max-w-2xl">
-            <div>
-              <h2 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
-                {data?.title}
-              </h2>
+          <div className="mb-5 flex flex-col gap-4 sm:mb-7 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <div>
+                <h2 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
+                  {data?.title}
+                </h2>
+              </div>
+              <p className="text-[#111827] text-[13px] font-base sm:text-lg max-w-2xl">{data?.subtitle}</p>
             </div>
-            <p className="text-[#111827] text-[13px] font-base sm:text-lg max-w-2xl">{data?.subtitle}</p>
+
+            <div className="flex items-center justify-end gap-3">
+              <button
+                type="button"
+                onClick={goPrev}
+                disabled={totalCards <= clampedVisibleCount || isSliding}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+                aria-label="Previous events"
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              <button
+                type="button"
+                onClick={goNext}
+                disabled={totalCards <= clampedVisibleCount || isSliding}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+                aria-label="Next events"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
         </AnimatedSection>
-
-        <div className="mx-auto mb-6 flex max-w-5xl items-center justify-end gap-3">
-          <button
-            type="button"
-            onClick={goPrev}
-            disabled={totalCards <= clampedVisibleCount || isSliding}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
-            aria-label="Previous events"
-          >
-            <ChevronLeft size={20} />
-          </button>
-
-          <button
-            type="button"
-            onClick={goNext}
-            disabled={totalCards <= clampedVisibleCount || isSliding}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#0a0b85] text-[#0a0b85] transition-colors hover:bg-[#0a0b85] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
-            aria-label="Next events"
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div>
 
         <div
           className={`achievement-track mx-auto grid max-w-[1600px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 ${

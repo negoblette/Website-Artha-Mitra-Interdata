@@ -174,7 +174,7 @@ export default function InsightNewsSection({ data }) {
 
       <div className="relative z-20 mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-20">
         <AnimatedSection>
-          <div className="mb-14 text-left">
+          <div className="mb-8 sm:mb-10 text-left">
             <div className="mb-1">
               <h2 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
                 {data.title}
@@ -184,51 +184,57 @@ export default function InsightNewsSection({ data }) {
           </div>
         </AnimatedSection>
 
-        <div className="mb-8 flex flex-wrap items-center justify-left gap-2">
-          {paginatedCategories.map((category) => {
-            const isActive = activeCategory === category;
+        <div className="mb-8">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#010268]/70 sm:text-xs">
+            Categorized by news topic
+          </p>
 
-            return (
-              <button
-                key={category}
-                type="button"
-                onClick={() => {
-                  setActiveCategory(category);
-                  setCurrentPage(1);
-                }}
-                className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors ${
-                  isActive
-                    ? 'border-[#010268] bg-[#010268] text-white'
-                    : 'border-[#010268]/10 bg-white text-[#010268] hover:bg-[#f3f5ff]'
-                }`}
-                aria-pressed={isActive}
-              >
-                {category}
-              </button>
-            );
-          })}
+          <div className="flex flex-wrap items-center justify-left gap-2">
+            {paginatedCategories.map((category) => {
+              const isActive = activeCategory === category;
 
-        {categories.length > categoriesPerPage && (
-          <div className="ml-2 flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setCategoryPage((page) => Math.max(1, page - 1))}
-              disabled={categoryPage === 1}
-              className="rounded-full border border-white/50 bg-[#010268] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#2d2e7d] disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Prev
-            </button>
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory(category);
+                    setCurrentPage(1);
+                  }}
+                  className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                    isActive
+                      ? 'border-[#010268] bg-[#010268] text-white'
+                      : 'border-[#010268]/10 bg-white text-[#010268] hover:bg-[#f3f5ff]'
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {category}
+                </button>
+              );
+            })}
 
-            <button
-              type="button"
-              onClick={() => setCategoryPage((page) => Math.min(totalCategoryPages, page + 1))}
-              disabled={categoryPage === totalCategoryPages}
-              className="rounded-full border border-white/50 bg-[#010268] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#2d2e7d] disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Next
-            </button>
+            {categories.length > categoriesPerPage && (
+              <div className="ml-2 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setCategoryPage((page) => Math.max(1, page - 1))}
+                  disabled={categoryPage === 1}
+                  className="rounded-full border border-white/50 bg-[#010268] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#2d2e7d] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Prev
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setCategoryPage((page) => Math.min(totalCategoryPages, page + 1))}
+                  disabled={categoryPage === totalCategoryPages}
+                  className="rounded-full border border-white/50 bg-[#010268] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#2d2e7d] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
-        )}
         </div>
 
         <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-3">

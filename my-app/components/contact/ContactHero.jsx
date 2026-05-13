@@ -35,7 +35,7 @@ export default function ContactHero() {
               
               <p className="relative z-10 product-hero-copy-light">
                 We&apos;re here to help and answer any questions you might have.
-                <br />
+                
                 Feel free to reach out - we&apos;d love to hear from you.
               </p>
             </div>

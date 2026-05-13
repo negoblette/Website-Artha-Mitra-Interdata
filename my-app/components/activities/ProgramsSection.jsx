@@ -27,19 +27,19 @@ function ProgramCard({ program, index }) {
           <div className="relative flex min-h-[200px] flex-col xl:min-h-[100px] xl:flex-row">
 
             {/* LEFT */}
-            <div className="relative z-10 flex flex-1 flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] px-5 py-5 sm:px-6 sm:py-6 xl:w-[52.5%] xl:px-7 xl:py-8">
-              <div className="absolute inset-y-0 right-[-40px] hidden w-[88px] bg-white [clip-path:polygon(24%_0%,100%_0%,76%_100%,0%_100%)] xl:block" />
+            <div className="relative z-10 flex flex-1 flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] py-5 pl-6 pr-6 sm:py-6 sm:pl-7 sm:pr-7 xl:w-[52.5%] xl:py-8 xl:pl-12 xl:pr-11">
+              <div className="absolute inset-y-0 right-[-17px] z-0 hidden w-[72px] bg-white [clip-path:polygon(24%_0%,100%_0%,76%_100%,0%_100%)] xl:block" />
 
-              <div className="relative max-w-xl space-y-4 sm:space-y-5">
+              <div className="relative z-10 max-w-xl space-y-4 sm:space-y-5">
                 {/* <span className="inline-flex rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#0a0b85] sm:text-xs">
                   Program
                 </span> */}
 
-                <h3 className="inline-block max-w-[12ch] text-[1.55rem] font-black leading-[1.05] tracking-tight text-[rgb(13,27,94)] sm:max-w-none sm:text-[1.9rem] xl:text-5xl">
+                <h3 className="max-w-xl text-[13px] text-[1.55rem] font-black leading-[1.05] tracking-tight text-[rgb(13,27,94)] sm:text-[1.9rem] xl:text-[2.3rem]">
                   {program.name}
                 </h3>
 
-                <p className={`max-w-xl text-[13px] font-medium leading-6 text-[#111827]/72 sm:text-sm ${expanded ? '' : 'line-clamp-4 sm:line-clamp-4'}`}>
+                <p className={`max-w-xl text-[13px] text-justify font-medium leading-6 text-[#111827]/72 sm:text-sm ${expanded ? '' : 'line-clamp-4 sm:line-clamp-4'}`}>
                   {program.description}
                 </p>
 
@@ -52,7 +52,7 @@ function ProgramCard({ program, index }) {
                 </div>
               </div>
 
-              <div className="relative mt-5 flex flex-wrap items-center gap-3 sm:mt-6">
+              <div className="relative z-10 mt-5 flex flex-wrap items-center gap-3 sm:mt-6">
                 <button
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a0b85] sm:w-auto"
                   onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
@@ -73,7 +73,7 @@ function ProgramCard({ program, index }) {
                     transition={{ duration: 0.28, ease: 'easeOut' }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-5 max-w-full rounded-[1.35rem] border border-[#0a0b85]/8 bg-[#f4f7ff] p-4 sm:max-w-md sm:p-5">
+                    <div className="relative z-10 mt-5 max-w-full rounded-[1.35rem] border border-[#0a0b85]/8 bg-[#f4f7ff] p-4 sm:max-w-md sm:p-5">
                       <p className="text-sm leading-6 text-[#5b6b82]">
                         {program.detail}
                       </p>
