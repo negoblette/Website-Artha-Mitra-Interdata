@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function AboutHero({ data }) {
   return (
-    <section className="relative min-h-[70vh] overflow-hidden pt-28 pb-[clamp(3.5rem,8vh,6rem)] sm:pt-32 lg:pt-36">
+    <section className="relative min-h-[32.5rem] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
       <div className="absolute inset-0 bg-white" />
 
       <div className="absolute inset-0">
@@ -37,7 +37,7 @@ export default function AboutHero({ data }) {
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[58vh] w-full max-w-[92vw] items-center px-4 sm:px-6 lg:px-20">
+      <div className="relative z-10 mx-auto flex min-h-[26.875rem] w-full max-w-[100rem] items-center px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
