@@ -49,7 +49,7 @@ export default function ActivitiesHero({ data }) {
               {data.title}
             </h1>
 
-            <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-xl">
+            <p className="mt-6 max-w-xl font-semibold text-base leading-relaxed text-[#111827]/88 sm:text-xl text-justify">
               {data.description}
             </p>
 
