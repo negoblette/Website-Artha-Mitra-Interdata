@@ -94,6 +94,13 @@ export default function TestimonialsSection({ data }) {
       ? "opacity-0 translate-y-3"
       : "opacity-0 -translate-y-3"
     : "opacity-100 translate-y-0";
+  const textLength = activeItem?.text?.length ?? 0;
+  const textScaleClass =
+    textLength > 520
+      ? "lg:text-[0.875rem] lg:leading-[1.55]"
+      : textLength > 360
+        ? "lg:text-[0.9375rem] lg:leading-[1.65]"
+        : "lg:text-base lg:leading-[1.75]";
 
   const slots = [
     { index: prevIdx, position: "top" },
@@ -207,7 +214,7 @@ export default function TestimonialsSection({ data }) {
           </div>
 
           {/* ── Right: testimonial text ── */}
-          <div className="relative flex items-start lg:min-h-[32vh]">
+          <div className="relative flex items-start lg:h-[36vh] lg:max-h-[36vh]">
             {/* Large quotation marks */}
             <span className="select-none text-[4rem] sm:text-[5rem] leading-none font-serif text-black -mt-2 sm:-mt-3 mr-1 sm:mr-3 shrink-0">
               &ldquo;
@@ -215,7 +222,7 @@ export default function TestimonialsSection({ data }) {
 
             {/* Testimonial content */}
             <div className={`pt-3 sm:pt-5 flex flex-col justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${textMotion}`}>
-              <p className="text-sm sm:text-[0.9375rem] lg:text-base font-normal italic leading-[1.75] sm:leading-[1.85] text-[#444] max-w-xl text-justify">
+              <p className={`text-sm sm:text-[0.9375rem] font-normal italic leading-[1.75] sm:leading-[1.85] text-[#444] max-w-xl text-justify ${textScaleClass}`}>
                 {activeItem.text}
               </p>
 
