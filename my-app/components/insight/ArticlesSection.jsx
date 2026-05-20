@@ -5,7 +5,11 @@ import { BookOpen, ChevronDown, Tag, User, Calendar } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import Image from 'next/image';
 
-function ArticleCard({ item, index }) {
+const EXPANDED_CONTENT_HEIGHT = 240;
+const ARTICLE_AUTHOR_ROW_HEIGHT = 36;
+const ARTICLE_TAGS_ROW_HEIGHT = 44;
+
+function ArticleCard({ item }) {
   const [expanded, setExpanded] = useState(false);
   const hasImage = typeof item.image === 'string' && item.image.trim().length > 0;
 
@@ -57,26 +61,37 @@ function ArticleCard({ item, index }) {
             <AnimatePresence initial={false}>
               {expanded && item.content && (
                 <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: 'auto' }}
-                  exit={{ height: 0 }}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: EXPANDED_CONTENT_HEIGHT, opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.24, ease: 'easeOut' }}
                   className="overflow-hidden"
                 >
-                  <div className="mt-4 border-t border-[#0a0b85]/10 pt-4">
-                    <p className="text-sm leading-7 text-white">
+                  <div className="mt-4 grid h-full min-h-0 grid-rows-[minmax(0,1fr)_auto_auto] border-t border-[#0a0b85]/10 pt-4">
+                    <p className="article-card-scrollbar min-h-0 overflow-y-auto pr-2 text-sm leading-7 text-white">
                       {item.content}
                     </p>
-                    <div className="mt-4 flex flex-wrap gap-4 text-xs text-white">
+                    <div
+                      className="mt-4 flex items-center"
+                      style={{ height: ARTICLE_AUTHOR_ROW_HEIGHT }}
+                    >
                       {item.author && (
-                        <span className="flex items-center gap-1">
-                          <User className="h-3 w-3 text-white" /> {item.author}
+                        <span className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-white/18 bg-white/14 px-3 py-1.5 text-[11px] font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm">
+                          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/18">
+                            <User className="h-3 w-3 text-[#eff6ff]" />
+                          </span>
+                          <span className="truncate">{item.author}</span>
                         </span>
                       )}
+                    </div>
+                    <div
+                      className="mt-3 mb-3 flex items-center"
+                      style={{ minHeight: ARTICLE_TAGS_ROW_HEIGHT }}
+                    >
                       {item.tags && item.tags.length > 0 && (
-                        <span className="flex items-center gap-1">
-                          <Tag className="h-3 w-3 text-white" />
-                          {item.tags.join(', ')}
+                        <span className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-white/18 bg-white/10 px-3 py-1.5 text-[11px] font-medium text-white/92 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-sm">
+                          <Tag className="h-3 w-3 shrink-0 text-[#dbeafe]" />
+                          <span className="truncate">{item.tags.join(', ')}</span>
                         </span>
                       )}
                     </div>
@@ -332,11 +347,10 @@ export default function ArticlesSection({ data }) {
         {headlineItem && <FeaturedArticle item={headlineItem} />}
 
         <div className="mt-8 grid items-start grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {paginatedItems.map((item, i) => (
+          {paginatedItems.map((item) => (
             <ArticleCard
               key={item.slug}
               item={item}
-              index={i}
             />
           ))}
         </div>

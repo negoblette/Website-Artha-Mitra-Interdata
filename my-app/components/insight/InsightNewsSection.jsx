@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Newspaper, ChevronDown, Calendar, ExternalLink } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
+const EXPANDED_NEWS_CONTENT_HEIGHT = 240;
+const NEWS_SOURCE_ROW_HEIGHT = 44;
+
 function NewsCard({ item, index }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -38,7 +41,7 @@ function NewsCard({ item, index }) {
             </div>
 
             <div className="mb-2 flex items-start justify-between gap-4">
-              <h3 className="text-[#eef3ff] font-semibold text-base group-hover:text-white transition-colors">
+              <h3 className="line-clamp-2 min-h-[3.5rem] text-[#eef3ff] font-semibold text-base group-hover:text-white transition-colors">
                 {item.title}
               </h3>
               <Newspaper size={16} className="text-[#eef3ff] group-hover:text-white transition-colors flex-shrink-0 mt-1" />
@@ -53,23 +56,30 @@ function NewsCard({ item, index }) {
                 {expanded && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: EXPANDED_NEWS_CONTENT_HEIGHT, opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-4 border-t border-white/10 pt-4">
+                    <div className="mt-4 grid h-full min-h-0 grid-rows-[minmax(0,1fr)_auto] border-t border-white/10 pt-4">
                       {item.content && (
-                        <p className="text-sm leading-relaxed text-white/88">
+                        <p className="article-card-scrollbar min-h-0 overflow-y-auto pr-2 text-sm leading-relaxed text-white/88">
                           {item.content}
                         </p>
                       )}
-                      {item.source && (
-                        <span className="mt-4 flex items-center gap-1.5 text-xs text-white/82">
-                          <ExternalLink className="w-3 h-3" />
-                          Source: {item.source}
-                        </span>
-                      )}
+                      <div
+                        className="mt-4 mb-5 flex items-center"
+                        style={{ height: NEWS_SOURCE_ROW_HEIGHT }}
+                      >
+                        {item.source && (
+                          <span className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-[#dbeafe]/30 bg-[#dbeafe]/18 px-3 py-2 text-[11px] font-semibold text-white shadow-[0_10px_24px_rgba(8,9,110,0.2)] backdrop-blur-md">
+                            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/18">
+                              <ExternalLink className="h-3 w-3 text-[#eff6ff]" />
+                            </span>
+                            <span className="truncate text-white">Source: {item.source}</span>
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 )}
