@@ -61,39 +61,45 @@ export default function ContactInfo({ contact, whatsapp }) {
 
               <div className="mt-10 border-l border-dashed border-[#2f54eb]/25 pl-5">
                 <div className="space-y-5">
-                  <a
-                    href={`mailto:${contact?.email}`}
-                    className="group flex items-start gap-4 text-[#16305f] transition-colors hover:text-[#2f54eb]"
-                  >
-                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#2f54eb] shadow-[0_14px_30px_rgba(47,84,235,0.10)] ring-1 ring-[#2f54eb]/8 transition-transform group-hover:scale-105">
-                      <Mail className="h-5 w-5" />
-                    </span>
+                  <div className="flex items-start gap-4 text-[#16305f]">
+                    <a
+                      href={`mailto:${contact?.email}`}
+                      className="group shrink-0"
+                      aria-label={`Send email to ${contact?.email}`}
+                    >
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#2f54eb] shadow-[0_14px_30px_rgba(47,84,235,0.10)] ring-1 ring-[#2f54eb]/8 transition-transform group-hover:scale-105">
+                        <Mail className="h-5 w-5" />
+                      </span>
+                    </a>
                     <span className="min-w-0">
                       <span className="block text-[16px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
                         Email
                       </span>
-                      <span className="mt-1 block break-all text-[23px] font-bold leading-[1.15] sm:text-[25px]">
+                      <span className="mt-1 block break-all select-text text-[23px] font-bold leading-[1.15] sm:text-[25px]">
                         {contact?.email}
                       </span>
                     </span>
-                  </a>
+                  </div>
 
-                  <a
-                    href={`tel:${officePhoneHref}`}
-                    className="group flex items-start gap-4 text-[#16305f] transition-colors hover:text-[#2f54eb]"
-                  >
-                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#2f54eb] shadow-[0_14px_30px_rgba(47,84,235,0.10)] ring-1 ring-[#2f54eb]/8 transition-transform group-hover:scale-105">
-                      <Phone className="h-5 w-5" />
-                    </span>
+                  <div className="flex items-start gap-4 text-[#16305f]">
+                    <a
+                      href={`tel:${officePhoneHref}`}
+                      className="group shrink-0"
+                      aria-label={`Call ${contact?.phone}`}
+                    >
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#2f54eb] shadow-[0_14px_30px_rgba(47,84,235,0.10)] ring-1 ring-[#2f54eb]/8 transition-transform group-hover:scale-105">
+                        <Phone className="h-5 w-5" />
+                      </span>
+                    </a>
                     <span className="min-w-0">
                       <span className="block text-[16px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
                         Phone
                       </span>
-                      <span className="mt-1 block text-[23px] font-bold leading-[1.15] sm:text-[25px]">
+                      <span className="mt-1 block select-text text-[23px] font-bold leading-[1.15] sm:text-[25px]">
                         {contact?.phone}
                       </span>
                     </span>
-                  </a>
+                  </div>
 
                   <a
                     href={`https://wa.me/${whatsappHref}?text=${encodeURIComponent(
@@ -101,18 +107,18 @@ export default function ContactInfo({ contact, whatsapp }) {
                     )}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex items-start gap-4 text-[#16305f] transition-colors hover:text-[#2f54eb]"
+                    className="group flex items-center gap-4 text-[#16305f] transition-colors hover:text-[#2f54eb]"
                   >
                     <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#21c45d] shadow-[0_14px_30px_rgba(47,84,235,0.10)] ring-1 ring-[#2f54eb]/8 transition-transform group-hover:scale-105">
                       <MessageCircle className="h-5 w-5" />
                     </span>
-                    <span className="min-w-0">
-                      <span className="block text-[16px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb]">
+                    <span className="min-w-0 flex items-center">
+                      <span className="block text-[16px] font-semibold uppercase tracking-[0.3em] text-[#2f54eb] hover:text-[#16305f]">
                         WhatsApp
                       </span>
-                      <span className="mt-1 block text-[23px] font-bold leading-[1.15] sm:text-[25px]">
+                      {/* <span className="mt-1 block text-[23px] font-bold leading-[1.15] sm:text-[25px]">
                         {whatsapp || contact?.phone}
-                      </span>
+                      </span> */}
                     </span>
                   </a>
                 </div>
