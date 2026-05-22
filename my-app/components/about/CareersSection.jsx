@@ -14,11 +14,19 @@ export default function CareersSection({ data }) {
 
   const handleApply = (positionTitle) => {
     const subject = encodeURIComponent(`Job Application - ${positionTitle} Artha Mitra Interdata`);
-    const to = encodeURIComponent(careerEmail);
-    window.open(
-      `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}`,
-      '_blank'
+    const body = encodeURIComponent(
+      `Hello Artha Mitra Interdata Team,%0D%0A%0D%0A` +
+        `I would like to apply for the ${positionTitle} position. Please find my details below.%0D%0A%0D%0A` +
+        `Name:%0D%0APhone:%0D%0ALinkedIn/Portfolio:%0D%0A%0D%0AThank you.`
     );
+    window.location.href = `mailto:${careerEmail}?subject=${subject}&body=${body}`;
+  };
+
+  const handleSelectableLinkClick = (event) => {
+    const selection = window.getSelection?.();
+    if (selection && selection.toString().length > 0) {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -103,60 +111,63 @@ export default function CareersSection({ data }) {
             </p>
 
             <div className="mt-6 space-y-5">
-              <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(careerEmail)}&su=${encodeURIComponent('Career Inquiry - Artha Mitra Interdata')}`}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center gap-4 transition-colors"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition-transform group-hover:scale-105 group-hover:bg-white/15">
+              <div className="flex items-center gap-4">
+                <a
+                  href={`mailto:${careerEmail}?subject=${encodeURIComponent('Career Inquiry - Artha Mitra Interdata')}&body=${encodeURIComponent('Hello Artha Mitra Interdata Team,%0D%0A%0D%0AI would like to ask about career opportunities.%0D%0A%0D%0AThank you.')}`}
+                  onClick={handleSelectableLinkClick}
+                  className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition-transform hover:scale-105 hover:bg-white/15"
+                  aria-label="Email Artha Mitra Interdata"
+                >
                   <Mail className="h-5 w-5" />
-                </span>
+                </a>
                 <span className="min-w-0">
                   <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.25em] text-white/55">
                     Email
                   </span>
-                  <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
+                  <span className="mt-0.5 block select-text text-[1.1rem] font-bold leading-tight text-white">
                     {careerEmail}
                   </span>
                 </span>
-              </a>
+              </div>
 
-              <a
-                href="tel:+622156975111"
-                className="group flex items-center gap-4 transition-colors"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition-transform group-hover:scale-105 group-hover:bg-white/15">
+              <div className="flex items-center gap-4">
+                <a
+                  href="tel:+622156975111"
+                  onClick={handleSelectableLinkClick}
+                  className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition-transform hover:scale-105 hover:bg-white/15"
+                  aria-label="Call Artha Mitra Interdata"
+                >
                   <Phone className="h-5 w-5" />
-                </span>
+                </a>
                 <span className="min-w-0">
                   <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.25em] text-white/55">
                     Phone
                   </span>
-                  <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
+                  <span className="mt-0.5 block select-text text-[1.1rem] font-bold leading-tight text-white">
                     +6221-56975111/5222
                   </span>
                 </span>
-              </a>
+              </div>
 
-              <a
-                href="https://wa.me/628164850082?text=Hello%20Artha%20Mitra%20Interdata%2C%20I%20would%20like%20to%20discuss%20a%20career%20opportunity."
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center gap-4 transition-colors"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#22c55e] ring-1 ring-white/15 transition-transform group-hover:scale-105 group-hover:bg-white/15">
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://wa.me/628164850082?text=Hello%20Artha%20Mitra%20Interdata%2C%20I%20would%20like%20to%20discuss%20a%20career%20opportunity."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#22c55e] ring-1 ring-white/15 transition-transform hover:scale-105 hover:bg-white/15"
+                  aria-label="Chat on WhatsApp"
+                >
                   <MessageCircle className="h-5 w-5" />
-                </span>
+                </a>
                 <span className="min-w-0">
                   <span className="block text-[0.625rem] font-semibold uppercase tracking-[0.25em] text-white/55">
                     WhatsApp
                   </span>
-                  <span className="mt-0.5 block text-[1.1rem] font-bold leading-tight text-white">
+                  <span className="mt-0.5 block select-text text-[1.1rem] font-bold leading-tight text-white">
                     +628164850082
                   </span>
                 </span>
-              </a>
+              </div>
             </div>
           </article>
         </div>
