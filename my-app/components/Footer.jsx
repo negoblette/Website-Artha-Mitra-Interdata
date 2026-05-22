@@ -33,15 +33,19 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
       { href: '/contact', label: 'Contact' },
     ],
     solutions: [
-      { href: '/solution', label: 'Network Infrastructure' },
-      { href: '/solution', label: 'IT Security' },
-      { href: '/solution', label: 'Network Monitoring' },
-      { href: '/solution', label: 'Secure Access & VPN' },
+      { href: '/solution/network-infrastructure', label: 'Network Infrastructure' },
+      { href: '/solution/network-performance-monitoring', label: 'Network Performance Monitoring' },
+      { href: '/solution/network-security', label: 'Network Security' },
+      { href: '/solution/data-security', label: 'Data Security' },
+      { href: '/solution/application-security', label: 'Application Security' },
+      { href: '/solution/endpoint-security', label: 'Endpoint Security' },
+      { href: '/solution/information-security', label: 'Information Security' },
+      { href: '/solution/security-management', label: 'Security Management' },
+      { href: '/solution/cloud-security', label: 'Cloud Security' },
     ],
     careers: [
       { href: '/about', label: 'Life at AMI' },
       { href: '/about', label: 'Join Us' },
-      { href: '/about', label: 'Open Roles' },
     ],
   };
 
@@ -80,8 +84,8 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
             </div>
           </div>
 
-          <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-7">
-            <div>
+          <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-5 gap-6 md:gap-7">
+            <div className="min-w-0">
               <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Quick Links</h4>
               <ul className="mt-3 space-y-2">
                 {staticColumns.quickLinks.map((link) => (
@@ -92,18 +96,23 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
               </ul>
             </div>
 
-            <div>
-              <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Solutions</h4>
-              <ul className="mt-3 space-y-2">
+            <div className="min-w-0 sm:col-span-2">
+              <h4 className="text-center text-[14px] font-bold uppercase tracking-wide text-black">Solutions</h4>
+              <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2">
                 {staticColumns.solutions.map((link) => (
                   <li key={link.href + link.label}>
-                    <Link href={link.href} className="text-[14px] leading-tight text-black/70 hover:text-[#0a0b85]">{link.label}</Link>
+                    <Link
+                      href={link.href}
+                      className="text-[14px] leading-snug text-black/70 hover:text-[#0a0b85] [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] overflow-hidden"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Careers</h4>
               <ul className="mt-3 space-y-2">
                 {staticColumns.careers.map((link) => (
@@ -114,7 +123,7 @@ export default function Footer({ data, companyName, logo, tagline, contact }) {
               </ul>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h4 className="text-[14px] font-bold uppercase tracking-wide text-black">Contact</h4>
               <div className="mt-3 space-y-2.5 text-[14px] leading-snug text-black/70">
                 <p className="flex items-start gap-2"><MapPin size={13} className="mt-0.5 flex-shrink-0" />{staticContact.address}</p>

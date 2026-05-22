@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -13,9 +13,20 @@ export default function Navbar({ data }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const isTransparentTopPage = pathname === '/' || pathname === '/about' || pathname === '/insight' || pathname === '/solution' || pathname === '/activities' || pathname === '/products';
   const showSolidNavbar = scrolled || !isTransparentTopPage;
   const navItems = data.nav;
+
+  const handleLogoClick = (event) => {
+    if (pathname === '/') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return;
+    }
+
+    router.push('/');
+  };
   
 
   useEffect(() => {
@@ -57,7 +68,7 @@ export default function Navbar({ data }) {
               showSolidNavbar ? 'px-4 sm:px-6' : 'px-4 sm:px-6 py-2.5'
             }`}
           >
-            <Link href="/" className="flex items-center group justify-self-start">
+            <Link href="/" onClick={handleLogoClick} className="flex items-center group justify-self-start">
               <motion.div
                 className="relative w-44 sm:w-48 h-12 sm:h-14 overflow-hidden"
                 whileHover={{ scale: 1.03 }}
