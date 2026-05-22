@@ -39,20 +39,20 @@ function ProgramCard({ program, index }) {
                   {program.name}
                 </h3>
 
-                <p className={`max-w-xl text-[13px] text-justify font-medium leading-6 text-[#111827]/72 sm:text-sm ${expanded ? '' : 'line-clamp-4 sm:line-clamp-4'}`}>
+                <p className={`max-w-xl text-[13px] mb-10 text-justify font-medium leading-6 text-[#111827]/72 sm:text-sm ${expanded ? '' : 'line-clamp-4 sm:line-clamp-4'}`}>
                   {program.description}
                 </p>
 
-                <div className="space-y-2 rounded-[1.15rem] border border-[#0a0b85]/8 bg-[#f8faff] px-4 py-3 text-[11px] text-[#29324f] sm:text-sm">
+                {/* <div className="space-y-2 rounded-[1.15rem] border border-[#0a0b85]/8 bg-[#f8faff] px-4 py-3 text-[11px] text-[#29324f] sm:text-sm">
                   <p className="font-bold leading-5 text-[rgb(13,27,94)]">{program.summaryLabel}</p>
                   <p className="leading-6">
                     <span className="font-semibold text-[#00a86b]">{program.focusLabel}</span>{' '}
                     {program.focusText}
                   </p>
-                </div>
+                </div> */}
               </div>
 
-              <div className="relative z-10 mt-5 flex flex-wrap items-center gap-3 sm:mt-6">
+              <div className="relative z-10 mt-10 mb-6 flex flex-wrap items-center gap-3 sm:mt-6">
                 <button
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a0b85] sm:w-auto"
                   onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
