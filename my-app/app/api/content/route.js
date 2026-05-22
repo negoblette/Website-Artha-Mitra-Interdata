@@ -22,6 +22,34 @@ const FILE_ROUTES = {
   insight: ['/insight'],
 };
 
+const READ_ONLY_MAP = {
+  homepage: ['hero', 'howItWorks', 'contactSection'],
+  about: ['hero', 'vision', 'mission'],
+  solution: ['hero'],
+  products: ['hero'],
+  activities: ['hero'],
+  insight: ['hero'],
+};
+
+function getValueAtPath(obj, path) {
+  if (!obj || !path) return undefined;
+  return path.split('.').reduce((acc, key) => (acc ? acc[key] : undefined), obj);
+}
+
+function setValueAtPath(obj, path, value) {
+  if (!obj || !path) return;
+  const keys = path.split('.');
+  let target = obj;
+  for (let i = 0; i < keys.length - 1; i += 1) {
+    const key = keys[i];
+    if (typeof target[key] !== 'object' || target[key] === null) {
+      target[key] = {};
+    }
+    target = target[key];
+  }
+  target[keys[keys.length - 1]] = value;
+}
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const file = searchParams.get('file');
@@ -51,6 +79,15 @@ export async function PUT(request) {
   }
 
   const body = await request.json();
+  const existing = getContent(file);
+  const readOnlyPaths = READ_ONLY_MAP[file] || [];
+  for (const readOnlyPath of readOnlyPaths) {
+    const preserved = getValueAtPath(existing, readOnlyPath);
+    if (preserved !== undefined) {
+      setValueAtPath(body, readOnlyPath, preserved);
+    }
+  }
+
   const updated = updateContent(file, body);
 
   // Revalidate affected routes so static pages update

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Home, Info, Layers, Package, Calendar, Globe, 
@@ -17,6 +17,85 @@ const PAGES = [
   { key: 'activities', label: 'Activities', icon: Calendar },
   { key: 'insight', label: 'Insight', icon: BookOpen },
 ];
+
+const READ_ONLY_MAP = {
+  homepage: ['hero', 'howItWorks', 'contactSection'],
+  about: ['hero', 'vision', 'mission'],
+  solution: ['hero'],
+  products: ['hero'],
+  activities: ['hero'],
+  insight: ['hero'],
+};
+
+const UPLOAD_MAX_BYTES = 10 * 1024 * 1024;
+const IMAGE_MIME_TYPES = ['image/png', 'image/jpeg'];
+const IMAGE_KEY_REGEX = /(image|logo|background|thumbnail|photo|icon|banner|cover)$/i;
+
+function isReadOnlyPath(path, readOnlyPaths = []) {
+  if (!path) return false;
+  return readOnlyPaths.some((blocked) => path === blocked || path.startsWith(`${blocked}.`));
+}
+
+function isImageKey(key = '') {
+  return IMAGE_KEY_REGEX.test(key);
+}
+
+function looksLikeImagePath(value = '') {
+  return /(\/uploads\/|\/images\/|\.png$|\.jpg$|\.jpeg$|\.webp$)/i.test(value);
+}
+
+function isImageField(path, key, value) {
+  if (isImageKey(key)) return true;
+  if (path && /(^|\.)images?\b/i.test(path)) return true;
+  if (path && /(^|\.)logos?\b/i.test(path)) return true;
+  return looksLikeImagePath(value);
+}
+
+const ARRAY_LABEL_OVERRIDES = {
+  items: 'Item',
+  testimonials: 'Testimonial',
+  news: 'News',
+  programs: 'Program',
+  events: 'Event',
+  solutions: 'Solution',
+  services: 'Service',
+  brands: 'Brand',
+  images: 'Image',
+  positions: 'Position',
+  points: 'Point',
+  milestones: 'Milestone',
+  socials: 'Social',
+  tabs: 'Tab',
+  features: 'Feature',
+};
+
+function toTitleCase(value = '') {
+  return value
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/[-_]+/g, ' ')
+    .trim()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function singularize(label = '') {
+  if (!label) return label;
+  if (label.toLowerCase() === 'news') return 'News';
+  if (label.endsWith('s')) return label.slice(0, -1);
+  return label;
+}
+
+function getArrayItemBaseLabel(path = '') {
+  if (!path) return '';
+  const parts = path.split('.');
+  const last = parts[parts.length - 1];
+  const fallbackKey = last === 'items' && parts.length > 1 ? parts[parts.length - 2] : last;
+  const rawKey = (ARRAY_LABEL_OVERRIDES[last] && last !== 'items')
+    ? last
+    : fallbackKey;
+  const override = ARRAY_LABEL_OVERRIDES[rawKey];
+  if (override) return override;
+  return singularize(toTitleCase(rawKey));
+}
 
 function LoginScreen({ onLogin }) {
   const [password, setPassword] = useState('');
@@ -124,6 +203,25 @@ export default function AdminPage() {
       setTimeout(() => setSaved(false), 2000);
     }
     setSaving(false);
+  }
+
+  async function handleUpload(path, file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      headers: { 'x-admin-key': adminKey },
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const error = await res.json().catch(() => ({}));
+      throw new Error(error?.error || 'Upload failed');
+    }
+
+    const json = await res.json();
+    if (json?.url) updateField(path, json.url);
   }
 
   function updateField(path, value) {
@@ -321,6 +419,8 @@ export default function AdminPage() {
                 onRemoveItem={removeArrayItem}
                 onDuplicateItem={duplicateArrayItem}
                 onMoveItem={moveArrayItem}
+                onUpload={handleUpload}
+                readOnlyPaths={READ_ONLY_MAP[activePage]}
               />
             </div>
           ) : null}
@@ -342,25 +442,139 @@ function clearValues(obj) {
   }
 }
 
-function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicateItem, onMoveItem, depth = 0 }) {
+function JsonEditor({
+  data,
+  path,
+  onChange,
+  onAddItem,
+  onRemoveItem,
+  onDuplicateItem,
+  onMoveItem,
+  onUpload,
+  readOnlyPaths = [],
+  fieldKey,
+  depth = 0,
+}) {
   if (data === null || data === undefined) return null;
+
+  const readOnly = isReadOnlyPath(path, readOnlyPaths);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const fileInputRef = useRef(null);
 
   if (typeof data === 'string') {
     const isLong = data.length > 100;
-    return isLong ? (
+    const showPreview = isImageField(path, fieldKey, data);
+    const showUploader = !readOnly && showPreview && typeof onUpload === 'function';
+
+    async function handleFileChange(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      if (!IMAGE_MIME_TYPES.includes(file.type)) {
+        setUploadError('Only PNG/JPG images are allowed.');
+        e.target.value = '';
+        return;
+      }
+
+      if (file.size > UPLOAD_MAX_BYTES) {
+        setUploadError('File is too large. Max 10MB.');
+        e.target.value = '';
+        return;
+      }
+
+      setUploadError('');
+      setUploading(true);
+      try {
+        await onUpload(path, file);
+      } catch (error) {
+        setUploadError(error?.message || 'Upload failed.');
+      } finally {
+        setUploading(false);
+        e.target.value = '';
+      }
+    }
+
+    const inputField = isLong ? (
       <textarea
         value={data}
-        onChange={(e) => onChange(path, e.target.value)}
+        onChange={readOnly ? undefined : (e) => onChange(path, e.target.value)}
         rows={3}
-        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 resize-y font-mono"
+        readOnly={readOnly}
+        className={`w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 resize-y font-mono ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
       />
     ) : (
       <input
         type="text"
         value={data}
-        onChange={(e) => onChange(path, e.target.value)}
-        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 font-mono"
+        onChange={readOnly ? undefined : (e) => onChange(path, e.target.value)}
+        readOnly={readOnly}
+        className={`w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 font-mono ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
       />
+    );
+
+    return isLong ? (
+      <div className="space-y-2">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div className="flex-1 min-w-0">{inputField}</div>
+          {showUploader && (
+            <div className="flex items-center gap-2">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/png,image/jpeg"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="px-3 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:border-purple-500/40 transition-colors text-xs uppercase tracking-wider disabled:opacity-50"
+              >
+                {uploading ? 'Uploading...' : 'Upload Image'}
+              </button>
+            </div>
+          )}
+        </div>
+        {uploadError && <p className="text-xs text-red-400">{uploadError}</p>}
+        {showPreview && data && (
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <img src={data} alt="Preview" className="max-h-40 w-auto rounded" />
+          </div>
+        )}
+      </div>
+    ) : (
+      <div className="space-y-2">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div className="flex-1 min-w-0">{inputField}</div>
+          {showUploader && (
+            <div className="flex items-center gap-2">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/png,image/jpeg"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="px-3 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:border-purple-500/40 transition-colors text-xs uppercase tracking-wider disabled:opacity-50"
+              >
+                {uploading ? 'Uploading...' : 'Upload Image'}
+              </button>
+            </div>
+          )}
+        </div>
+        {uploadError && <p className="text-xs text-red-400">{uploadError}</p>}
+        {showPreview && data && (
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <img src={data} alt="Preview" className="max-h-40 w-auto rounded" />
+          </div>
+        )}
+      </div>
     );
   }
 
@@ -369,8 +583,9 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
       <input
         type="number"
         value={data}
-        onChange={(e) => onChange(path, Number(e.target.value))}
-        className="w-32 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 font-mono"
+        onChange={readOnly ? undefined : (e) => onChange(path, Number(e.target.value))}
+        readOnly={readOnly}
+        className={`w-32 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 font-mono ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
       />
     );
   }
@@ -378,10 +593,11 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
   if (typeof data === 'boolean') {
     return (
       <button
-        onClick={() => onChange(path, !data)}
+        onClick={readOnly ? undefined : () => onChange(path, !data)}
+        disabled={readOnly}
         className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
           data ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-        }`}
+        } ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
       >
         {data ? 'true' : 'false'}
       </button>
@@ -395,13 +611,15 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
           const itemLabel = typeof item === 'object' && item
             ? item.title || item.label || item.name || item.slug || item.year || ''
             : typeof item === 'string' ? item.substring(0, 50) : '';
+          const baseLabel = getArrayItemBaseLabel(path);
+          const displayLabel = baseLabel ? `${baseLabel} ${i + 1}` : `[${i}]`;
 
           return (
             <div key={i} className="relative group/item">
               <CollapsibleSection
-                label={`[${i}]${itemLabel ? ` — ${itemLabel}` : ''}`}
+                label={`${displayLabel}${itemLabel ? ` — ${itemLabel}` : ''}`}
                 depth={depth}
-                actions={
+                actions={!readOnly ? (
                   <div className="flex items-center gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
                     <button
                       onClick={(e) => { e.stopPropagation(); onMoveItem(path, i, -1); }}
@@ -434,7 +652,12 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
                       <Trash2 size={12} />
                     </button>
                   </div>
-                }
+                ) : (
+                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[0.625rem] uppercase tracking-wider text-white/40">
+                    <Lock size={10} />
+                    Read-only
+                  </span>
+                )}
               >
                 <JsonEditor
                   data={item}
@@ -444,19 +667,23 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
                   onRemoveItem={onRemoveItem}
                   onDuplicateItem={onDuplicateItem}
                   onMoveItem={onMoveItem}
+                  onUpload={onUpload}
+                  readOnlyPaths={readOnlyPaths}
                   depth={depth + 1}
                 />
               </CollapsibleSection>
             </div>
           );
         })}
-        <button
-          onClick={() => onAddItem(path)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-white/10 text-white/30 hover:text-purple-400 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all text-sm w-full justify-center"
-        >
-          <Plus size={14} />
-          Add Item
-        </button>
+        {!readOnly && (
+          <button
+            onClick={() => onAddItem(path)}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-white/10 text-white/30 hover:text-purple-400 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all text-sm w-full justify-center"
+          >
+            <Plus size={14} />
+            Add Item
+          </button>
+        )}
       </div>
     );
   }
@@ -467,6 +694,7 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
         {Object.entries(data).map(([key, value]) => {
           const fieldPath = path ? `${path}.${key}` : key;
           const isSimple = typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
+          const isFieldReadOnly = isReadOnlyPath(fieldPath, readOnlyPaths);
 
           if (isSimple) {
             return (
@@ -474,6 +702,12 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
                 <label className="text-white/40 text-xs font-medium uppercase tracking-wider flex items-center gap-1.5">
                   <Edit3 size={10} />
                   {key}
+                  {isFieldReadOnly && (
+                    <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[0.6rem] uppercase tracking-wider text-white/40">
+                      <Lock size={10} />
+                      Read-only
+                    </span>
+                  )}
                 </label>
                 <JsonEditor
                   data={value}
@@ -483,6 +717,9 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
                   onRemoveItem={onRemoveItem}
                   onDuplicateItem={onDuplicateItem}
                   onMoveItem={onMoveItem}
+                  onUpload={onUpload}
+                  readOnlyPaths={readOnlyPaths}
+                  fieldKey={key}
                   depth={depth + 1}
                 />
               </div>
@@ -490,7 +727,7 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
           }
 
           return (
-            <CollapsibleSection key={key} label={key} depth={depth}>
+            <CollapsibleSection key={key} label={key} depth={depth} readOnly={isFieldReadOnly}>
               <JsonEditor
                 data={value}
                 path={fieldPath}
@@ -499,6 +736,9 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
                 onRemoveItem={onRemoveItem}
                 onDuplicateItem={onDuplicateItem}
                 onMoveItem={onMoveItem}
+                onUpload={onUpload}
+                readOnlyPaths={readOnlyPaths}
+                fieldKey={key}
                 depth={depth + 1}
               />
             </CollapsibleSection>
@@ -511,8 +751,8 @@ function JsonEditor({ data, path, onChange, onAddItem, onRemoveItem, onDuplicate
   return <span className="text-white/30 text-sm">unsupported type</span>;
 }
 
-function CollapsibleSection({ label, children, depth = 0, actions }) {
-  const [open, setOpen] = useState(depth < 1);
+function CollapsibleSection({ label, children, depth = 0, actions, readOnly = false }) {
+  const [open, setOpen] = useState(false);
 
   return (
     <div className={`border border-white/5 rounded-lg overflow-hidden ${depth > 0 ? 'ml-0' : ''}`}>
@@ -524,6 +764,12 @@ function CollapsibleSection({ label, children, depth = 0, actions }) {
           <ChevronRight className="text-purple-400" size={14} />
         </motion.div>
         <span className="text-white/70 text-sm font-medium flex-1">{label}</span>
+        {readOnly && !actions && (
+          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[0.625rem] uppercase tracking-wider text-white/40">
+            <Lock size={10} />
+            Read-only
+          </span>
+        )}
         {actions}
       </button>
       <AnimatePresence>

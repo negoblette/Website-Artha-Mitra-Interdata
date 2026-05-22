@@ -11,14 +11,13 @@ export const metadata = {
 
 export default function SolutionPage() {
   const data = getContent('solution');
-  const products = getContent('products');
 
   return (
     <div className="relative z-10">
       <SolutionHero data={data.hero} />
       <SolutionGrid solutions={data.solutions} />
       <ServicesGrid services={data.services} />
-      <WhyChoose data={products.whyChoose} />
+      <WhyChoose data={data.whyChoose} />
     </div>
   );
 }
