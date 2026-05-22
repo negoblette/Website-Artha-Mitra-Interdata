@@ -326,5 +326,16 @@
       "icon": "Users",
       "description": "Awareness sessions and event support designed to strengthen security culture, user readiness, and stakeholder engagement."
     }
-  ]
+  ],
+  "whyChoose": {
+    "title": "Why Choose AMI?",
+    "description": "Our core focus has never wavered since our establishment — we have always trusted in the partnership approach of shared responsibility and vision. We hold ourselves accountable to what we set out to achieve.",
+    "points": [
+      "Authorized partner for 8+ global technology leaders",
+      "Over two decades of deployment experience across Indonesia",
+      "Certified engineering team with vendor-specific expertise",
+      "End-to-end services from assessment to ongoing maintenance",
+      "Proven track record in banking, government, and enterprise sectors"
+    ]
+  }
 }

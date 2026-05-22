@@ -4,20 +4,6 @@
     "description": "At Artha Mitra Interdata, we believe in a partnership approach built on shared responsibility and vision. We work closely with our customers to deliver infrastructure and security solutions that create real value, building IT environments that are efficient, resilient, and ready to support long-term growth.",
     "image": "/images/about-hero-fox.png"
   },
-  "highlights": [
-    {
-      "image": "/images/about-1.jpg",
-      "text": "Our experience in the IT integrations industry has allowed us to work with different clients across various industries — from banking and finance to government and manufacturing — each with unique challenges that have shaped the way we deliver our solutions."
-    },
-    {
-      "image": "/images/about-2.jpg",
-      "text": "We specialize in IT Infrastructure and Security solutions, covering network hardware, software, bandwidth management, firewall systems, anti-spam solutions, VoIP, and comprehensive security audits to protect your business-critical assets."
-    },
-    {
-      "image": "/images/about-3.jpg",
-      "text": "With partnerships spanning global technology leaders like Juniper Networks, Barracuda, Rapid7, A10 Networks, and more, we bring world-class solutions tailored to the Indonesian market and your specific business requirements."
-    }
-  ],
   "vision": "Be the company of choice as a technology solution integrator and provider to intensify customers' competitive edge.",
   "mission": "Cooperate with customers as a partner by assisting them to achieve their competitive business objectives through leadership and professionalism of services, as well as delivering excellent performance with dedicated and motivated people.",
   "history": {
@@ -25,10 +11,22 @@
     "description": "Artha Mitra Interdata (AMI) was established in 2003. Our experience in the IT integrations industry has since allowed us to work with different clients across various industries, each with different experiences that have shaped the way we deliver our solutions.\n\nWe look to continue building upon the decade-long body of knowledge that we've had, and continuously providing value for the clients that we work with by applying and adopting suitable technology.",
     "image": "/images/history.jpg",
     "milestones": [
-      { "year": "2003", "description": "Company Founded — AMI established as IT Solutions Integrator in Jakarta" },
-      { "year": "2010", "description": "Partnership Expansion — Became authorized partner for major global IT brands" },
-      { "year": "2018", "description": "Security Focus — Expanded cybersecurity solutions portfolio with Rapid7 & Barracuda" },
-      { "year": "2026", "description": "Continued Growth — Serving clients across banking, government, and enterprise sectors" }
+      {
+        "year": "2003",
+        "description": "Company Founded — AMI established as IT Solutions Integrator in Jakarta"
+      },
+      {
+        "year": "2010",
+        "description": "Partnership Expansion — Became authorized partner for major global IT brands"
+      },
+      {
+        "year": "2018",
+        "description": "Security Focus — Expanded cybersecurity solutions portfolio with Rapid7 & Barracuda"
+      },
+      {
+        "year": "2026",
+        "description": "Continued Growth — Serving clients across banking, government, and enterprise sectors"
+      }
     ]
   },
   "achievement": {
@@ -79,7 +77,7 @@
         "title": "Network Engineer",
         "type": "Full-time",
         "slug": "net-engineer",
-        "location": "Jakarta / Hybrid",
+        "location": "Jakarta",
         "experience": "2-5 years",
         "summary": "Design, deploy, and troubleshoot enterprise network infrastructure and security controls."
       },
