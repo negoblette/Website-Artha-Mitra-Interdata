@@ -69,6 +69,10 @@ const ARRAY_LABEL_OVERRIDES = {
   features: 'Feature',
 };
 
+const SINGLE_ITEM_ARRAY_PATHS = [
+  /^programs\.items\.\d+\.images$/,
+];
+
 function toTitleCase(value = '') {
   return value
     .replace(/([a-z])([A-Z])/g, '$1 $2')
@@ -95,6 +99,10 @@ function getArrayItemBaseLabel(path = '') {
   const override = ARRAY_LABEL_OVERRIDES[rawKey];
   if (override) return override;
   return singularize(toTitleCase(rawKey));
+}
+
+function isSingleItemArrayPath(path = '') {
+  return SINGLE_ITEM_ARRAY_PATHS.some((pattern) => pattern.test(path));
 }
 
 function LoginScreen({ onLogin }) {
@@ -248,6 +256,7 @@ export default function AdminPage() {
         obj = isNaN(k) ? obj[k] : obj[parseInt(k)];
       }
       if (!Array.isArray(obj)) return copy;
+      if (isSingleItemArrayPath(path) && obj.length >= 1) return copy;
       if (obj.length > 0) {
         const template = JSON.parse(JSON.stringify(obj[obj.length - 1]));
         clearValues(template);
@@ -281,6 +290,7 @@ export default function AdminPage() {
         obj = isNaN(k) ? obj[k] : obj[parseInt(k)];
       }
       if (Array.isArray(obj)) {
+        if (isSingleItemArrayPath(path)) return copy;
         const duplicate = JSON.parse(JSON.stringify(obj[index]));
         obj.splice(index + 1, 0, duplicate);
       }
@@ -613,6 +623,7 @@ function JsonEditor({
             : typeof item === 'string' ? item.substring(0, 50) : '';
           const baseLabel = getArrayItemBaseLabel(path);
           const displayLabel = baseLabel ? `${baseLabel} ${i + 1}` : `[${i}]`;
+          const isSingleItemArray = isSingleItemArrayPath(path);
 
           return (
             <div key={i} className="relative group/item">
@@ -637,13 +648,15 @@ function JsonEditor({
                     >
                       <ArrowDown size={12} />
                     </button>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); onDuplicateItem(path, i); }}
-                      className="p-1 hover:bg-blue-500/20 rounded text-white/40 hover:text-blue-400"
-                      title="Duplicate"
-                    >
-                      <Copy size={12} />
-                    </button>
+                    {!isSingleItemArray && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); onDuplicateItem(path, i); }}
+                        className="p-1 hover:bg-blue-500/20 rounded text-white/40 hover:text-blue-400"
+                        title="Duplicate"
+                      >
+                        <Copy size={12} />
+                      </button>
+                    )}
                     <button
                       onClick={(e) => { e.stopPropagation(); if (confirm('Remove this item?')) onRemoveItem(path, i); }}
                       className="p-1 hover:bg-red-500/20 rounded text-white/40 hover:text-red-400"
@@ -675,7 +688,7 @@ function JsonEditor({
             </div>
           );
         })}
-        {!readOnly && (
+        {!readOnly && !isSingleItemArrayPath(path) && (
           <button
             onClick={() => onAddItem(path)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-white/10 text-white/30 hover:text-purple-400 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all text-sm w-full justify-center"
