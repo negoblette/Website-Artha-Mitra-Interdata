@@ -1,13 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function AchievementSection({ data }) {
-  const [flippedCards, setFlippedCards] = useState({});
+  const [cardRatio, setCardRatio] = useState(null);
   const [startIndex, setStartIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState('');
   const [isSliding, setIsSliding] = useState(false);
+
+  const referenceImage = '/images/Achievement/Juniper%202010.png';
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = referenceImage;
+    img.onload = () => {
+      if (!img.naturalWidth || !img.naturalHeight) return;
+      setCardRatio(img.naturalWidth / img.naturalHeight);
+    };
+  }, []);
 
   const images = data.images || [];
   const totalCards = images.length;
@@ -17,8 +28,12 @@ export default function AchievementSection({ data }) {
     (startIndex + offset) % totalCards
   );
 
-  const toggleFlip = (index) => {
-    setFlippedCards((prev) => ({ ...prev, [index]: !prev[index] }));
+  const handleImageLoad = (src, event) => {
+    const { naturalWidth, naturalHeight } = event.currentTarget;
+    if (!naturalWidth || !naturalHeight) return;
+    if (src === referenceImage) {
+      setCardRatio(naturalWidth / naturalHeight);
+    }
   };
 
   const goPrev = () => {
@@ -76,39 +91,21 @@ export default function AchievementSection({ data }) {
           }`}
         >
           {visibleIndices.map((cardIndex) => (
-            <button
+            <div
               key={`achievement-${cardIndex}`}
-              type="button"
-              onClick={() => toggleFlip(cardIndex)}
-              className="group h-56 w-full text-left [perspective:1200px]"
-              aria-pressed={Boolean(flippedCards[cardIndex])}
-              aria-label={`Flip achievement card ${cardIndex + 1}`}
+              className="group w-full text-left"
+              style={{ aspectRatio: cardRatio || '16 / 9' }}
             >
-              <span className="sr-only">Flip card</span>
-              <div
-                className={`relative h-full rounded-xl [transform-style:preserve-3d] transition-transform duration-700 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:[transform:rotateY(180deg)] ${flippedCards[cardIndex] ? '[transform:rotateY(180deg)]' : ''}`}
-              >
-                <div className="absolute inset-0 overflow-hidden rounded-xl bg-[#0a0b85] text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)] [backface-visibility:hidden]">
-                  <img
-                    src={images[cardIndex]}
-                    alt={`Achievement ${cardIndex + 1}`}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                  <span className="absolute inset-0 bg-gradient-to-t from-[#0a0b85]/68 via-[#0a0b85]/25 to-transparent" />
-                  <span className="absolute right-4 top-3 text-xl leading-none">&rarr;</span>
-                  <span className="absolute bottom-4 left-4 text-sm font-semibold tracking-[0.16em] text-white/95">ACHIEVEMENT</span>
-                </div>
-
-                <div className="absolute inset-0 rounded-xl border border-[#0a0b85]/35 bg-white p-5 text-[#111827] shadow-[0_12px_24px_rgba(10,11,133,0.16)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#0a0b85]/75">Achievement</span>
-                  <span className="mt-3 block text-3xl font-black leading-none text-[#0a0b85]">Card {cardIndex + 1}</span>
-                  <span className="mt-4 block text-sm leading-relaxed text-[#111827]/85">
-                    Pencapaian tim AMI dalam menghadirkan solusi IT yang terukur dan berkelanjutan.
-                  </span>
-                </div>
+              <div className="relative h-full overflow-hidden rounded-xl bg-[#0a0b85] text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)] transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_18px_32px_rgba(10,11,133,0.24)]">
+                <img
+                  src={images[cardIndex]}
+                  alt={`Achievement ${cardIndex + 1}`}
+                  className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                  loading="lazy"
+                  onLoad={(event) => handleImageLoad(images[cardIndex], event)}
+                />
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>
