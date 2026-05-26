@@ -4,7 +4,6 @@ import WaveCanvas from './WaveCanvas';
 
 export default function HeroSection({ data }) {
   const [firstWord = '', highlightWord = '', ...restWords] = data.title.split(' ');
-  const remainingText = restWords.join(' ');
 
   return (
     <section className="home-panel relative overflow-x-hidden bg-white min-h-[100svh] flex flex-col items-center justify-center">

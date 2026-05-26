@@ -69,14 +69,8 @@ function StatsCard({ stat, index }) {
 }
 
 export default function HowItWorksSection({ data }) {
-  const left = data.left ?? {
-    title: "",
-    description: data.description?.split("\n\n")?.[0] ?? "",
-  };
-  const right = data.right ?? {
-    title: "",
-    description: data.description?.split("\n\n")?.[1] ?? "",
-  };
+  const left = data.left ?? { title: '', description: '' };
+  const right = data.right ?? { title: '', description: '' };
 
   return (
     <section className="relative overflow-hidden bg-white px-4 py-[clamp(3.5rem,8vh,6rem)] sm:px-8 lg:px-10">

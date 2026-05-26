@@ -15,7 +15,6 @@ export const metadata = {
 export default function AboutPage() {
   const data = getContent('about');
 
-
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#f3f4f8]">
       {/* Page background - subtle */}

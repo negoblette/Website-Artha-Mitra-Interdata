@@ -1,19 +1,10 @@
 {
   "hero": {
-    "eyebrow": "IT Solutions Integrator and Provider",
     "title": "we optimize IT for you",
-    "accentWord": "Optimize",
     "description": "As technology grows more complex, managing it effectively becomes critical to staying competitive. Artha Mitra Interdata partners with you to take control of your IT infrastructure and security, improving efficiency, reducing risk, and enabling sustainable growth.",
     "cta": {
       "label": "Get to Know Us",
       "href": "/about"
-    },
-    "secondaryCta": {
-      "label": "Contact Us",
-      "href": "/contact"
-    },
-    "background": {
-      "image": "/images/reference/home-page-background.svg"
     }
   },
   "howItWorks": {
@@ -182,23 +173,6 @@
   },
   "contactSection": {
     "eyebrow": "Contact Us",
-    "title": "Get In Touch With Us",
-    "socials": [
-      {
-        "platform": "Instagram",
-        "label": "@arthamitrainterdata"
-      },
-      {
-        "platform": "Facebook",
-        "label": "@arthamitrainterdata"
-      },
-      {
-        "platform": "LinkedIn",
-        "label": "@arthamitrainterdata"
-      }
-    ],
-    "form": {
-      "submitLabel": "> Send Message"
-    }
+    "title": "Get In Touch With Us"
   }
 }
