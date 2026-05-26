@@ -43,13 +43,12 @@ export default function ContactInfo({ contact, whatsapp }) {
               
 
               <h2 className="mt-5 max-w-lg text-5xl font-black leading-[0.94] tracking-tight text-[#16305f] sm:text-6xl lg:text-[5.4rem]">
-                Let&apos;s create
+                Let&apos;s start
                 <br />
-                something
+                to optimize IT
                 <br />
-                great{' '}
                 <span className="relative inline-block text-[#2f54eb]">
-                  together.
+                  together??.
                   <span className="absolute inset-x-0 -bottom-2 h-2 rounded-full bg-[#2f54eb]/20" />
                 </span>
               </h2>
