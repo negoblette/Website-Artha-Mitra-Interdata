@@ -24,7 +24,7 @@ const FILE_ROUTES = {
 
 const READ_ONLY_MAP = {
   homepage: ['hero', 'howItWorks', 'contactSection'],
-  about: ['hero', 'vision', 'mission'],
+  about: ['hero', 'vision', 'mission', 'coreValues'],
   solution: ['hero'],
   products: ['hero'],
   activities: ['hero'],
