@@ -67,6 +67,16 @@ export default function CiptaValuesSection({ values = [] }) {
           ))}
         </div>
 
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mt-10 max-w-3xl text-center text-sm font-semibold leading-relaxed text-[rgb(13,27,94)] sm:text-base"
+        >
+          Through CIPTA Core Values, we Artha Mitra Interdata have achieved ISO Certifications of ISO 27001 &amp; ISO 45001 to strengthen our culture of Trust, Safety, Collaboration and Continuous Excellence.
+        </motion.p>
+
         <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
           {["/images/ISO 27001.png", "/images/ISO 45001.png"].map((src, index) => (
             <motion.div

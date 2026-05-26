@@ -14,7 +14,7 @@ export const metadata = {
 
 export default function AboutPage() {
   const data = getContent('about');
-  const homepage = getContent('homepage');
+
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#f3f4f8]">
@@ -31,7 +31,7 @@ export default function AboutPage() {
       <div className="relative z-10">
         <AboutHero data={data.hero} />
         <VisionMission vision={data.vision} mission={data.mission} />
-        <CiptaValuesSection values={homepage.howItWorks?.values} />
+        <CiptaValuesSection values={data.coreValues?.values} />
         <HistorySection data={data.history} />
         <AchievementSection data={data.achievement} />
         <LifeAtAmi data={data.lifeAtAmi} />

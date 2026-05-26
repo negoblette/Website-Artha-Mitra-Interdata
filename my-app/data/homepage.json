@@ -17,7 +17,7 @@
     }
   },
   "howItWorks": {
-    "title": "How We Optimize IT For You",
+    "title": "How We optimize IT For You",
     "left" : {
       "title": "Building Resilient & Future-Ready IT Solutions",
       "description": "At Artha Mitra Interdata, optimizing IT means ensuring that technology consistently supports and strengthens your business objectives. We work closely with our customers as trusted partners, taking the time to understand their priorities so that every solution we design delivers practical, measurable value. From infrastructure to security, our focus is on building IT environments that are stable, efficient, and able to adapt as your business evolves." 
@@ -31,39 +31,6 @@
       { "value" : "500+", "label": "Trusted Clients" },
       { "value" : "98%", "label": "Customer Satisfaction" },
       { "value" : "24/7", "label": "Support" }
-    ],
-"description": "At Artha Mitra Interdata, optimizing IT means ensuring that technology consistently supports and strengthens your business objectives. We work closely with our customers as trusted partners, taking the time to understand their priorities so that every solution we design delivers practical, measurable value. From infrastructure to security, our focus is on building IT environments that are stable, efficient, and able to adapt as your business evolves.\n\nOur approach is guided by a clear vision to become the technology partner of choice, and a mission to help customers achieve their competitive goals through strong leadership and professional service. Guided by our core values of Commitment, Integrity, Professionalism, Teamwork, and Advancement (CIPTA), we cultivate a culture of accountability, collaboration, and continuous improvement. These principles shape how we engage, how we deliver, and how we help our customers transform IT into a sustained competitive advantage.",
-    "values": [
-      {
-        "letter": "C",
-        "title": "Commitment",
-        "description": "We understand the importance of delivering on our promises and are dedicated to excellence in completing the tasks at hand.",
-        "image": "/images/commitment.jpg"
-      },
-      {
-        "letter": "I",
-        "title": "Integrity",
-        "description": "We abide to a set of moral standards that is unwavering and steadfast - we always look to do the right thing.",
-        "image": "/images/Integrity.png"
-      },
-      {
-        "letter": "P",
-        "title": "Professionalism",
-        "description": "We believe in our competence and seek to achieve the best results in all that we do.",
-        "image": "/images/professionalism.png"
-      },
-      {
-        "letter": "T",
-        "title": "Teamwork",
-        "description": "Understanding that synergy enables us to achieve more, we always collaborate in formulating the optimum solution.",
-        "image": "/images/teamwork.png"
-      },
-      {
-        "letter": "A",
-        "title": "Advancement",
-        "description": "Encapsulating our vision and purpose as a company, we ensure every delivery provides tangible value that advances the business.",
-        "image": "/images/advancement.png"
-      }
     ]
   },
   "offerings": {
@@ -126,7 +93,7 @@
           },
           {
             "name": "Design",
-            "description": "Security architecture and solution design tailored to needs."
+            "description": "Security architecture and solution design tailored to business needs."
           },
           {
             "name": "Implementation",
