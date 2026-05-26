@@ -67,7 +67,7 @@ export default function CiptaValuesSection({ values = [] }) {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
           {["/images/ISO 27001.png", "/images/ISO 45001.png"].map((src, index) => (
             <motion.div
               key={src}
@@ -75,14 +75,14 @@ export default function CiptaValuesSection({ values = [] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.5, delay: index * 0.12 }}
-              className="flex items-center justify-center px-4 py-3"
+              className="relative h-[80px] w-[180px] sm:h-[90px] sm:w-[200px]"
             >
               <Image
                 src={src}
                 alt={src.includes('27001') ? 'ISO 27001' : 'ISO 45001'}
-                width={140}
-                height={72}
-                className="h-auto w-28 sm:w-36"
+                fill
+                sizes="200px"
+                className="object-contain"
               />
             </motion.div>
           ))}
