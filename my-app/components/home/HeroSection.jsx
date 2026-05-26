@@ -45,7 +45,16 @@ export default function HeroSection({ data }) {
         <h1 className="hero-fade-2 mb-2 max-w-7xl mx-auto text-[clamp(2.6rem,7.5vw,7.4rem)] leading-[1.03] sm:leading-[0.98] text-[rgb(107,107,184)] font-bold text-balance break-words">
           {firstWord}{' '}
           <span className="text-[rgb(13,27,94)] font-extrabold">{highlightWord}</span>{' '}
-          {remainingText}
+          {restWords.map((word, i) => (
+            <span key={i}>
+              {word === 'IT' ? (
+                <span className="text-[rgb(13,27,94)] font-extrabold">{word}</span>
+              ) : (
+                word
+              )}
+              {i < restWords.length - 1 ? ' ' : ''}
+            </span>
+          ))}
         </h1>
 
         <p className="hero-fade-3 mt-4 sm:mt-8 mb-8 sm:mb-12 text-[clamp(1rem,2.4vw,1.65rem)] text-[rgb(13,27,94)] max-w-5xl mx-auto leading-relaxed font-semibold px-2 sm:px-0 text-balance">

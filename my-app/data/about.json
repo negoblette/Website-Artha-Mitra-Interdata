@@ -6,6 +6,42 @@
   },
   "vision": "Be the company of choice as a technology solution integrator and provider to intensify customers' competitive edge.",
   "mission": "Cooperate with customers as a partner by assisting them to achieve their competitive business objectives through leadership and professionalism of services, as well as delivering excellent performance with dedicated and motivated people.",
+  "coreValues": {
+    "title": "Core Values",
+    "description": "The principles that guide how we collaborate, deliver, and create lasting value for every client partnership.",
+    "values": [
+      {
+        "letter": "C",
+        "title": "Commitment",
+        "description": "We understand the importance of delivering on our promises and are dedicated to excellence in completing the tasks at hand.",
+        "image": "/images/commitment.jpg"
+      },
+      {
+        "letter": "I",
+        "title": "Integrity",
+        "description": "We abide to a set of moral standards that is unwavering and steadfast - we always look to do the right thing.",
+        "image": "/images/Integrity.png"
+      },
+      {
+        "letter": "P",
+        "title": "Professionalism",
+        "description": "We believe in our competence and seek to achieve the best results in all that we do.",
+        "image": "/images/professionalism.png"
+      },
+      {
+        "letter": "T",
+        "title": "Teamwork",
+        "description": "Understanding that synergy enables us to achieve more, we always collaborate in formulating the optimum solution.",
+        "image": "/images/teamwork.png"
+      },
+      {
+        "letter": "A",
+        "title": "Advancement",
+        "description": "Encapsulating our vision and purpose as a company, we ensure every delivery provides tangible value that advances the business.",
+        "image": "/images/advancement.png"
+      }
+    ]
+  },
   "history": {
     "title": "History & Journey",
     "description": "Artha Mitra Interdata (AMI) was established in 2003. Our experience in the IT integrations industry has since allowed us to work with different clients across various industries, each with different experiences that have shaped the way we deliver our solutions.\n\nWe look to continue building upon the decade-long body of knowledge that we've had, and continuously providing value for the clients that we work with by applying and adopting suitable technology.",
@@ -58,76 +94,53 @@
     "subtitle": "Available Positions",
     "positions": [
       {
-        "title": "JavaScript Developer (NodeJS)",
+        "title": "Network Engineer (Presales)",
         "type": "Full-time",
-        "slug": "js-dev",
+        "slug": "net-presales",
         "location": "Jakarta",
-        "experience": "2-4 years",
-        "summary": "Build and maintain backend services, APIs, and internal integrations for enterprise platforms."
+        "summary": "Conduct technical assessments, design network solutions, and support the sales team with proposals and demonstrations."
       },
       {
-        "title": "IT Service Desk Manager",
+        "title": "Network Engineer (Project)",
         "type": "Full-time",
-        "slug": "it-manager",
+        "slug": "net-project",
         "location": "Jakarta",
-        "experience": "4+ years",
-        "summary": "Lead service desk operations, manage SLA performance, and improve end-user support quality."
+        "summary": "Plan, deploy, and configure network infrastructure for client projects from kickoff to handover."
       },
       {
-        "title": "Network Engineer",
+        "title": "Network Engineer (Postsales)",
         "type": "Full-time",
-        "slug": "net-engineer",
+        "slug": "net-postsales",
         "location": "Jakarta",
-        "experience": "2-5 years",
-        "summary": "Design, deploy, and troubleshoot enterprise network infrastructure and security controls."
+        "summary": "Provide ongoing technical support, troubleshooting, and maintenance for deployed network solutions."
       },
       {
-        "title": "Backend Engineer (Python)",
+        "title": "Account Sales",
         "type": "Full-time",
-        "slug": "backend-python",
-        "location": "Bandung",
-        "experience": "2-4 years",
-        "summary": "Develop scalable backend modules, automate workflows, and optimize system reliability."
-      },
-      {
-        "title": "Frontend Engineer (React)",
-        "type": "Full-time",
-        "slug": "frontend-react",
-        "location": "Jakarta / Remote",
-        "experience": "2-4 years",
-        "summary": "Create responsive web interfaces and collaborate closely with UX and backend teams."
-      },
-      {
-        "title": "Cyber Security Analyst",
-        "type": "Full-time",
-        "slug": "security-analyst",
+        "slug": "account-sales",
         "location": "Jakarta",
-        "experience": "3+ years",
-        "summary": "Monitor security events, perform incident response, and implement preventive controls."
+        "summary": "Manage client relationships, identify business opportunities, and drive revenue growth across IT solutions."
       },
       {
-        "title": "Cloud Infrastructure Engineer",
+        "title": "Technical/Sales Admin",
         "type": "Full-time",
-        "slug": "cloud-infra",
-        "location": "Jakarta / Hybrid",
-        "experience": "3-6 years",
-        "summary": "Manage cloud architecture, CI/CD infrastructure, and platform observability practices."
-      },
-      {
-        "title": "QA Automation Engineer",
-        "type": "Full-time",
-        "slug": "qa-automation",
-        "location": "Yogyakarta",
-        "experience": "2-4 years",
-        "summary": "Build automated test pipelines and enforce quality standards across product releases."
-      },
-      {
-        "title": "Technical Account Manager",
-        "type": "Full-time",
-        "slug": "tech-account-manager",
+        "slug": "tech-sales-admin",
         "location": "Jakarta",
-        "experience": "3+ years",
-        "summary": "Bridge technical delivery and client communication to ensure project success and retention."
+        "summary": "Support sales and technical teams with documentation, procurement coordination, and administrative tasks."
+      },
+      {
+        "title": "Project Coordinator",
+        "type": "Full-time",
+        "slug": "project-coordinator",
+        "location": "Jakarta",
+        "summary": "Coordinate project timelines, resources, and stakeholder communication to ensure smooth delivery."
+      },
+      {
+        "title": "Marketing Communication",
+        "type": "Full-time",
+        "slug": "marcom",
+        "location": "Jakarta",
+        "summary": "Develop and execute marketing strategies, manage brand communications, and create engaging content."
       }
     ],
     "careerEmail": "career@arthamitra.co.id",
