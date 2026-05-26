@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function AboutHero({ data }) {
+  const heroImage = data?.image || '/images/about-hero-bg.jpg';
+
   return (
     <section className="relative min-h-[32.5rem] overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36">
       <div className="absolute inset-0 bg-white" />
@@ -11,7 +13,7 @@ export default function AboutHero({ data }) {
       <div className="absolute inset-0">
         <div className="absolute inset-y-0 left-[24%] right-[-4rem] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.04)_28%,rgba(0,0,0,0.42)_44%,rgba(0,0,0,0.88)_58%,#000_68%)] sm:left-[28%] sm:right-[-5rem] lg:left-[34%] lg:right-[-6rem]">
           <Image
-            src="/images/about-hero-bg.jpg"
+            src={heroImage}
             alt={data.title}
             fill
             priority
