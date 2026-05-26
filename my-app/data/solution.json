@@ -10,8 +10,8 @@
       "slug": "network-infrastructure",
       "name": "Network Infrastructure",
       "icon": "Network",
-      "shortDescription": "Enterprise-grade network design, implementation, and optimization for seamless connectivity and peak performance.",
-      "fullDescription": "We design, implement, and manage robust network infrastructures that form the backbone of your business operations. From initial assessment to full deployment, our certified engineers ensure your network delivers maximum performance and reliability.",
+      "shortDescription": "Enterprise-grade network infrastructure for seamless connectivity and stable performance.",
+      "fullDescription": "We design, implement, and manage robust network infrastructures that form the backbone of your business operations. From initial assessment to full deployment, our certified engineers ensure your network delivers optimal performance, reliability, and scalability.",
       "features": [
         "LAN/WAN Design & Implementation",
         "Network Assessment & Optimization",
@@ -294,22 +294,22 @@
     {
       "name": "Design",
       "icon": "PenTool",
-      "description": "Custom network architecture design tailored to your business requirements, ensuring scalability, security, and performance."
+      "description": "Custom network and security architecture design tailored to your business requirements, ensuring scalability, security, and performance."
     },
     {
       "name": "Implementation",
       "icon": "Wrench",
-      "description": "Professional deployment, configuration, and integration of network equipment and security solutions with minimal disruption."
+      "description": "Professional deployment, configuration, and integration of network security equipment and solutions with minimal disruption."
     },
     {
       "name": "Maintenance & Support",
       "icon": "LifeBuoy",
-      "description": "Ongoing system maintenance, firmware updates, health monitoring, and priority technical support to keep your infrastructure running."
+      "description": "Ongoing system maintenance, firmware updates, health monitoring, and priority technical support to keep your infrastructure and security running optimally."
     },
     {
       "name": "Training",
       "icon": "GraduationCap",
-      "description": "Technical training programs to empower your IT team with the knowledge and skills to manage and optimize your infrastructure."
+      "description": "Technical training programs to empower your IT team with the knowledge and skills to optimize your infrastructure and security."
     },
     {
       "name": "Security Audit",
@@ -335,7 +335,8 @@
       "Over two decades of deployment experience across Indonesia",
       "Certified engineering team with vendor-specific expertise",
       "End-to-end services from assessment to ongoing maintenance",
-      "Proven track record in banking, government, and enterprise sectors"
+      "Proven track record in enterprise and B2B sectors in Indonesia",
+      "Compliance and standardization with our vendor-aligned delivery"
     ]
   }
 }

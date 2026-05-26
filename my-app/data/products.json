@@ -11,7 +11,7 @@
       "slug": "cyberark",
       "logo": "/images/principals/cyberark.png",
       "website": "https://www.cyberark.com",
-      "description": "Identity security and privileged access solutions focused on protecting critical accounts, credentials, and infrastructure.",
+      "description": "Identity security for human, machine, and AI identities with intelligent privilege controls.",
       "solutions": [
         { "name": "Data Security", "slug": "data-security" },
         { "name": "Information Security", "slug": "information-security" },
@@ -23,7 +23,7 @@
       "slug": "palo-alto",
       "logo": "/images/principals/paloalto.png",
       "website": "https://www.paloaltonetworks.com",
-      "description": "Network, cloud, and SOC security platforms designed to secure modern enterprise environments end to end.",
+      "description": "AI-powered cybersecurity across network security, cloud security, and security operations.",
       "solutions": [
         { "name": "Network Security", "slug": "network-security" },
         { "name": "Endpoint Security", "slug": "endpoint-security" },
@@ -36,7 +36,7 @@
       "slug": "fortinet",
       "logo": "/images/principals/fortinet.png",
       "website": "https://www.fortinet.com",
-      "description": "Integrated cybersecurity solutions spanning firewalls, secure networking, and protection across branch, campus, and cloud.",
+      "description": "Fortinet Security Fabric for secure networking, unified SASE, and security operations.",
       "solutions": [
         { "name": "Network Infrastructure", "slug": "network-infrastructure" },
         { "name": "Network Security", "slug": "network-security" },
@@ -48,7 +48,7 @@
       "slug": "juniper",
       "logo": "/images/principals/juniper.png",
       "website": "https://www.juniper.net",
-      "description": "AI-driven enterprise networking and cybersecurity solutions for data center, campus, and cloud environments.",
+      "description": "AI-native networking for campus, branch, data center, WAN, and security operations.",
       "solutions": [
         { "name": "Network Infrastructure", "slug": "network-infrastructure" },
         { "name": "Network Security", "slug": "network-security" }
@@ -59,7 +59,7 @@
       "slug": "rapid7",
       "logo": "/images/principals/rapid7.png",
       "website": "https://www.rapid7.com",
-      "description": "Security analytics, automation, and vulnerability management for comprehensive threat detection and response.",
+      "description": "Exposure management, vulnerability risk management, application security, and next-gen SIEM.",
       "solutions": [
         { "name": "Application Security", "slug": "application-security" },
         { "name": "Security Management", "slug": "security-management" }
@@ -70,7 +70,7 @@
       "slug": "das-security",
       "logo": "/images/principals/das.png",
       "website": "https://www.dbappsecurity.com",
-      "description": "Security-focused solutions supporting resilient enterprise protection, visibility, and operational defense.",
+      "description": "Application and data security solutions including WAF, database audit, and risk control.",
       "solutions": [
         { "name": "Network Security", "slug": "network-security" }
       ]
@@ -80,7 +80,7 @@
       "slug": "gigamon",
       "logo": "/images/principals/gigamon.png",
       "website": "https://www.gigamon.com",
-      "description": "Deep observability and network visibility solutions that help teams monitor, secure, and optimize traffic flows.",
+      "description": "Deep observability pipeline delivering network-derived intelligence across hybrid cloud environments.",
       "solutions": [
         { "name": "Network Infrastructure", "slug": "network-infrastructure" }
       ]
@@ -90,7 +90,7 @@
       "slug": "crowdstrike",
       "logo": "/images/principals/crowdstrike.png",
       "website": "https://www.crowdstrike.com/en-us/",
-      "description": "Cloud-native endpoint, identity, and threat intelligence capabilities for real-time cyber defense.",
+      "description": "Falcon platform protection for endpoint, identity, cloud, SaaS, and AI security.",
       "solutions": [
         { "name": "Endpoint Security", "slug": "endpoint-security" },
         { "name": "Cloud Security", "slug": "cloud-security" }
@@ -101,7 +101,7 @@
       "slug": "netscout",
       "logo": "/images/principals/netscout.png",
       "website": "https://www.netscout.com",
-      "description": "Performance management, visibility, and cybersecurity intelligence solutions for complex enterprise networks.",
+      "description": "Smart Data-powered observability, cybersecurity, DDoS protection, and service assurance.",
       "solutions": [
         { "name": "Network Performance Monitoring", "slug": "network-performance-monitoring" }
       ]
@@ -111,7 +111,7 @@
       "slug": "gtb-technology",
       "logo": "/images/principals/gtb.png",
       "website": "https://gttb.com",
-      "description": "Data loss prevention and insider risk controls aimed at protecting sensitive enterprise information.",
+      "description": "Enterprise DLP, data discovery, classification, and content-aware policy enforcement.",
       "solutions": [
         { "name": "Data Security", "slug": "data-security" },
         { "name": "Information Security", "slug": "information-security" }
@@ -122,7 +122,7 @@
       "slug": "genians",
       "logo": "/images/principals/genians.png",
       "website": "https://www.genians.com",
-      "description": "Network access control and device visibility solutions for secure onboarding and policy-driven access.",
+      "description": "Network access control and zero trust access with real-time device visibility.",
       "solutions": [
         { "name": "Network Security", "slug": "network-security" }
       ]
@@ -132,7 +132,7 @@
       "slug": "bitdefender",
       "logo": "/images/principals/bitdefender.png",
       "website": "https://www.bitdefender.com/en-id/",
-      "description": "Endpoint and cloud security solutions focused on threat prevention, detection, and resilience across distributed environments.",
+      "description": "GravityZone endpoint, cloud workload, and managed detection security for businesses.",
       "solutions": [
         { "name": "Endpoint Security", "slug": "endpoint-security" },
         { "name": "Cloud Security", "slug": "cloud-security" }
@@ -143,7 +143,7 @@
       "slug": "opentext",
       "logo": "/images/principals/opentext.png",
       "website": "https://www.opentext.com",
-      "description": "Enterprise information and application security capabilities supporting safer digital operations and risk-aware application environments.",
+      "description": "Fortify application security testing for SAST, DAST, SCA, and AppSec programs.",
       "solutions": [
         { "name": "Application Security", "slug": "application-security" }
       ]
