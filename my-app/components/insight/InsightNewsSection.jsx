@@ -9,6 +9,7 @@ const EXPANDED_NEWS_CONTENT_HEIGHT = 240;
 const NEWS_SOURCE_ROW_HEIGHT = 44;
 
 function NewsCard({ item, index }) {
+  // State untuk membuka/menutup konten panjang pada kartu news.
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -22,11 +23,13 @@ function NewsCard({ item, index }) {
       <article
         className="gradient-border group relative flex min-h-[240px] flex-col overflow-hidden rounded-2xl bg-[linear-gradient(135deg,rgb(20,40,120)_0%,rgb(15,30,95)_45%,rgb(10,20,70)_100%)] p-6 shadow-[0_24px_70px_rgba(15,23,42,0.16)] transition-shadow duration-300 group-hover:shadow-[0_30px_85px_rgba(10,20,70,0.28)] sm:p-7"
       >
+          {/* Layer dekoratif kartu news: shimmer, gradient, dan aksen blur. */}
           <div className="absolute inset-0 hidden shimmer opacity-0 transition-opacity duration-500 md:block group-hover:opacity-100" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.14),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(132,169,255,0.14),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.04),transparent_58%)]" />
           <div className="pointer-events-none absolute -right-10 top-6 hidden h-28 w-28 rounded-full bg-[#8eb1ff]/12 blur-3xl opacity-70 transition-opacity duration-500 md:block group-hover:opacity-100" />
           <div className="pointer-events-none absolute -left-10 bottom-0 hidden h-24 w-24 rounded-full bg-white/10 blur-3xl opacity-70 transition-opacity duration-500 md:block group-hover:opacity-100" />
 
+          {/* Konten utama kartu news: kategori, tanggal, judul, ringkasan, dan detail expand. */}
           <div className="relative flex flex-1 flex-col">
             <div className="flex items-center gap-3 mb-3">
               <span className="glass-card items-center gap-1.5 rounded-full border border-white/18 bg-white/14 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm">
@@ -52,6 +55,7 @@ function NewsCard({ item, index }) {
                 {item.excerpt}
               </p>
 
+              {/* Konten tambahan news yang muncul saat kartu dibuka. */}
               <AnimatePresence initial={false}>
                 {expanded && (
                   <motion.div
@@ -86,6 +90,7 @@ function NewsCard({ item, index }) {
               </AnimatePresence>
             </div>
 
+            {/* Tombol toggle untuk membuka atau menutup detail news. */}
             <button
               className="mt-auto pt-3 flex items-center gap-1 text-xs text-[#eef3ff] transition-colors hover:text-white"
               onClick={(e) => {
@@ -107,11 +112,14 @@ function NewsCard({ item, index }) {
 }
 
 export default function InsightNewsSection({ data }) {
+  // State filter kategori, pagination news, dan pagination daftar kategori.
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [categoryPage, setCategoryPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const categoriesPerPage = 10;
+
+  // Normalisasi item news: hanya item berslug yang dipakai, lalu dedupe berdasarkan slug.
   const items = Array.from(
     new Map(
       (data?.items ?? [])
@@ -125,6 +133,8 @@ export default function InsightNewsSection({ data }) {
         ]),
     ).values(),
   );
+
+  // Daftar kategori dibuat dari data news dan diawali opsi "All".
   const categories = ['All', ...new Set(items.map((item) => item.category).filter(Boolean))];
   const totalCategoryPages = Math.max(1, Math.ceil(categories.length / categoriesPerPage));
   const paginatedCategories = categories.slice(
@@ -132,17 +142,20 @@ export default function InsightNewsSection({ data }) {
     categoryPage * categoriesPerPage,
   );
 
+  // Filter news berdasarkan kategori aktif.
   const filteredItems =
     activeCategory === 'All'
       ? items
       : items.filter((item) => item.category === activeCategory);
 
+  // Hitung halaman news dan ambil item yang tampil di halaman aktif.
   const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
   const paginatedItems = filteredItems.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
 
+  // Atur jumlah kartu news per halaman berdasarkan ukuran viewport.
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth >= 1024) {
@@ -159,12 +172,14 @@ export default function InsightNewsSection({ data }) {
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
 
+  // Reset halaman news ketika jumlah item per halaman atau kategori berubah.
   useEffect(() => {
     setCurrentPage(1);
   }, [itemsPerPage, activeCategory]);
 
   return (
     <section className="relative py-24 overflow-hidden">
+      {/* Background dekoratif section news menggunakan ornamen SVG khusus Insight. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[920px] overflow-hidden sm:h-[840px] lg:h-[1200px]">
         <Image
           src="/decor/Insight_news.svg"
@@ -183,6 +198,7 @@ export default function InsightNewsSection({ data }) {
       <div className="absolute bottom-0 right-0 z-10 h-96 w-96 rounded-full bg-cyan-900/5 blur-[120px]" />
 
       <div className="relative z-20 mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-20">
+        {/* Header section News. */}
         <AnimatedSection>
           <div className="mb-8 sm:mb-10 text-left">
             <div className="mb-1">
@@ -194,6 +210,7 @@ export default function InsightNewsSection({ data }) {
           </div>
         </AnimatedSection>
 
+        {/* Filter kategori news, termasuk pagination kategori jika jumlahnya panjang. */}
         <div className="mb-8">
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#010268]/70 sm:text-xs">
             Categorized by news topic
@@ -247,12 +264,14 @@ export default function InsightNewsSection({ data }) {
           </div>
         </div>
 
+        {/* Grid kartu news sesuai kategori dan halaman aktif. */}
         <div className="grid grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-3">
           {paginatedItems.map((item, i) => (
             <NewsCard key={item.slug} item={item} index={i} />
           ))}
         </div>
 
+        {/* Kontrol pagination news hanya muncul jika data melebihi item per halaman. */}
         {filteredItems.length > itemsPerPage && (
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <button

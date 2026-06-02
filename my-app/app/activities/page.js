@@ -11,6 +11,9 @@ export const metadata = {
 
 export default function ActivitiesPage() {
   const data = getContent('activities');
+
+  // Konfigurasi dekorasi background untuk viewport mobile.
+  // Nilai posisi dan ukuran dipisah agar mudah disesuaikan tanpa mengubah markup.
   const activitiesBgMobile = {
     x: '-34%',
     y: '-10px',
@@ -22,6 +25,7 @@ export default function ActivitiesPage() {
     visibility: 'block sm:hidden',
   };
 
+  // Konfigurasi dekorasi background untuk viewport tablet.
   const activitiesBgTablet = {
     x: '-26%',
     y: '-158px',
@@ -33,6 +37,7 @@ export default function ActivitiesPage() {
     visibility: '',
   };
 
+  // Konfigurasi dekorasi background untuk viewport desktop.
   const activitiesBgDesktop = {
     x: '-22%',
     y: '-100px',
@@ -44,6 +49,7 @@ export default function ActivitiesPage() {
     visibility: '',
   };
 
+  // Helper untuk merender ornamen background Activities berdasarkan konfigurasi responsive.
   const renderActivitiesBg = (config) => (
     <div
       className={`pointer-events-none absolute inset-x-0 top-0 z-0 overflow-visible ${config.wrapperHeight} ${config.visibility}`}
@@ -74,13 +80,19 @@ export default function ActivitiesPage() {
 
   return (
     <div className="relative z-10">
+      {/* Section hero utama halaman Activities. */}
       <ActivitiesHero data={data.hero} />
+
+      {/* Wrapper untuk section Programs dan Events beserta dekorasi background-nya. */}
       <div className="relative overflow-visible">
         {renderActivitiesBg(activitiesBgMobile)}
         {renderActivitiesBg(activitiesBgTablet)}
         {renderActivitiesBg(activitiesBgDesktop)}
 
+        {/* Section daftar program/kegiatan yang bisa dibuka detailnya. */}
         <ProgramsSection data={data.programs} />
+
+        {/* Section daftar event dengan carousel dan kartu flip. */}
         <EventsSection data={data.events} />
       </div>
     </div>

@@ -2,19 +2,23 @@
 import { ArrowRight, Mail, MessageCircle, Phone } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
+// Bersihkan format nomor telepon agar aman dipakai sebagai href tel/WhatsApp.
 function normalizePhone(value = '') {
   return value.replace(/[^\d+]/g, '');
 }
 
+// WhatsApp URL tidak membutuhkan tanda plus di depan kode negara.
 function stripLeadingPlus(value = '') {
   return value.replace(/^\+/, '');
 }
 
+// Format nomor akhir untuk path wa.me.
 function formatWhatsAppHref(value = '') {
   return stripLeadingPlus(normalizePhone(value));
 }
 
 export default function ContactInfo({ contact, whatsapp }) {
+  // Siapkan nilai kontak utama yang dipakai untuk link email, telepon, WhatsApp, dan map.
   const officePhone = contact?.phone?.split('/')?.[0] ?? contact?.phone ?? '';
   const officePhoneHref = normalizePhone(officePhone);
   const whatsappHref = formatWhatsAppHref(whatsapp || contact?.whatsapp || officePhone);
@@ -23,8 +27,10 @@ export default function ContactInfo({ contact, whatsapp }) {
 
   return (
     <section className="relative overflow-hidden bg-[#eef3ff]">
+      {/* Background gradient lembut untuk seluruh section kontak. */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(47,84,235,0.10),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.68)_0%,rgba(238,243,255,0.92)_100%)]" />
 
+      {/* Dekorasi grid dan blur di belakang konten kontak. */}
       <div
         className="pointer-events-none absolute inset-x-0 inset-y-0 z-0 overflow-hidden"
         aria-hidden="true"
@@ -37,18 +43,20 @@ export default function ContactInfo({ contact, whatsapp }) {
       </div>
 
       <div className="mx-auto w-full max-w-[1600px] px-4 py-16 sm:px-6 sm:py-20 lg:px-20 lg:py-24">
+        {/* Layout dua kolom: informasi kontak di kiri dan lokasi kantor di kanan. */}
         <div className="grid gap-14 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">
           <AnimatedSection>
             <div className="relative max-w-2xl   lg:pt-4">
               
 
+              {/* Headline ajakan untuk menghubungi tim AMI. */}
               <h2 className="mt-5 max-w-lg text-5xl font-black leading-[0.94] tracking-tight text-[#16305f] sm:text-6xl lg:text-[5.4rem]">
                 Let&apos;s start
                 <br />
                 to optimize IT
-                <br />
+                {' '} 
                 <span className="relative inline-block text-[#2f54eb]">
-                  together??.
+                  together
                   <span className="absolute inset-x-0 -bottom-2 h-2 rounded-full bg-[#2f54eb]/20" />
                 </span>
               </h2>
@@ -58,8 +66,10 @@ export default function ContactInfo({ contact, whatsapp }) {
                 Reach out through the channel that feels most comfortable for you.
               </p>
 
+              {/* Daftar channel kontak: email, telepon, dan WhatsApp. */}
               <div className="mt-10 border-l border-dashed border-[#2f54eb]/25 pl-5">
                 <div className="space-y-5">
+                  {/* Link email langsung membuka client email pengguna. */}
                   <div className="flex items-start gap-4 text-[#16305f]">
                     <a
                       href={`mailto:${contact?.email}`}
@@ -80,6 +90,7 @@ export default function ContactInfo({ contact, whatsapp }) {
                     </span>
                   </div>
 
+                  {/* Link telepon menggunakan nomor kantor utama yang sudah dinormalisasi. */}
                   <div className="flex items-start gap-4 text-[#16305f]">
                     <a
                       href={`tel:${officePhoneHref}`}
@@ -100,6 +111,7 @@ export default function ContactInfo({ contact, whatsapp }) {
                     </span>
                   </div>
 
+                  {/* Link WhatsApp membuka chat baru dengan pesan awal yang sudah disiapkan. */}
                   <a
                     href={`https://wa.me/${whatsappHref}?text=${encodeURIComponent(
                       'Hello Artha Mitra Interdata, I would like to discuss a project.',
@@ -127,6 +139,7 @@ export default function ContactInfo({ contact, whatsapp }) {
 
           <AnimatedSection delay={0.08}>
             <div className="relative lg:pl-8 xl:pl-12">
+              {/* Aksen blur dekoratif di belakang area lokasi kantor. */}
               <div className="pointer-events-none absolute -right-10 top-6 h-48 w-48 rounded-full bg-[#2f54eb]/10 blur-[100px]" />
               <div className="pointer-events-none absolute right-0 top-20 h-64 w-64 rounded-full bg-white/60 blur-[120px]" />
 
@@ -139,9 +152,11 @@ export default function ContactInfo({ contact, whatsapp }) {
                 {officeAddress}
               </p>
 
+              {/* Kartu map: menampilkan iframe Google Maps jika tersedia, atau fallback alamat. */}
               <div className="mt-8 overflow-hidden rounded-[2.4rem] border border-white/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(248,250,255,0.92))] shadow-[0_26px_60px_rgba(47,84,235,0.10)]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(47,84,235,0.08),transparent_28%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.85),transparent_30%)]" />
                 <div className="relative left-5 top-5 z-10">
+                  {/* Tombol untuk membuka lokasi di aplikasi/peta eksternal. */}
                   <a
                     href={mapHref}
                     target="_blank"
@@ -153,6 +168,7 @@ export default function ContactInfo({ contact, whatsapp }) {
                   </a>
                 </div>
 
+                {/* Embed map dipakai jika URL tersedia dari data global. */}
                 {contact.mapEmbedUrl ? (
                   <iframe
                     src={contact.mapEmbedUrl}
@@ -166,6 +182,7 @@ export default function ContactInfo({ contact, whatsapp }) {
                     className="block w-full"
                   />
                 ) : (
+                  /* Fallback jika embed map belum tersedia. */
                   <div className="flex min-h-[430px] items-center justify-center px-6 py-10 text-center">
                     <div>
                       <p className="text-lg font-semibold text-[#16305f]">Artha Mitra Interdata</p>

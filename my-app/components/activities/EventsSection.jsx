@@ -7,7 +7,10 @@ import { ChevronLeft, ChevronRight, Mountain } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 function EventCard({ event, index, flippedCards, toggleFlip }) {
+  // Status flip disimpan di parent agar setiap kartu tetap sinkron saat carousel berubah.
   const isFlipped = Boolean(flippedCards[index]);
+
+  // Jika event tidak memiliki gambar, kartu akan memakai ikon fallback.
   const hasImage = typeof event.image === 'string' && event.image.trim().length > 0;
 
   return (
@@ -21,6 +24,7 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
             isFlipped ? '[transform:rotateY(180deg)]' : ''
           }`}
         >
+          {/* Sisi depan kartu: gambar, kategori, nama event, deskripsi, dan tombol flip. */}
           <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-white/65 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm [backface-visibility:hidden]">
             <div className="relative flex h-44 w-full items-center justify-center overflow-hidden bg-[linear-gradient(135deg,#eef4ff_0%,#d8e4ff_46%,#f7faff_100%)] sm:h-48 lg:h-52">
               {hasImage ? (
@@ -72,6 +76,7 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
             </div>
           </div>
 
+          {/* Sisi belakang kartu: ringkasan detail event dan tombol kembali ke sisi depan. */}
           <div className="absolute inset-0 overflow-hidden rounded-[1.85rem] border border-[#0a0b85]/15 bg-[linear-gradient(135deg,#0a0b85_0%,#0f1aa8_45%,#111827_100%)] p-5 text-white shadow-[0_24px_70px_rgba(15,23,42,0.16)] [transform:rotateY(180deg)] [backface-visibility:hidden] sm:p-6">
               <div className="flex h-full flex-col">
               <span className="inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-white/90">
@@ -116,6 +121,7 @@ function EventCard({ event, index, flippedCards, toggleFlip }) {
 }
 
 export default function EventsSection({ data }) {
+  // State interaksi kartu dan carousel event.
   const [flippedCards, setFlippedCards] = useState({});
   const [startIndex, setStartIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState('');
@@ -125,6 +131,7 @@ export default function EventsSection({ data }) {
   const events = data?.items || [];
   const totalCards = events.length;
 
+  // Atur jumlah kartu yang terlihat berdasarkan lebar viewport.
   useEffect(() => {
     const updateVisibleCount = () => {
       if (window.innerWidth >= 1024) {
@@ -146,16 +153,20 @@ export default function EventsSection({ data }) {
     return () => window.removeEventListener('resize', updateVisibleCount);
   }, []);
 
+  // Pastikan jumlah kartu visible tidak melebihi total data event.
   const clampedVisibleCount = Math.min(visibleCount, totalCards || 0);
 
+  // Index event yang sedang ditampilkan carousel.
   const visibleIndices = Array.from({ length: clampedVisibleCount }, (_, offset) =>
     (startIndex + offset) % totalCards
   );
 
+  // Toggle kartu depan/belakang berdasarkan index event.
   const toggleFlip = (index) => {
     setFlippedCards((prev) => ({ ...prev, [index]: !prev[index] }));
   };
 
+  // Geser carousel ke kumpulan event sebelumnya.
   const goPrev = () => {
     if (totalCards <= clampedVisibleCount || isSliding) return;
     setSlideDirection('prev');
@@ -167,6 +178,7 @@ export default function EventsSection({ data }) {
     }, 420);
   };
 
+  // Geser carousel ke kumpulan event berikutnya.
   const goNext = () => {
     if (totalCards <= clampedVisibleCount || isSliding) return;
     setSlideDirection('next');
@@ -180,10 +192,12 @@ export default function EventsSection({ data }) {
 
   return (
     <section className="relative z-10 pt-20 pb-24">
+      {/* Background section event dibuat transparan agar menyatu dengan dekorasi page. */}
       <div className="absolute inset-0 bg-transparent" />
       {/* <div className="absolute inset-0 mesh-gradient-accent opacity-0" /> */}
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] lg:px-20 px-4 sm:px-6">
+        {/* Header section Events beserta kontrol navigasi carousel. */}
         <AnimatedSection>
           <div className="mb-5 flex flex-col gap-4 sm:mb-7 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
@@ -219,6 +233,7 @@ export default function EventsSection({ data }) {
           </div>
         </AnimatedSection>
 
+        {/* Track carousel event, diberi class animasi sesuai arah geser. */}
         <div
           className={`achievement-track mx-auto grid max-w-[1600px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 ${
             isSliding

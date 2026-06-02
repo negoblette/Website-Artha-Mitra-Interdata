@@ -10,13 +10,17 @@ const ARTICLE_AUTHOR_ROW_HEIGHT = 36;
 const ARTICLE_TAGS_ROW_HEIGHT = 44;
 
 function ArticleCard({ item }) {
+  // State untuk membuka/menutup konten panjang pada kartu artikel.
   const [expanded, setExpanded] = useState(false);
+
+  // Jika artikel tidak memiliki gambar, kartu akan memakai ikon fallback.
   const hasImage = typeof item.image === 'string' && item.image.trim().length > 0;
 
   return (
       <div className="w-full self-start">
       <article className="group w-full self-start text-left [perspective:1600px]">
         <div className="relative flex min-h-[520px] flex-col overflow-hidden rounded-[1.85rem] border border-white/65 bg-[linear-gradient(135deg,rgb(20,40,120)_0%,rgb(15,30,95)_45%,rgb(10,20,70)_100%)] shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur-sm transition-shadow duration-300 group-hover:shadow-[0_24px_70px_rgba(10,11,133,0.18)]">
+          {/* Area gambar artikel dengan fallback ikon jika data gambar kosong. */}
           <div className="relative flex h-52 w-full items-center justify-center overflow-hidden bg-white">
             {hasImage ? (
               <Image
@@ -36,6 +40,7 @@ function ArticleCard({ item }) {
             <div className="absolute -left-8 bottom-0 h-20 w-20 rounded-full bg-white/40 blur-2xl" />
           </div>
 
+          {/* Area isi kartu: metadata, judul, ringkasan, detail expand, dan tombol read more. */}
           <div className="relative flex flex-1 flex-col p-5 sm:p-6">
             <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(10,11,133,0.22),transparent)]" />
             <div className="flex flex-wrap items-center gap-2">
@@ -58,6 +63,7 @@ function ArticleCard({ item }) {
               {item.excerpt}
             </p>
 
+            {/* Konten tambahan artikel yang muncul saat kartu dibuka. */}
             <AnimatePresence initial={false}>
               {expanded && item.content && (
                 <motion.div
@@ -100,6 +106,7 @@ function ArticleCard({ item }) {
               )}
             </AnimatePresence>
 
+            {/* Tombol toggle untuk membuka atau menutup detail artikel. */}
             <div className="mt-auto pt-6">
               <button
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-white"
@@ -123,11 +130,13 @@ function ArticleCard({ item }) {
 }
 
 function FeaturedArticle({ item }) {
+  // Featured article memakai layout lebih lebar untuk menonjolkan headline utama.
   const hasImage = typeof item.image === 'string' && item.image.trim().length > 0;
 
   return (
     <AnimatedSection>
       <article className="group grid w-full gap-8 rounded-[2rem] border border-[#a9abd6]/100 bg-white p-4 shadow-[0_28px_80px_rgba(10,11,133,0.08)] sm:p-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        {/* Area gambar headline dengan fallback ikon buku. */}
         <div className="relative min-h-[280px] overflow-hidden border-[#a9abd6] rounded-[1.7rem] bg-[linear-gradient(135deg,#eef2ff_0%,#dfe8ff_50%,#f8fbff_100%)] sm:min-h-[340px]">
           {hasImage ? (
             <Image
@@ -148,6 +157,7 @@ function FeaturedArticle({ item }) {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(10,11,133,0.12),transparent_30%),linear-gradient(135deg,rgba(10,11,133,0.06),transparent_58%)]" />
         </div>
 
+        {/* Area teks headline: kategori, tanggal, judul, ringkasan, author, dan tags. */}
         <div className="flex flex-col justify-center px-1 py-2 sm:px-2 lg:pr-6">
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex w-fit rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#0a0b85] shadow-[0_8px_18px_rgba(10,11,133,0.06)]">
@@ -191,11 +201,14 @@ function FeaturedArticle({ item }) {
 }
 
 export default function ArticlesSection({ data }) {
+  // State filter kategori, pagination artikel, dan pagination daftar kategori.
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [categoryPage, setCategoryPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const categoriesPerPage = 10;
+
+  // Normalisasi item artikel: hanya item berslug yang dipakai, lalu dedupe berdasarkan slug.
   const items = Array.from(
     new Map(
       (data?.items ?? [])
@@ -209,6 +222,8 @@ export default function ArticlesSection({ data }) {
         ]),
     ).values(),
   );
+
+  // Daftar kategori dibuat dari data artikel dan diawali opsi "All".
   const categories = ['All', ...new Set(items.map((item) => item.category).filter(Boolean))];
   const totalCategoryPages = Math.max(1, Math.ceil(categories.length / categoriesPerPage));
   const paginatedCategories = categories.slice(
@@ -216,18 +231,23 @@ export default function ArticlesSection({ data }) {
     categoryPage * categoriesPerPage,
   );
 
+  // Filter artikel berdasarkan kategori aktif.
   const filteredItems =
     activeCategory === 'All'
       ? items
       : items.filter((item) => item.category === activeCategory);
 
+  // Hitung halaman artikel dan ambil item yang tampil di halaman aktif.
   const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
   const paginatedItems = filteredItems.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
+
+  // Headline ditampilkan sebagai artikel unggulan di atas daftar artikel.
   const headlineItem = data?.headline;
 
+  // Atur jumlah kartu artikel per halaman berdasarkan ukuran viewport.
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth >= 1280) {
@@ -249,16 +269,19 @@ export default function ArticlesSection({ data }) {
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
 
+  // Reset halaman artikel ketika jumlah item per halaman atau kategori berubah.
   useEffect(() => {
     setCurrentPage(1);
   }, [itemsPerPage, activeCategory]);
 
+  // Ubah kategori aktif saat tombol filter diklik.
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
   };
 
   return (
     <section className="relative py-24 overflow-hidden">
+      {/* Background putih dan dekorasi grid untuk section artikel. */}
       <div className="absolute inset-0 bg-white" />
       <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[980px] overflow-hidden sm:h-[1080px] xl:h-[1200px]">
         <div className="absolute inset-0 mesh-gradient-accent opacity-[0.08]" />
@@ -283,6 +306,7 @@ export default function ArticlesSection({ data }) {
       <div className="absolute top-0 left-0 h-96 w-96 rounded-full bg-[#737373]/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-20">
+        {/* Header section Articles. */}
         <AnimatedSection>
           <div className="mb-8 sm:mb-10 text-left">
             <div className="mb-1">
@@ -294,6 +318,7 @@ export default function ArticlesSection({ data }) {
           </div>
         </AnimatedSection>
 
+        {/* Filter kategori artikel, termasuk pagination kategori jika jumlahnya panjang. */}
         <div className="relative z-10 mb-8">
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#010268]/70 sm:text-xs">
             Categorized by article topic
@@ -344,8 +369,10 @@ export default function ArticlesSection({ data }) {
           </div>
         </div>
 
+        {/* Artikel unggulan/headline. */}
         {headlineItem && <FeaturedArticle item={headlineItem} />}
 
+        {/* Grid kartu artikel sesuai kategori dan halaman aktif. */}
         <div className="mt-8 grid items-start grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {paginatedItems.map((item) => (
             <ArticleCard
@@ -355,6 +382,7 @@ export default function ArticlesSection({ data }) {
           ))}
         </div>
 
+        {/* Kontrol pagination artikel hanya muncul jika data melebihi item per halaman. */}
         {filteredItems.length > itemsPerPage && (
           <div className="mt-10 flex items-center justify-center gap-3">
             <button

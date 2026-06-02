@@ -9,12 +9,18 @@ export const metadata = {
 };
 
 export default function InsightPage() {
+  // Ambil semua konten halaman Insight dari data JSON melalui helper content.
   const data = getContent('insight');
 
   return (
     <>
+      {/* Section hero utama halaman Insight. */}
       <InsightHero data={data.hero} />
+
+      {/* Section artikel dengan featured article, filter kategori, dan pagination. */}
       <ArticlesSection data={data.articles} />
+
+      {/* Section news/latest updates dengan filter kategori dan pagination. */}
       <InsightNewsSection data={data.news} />
     </>
   );

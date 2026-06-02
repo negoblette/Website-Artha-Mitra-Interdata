@@ -5,7 +5,9 @@ export default function ContactHero() {
   return (
     <section className="relative overflow-hidden bg-[#dfe6f2] pt-4">
       <div className="relative overflow-hidden bg-transparent">
+        {/* Container hero dengan aspect ratio lebar agar gambar tetap proporsional. */}
         <div className="relative aspect-[24/6] right-1 min-h-[320px] w-full lg:min-h-[420px]">
+          {/* Gambar background hero halaman Contact Us. */}
           <Image
             src="/images/contact1.jpg"
             alt="Contact hero background"
@@ -15,11 +17,13 @@ export default function ContactHero() {
             className="object-cover object-center"
           />
 
+          {/* Overlay gradient untuk menjaga keterbacaan teks di atas gambar. */}
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,12,32,0.08)_0%,rgba(8,15,38,0.40)_48%,rgba(8,15,38,0.86)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_20%),radial-gradient(circle_at_left,rgba(109,133,255,0.16),transparent_24%)]" />
 
         
 
+          {/* Konten hero: headline, aksen visual, dan deskripsi singkat. */}
           <div className="relative z-10 mx-auto flex min-h-[320px] w-full max-w-[1600px] items-end px-4 pb-8 sm:min-h-[320px] sm:px-6 sm:pb-12 lg:min-h-[420px] lg:px-20 lg:pb-16">
             <div>
               <div className="relative z-10 inline-flex items-end gap-2.5 sm:gap-4 md:gap-5 lg:gap-6">
@@ -27,6 +31,7 @@ export default function ContactHero() {
                   Let&apos;s Talk
                 </h1>
 
+                {/* Aksen dua bar putih di samping judul. */}
                 <div className="mb-1 flex shrink-0 items-center gap-1.5 sm:gap-2 md:mb-2 lg:mb-1">
                   <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/95 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-16 lg:w-6" />
                   <span className="h-8 w-2 skew-x-[18deg] rounded-[2px] bg-white/55 sm:h-10 sm:w-2.5 md:h-12 md:w-3 lg:h-16 lg:w-6" />

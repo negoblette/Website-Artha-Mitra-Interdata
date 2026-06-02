@@ -8,11 +8,15 @@ export const metadata = {
 };
 
 export default function ContactPage() {
+  // Ambil data global untuk kebutuhan kontak, WhatsApp, dan alamat kantor.
   const global = getContent('global');
 
   return (
     <>
+      {/* Section hero utama halaman Contact Us. */}
       <ContactHero />
+
+      {/* Section detail kontak dan lokasi kantor. */}
       <ContactInfo contact={global.contact} whatsapp={global.whatsapp} />
     </>
   );

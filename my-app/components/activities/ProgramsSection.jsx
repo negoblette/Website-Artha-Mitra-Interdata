@@ -8,7 +8,10 @@ import AnimatedSection from '@/components/AnimatedSection';
 const PROGRAM_FALLBACK_IMAGE = '/images/activities.jpeg';
 
 function ProgramCard({ program, index }) {
+  // State untuk membuka/menutup informasi detail pada setiap kartu program.
   const [expanded, setExpanded] = useState(false);
+
+  // Ambil gambar utama dan maksimal tiga gambar tambahan untuk thumbnail galeri.
   const images = (program.images ?? []).filter(Boolean);
   const primaryImage = images[0] || PROGRAM_FALLBACK_IMAGE;
   const galleryImages = images.slice(1, 4);
@@ -23,10 +26,10 @@ function ProgramCard({ program, index }) {
         >
           <div className="absolute inset-0 rounded-[2rem] border border-[#0a0b85]/8 pointer-events-none" />
 
-          {/* GRID */}
+          {/* Layout utama kartu: area konten di kiri dan area gambar di kanan. */}
           <div className="relative flex min-h-[200px] flex-col xl:min-h-[100px] xl:flex-row">
 
-            {/* LEFT */}
+            {/* Area teks program berisi nama, deskripsi singkat, dan tombol detail. */}
             <div className="relative z-10 flex flex-1 flex-col justify-between bg-[linear-gradient(180deg,#ffffff_0%,#fbfcff_100%)] py-5 pl-6 pr-6 sm:py-6 sm:pl-7 sm:pr-7 xl:w-[52.5%] xl:py-8 xl:pl-12 xl:pr-11">
               <div className="absolute inset-y-0 right-[-17px] z-0 hidden w-[72px] bg-white [clip-path:polygon(24%_0%,100%_0%,76%_100%,0%_100%)] xl:block" />
 
@@ -52,6 +55,7 @@ function ProgramCard({ program, index }) {
                 </div> */}
               </div>
 
+              {/* Tombol toggle untuk menampilkan detail tambahan program. */}
               <div className="relative z-10 mt-10 mb-6 flex flex-wrap items-center gap-3 sm:mt-6">
                 <button
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#0a0b85]/10 bg-[#eef3ff] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0a0b85] sm:w-auto"
@@ -64,6 +68,7 @@ function ProgramCard({ program, index }) {
                 </button>
               </div>
 
+              {/* Panel detail yang dianimasikan saat kartu dibuka. */}
               <AnimatePresence initial={false}>
                 {expanded && (
                   <motion.div
@@ -83,7 +88,7 @@ function ProgramCard({ program, index }) {
               </AnimatePresence>
             </div>
 
-            {/* RIGHT (FULL IMAGE FIX) */}
+            {/* Area visual program: gambar utama dan thumbnail galeri tambahan. */}
             <div className="relative min-h-[220px] overflow-hidden sm:min-h-[260px] xl:min-h-0 xl:w-[47.5%] xl:flex-none xl:self-stretch">
               <div className="absolute inset-0">
                 <Image
@@ -95,9 +100,10 @@ function ProgramCard({ program, index }) {
                 />
               </div>
 
-              {/* overlay biar lebih estetik */}
+              {/* Overlay tipis agar gambar terasa menyatu dengan desain kartu. */}
               <div className="absolute inset-0 bg-black/10" />
 
+              {/* Thumbnail galeri hanya tampil jika program memiliki gambar tambahan. */}
               {galleryImages.length > 0 && (
                 <div className="absolute bottom-3 right-3 flex gap-2">
                   {galleryImages.map((imageSrc, j) => (
@@ -122,10 +128,12 @@ function ProgramCard({ program, index }) {
 }
 
 export default function ProgramsSection({ data }) {
+  // Pagination program: satu halaman menampilkan dua kartu agar layout tetap ringkas.
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
   const programs = data?.items ?? [];
 
+  // Hitung jumlah halaman dan data program yang tampil pada halaman aktif.
   const totalPages = Math.max(1, Math.ceil(programs.length / itemsPerPage));
   const paginatedItems = programs.slice(
     (currentPage - 1) * itemsPerPage,
@@ -134,10 +142,12 @@ export default function ProgramsSection({ data }) {
 
   return (
     <section className="relative z-10 mt-14  pt-20 pb-10 sm:mt-20 lg:mt-24">
+      {/* Background section program dibuat transparan agar dekorasi page tetap terlihat. */}
       <div className="absolute inset-0 bg-transparent" />
       <div className="absolute inset-0 dot-pattern opacity-[0.03]" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-20">
+        {/* Header section Programs. */}
         <AnimatedSection>
           <div className="mb-5 sm:mb-7 max-w-2xl">
             <h2 className="font-black tracking-tight text-[rgb(13,27,94)] sm:text-5xl inline-block">
@@ -149,12 +159,14 @@ export default function ProgramsSection({ data }) {
           </div>
         </AnimatedSection>
 
+        {/* Grid kartu program berdasarkan data yang sudah dipaginasi. */}
         <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-2 xl:gap-6">
           {paginatedItems.map((program, i) => (
             <ProgramCard key={i} program={program} index={i} />
           ))}
         </div>
 
+        {/* Kontrol pagination hanya muncul jika jumlah program melebihi item per halaman. */}
         {programs.length > itemsPerPage && (
           <div className="mt-10 flex items-center justify-center gap-3">
             <button
