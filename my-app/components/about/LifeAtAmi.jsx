@@ -39,7 +39,7 @@ export default function LifeAtAmi({ data }) {
         <h2 className="text-5xl font-black text-[rgba(13,27,94)] md:text-5xl">Life At AMI</h2>
 
         <div className="mx-auto mt-8 w-full max-w-[92vw] overflow-visible">
-          <div className="relative mx-auto h-[28vh] w-[118%] max-w-[92vw] -translate-x-[9%] sm:h-[30vh] lg:h-[32vh]">
+          <div className="relative mx-auto h-[20vh] w-[118%] max-w-[92vw] -translate-x-[9%] sm:h-[22vh] lg:h-[24vh]">
             {stripSlots.map((slot, slotIndex) => {
               const photoIndex = getWrappedIndex(activeIndex + slot.offset);
               const isActive = slot.offset === 0;
@@ -51,8 +51,8 @@ export default function LifeAtAmi({ data }) {
                   onClick={() => setActiveIndex(photoIndex)}
                   className="absolute left-1/2 top-1/2 overflow-hidden rounded-xl border border-[#c9d2ff] bg-[#dfe6ff] shadow-[0_10px_22px_rgba(10,11,133,0.16)] transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]"
                   style={{
-                    width: 'clamp(22vw, 28vw, 34vw)',
-                    height: 'clamp(14vw, 16vw, 20vw)',
+                    width: 'clamp(16vw, 20vw, 26vw)',
+                    height: 'clamp(10vw, 12vw, 15vw)',
                     transform: `translate(-50%, -50%) translateX(${slot.x}) scale(${slot.scale})`,
                     zIndex: slot.zIndex,
                     opacity: slot.opacity,

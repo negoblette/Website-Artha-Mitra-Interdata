@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -149,9 +149,6 @@ section.scroll-reveal.in-view {
   .vision-card-enter,
   .vision-card-enter-delay,
   .history-intro,
-  .history-item,
-  .history-item:hover,
-  .history-item-enter,
   .careers-panel,
   .careers-panel-left,
   .careers-panel-right,
@@ -278,26 +275,8 @@ section.scroll-reveal.in-view .vision-card-enter {
   filter: blur(4px);
 }
 
-.history-item {
-  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.history-item:hover {
-  transform: translateY(-6px);
-}
-
-.history-item-enter {
-  opacity: 0;
-  filter: blur(4px);
-}
-
 section.scroll-reveal.in-view .history-intro {
   animation: historyIntroIn 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-section.scroll-reveal.in-view .history-item-enter {
-  animation: historyItemIn 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: var(--history-delay, 0ms);
 }
 
 .careers-panel {
