@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { 
   Home, Info, Layers, Package, Calendar, Globe, 
   Save, ChevronRight, ChevronDown, Edit3, Check, X,
@@ -124,20 +125,20 @@ function LoginScreen({ onLogin }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+    <div className="min-h-screen bg-white flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-sm"
       >
-        <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8">
+        <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-14 h-14 rounded-2xl bg-purple-600/20 border border-purple-500/20 flex items-center justify-center">
-              <Lock className="w-6 h-6 text-purple-400" />
+            <div className="relative w-36 h-14">
+              <Image src="/logo.png" alt="AMI" fill className="object-contain" priority />
             </div>
           </div>
-          <h1 className="text-white text-xl font-bold text-center mb-1">AMI Admin</h1>
-          <p className="text-white/30 text-sm text-center mb-6">Enter admin password to continue</p>
+          <h1 className="text-gray-900 text-xl font-bold text-center mb-1">AMI Admin</h1>
+          <p className="text-gray-500 text-sm text-center mb-6">Enter admin password to continue</p>
           <form onSubmit={handleSubmit}>
             <input
               type="password"
@@ -145,20 +146,20 @@ function LoginScreen({ onLogin }) {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Admin password"
               autoFocus
-              className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-500 mb-4"
+              className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 mb-4"
             />
             {error && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-red-400 text-xs mb-3"
+                className="text-red-500 text-xs mb-3"
               >
                 Invalid password
               </motion.p>
             )}
             <button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-500 text-white py-3 rounded-lg text-sm font-medium transition-colors"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-sm font-medium transition-colors"
             >
               Sign In
             </button>
@@ -317,27 +318,27 @@ export default function AdminPage() {
   if (!adminKey) return <LoginScreen onLogin={setAdminKey} />;
 
   return (
-    <div className="min-h-screen bg-gray-950 flex">
+    <div className="min-h-screen bg-white flex">
       {/* Sidebar */}
       <motion.aside
         animate={{ width: sidebarOpen ? 260 : 72 }}
-        className="bg-indigo-950/80 border-r border-white/5 flex flex-col fixed top-0 left-0 h-full z-50"
+        className="bg-white border-r-2 border-gray-200 shadow-[2px_0_8px_rgba(0,0,0,0.06)] flex flex-col fixed top-0 left-0 h-full z-50"
       >
-        <div className="p-4 border-b border-white/5 flex items-center gap-3">
+        <div className="p-4 border-b border-gray-200 flex items-center gap-3">
           <button 
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            <Menu className="text-white" size={20} />
+            <Menu className="text-gray-700" size={20} />
           </button>
           {sidebarOpen && (
-            <motion.span
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-white font-bold text-sm"
+              className="relative w-52 h-14 overflow-hidden"
             >
-              AMI Admin
-            </motion.span>
+              <Image src="/logo.png" alt="AMI" fill className="object-contain object-left" priority />
+            </motion.div>
           )}
         </div>
 
@@ -350,8 +351,8 @@ export default function AdminPage() {
                 onClick={() => setActivePage(page.key)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
                   activePage === page.key
-                    ? 'bg-purple-600/30 text-purple-300'
-                    : 'text-white/50 hover:text-white hover:bg-white/5'
+                    ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-200'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 <Icon size={18} />
@@ -361,17 +362,17 @@ export default function AdminPage() {
           })}
         </nav>
 
-        <div className="p-3 border-t border-white/5 space-y-1">
+        <div className="p-3 border-t border-gray-200 space-y-1">
           <button
             onClick={() => { sessionStorage.removeItem('admin-key'); setAdminKey(null); }}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-all"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-500/70 hover:text-red-600 hover:bg-red-50 transition-all"
           >
             <Lock size={18} />
             {sidebarOpen && <span>Logout</span>}
           </button>
           <a
             href="/"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-white/40 hover:text-white hover:bg-white/5 transition-all"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition-all"
           >
             <LogOut size={18} />
             {sidebarOpen && <span>View Site</span>}
@@ -382,12 +383,12 @@ export default function AdminPage() {
       {/* Main Content */}
       <main className={`flex-1 transition-all ${sidebarOpen ? 'ml-[260px]' : 'ml-[72px]'}`}>
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-gray-950/90 backdrop-blur-xl border-b border-white/5 px-6 h-16 flex items-center justify-between">
+        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-gray-200 px-6 h-16 flex items-center justify-between">
           <div>
-            <h1 className="text-white font-semibold text-lg">
+            <h1 className="text-black font-semibold text-lg">
               {PAGES.find((p) => p.key === activePage)?.label}
             </h1>
-            <p className="text-white/30 text-xs">Edit content for this page</p>
+            <p className="text-black/60 text-xs">Edit content for this page</p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -396,7 +397,7 @@ export default function AdminPage() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }}
-                className="flex items-center gap-1 text-green-400 text-sm"
+                className="flex items-center gap-1 text-green-600 text-sm"
               >
                 <Check size={16} />
                 Saved &amp; Revalidated!
@@ -405,7 +406,7 @@ export default function AdminPage() {
             <button
               onClick={handleSave}
               disabled={saving || !data}
-              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
             >
               <Save size={16} />
               {saving ? 'Saving...' : 'Save Changes'}
@@ -417,7 +418,7 @@ export default function AdminPage() {
         <div className="p-6">
           {loading ? (
             <div className="flex items-center justify-center py-32">
-              <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
             </div>
           ) : data ? (
             <div className="max-w-4xl">
@@ -511,7 +512,7 @@ function JsonEditor({
         onChange={readOnly ? undefined : (e) => onChange(path, e.target.value)}
         rows={3}
         readOnly={readOnly}
-        className={`w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 resize-y font-mono ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
+        className={`w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-black text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-y font-mono ${readOnly ? 'opacity-50 cursor-not-allowed bg-gray-100' : ''}`}
       />
     ) : (
       <input
@@ -519,7 +520,7 @@ function JsonEditor({
         value={data}
         onChange={readOnly ? undefined : (e) => onChange(path, e.target.value)}
         readOnly={readOnly}
-        className={`w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 font-mono ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
+        className={`w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-black text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 font-mono ${readOnly ? 'opacity-50 cursor-not-allowed bg-gray-100' : ''}`}
       />
     );
 
@@ -540,16 +541,16 @@ function JsonEditor({
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                className="px-3 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:border-purple-500/40 transition-colors text-xs uppercase tracking-wider disabled:opacity-50"
+                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:text-blue-600 hover:border-blue-400 transition-colors text-xs uppercase tracking-wider disabled:opacity-50"
               >
                 {uploading ? 'Uploading...' : 'Upload Image'}
               </button>
             </div>
           )}
         </div>
-        {uploadError && <p className="text-xs text-red-400">{uploadError}</p>}
+        {uploadError && <p className="text-xs text-red-500">{uploadError}</p>}
         {showPreview && data && (
-          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
             <img src={data} alt="Preview" className="max-h-40 w-auto rounded" />
           </div>
         )}
@@ -571,16 +572,16 @@ function JsonEditor({
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                className="px-3 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:border-purple-500/40 transition-colors text-xs uppercase tracking-wider disabled:opacity-50"
+                className="px-3 py-2 rounded-lg border border-gray-300 text-gray-600 hover:text-blue-600 hover:border-blue-400 transition-colors text-xs uppercase tracking-wider disabled:opacity-50"
               >
                 {uploading ? 'Uploading...' : 'Upload Image'}
               </button>
             </div>
           )}
         </div>
-        {uploadError && <p className="text-xs text-red-400">{uploadError}</p>}
+        {uploadError && <p className="text-xs text-red-500">{uploadError}</p>}
         {showPreview && data && (
-          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
             <img src={data} alt="Preview" className="max-h-40 w-auto rounded" />
           </div>
         )}
@@ -595,7 +596,7 @@ function JsonEditor({
         value={data}
         onChange={readOnly ? undefined : (e) => onChange(path, Number(e.target.value))}
         readOnly={readOnly}
-        className={`w-32 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500 font-mono ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
+        className={`w-32 bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-black text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 font-mono ${readOnly ? 'opacity-50 cursor-not-allowed bg-gray-100' : ''}`}
       />
     );
   }
@@ -606,8 +607,8 @@ function JsonEditor({
         onClick={readOnly ? undefined : () => onChange(path, !data)}
         disabled={readOnly}
         className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
-          data ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-        } ${readOnly ? 'opacity-60 cursor-not-allowed' : ''}`}
+          data ? 'bg-green-100 text-green-700 border border-green-300' : 'bg-red-100 text-red-700 border border-red-300'
+        } ${readOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         {data ? 'true' : 'false'}
       </button>
@@ -635,7 +636,7 @@ function JsonEditor({
                     <button
                       onClick={(e) => { e.stopPropagation(); onMoveItem(path, i, -1); }}
                       disabled={i === 0}
-                      className="p-1 hover:bg-white/10 rounded disabled:opacity-20 text-white/40 hover:text-white"
+                      className="p-1 hover:bg-gray-100 rounded disabled:opacity-20 text-gray-400 hover:text-gray-700"
                       title="Move up"
                     >
                       <ArrowUp size={12} />
@@ -643,7 +644,7 @@ function JsonEditor({
                     <button
                       onClick={(e) => { e.stopPropagation(); onMoveItem(path, i, 1); }}
                       disabled={i === data.length - 1}
-                      className="p-1 hover:bg-white/10 rounded disabled:opacity-20 text-white/40 hover:text-white"
+                      className="p-1 hover:bg-gray-100 rounded disabled:opacity-20 text-gray-400 hover:text-gray-700"
                       title="Move down"
                     >
                       <ArrowDown size={12} />
@@ -651,7 +652,7 @@ function JsonEditor({
                     {!isSingleItemArray && (
                       <button
                         onClick={(e) => { e.stopPropagation(); onDuplicateItem(path, i); }}
-                        className="p-1 hover:bg-blue-500/20 rounded text-white/40 hover:text-blue-400"
+                        className="p-1 hover:bg-blue-50 rounded text-gray-400 hover:text-blue-600"
                         title="Duplicate"
                       >
                         <Copy size={12} />
@@ -659,14 +660,14 @@ function JsonEditor({
                     )}
                     <button
                       onClick={(e) => { e.stopPropagation(); if (confirm('Remove this item?')) onRemoveItem(path, i); }}
-                      className="p-1 hover:bg-red-500/20 rounded text-white/40 hover:text-red-400"
+                      className="p-1 hover:bg-red-50 rounded text-gray-400 hover:text-red-500"
                       title="Remove"
                     >
                       <Trash2 size={12} />
                     </button>
                   </div>
                 ) : (
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[0.625rem] uppercase tracking-wider text-white/40">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2 py-0.5 text-[0.625rem] uppercase tracking-wider text-gray-500">
                     <Lock size={10} />
                     Read-only
                   </span>
@@ -691,7 +692,7 @@ function JsonEditor({
         {!readOnly && !isSingleItemArrayPath(path) && (
           <button
             onClick={() => onAddItem(path)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-white/10 text-white/30 hover:text-purple-400 hover:border-purple-500/30 hover:bg-purple-500/5 transition-all text-sm w-full justify-center"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
           >
             <Plus size={14} />
             Add Item
@@ -712,11 +713,11 @@ function JsonEditor({
           if (isSimple) {
             return (
               <div key={key} className="flex flex-col gap-1.5">
-                <label className="text-white/40 text-xs font-medium uppercase tracking-wider flex items-center gap-1.5">
+                <label className="text-black/70 text-xs font-medium uppercase tracking-wider flex items-center gap-1.5">
                   <Edit3 size={10} />
                   {key}
                   {isFieldReadOnly && (
-                    <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[0.6rem] uppercase tracking-wider text-white/40">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2 py-0.5 text-[0.6rem] uppercase tracking-wider text-gray-500">
                       <Lock size={10} />
                       Read-only
                     </span>
@@ -761,24 +762,24 @@ function JsonEditor({
     );
   }
 
-  return <span className="text-white/30 text-sm">unsupported type</span>;
+  return <span className="text-gray-400 text-sm">unsupported type</span>;
 }
 
 function CollapsibleSection({ label, children, depth = 0, actions, readOnly = false }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={`border border-white/5 rounded-lg overflow-hidden ${depth > 0 ? 'ml-0' : ''}`}>
+    <div className={`border border-gray-200 rounded-lg overflow-hidden ${depth > 0 ? 'ml-0' : ''}`}>
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-2 px-4 py-2.5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors text-left"
+        className="w-full flex items-center gap-2 px-4 py-2.5 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
       >
         <motion.div animate={{ rotate: open ? 90 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronRight className="text-purple-400" size={14} />
+          <ChevronRight className="text-blue-600" size={14} />
         </motion.div>
-        <span className="text-white/70 text-sm font-medium flex-1">{label}</span>
+        <span className="text-black text-sm font-medium flex-1 capitalize">{label}</span>
         {readOnly && !actions && (
-          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[0.625rem] uppercase tracking-wider text-white/40">
+          <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2 py-0.5 text-[0.625rem] uppercase tracking-wider text-gray-500">
             <Lock size={10} />
             Read-only
           </span>
@@ -794,7 +795,7 @@ function CollapsibleSection({ label, children, depth = 0, actions, readOnly = fa
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="p-4 border-t border-white/5">{children}</div>
+            <div className="p-4 border-t border-gray-200 bg-white">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
