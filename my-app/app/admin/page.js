@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { 
   Home, Info, Layers, Package, Calendar, Globe, 
   Save, ChevronRight, ChevronDown, Edit3, Check, X,
@@ -108,19 +109,64 @@ function isSingleItemArrayPath(path = '') {
 
 function LoginScreen({ onLogin }) {
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [step, setStep] = useState('password');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  function getRetryMessage(res, fallback) {
+    const retryAfter = Number(res.headers.get('Retry-After') || 0);
+
+    if (!retryAfter) {
+      return fallback;
+    }
+
+    const minutes = Math.ceil(retryAfter / 60);
+    return `${fallback} Try again in about ${minutes} minute${minutes > 1 ? 's' : ''}.`;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const res = await fetch('/api/content?file=global', {
-      headers: { 'x-admin-key': password },
-    });
-    if (res.ok) {
-      sessionStorage.setItem('admin-key', password);
-      onLogin(password);
-    } else {
-      setError(true);
-      setTimeout(() => setError(false), 2000);
+    setLoading(true);
+    setError('');
+
+    try {
+      if (step === 'password') {
+        const res = await fetch('/api/auth/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password }),
+        });
+
+        if (res.ok) {
+          setStep('otp');
+          setOtp('');
+        } else if (res.status === 429) {
+          setError(getRetryMessage(res, 'Too many login attempts.'));
+        } else if (res.status === 500) {
+          setError('Admin auth is not configured. Check server environment variables.');
+        } else {
+          setError('Invalid password');
+        }
+      } else {
+        const res = await fetch('/api/auth/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ otp }),
+        });
+
+        if (res.ok) {
+          onLogin();
+        } else if (res.status === 429) {
+          setError(getRetryMessage(res, 'Too many OTP attempts.'));
+        } else if (res.status === 500) {
+          setError('Admin auth is not configured. Check server environment variables.');
+        } else {
+          setError('Invalid or expired OTP');
+        }
+      }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -138,31 +184,61 @@ function LoginScreen({ onLogin }) {
             </div>
           </div>
           <h1 className="text-gray-900 text-xl font-bold text-center mb-1">AMI Admin</h1>
-          <p className="text-gray-500 text-sm text-center mb-6">Enter admin password to continue</p>
+          <p className="text-gray-500 text-sm text-center mb-6">
+            {step === 'password' ? 'Enter admin password to continue' : 'Enter your authenticator code'}
+          </p>
           <form onSubmit={handleSubmit}>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Admin password"
-              autoFocus
-              className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 mb-4"
-            />
+            {step === 'password' ? (
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Admin password"
+                autoFocus
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 mb-4"
+              />
+            ) : (
+              <input
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={6}
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                placeholder="6-digit OTP"
+                autoFocus
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-gray-900 text-sm text-center tracking-[0.35em] focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 mb-4"
+              />
+            )}
             {error && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="text-red-500 text-xs mb-3"
               >
-                Invalid password
+                {error}
               </motion.p>
             )}
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-sm font-medium transition-colors"
             >
-              Sign In
+              {loading ? 'Checking...' : step === 'password' ? 'Continue' : 'Sign In'}
             </button>
+            {step === 'otp' && (
+              <button
+                type="button"
+                onClick={() => {
+                  setStep('password');
+                  setOtp('');
+                  setError('');
+                }}
+                className="w-full mt-3 text-gray-500 hover:text-gray-800 text-xs transition-colors"
+              >
+                Use a different password
+              </button>
+            )}
           </form>
         </div>
       </motion.div>
@@ -171,7 +247,8 @@ function LoginScreen({ onLogin }) {
 }
 
 export default function AdminPage() {
-  const [adminKey, setAdminKey] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
   const [activePage, setActivePage] = useState('homepage');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -180,22 +257,28 @@ export default function AdminPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem('admin-key');
-    if (stored) setAdminKey(stored);
+    async function checkSession() {
+      const res = await fetch('/api/auth/me');
+      setIsAuthenticated(res.ok);
+      setAuthChecked(true);
+    }
+
+    checkSession();
   }, []); 
 
   useEffect(() => {
-    if (adminKey) loadData(activePage);
-  }, [activePage, adminKey]);
+    if (isAuthenticated) loadData(activePage);
+  }, [activePage, isAuthenticated]);
 
   async function loadData(page) {
     setLoading(true);
-    const res = await fetch(`/api/content?file=${page}`, {
-      headers: { 'x-admin-key': adminKey },
-    });
+    const res = await fetch(`/api/content?file=${page}`);
     if (res.ok) {
       const json = await res.json();
       setData(json);
+    } else if (res.status === 401) {
+      setIsAuthenticated(false);
+      setData(null);
     }
     setLoading(false);
   }
@@ -204,7 +287,7 @@ export default function AdminPage() {
     setSaving(true);
     const res = await fetch(`/api/content?file=${activePage}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
     if (res.ok) {
@@ -220,7 +303,6 @@ export default function AdminPage() {
 
     const res = await fetch('/api/upload', {
       method: 'POST',
-      headers: { 'x-admin-key': adminKey },
       body: formData,
     });
 
@@ -231,6 +313,12 @@ export default function AdminPage() {
 
     const json = await res.json();
     if (json?.url) updateField(path, json.url);
+  }
+
+  async function handleLogout() {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    setIsAuthenticated(false);
+    setData(null);
   }
 
   function updateField(path, value) {
@@ -315,7 +403,15 @@ export default function AdminPage() {
     });
   }
 
-  if (!adminKey) return <LoginScreen onLogin={setAdminKey} />;
+  if (!authChecked) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) return <LoginScreen onLogin={() => setIsAuthenticated(true)} />;
 
   return (
     <div className="min-h-screen bg-white flex">
@@ -364,19 +460,19 @@ export default function AdminPage() {
 
         <div className="p-3 border-t border-gray-200 space-y-1">
           <button
-            onClick={() => { sessionStorage.removeItem('admin-key'); setAdminKey(null); }}
+            onClick={handleLogout}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-500/70 hover:text-red-600 hover:bg-red-50 transition-all"
           >
             <Lock size={18} />
             {sidebarOpen && <span>Logout</span>}
           </button>
-          <a
+          <Link
             href="/"
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition-all"
           >
             <LogOut size={18} />
             {sidebarOpen && <span>View Site</span>}
-          </a>
+          </Link>
         </div>
       </motion.aside>
 
@@ -466,12 +562,12 @@ function JsonEditor({
   fieldKey,
   depth = 0,
 }) {
-  if (data === null || data === undefined) return null;
-
   const readOnly = isReadOnlyPath(path, readOnlyPaths);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const fileInputRef = useRef(null);
+
+  if (data === null || data === undefined) return null;
 
   if (typeof data === 'string') {
     const isLong = data.length > 100;

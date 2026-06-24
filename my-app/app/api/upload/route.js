@@ -2,16 +2,16 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
+import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
 
 export const runtime = 'nodejs';
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ami-admin-2026';
 const MAX_BYTES = 10 * 1024 * 1024;
 const ALLOWED_TYPES = new Set(['image/png', 'image/jpeg']);
 
 function checkAuth(request) {
-  const key = request.headers.get('x-admin-key');
-  return key === ADMIN_PASSWORD;
+  const token = request.cookies.get(SESSION_COOKIE)?.value;
+  return verifyAdminSessionToken(token);
 }
 
 function extensionForType(mime) {

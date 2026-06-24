@@ -1,14 +1,13 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { getContent, updateContent } from '@/lib/content';
+import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
 
 const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'activities', 'insight'];
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ami-admin-2026';
-
 function checkAuth(request) {
-  const key = request.headers.get('x-admin-key');
-  return key === ADMIN_PASSWORD;
+  const token = request.cookies.get(SESSION_COOKIE)?.value;
+  return verifyAdminSessionToken(token);
 }
 
 // Map which files affect which routes (for revalidation)

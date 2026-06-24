@@ -4,7 +4,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-ami-admin-2026}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     volumes:
       # Persist CMS data across container restarts
       - ami-data:/app/data
