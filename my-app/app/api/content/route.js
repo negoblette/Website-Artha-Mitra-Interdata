@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import { getContent, updateContent } from '@/lib/content';
+import { getContent, updateContent, backupContent, purgeOldBackups } from '@/lib/content';
 
 const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'activities', 'insight'];
 
@@ -86,6 +86,14 @@ export async function PUT(request) {
     if (preserved !== undefined) {
       setValueAtPath(body, readOnlyPath, preserved);
     }
+  }
+
+  // Backup current version before overwriting
+  try {
+    backupContent(file);
+    purgeOldBackups(file);
+  } catch {
+    // Non-fatal — continue even if backup fails
   }
 
   const updated = updateContent(file, body);
