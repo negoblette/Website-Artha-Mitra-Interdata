@@ -42,7 +42,7 @@ export default function ContactSection({ data, contact, socials, whatsapp }) {
           <a
             href={waHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 sm:gap-2.5 rounded-full border-2 border-[#25D366] px-5 sm:px-7 py-2.5 sm:py-3 text-sm font-bold text-[#128C7E] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#25D366] hover:text-white hover:shadow-[0_12px_28px_rgba(37,211,102,0.25)] active:translate-y-0 active:scale-[0.98]"
           >
             <MessageCircle size={16} />
@@ -63,7 +63,7 @@ export default function ContactSection({ data, contact, socials, whatsapp }) {
                 key={social.platform}
                 href={social.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-black/50 transition-colors duration-200 hover:text-[#0a0b85]"
                 aria-label={social.platform}
               >

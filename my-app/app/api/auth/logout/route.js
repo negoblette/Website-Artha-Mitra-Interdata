@@ -3,8 +3,12 @@ import {
   OTP_CHALLENGE_COOKIE,
   SESSION_COOKIE,
 } from '@/lib/adminAuth';
+import { rejectInvalidAdminHost } from '@/lib/adminHost';
 
-export async function POST() {
+export async function POST(request) {
+  const invalidHost = rejectInvalidAdminHost(request);
+  if (invalidHost) return invalidHost;
+
   const response = NextResponse.json({ ok: true });
   const expiredCookie = {
     httpOnly: true,

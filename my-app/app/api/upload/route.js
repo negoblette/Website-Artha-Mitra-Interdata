@@ -3,6 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
 import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
+import { rejectInvalidAdminHost } from '@/lib/adminHost';
 
 export const runtime = 'nodejs';
 
@@ -20,7 +21,10 @@ function extensionForType(mime) {
   return '';
 }
 
-export async function POST(request) {
+export async function POST(request) {  
+  const invalidHost = rejectInvalidAdminHost(request);
+  if (invalidHost) return invalidHost;
+
   if (!checkAuth(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

@@ -117,7 +117,7 @@ export default function ContactInfo({ contact, whatsapp }) {
                       'Hello Artha Mitra Interdata, I would like to discuss a project.',
                     )}`}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="group flex items-center gap-4 text-[#16305f] transition-colors hover:text-[#2f54eb]"
                   >
                     <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[#21c45d] shadow-[0_14px_30px_rgba(47,84,235,0.10)] ring-1 ring-[#2f54eb]/8 transition-transform group-hover:scale-105">
@@ -160,7 +160,7 @@ export default function ContactInfo({ contact, whatsapp }) {
                   <a
                     href={mapHref}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-3 text-sm font-semibold text-[#2f54eb] shadow-[0_12px_28px_rgba(47,84,235,0.12)] backdrop-blur-sm transition-transform hover:-translate-y-0.5"
                   >
                     Open in Maps

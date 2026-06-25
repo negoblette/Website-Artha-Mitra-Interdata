@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import { getContent, updateContent } from '@/lib/content';
+import { getContent, updateContent, backupContent, purgeOldBackups } from '@/lib/content';
 import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
+import { rejectInvalidAdminHost } from '@/lib/adminHost';
+import { validateContentPayload } from '@/lib/contentValidation';
+
 
 const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'activities', 'insight'];
 
@@ -50,6 +53,9 @@ function setValueAtPath(obj, path, value) {
 }
 
 export async function GET(request) {
+  const invalidHost = rejectInvalidAdminHost(request);
+  if (invalidHost) return invalidHost;
+
   const { searchParams } = new URL(request.url);
   const file = searchParams.get('file');
 
@@ -66,6 +72,9 @@ export async function GET(request) {
 }
 
 export async function PUT(request) {
+  const invalidHost = rejectInvalidAdminHost(request);
+  if (invalidHost) return invalidHost;
+
   const { searchParams } = new URL(request.url);
   const file = searchParams.get('file');
 
@@ -78,6 +87,15 @@ export async function PUT(request) {
   }
 
   const body = await request.json();
+  const validation = validateContentPayload(file, body);
+
+  if (!validation.ok) {
+    return NextResponse.json(
+      { error: 'Invalid content payload', details: validation.errors },
+      { status: 400 }
+    );
+  }
+
   const existing = getContent(file);
   const readOnlyPaths = READ_ONLY_MAP[file] || [];
   for (const readOnlyPath of readOnlyPaths) {
@@ -85,6 +103,14 @@ export async function PUT(request) {
     if (preserved !== undefined) {
       setValueAtPath(body, readOnlyPath, preserved);
     }
+  }
+
+  // Backup current version before overwriting
+  try {
+    backupContent(file);
+    purgeOldBackups(file);
+  } catch {
+    // Non-fatal — continue even if backup fails
   }
 
   const updated = updateContent(file, body);

@@ -153,7 +153,7 @@ export default function CareersSection({ data }) {
                 <a
                   href="https://wa.me/628164850082?text=Hello%20Artha%20Mitra%20Interdata%2C%20I%20would%20like%20to%20discuss%20a%20career%20opportunity."
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="group flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#22c55e] ring-1 ring-white/15 transition-transform hover:scale-105 hover:bg-white/15"
                   aria-label="Chat on WhatsApp"
                 >

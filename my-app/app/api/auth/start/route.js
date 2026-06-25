@@ -5,8 +5,12 @@ import {
   OTP_CHALLENGE_COOKIE,
 } from '@/lib/adminAuth';
 import { checkRateLimit, clearRateLimit } from '@/lib/rateLimit';
+import { rejectInvalidAdminHost } from '@/lib/adminHost';
 
 export async function POST(request) {
+  const invalidHost = rejectInvalidAdminHost(request);
+  if (invalidHost) return invalidHost;
+
   const { password } = await request.json().catch(() => ({}));
 
   if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_TOTP_SECRET || !process.env.SESSION_SECRET) {

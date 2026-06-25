@@ -8,9 +8,14 @@ import {
   verifyOtpChallengeToken,
 } from '@/lib/adminAuth';
 import { checkRateLimit, clearRateLimit } from '@/lib/rateLimit';
+import { rejectInvalidAdminHost } from '@/lib/adminHost';
 
 export async function POST(request) {
+  const invalidHost = rejectInvalidAdminHost(request);
+  if (invalidHost) return invalidHost;
+
   const { otp } = await request.json().catch(() => ({}));
+  const otpToken = String(otp || '').trim();
   const challengeToken = request.cookies.get(OTP_CHALLENGE_COOKIE)?.value;
 
   if (!process.env.ADMIN_TOTP_SECRET || !process.env.SESSION_SECRET) {
@@ -37,10 +42,21 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const validOtp = verify({
-    token: String(otp || ''),
-    secret: process.env.ADMIN_TOTP_SECRET,
-  });
+  if (!/^\d{6}$/.test(otpToken)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  let validOtp = false;
+
+  try {
+    const result = await verify({
+      token: otpToken,
+      secret: process.env.ADMIN_TOTP_SECRET,
+    });
+    validOtp = result === true || result?.valid === true;
+  } catch {
+    validOtp = false;
+  }
 
   if (!validOtp) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
