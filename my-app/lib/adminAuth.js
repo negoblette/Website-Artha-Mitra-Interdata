@@ -86,6 +86,8 @@ export function createAdminSessionToken() {
   return signPayload({
     type: 'admin_session',
     role: 'admin',
+    jti: crypto.randomUUID(),
+    iat: Math.floor(Date.now() / 1000),
     exp,
   });
 }
@@ -105,7 +107,7 @@ export function getOtpChallengeCookieOptions() {
   return {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    sameSite: 'strict',
     maxAge: OTP_CHALLENGE_MAX_AGE,
     path: '/',
   };
@@ -115,7 +117,7 @@ export function getSessionCookieOptions() {
   return {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    sameSite: 'strict',
     maxAge: SESSION_MAX_AGE,
     path: '/',
   };

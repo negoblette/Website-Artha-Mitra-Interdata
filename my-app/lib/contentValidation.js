@@ -1,3 +1,4 @@
+//point no 1 & 2
 const VALID_FILES = new Set([
   'global',
   'homepage',
