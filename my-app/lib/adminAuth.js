@@ -10,7 +10,7 @@ function getSessionSecret() {
   return process.env.SESSION_SECRET;
 }
 
-function signPayload(payload) {
+function signPayload(payload) {   // -> penerapan poin no 16 Dengan Mekanisme HMAC-SHA256
   const secret = getSessionSecret();
 
   if (!secret) {
@@ -19,7 +19,7 @@ function signPayload(payload) {
 
   const encodedPayload = Buffer.from(JSON.stringify(payload)).toString('base64url');
   const signature = crypto
-    .createHmac('sha256', secret)
+    .createHmac('sha256', secret)   // -> HMAC-SHA256
     .update(encodedPayload)
     .digest('base64url');
 

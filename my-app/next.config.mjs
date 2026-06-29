@@ -35,6 +35,23 @@ const nextConfig = {
 async headers() {
   return [
     {
+      source: '/api/:path*', //penerapan poin 13
+      headers: [
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff',
+        },
+        {
+          key: 'X-Frame-Options',
+          value: 'DENY',
+        },
+        {
+          key: 'Cache-Control',
+          value: 'no-store, no-cache, must-revalidate',
+        },
+      ],
+    },
+    {
       source: '/:path*',
       headers: [
         {

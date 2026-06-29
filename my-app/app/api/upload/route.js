@@ -10,6 +10,21 @@ export const runtime = 'nodejs';
 const MAX_BYTES = 10 * 1024 * 1024;
 const ALLOWED_TYPES = new Set(['image/png', 'image/jpeg']);
 
+//Magic bytes for PNG and JPG files for validation purposes -> point no 18
+const MAGIC_BYTES = {
+  'image/png' : [0x89, 0x50, 0x4E, 0x47],
+  'image/jpeg' : [0xFF, 0xD8, 0xFF],
+};
+
+function validateMagicBytes(buffer, expectedType) {
+  const bytes = new Uint8Array(buffer.slice(0, 8));
+  const expected = MAGIC_BYTES[expectedType];
+
+  if (!expected) return false;
+
+  return expected.every((byte, index) => bytes[index] === byte);
+}
+
 function checkAuth(request) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   return verifyAdminSessionToken(token);
@@ -44,6 +59,14 @@ export async function POST(request) {
     return NextResponse.json({ error: 'File is too large. Max 10MB.' }, { status: 413 });
   }
 
+  // Validate MAGICBYTES to ensure file content matches MIME type -> poin no 18
+  const buffer = Buffer.from(await file.arrayBuffer());
+  if (!validateMagicBytes(buffer, file.type)) {
+    return NextResponse.json({
+      error: 'Invalid File content, File does not match declared Type.'
+    }, { status: 415 });
+  }
+
   const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
   await fs.mkdir(uploadsDir, { recursive: true });
 
@@ -51,7 +74,6 @@ export async function POST(request) {
   const fileName = `${crypto.randomUUID()}${ext}`;
   const filePath = path.join(uploadsDir, fileName);
 
-  const buffer = Buffer.from(await file.arrayBuffer());
   await fs.writeFile(filePath, buffer);
 
   return NextResponse.json({
