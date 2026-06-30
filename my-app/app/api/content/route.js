@@ -4,7 +4,7 @@ import { getContent, updateContent, backupContent, purgeOldBackups } from '@/lib
 import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
 import { validateContentPayload } from '@/lib/contentValidation';
-
+import { logContentUpdate } from '@/lib/auditLogger';
 
 const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'activities', 'insight'];
 
@@ -114,7 +114,10 @@ export async function PUT(request) {
   }
 
   const updated = updateContent(file, body);
-
+  
+  //Log Update Content
+  await logContentUpdate(file,'admin', request);
+  
   // Revalidate affected routes so static pages update
   const routes = FILE_ROUTES[file] || [];
   for (const route of routes) {

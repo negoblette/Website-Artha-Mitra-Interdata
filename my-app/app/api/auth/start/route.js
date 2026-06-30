@@ -6,6 +6,7 @@ import {
 } from '@/lib/adminAuth';
 import { checkRateLimit, clearRateLimit } from '@/lib/rateLimit';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
+import { logFailedLogin, logRateLimitHit } from '@/lib/auditLogger';
 
 export async function POST(request) {
   const invalidHost = rejectInvalidAdminHost(request);
@@ -24,6 +25,9 @@ export async function POST(request) {
   });
 
   if (!rateLimit.allowed) {
+    //LOG: Rate Limit Hit -> poin checklist no 20
+    await logRateLimitHit ('/api/auth/start', request);
+
     return NextResponse.json(
       { error: 'Too many login attempts' },
       {
@@ -34,6 +38,9 @@ export async function POST(request) {
   }
 
   if (!password || password !== process.env.ADMIN_PASSWORD) {
+    //LOG : Failed Login -> poin checklist no 20
+    await logFailedLogin ('Invalid password', request);
+
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

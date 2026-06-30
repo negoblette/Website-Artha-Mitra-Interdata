@@ -1,3 +1,4 @@
+import { logSuccessfulLogin } from '@/lib/auditLogger';
 import { NextResponse } from 'next/server';
 import { verify } from 'otplib';
 import {
@@ -63,6 +64,9 @@ export async function POST(request) {
   }
 
   await clearRateLimit(request, 'admin_otp');
+  
+  //Log Successful login
+  await logSuccessfulLogin(request);
 
   const response = NextResponse.json({ ok: true });
   const expiredCookie = {

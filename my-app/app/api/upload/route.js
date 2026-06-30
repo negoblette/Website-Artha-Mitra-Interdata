@@ -4,6 +4,7 @@ import path from 'path';
 import crypto from 'crypto';
 import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
+import { logFileUpload } from '@/lib/auditLogger';
 
 export const runtime = 'nodejs';
 
@@ -75,6 +76,9 @@ export async function POST(request) {
   const filePath = path.join(uploadsDir, fileName);
 
   await fs.writeFile(filePath, buffer);
+
+  //Log Upload File
+  await logFileUpload(fileName, file.size, file.type, request);
 
   return NextResponse.json({
     url: `/uploads/${fileName}`,
