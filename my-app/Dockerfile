@@ -33,6 +33,12 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Copy data directory (writable for CMS)
 COPY --from=builder --chown=nextjs:nodejs /app/data ./data
+# Keep a pristine copy for first-run initialization (volume won't override this)
+COPY --from=builder --chown=nextjs:nodejs /app/data ./data-init
+
+# Entrypoint script to initialize data volume on first run
+COPY --chown=nextjs:nodejs docker-entrypoint.sh /app/docker-entrypoint.sh
+RUN chmod +x /app/docker-entrypoint.sh
 
 USER nextjs
 
@@ -40,4 +46,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD ["/app/docker-entrypoint.sh"]

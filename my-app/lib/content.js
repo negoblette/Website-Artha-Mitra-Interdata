@@ -10,6 +10,9 @@ const MAX_BACKUPS = 10;
 
 export function getContent(fileName) {
   const filePath = path.join(dataDir, `${fileName}.json`);
+  if (!fs.existsSync(filePath)) {
+    return {};
+  }
   const raw = fs.readFileSync(filePath, 'utf-8');
   return JSON.parse(raw);
 }
