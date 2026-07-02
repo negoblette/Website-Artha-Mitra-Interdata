@@ -15,7 +15,6 @@ const publicCsp = [
   "form-action 'self'",
   "frame-ancestors 'self'",
   "manifest-src 'self'",
-  ...(isDev ? [] : ['upgrade-insecure-requests']),
 ].join('; ');
 
 const adminCsp = publicCsp.replace("frame-ancestors 'self'", "frame-ancestors 'none'");
@@ -48,6 +47,24 @@ async headers() {
         {
           key: 'Cache-Control',
           value: 'no-store, no-cache, must-revalidate',
+        },
+      ],
+    },
+    {
+      source: '/api/uploads/:path*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+    {
+      source: '/uploads/:path*',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
         },
       ],
     },

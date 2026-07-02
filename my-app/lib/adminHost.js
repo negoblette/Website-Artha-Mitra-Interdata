@@ -8,11 +8,13 @@ export function getAllowedAdminHosts() {
 }
 
 export function getRequestHost(request) {
-  return (
+  const host = (
     request.headers.get('x-forwarded-host') ||
     request.headers.get('host') ||
     ''
   ).toLowerCase();
+  // Strip port number for comparison (e.g. "localhost:3000" → "localhost")
+  return host.replace(/:\d+$/, '');
 }
 
 export function isAllowedAdminHost(request) {

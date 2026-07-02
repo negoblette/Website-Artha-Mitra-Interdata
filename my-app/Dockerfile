@@ -35,6 +35,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/data ./data
 # Keep a pristine copy for first-run initialization (volume won't override this)
 COPY --from=builder --chown=nextjs:nodejs /app/data ./data-init
+# Seed uploads into data-init so they persist across volume mounts
+COPY --from=builder --chown=nextjs:nodejs /app/public/uploads ./data-init/uploads
 
 USER nextjs
 

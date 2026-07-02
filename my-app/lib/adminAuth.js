@@ -1,11 +1,10 @@
 import crypto from 'crypto';
-import { isSessionRevoked } from './sessionRevocation';
+import { createSession, getSession, deleteSession, isSessionRevoked, SESSION_MAX_AGE } from './sessionStore';
 
 export const OTP_CHALLENGE_COOKIE = 'admin_otp_challenge';
 export const SESSION_COOKIE = 'admin_session';
 
 const OTP_CHALLENGE_MAX_AGE = 5 * 60;
-const SESSION_MAX_AGE = 60 * 60;
 
 function getSessionSecret() {
   return process.env.SESSION_SECRET;
@@ -81,39 +80,78 @@ export function verifyOtpChallengeToken(token) {
   );
 }
 
-export function createAdminSessionToken() {
-  const exp = Math.floor(Date.now() / 1000) + SESSION_MAX_AGE;
-
-  return signPayload({
-    type: 'admin_session',
+/**
+ * Create a new admin session in Redis
+ * @param {string} ip - Client IP address
+ * @param {string} userAgent - Client user agent
+ * @returns {Promise<string>} Session ID
+ */
+export async function createAdminSession(ip, userAgent) {
+  const sessionData = {
+    userId: 'admin',
     role: 'admin',
-    jti: crypto.randomUUID(),
-    iat: Math.floor(Date.now() / 1000),
-    exp,
-  });
+    ip: ip || 'unknown',
+    userAgent: userAgent || 'unknown',
+    createdAt: Date.now(),
+  };
+
+  return await createSession(sessionData);
+}
+
+/**
+ * Verify admin session from Redis
+ * @param {string} sessionId - Session ID from cookie
+ * @returns {Promise<Object|null>} Session data or null if invalid
+ */
+export async function verifyAdminSessionToken(sessionId) {
+  if (!sessionId) {
+    return null;
+  }
+
+  // Check if session is revoked
+  if (await isSessionRevoked(sessionId)) {
+    return null;
+  }
+
+  // Get session from Redis
+  const session = await getSession(sessionId);
+
+  if (!session) {
+    return null;
+  }
+
+  // Verify session structure
+  if (
+    session.userId !== 'admin' ||
+    session.role !== 'admin'
+  ) {
+    return null;
+  }
+
+  return session;
+}
+
+/**
+ * Delete admin session from Redis
+ * @param {string} sessionId
+ */
+export async function deleteAdminSession(sessionId) {
+  await deleteSession(sessionId);
+}
+
+/**
+ * Revoke admin session
+ * @param {string} sessionId
+ */
+export async function revokeAdminSession(sessionId) {
+  const { revokeSession } = await import('./sessionStore');
+  await revokeSession(sessionId);
 }
 
 export function decodeSessionToken(token) {
+  // For backward compatibility, try to verify as JWT
+  // But prefer session-based auth
   return verifySignedPayload(token);
-}
-
-export async function verifyAdminSessionToken(token) {
-  const payload = verifySignedPayload(token);
-
-  if (
-    !payload ||
-    payload.type !== 'admin_session' ||
-    payload.role !== 'admin' ||
-    payload.exp <= Math.floor(Date.now() / 1000)
-  ) {
-    return false;
-  }
-
-  if (payload.jti && await isSessionRevoked(payload.jti)) {
-    return false;
-  }
-
-  return true;
 }
 
 export function getOtpChallengeCookieOptions() {
@@ -131,7 +169,9 @@ export function getSessionCookieOptions() {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
-    maxAge: SESSION_MAX_AGE,
+    maxAge: SESSION_MAX_AGE, // 1 jam
     path: '/',
   };
 }
+
+export { SESSION_MAX_AGE };

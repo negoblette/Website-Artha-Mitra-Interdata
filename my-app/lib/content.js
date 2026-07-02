@@ -2,17 +2,64 @@ import fs from 'fs';
 import path from 'path';
 
 const dataDir = path.join(process.cwd(), 'data');
-// In Docker, /app/data is a volume (writable). Initial files are in /app/data-init.
-// Read from data-init (pristine), write to data (persistent).
-const dataInitDir = process.env.DATA_INIT_DIR || dataDir;
+const dataInitDir = path.join(process.cwd(), 'data-init');
 const backupsRoot = path.join(dataDir, 'backups');
 
 const MAX_BACKUPS = 10;
 
 // ─── Core read/write ────────────────────────────────────────────────────────
+let initialized = false;
+
+function initDataDir() {
+  if(initialized) return;
+  initialized = true;
+
+  //only run when dataDir is empty
+  if (!fs.existsSync(dataDir) || fs.readdirSync(dataDir).length > 0) return;
+  if(!fs.existsSync(dataInitDir)) return;
+
+  const files = fs.readdirSync(dataInitDir).filter((f) => f.endsWith('.json'));
+  for (const file of files) {
+    fs.copyFileSync(path.join(dataInitDir, file), path.join(dataDir, file));
+  }
+
+  // Also copy seed uploads
+  const uploadsInit = path.join(dataInitDir, 'uploads');
+  if (fs.existsSync(uploadsInit)) {
+    const uploadsDest = path.join(dataDir, 'uploads');
+    fs.mkdirSync(uploadsDest, { recursive: true });
+    const uploadFiles = fs.readdirSync(uploadsInit);
+    for (const file of uploadFiles) {
+      fs.copyFileSync(path.join(uploadsInit, file), path.join(uploadsDest, file));
+    }
+    console.log(`[content] Copied ${uploadFiles.length} seed uploads`);
+  }
+
+  console.log(`[content] Initialized data directory with ${files.length} files`);
+}
+
+// Migrate legacy uploads from public/uploads/ to data/uploads/
+function migrateLegacyUploads() {
+  const legacyDir = path.join(process.cwd(), 'public', 'uploads');
+  const destDir = path.join(dataDir, 'uploads');
+
+  if (!fs.existsSync(legacyDir)) return;
+  if (fs.existsSync(destDir) && fs.readdirSync(destDir).length > 0) return;
+
+  fs.mkdirSync(destDir, { recursive: true });
+  const files = fs.readdirSync(legacyDir).filter((f) => !f.startsWith('.'));
+  for (const file of files) {
+    fs.copyFileSync(path.join(legacyDir, file), path.join(destDir, file));
+  }
+  if (files.length > 0) {
+    console.log(`[content] Migrated ${files.length} legacy uploads from public/uploads/`);
+  }
+}
 
 export function getContent(fileName) {
-  const filePath = path.join(dataInitDir, `${fileName}.json`);
+  initDataDir();
+  migrateLegacyUploads();
+  const filePath = path.join(dataDir, `${fileName}.json`);
   if (!fs.existsSync(filePath)) {
     return {};
   }

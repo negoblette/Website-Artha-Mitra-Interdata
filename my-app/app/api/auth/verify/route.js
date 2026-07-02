@@ -2,7 +2,7 @@ import { logSuccessfulLogin } from '@/lib/auditLogger';
 import { NextResponse } from 'next/server';
 import { verify } from 'otplib';
 import {
-  createAdminSessionToken,
+  createAdminSession,
   getSessionCookieOptions,
   OTP_CHALLENGE_COOKIE,
   SESSION_COOKIE,
@@ -71,9 +71,14 @@ export async function POST(request) {
   }
 
   await clearRateLimit(request, 'admin_otp');
-  
+
   //Log Successful login
   await logSuccessfulLogin(request);
+
+  // Create session in Redis (server-side)
+  const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+  const userAgent = request.headers.get('user-agent') || 'unknown';
+  const sessionId = await createAdminSession(ip, userAgent);
 
   const response = NextResponse.json({ ok: true });
   const expiredCookie = {
@@ -85,7 +90,7 @@ export async function POST(request) {
   };
 
   response.cookies.set(OTP_CHALLENGE_COOKIE, '', expiredCookie);
-  response.cookies.set(SESSION_COOKIE, createAdminSessionToken(), getSessionCookieOptions());
+  response.cookies.set(SESSION_COOKIE, sessionId, getSessionCookieOptions());
 
   return response;
 }
