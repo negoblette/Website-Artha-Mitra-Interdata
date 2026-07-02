@@ -18,6 +18,8 @@ services:
       REDIS_URL: redis://redis:6379
       # Inside Docker, the host header may arrive as the service name "web"
       ADMIN_ALLOWED_HOSTS: "localhost:3000,127.0.0.1:3000,web:3000"
+      # Read CMS data from pristine copy (volume overlay hides /app/data)
+      DATA_INIT_DIR: /app/data-init
     depends_on:
       redis:
         condition: service_healthy

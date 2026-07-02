@@ -2,6 +2,9 @@ import fs from 'fs';
 import path from 'path';
 
 const dataDir = path.join(process.cwd(), 'data');
+// In Docker, /app/data is a volume (writable). Initial files are in /app/data-init.
+// Read from data-init (pristine), write to data (persistent).
+const dataInitDir = process.env.DATA_INIT_DIR || dataDir;
 const backupsRoot = path.join(dataDir, 'backups');
 
 const MAX_BACKUPS = 10;
@@ -9,7 +12,7 @@ const MAX_BACKUPS = 10;
 // ─── Core read/write ────────────────────────────────────────────────────────
 
 export function getContent(fileName) {
-  const filePath = path.join(dataDir, `${fileName}.json`);
+  const filePath = path.join(dataInitDir, `${fileName}.json`);
   if (!fs.existsSync(filePath)) {
     return {};
   }
