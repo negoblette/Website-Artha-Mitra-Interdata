@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { isSessionRevoked } from './sessionRevocation';
 
 export const OTP_CHALLENGE_COOKIE = 'admin_otp_challenge';
 export const SESSION_COOKIE = 'admin_session';
@@ -92,15 +93,27 @@ export function createAdminSessionToken() {
   });
 }
 
-export function verifyAdminSessionToken(token) {
+export function decodeSessionToken(token) {
+  return verifySignedPayload(token);
+}
+
+export async function verifyAdminSessionToken(token) {
   const payload = verifySignedPayload(token);
 
-  return Boolean(
-    payload &&
-    payload.type === 'admin_session' &&
-    payload.role === 'admin' &&
-    payload.exp > Math.floor(Date.now() / 1000)
-  );
+  if (
+    !payload ||
+    payload.type !== 'admin_session' ||
+    payload.role !== 'admin' ||
+    payload.exp <= Math.floor(Date.now() / 1000)
+  ) {
+    return false;
+  }
+
+  if (payload.jti && await isSessionRevoked(payload.jti)) {
+    return false;
+  }
+
+  return true;
 }
 
 export function getOtpChallengeCookieOptions() {

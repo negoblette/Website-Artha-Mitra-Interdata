@@ -57,6 +57,83 @@ Before deploying to production:
 - [ ] Check for breaking changes in major version updates
 - [ ] Update CHANGELOG with dependency changes
 
+### Third-Party Resource Governance
+
+Project ini memakai beberapa resource eksternal yang harus dikendalikan secara ketat agar tidak menambah risiko keamanan, terutama untuk CSP, embed, dan link pihak ketiga.
+
+#### Allowed External Resources
+
+| Resource | Type | Used In | Purpose | Runtime / Build-time |
+|---|---|---|---|---|
+| Google Maps Embed | iframe | [components/contact/ContactInfo.jsx](components/contact/ContactInfo.jsx#L154-L183) | Menampilkan lokasi kantor | Runtime |
+| WhatsApp Link | link | [components/WhatsAppButton.jsx](components/WhatsAppButton.jsx#L3-L11), [components/home/ContactSection.jsx](components/home/ContactSection.jsx#L41-L49), [components/contact/ContactInfo.jsx](components/contact/ContactInfo.jsx#L113-L133) | Membuka chat WhatsApp | Runtime |
+| Social Media Links | link | [components/Footer.jsx](components/Footer.jsx#L20-L23) | Navigasi ke media sosial resmi | Runtime |
+| Google Fonts | font loader | [app/layout.js](app/layout.js#L1-L9) | Font UI application | Build-time |
+
+#### Allowed Domains
+
+Resource eksternal hanya boleh berasal dari domain berikut:
+
+- `www.google.com`
+- `maps.google.com`
+- `wa.me`
+- `www.facebook.com`
+- `www.instagram.com`
+- `www.linkedin.com`
+- `arthamitra.co.id`
+- `www.arthamitra.co.id`
+
+#### CSP Enforcement
+
+Content Security Policy harus selalu mengikuti daftar resource yang diizinkan di atas. Konfigurasi CSP utama ada di [next.config.mjs](next.config.mjs#L5-L19).
+
+Aturan utama:
+- `frame-src` hanya boleh berisi domain yang benar-benar dipakai untuk embed
+- `script-src` tetap dibatasi ke `self` kecuali ada kebutuhan yang sudah direview
+- resource baru tidak boleh ditambahkan ke CSP tanpa alasan yang jelas
+- resource yang tidak ada dalam inventaris ini tidak boleh diaktifkan
+
+#### Approval Process for New External Resources
+
+Sebelum resource eksternal baru digunakan, langkah berikut harus dilakukan:
+
+1. Identifikasi kebutuhan resource
+2. Verifikasi bahwa resource memang diperlukan
+3. Tambahkan resource ke inventaris ini
+4. Perbarui CSP di [next.config.mjs](next.config.mjs#L5-L19) jika diperlukan
+5. Uji resource di local development
+6. Review hasilnya sebelum deploy
+
+#### Prohibited External Resources
+
+Resource berikut tidak boleh ditambahkan tanpa review keamanan:
+
+- third-party script tracker
+- widget chat pihak ketiga
+- CDN JavaScript yang tidak jelas sumbernya
+- embed dari domain yang tidak masuk allowlist
+- inline script tambahan tanpa kebutuhan yang jelas
+- resource yang meminta izin akses berlebihan
+
+#### Review Checklist
+
+Sebelum menambah resource eksternal baru, pastikan:
+
+- resource benar-benar diperlukan
+- domain sumber jelas dan terpercaya
+- dampak ke CSP sudah dipahami
+- tidak menambah attack surface yang tidak perlu
+- resource diuji di local sebelum masuk production
+- dokumentasi ini diperbarui setelah perubahan
+
+#### Maintenance
+
+Inventaris resource eksternal ini harus diperbarui setiap kali ada perubahan pada:
+- komponen yang memakai link atau iframe eksternal
+- CSP rules
+- resource pihak ketiga baru
+- font atau embed baru yang dipakai di aplikasi
+
 ### Vulnerability Severity Levels
 
 | Severity | Response Time | Action |
@@ -129,5 +206,7 @@ If you discover a security vulnerability:
 - [Snyk Vulnerability Database](https://snyk.io/vuln/)
 
 ---
+
+
 
 Last Updated: June 2026

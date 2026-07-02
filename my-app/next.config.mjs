@@ -63,6 +63,10 @@ async headers() {
           value: 'nosniff',
         },
         {
+          key: 'X-XSS-Protection',
+          value: '1; mode=block',
+        },
+        {
           key: 'Referrer-Policy',
           value: 'strict-origin-when-cross-origin',
         },
@@ -78,6 +82,10 @@ async headers() {
         {
           key: 'Content-Security-Policy',
           value: adminCsp,
+        },
+        {
+          key: 'X-XSS-Protection',
+          value: '1; mode=block',
         },
         {
           key: 'Referrer-Policy',
@@ -99,6 +107,10 @@ async headers() {
         {
           key: 'Content-Security-Policy',
           value: adminCsp,
+        },
+        {
+          key: 'X-XSS-Protection',
+          value: '1; mode=block',
         },
         {
           key: 'Referrer-Policy',

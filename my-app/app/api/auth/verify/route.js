@@ -10,12 +10,19 @@ import {
 } from '@/lib/adminAuth';
 import { checkRateLimit, clearRateLimit } from '@/lib/rateLimit';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
+import { readJsonWithLimit, REQUEST_LIMITS } from '@/lib/requestLimits';
 
 export async function POST(request) {
   const invalidHost = rejectInvalidAdminHost(request);
   if (invalidHost) return invalidHost;
 
-  const { otp } = await request.json().catch(() => ({}));
+  const parsed = await readJsonWithLimit(request, REQUEST_LIMITS.otp);
+
+  if (!parsed.ok) {
+    return parsed.response;
+  }
+
+  const { otp } = parsed.body;
   const otpToken = String(otp || '').trim();
   const challengeToken = request.cookies.get(OTP_CHALLENGE_COOKIE)?.value;
 

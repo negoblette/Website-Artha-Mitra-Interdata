@@ -7,12 +7,18 @@ import {
 import { checkRateLimit, clearRateLimit } from '@/lib/rateLimit';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
 import { logFailedLogin, logRateLimitHit } from '@/lib/auditLogger';
+import { readJsonWithLimit, REQUEST_LIMITS } from '@/lib/requestLimits';
 
 export async function POST(request) {
   const invalidHost = rejectInvalidAdminHost(request);
   if (invalidHost) return invalidHost;
 
-  const { password } = await request.json().catch(() => ({}));
+  const parsed = await readJsonWithLimit(request, REQUEST_LIMITS.auth);
+  if (!parsed.ok) {
+    return parsed.response;
+  }
+  
+  const { password } = parsed.body;
 
   if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_TOTP_SECRET || !process.env.SESSION_SECRET) {
     return NextResponse.json({ error: 'Auth is not configured' }, { status: 500 });

@@ -1,15 +1,31 @@
 services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
   web:
     build: .
     ports:
       - "3000:3000"
+    env_file:
+      - .env.local
     environment:
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
     volumes:
-      # Persist CMS data across container restarts
+      #Persist CMS data across container restarts
       - ami-data:/app/data
-      # Persist uploaded images
+      #Persist uploaded images
       - ami-public:/app/public/images
+      #Persist audit logs (bind mount for direct host access)
+      - ./logs:/app/logs
     restart: unless-stopped
 
 volumes:

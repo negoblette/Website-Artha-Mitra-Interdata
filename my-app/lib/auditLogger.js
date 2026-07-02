@@ -72,6 +72,11 @@ export async function logSuccessfulLogin(request = null) {
     await logAuth('LOGIN_SUCCESS', {}, request);
 }
 
+//Log Logout
+export async function logLogout(request = null) {
+    await logAuth('LOGOUT', {}, request);
+}
+
 //Log Rate Limit
 export async function logRateLimitHit(endpoint, request = null) {
     await logActivity('RATE_LIMIT_HIT', { endpoint }, request);
@@ -92,13 +97,26 @@ export async function logApiError(endpoint, statusCode, errorMessage, request = 
     await logActivity('error', 'API_ERROR', [ endpoint, statusCode, errorMessage ], request);
 }
 
+//Log Backup Restore
+export async function logBackupRestore(file, filename, success, request = null) {
+    await logActivity('backup', 'BACKUP_RESTORE', { file, filename, success }, request);
+}
+
+//Log Backup List Access
+export async function logBackupListAccess(file, request = null) {
+    await logActivity('backup', 'BACKUP_LIST_ACCESS', { file }, request);
+}
+
 export default {
-    logActivity, 
+    logActivity,
     logAuth,
-    logFailedLogin, 
+    logFailedLogin,
     logSuccessfulLogin,
+    logLogout,
     logRateLimitHit,
     logContentUpdate,
     logFileUpload,
     logApiError,
+    logBackupRestore,
+    logBackupListAccess,
 };

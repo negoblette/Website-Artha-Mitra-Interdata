@@ -4,13 +4,15 @@ import { getContent, updateContent, backupContent, purgeOldBackups } from '@/lib
 import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
 import { validateContentPayload } from '@/lib/contentValidation';
-import { logContentUpdate } from '@/lib/auditLogger';
+import { logContentUpdate, logRateLimitHit, logApiError } from '@/lib/auditLogger';
+import { readJsonWithLimit, REQUEST_LIMITS } from '@/lib/requestLimits';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'activities', 'insight'];
 
-function checkAuth(request) {
+async function checkAuth(request) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
-  return verifyAdminSessionToken(token);
+  return await verifyAdminSessionToken(token);
 }
 
 // Map which files affect which routes (for revalidation)
@@ -63,12 +65,17 @@ export async function GET(request) {
     return NextResponse.json({ error: 'Invalid file parameter' }, { status: 400 });
   }
 
-  if (!checkAuth(request)) {
+  if (!await checkAuth(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const data = getContent(file);
-  return NextResponse.json(data);
+  try {
+    const data = getContent(file);
+    return NextResponse.json(data);
+  } catch (err) {
+    await logApiError('/api/content', 500, err?.message, request);
+    return NextResponse.json({ error: 'Failed to load content' }, { status: 500 });
+  }
 }
 
 export async function PUT(request) {
@@ -82,11 +89,35 @@ export async function PUT(request) {
     return NextResponse.json({ error: 'Invalid file parameter' }, { status: 400 });
   }
 
-  if (!checkAuth(request)) {
+  if (!await checkAuth(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const body = await request.json();
+  const rateLimit = await checkRateLimit(request, 'admin_content_update', {
+    limit: 60,
+    windowSeconds: 5 * 60,
+    lockoutSeconds: 3 * 60,
+  });
+
+  if(!rateLimit.allowed) {
+    await logRateLimitHit('/api/content', request);
+
+    return NextResponse.json(
+      { error: 'Too many content update request.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(rateLimit.retryAfter)},
+      }
+    );
+  }
+
+  const parsed = await readJsonWithLimit(request, REQUEST_LIMITS.content);
+  if (!parsed.ok) {
+    return parsed.response;
+  }
+  
+
+  const body = parsed.body;
   const validation = validateContentPayload(file, body);
 
   if (!validation.ok) {
@@ -96,7 +127,14 @@ export async function PUT(request) {
     );
   }
 
-  const existing = getContent(file);
+  let existing;
+  try {
+    existing = getContent(file);
+  } catch (err) {
+    await logApiError('/api/content', 500, err?.message, request);
+    return NextResponse.json({ error: 'Failed to read current content' }, { status: 500 });
+  }
+
   const readOnlyPaths = READ_ONLY_MAP[file] || [];
   for (const readOnlyPath of readOnlyPaths) {
     const preserved = getValueAtPath(existing, readOnlyPath);
@@ -113,11 +151,17 @@ export async function PUT(request) {
     // Non-fatal — continue even if backup fails
   }
 
-  const updated = updateContent(file, body);
-  
+  let updated;
+  try {
+    updated = updateContent(file, body);
+  } catch (err) {
+    await logApiError('/api/content', 500, err?.message, request);
+    return NextResponse.json({ error: 'Failed to save content' }, { status: 500 });
+  }
+
   //Log Update Content
   await logContentUpdate(file,'admin', request);
-  
+
   // Revalidate affected routes so static pages update
   const routes = FILE_ROUTES[file] || [];
   for (const route of routes) {

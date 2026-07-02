@@ -4,7 +4,9 @@ import path from 'path';
 import crypto from 'crypto';
 import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
-import { logFileUpload } from '@/lib/auditLogger';
+import { logFileUpload, logRateLimitHit } from '@/lib/auditLogger';
+import { rejectLargeRequest, REQUEST_LIMITS } from '@/lib/requestLimits';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 export const runtime = 'nodejs';
 
@@ -26,9 +28,9 @@ function validateMagicBytes(buffer, expectedType) {
   return expected.every((byte, index) => bytes[index] === byte);
 }
 
-function checkAuth(request) {
+async function checkAuth(request) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
-  return verifyAdminSessionToken(token);
+  return await verifyAdminSessionToken(token);
 }
 
 function extensionForType(mime) {
@@ -41,8 +43,32 @@ export async function POST(request) {
   const invalidHost = rejectInvalidAdminHost(request);
   if (invalidHost) return invalidHost;
 
-  if (!checkAuth(request)) {
+  if (!await checkAuth(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const rateLimit = await checkRateLimit(request, 'admin_upload', {
+    limit: 30,
+    windowSeconds: 60 * 60,
+    lockoutSeconds: 15 * 60,
+  });
+
+  if (!rateLimit.allowed) {
+    await logRateLimitHit('/api/upload', request);
+
+    return NextResponse.json(
+      { error: 'Too many upload requests. Please try again later.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(rateLimit.retryAfter) },
+      }
+    );
+  }
+
+  const tooLarge = rejectLargeRequest(request, REQUEST_LIMITS.upload);
+
+  if (tooLarge) {
+    return tooLarge;
   }
 
   const formData = await request.formData();

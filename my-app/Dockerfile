@@ -1,13 +1,11 @@
 FROM node:20-alpine AS base
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # --- Dependencies ---
 FROM base AS deps
 WORKDIR /app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # --- Build ---
 FROM base AS builder
@@ -15,7 +13,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN pnpm build
+RUN npm run build
 
 # --- Production ---
 FROM base AS runner
@@ -27,7 +25,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy public assets
-COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
 # Copy standalone output
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./

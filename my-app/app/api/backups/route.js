@@ -3,6 +3,9 @@ import { listBackups, restoreBackup, purgeOldBackups } from '@/lib/content';
 import { revalidatePath } from 'next/cache';
 import { SESSION_COOKIE, verifyAdminSessionToken } from '@/lib/adminAuth';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
+import { readJsonWithLimit, REQUEST_LIMITS } from '@/lib/requestLimits';
+import { checkRateLimit } from '@/lib/rateLimit';
+import { logRateLimitHit, logBackupRestore, logBackupListAccess, logApiError } from '@/lib/auditLogger';
 
 const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'activities', 'insight'];
 
@@ -16,9 +19,9 @@ const FILE_ROUTES = {
   insight: ['/insight'],
 };
 
-function checkAuth(request) {
+async function checkAuth(request) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
-  return verifyAdminSessionToken(token);
+  return await verifyAdminSessionToken(token);
 }
 
 /**
@@ -29,7 +32,7 @@ export async function GET(request) {
   const invalidHost = rejectInvalidAdminHost(request);
   if (invalidHost) return invalidHost;
 
-  if (!checkAuth(request)) {
+  if (!await checkAuth(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -42,9 +45,11 @@ export async function GET(request) {
 
   try {
     const backups = listBackups(file);
+    await logBackupListAccess(file, request);
     return NextResponse.json({ backups });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    await logApiError('/api/backups', 500, err?.message, request);
+    return NextResponse.json({ error: 'Failed to list backups' }, { status: 500 });
   }
 }
 
@@ -58,17 +63,35 @@ export async function POST(request) {
   const invalidHost = rejectInvalidAdminHost(request);
   if (invalidHost) return invalidHost;
 
-  if (!checkAuth(request)) {
+  if (!await checkAuth(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  let body;
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+  const rateLimit = await checkRateLimit(request, 'admin_backup', {
+    limit: 20,
+    windowSeconds: 60 * 60,
+    lockoutSeconds: 15 * 60,
+  });
+
+  if (!rateLimit.allowed) {
+    await logRateLimitHit('/api/backups', request);
+
+    return NextResponse.json(
+      { error: 'Too many backup restore requests.' },
+      {
+        status: 429,
+        headers: { 'Retry-After': String(rateLimit.retryAfter) },
+      }
+    );
   }
 
+  const parsed = await readJsonWithLimit(request, REQUEST_LIMITS.backup);
+
+  if (!parsed.ok) {
+    return parsed.response;
+  }
+
+  const body = parsed.body;
   const { file, filename } = body || {};
 
   if (!file || !VALID_FILES.includes(file)) {
@@ -87,6 +110,8 @@ export async function POST(request) {
   try {
     const restored = restoreBackup(file, filename);
 
+    await logBackupRestore(file, filename, true, request);
+
     // Purge old backups after restore creates a new one
     try { purgeOldBackups(file); } catch {}
 
@@ -98,6 +123,8 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true, data: restored, _revalidated: routes });
   } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    await logBackupRestore(file, filename, false, request);
+    await logApiError('/api/backups', 500, err?.message, request);
+    return NextResponse.json({ error: 'Failed to restore backup' }, { status: 500 });
   }
 }

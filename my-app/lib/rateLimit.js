@@ -1,4 +1,10 @@
-const buckets = new Map();
+import { createClient } from 'redis';
+
+const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+const PREFIX = 'ami:rate-limit';
+
+let redisClient;
+let redisConnectPromise;
 
 function getClientIp(request) {
   return (
@@ -8,62 +14,87 @@ function getClientIp(request) {
   );
 }
 
+async function getRedisClient() {
+  if (redisClient?.isReady) {
+    return redisClient; 
+  }
+
+  if (!redisConnectPromise) {
+    redisClient = createClient({url: REDIS_URL});
+    
+    redisClient.on('error' , (error) => {
+      console.error('Redis rate limit client error:', error);
+    });
+
+    redisConnectPromise = redisClient.connect().then(() => redisClient).catch((error) => {
+      redisConnectPromise = null;
+      redisClient = undefined;
+      throw error;
+    });
+  }
+  return redisConnectPromise;
+}
+
+function buildBaseKey(keyPrefix, ip) {
+  return `${keyPrefix}:${ip}`; 
+}
+
 export async function checkRateLimit(request, keyPrefix, options = {}) {
-  const {
+  const{
     limit = 5,
     windowSeconds = 10 * 60,
     lockoutSeconds = 15 * 60,
   } = options;
-  const ip = getClientIp(request);
-  const key = `${keyPrefix}:${ip}`;
-  const now = Date.now();
-  const record = buckets.get(key);
 
-  if (record?.lockedUntil && record.lockedUntil > now) {
+  const ip = getClientIp(request);
+  const baseKey = buildBaseKey(keyPrefix, ip);
+  const lockKey = `${baseKey}:lock`;
+  const client = await getRedisClient();
+
+  const lockedUntil = await client.get(lockKey);
+  if(lockedUntil) {
+    const retryAfter = Math.max(
+      1,
+      Math.ceil((Number(lockedUntil) - Date.now()) / 1000)
+    );
+
     return {
       allowed: false,
       locked: true,
-      retryAfter: Math.ceil((record.lockedUntil - now) / 1000),
+      retryAfter,
     };
   }
 
-  if (!record || record.resetAt <= now) {
-    buckets.set(key, {
-      count: 1,
-      resetAt: now + windowSeconds * 1000,
-      lockedUntil: null,
+  const count = await client.incr(baseKey);
+
+  if(count === 1) {
+    await client.expire(baseKey, windowSeconds);
+  }
+
+  if(count > limit) {
+    const retryAfter = lockoutSeconds;
+    await client.set(lockKey, String(Date.now() + lockoutSeconds * 1000), {
+      EX: lockoutSeconds,
     });
 
-    return {
-      allowed: true,
-      locked: false,
-      remaining: limit - 1,
-    };
-  }
-
-  record.count += 1;
-
-  if (record.count > limit) {
-    record.lockedUntil = now + lockoutSeconds * 1000;
-    buckets.set(key, record);
-
-    return {
-      allowed: false,
+    return{
+      allowed: false, 
       locked: true,
-      retryAfter: lockoutSeconds,
+      retryAfter,
     };
-  }
-
-  buckets.set(key, record);
+  } 
 
   return {
     allowed: true,
     locked: false,
-    remaining: Math.max(limit - record.count, 0),
+    remaining: Math.max(limit - count, 0),
   };
 }
 
 export async function clearRateLimit(request, keyPrefix) {
   const ip = getClientIp(request);
-  buckets.delete(`${keyPrefix}:${ip}`);
+  const baseKey = buildBaseKey(keyPrefix, ip);
+  const client = await getRedisClient();
+
+  await client.del(baseKey, `${baseKey}:lock`);
 }

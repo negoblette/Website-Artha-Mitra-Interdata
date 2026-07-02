@@ -8,7 +8,7 @@ export async function GET(request) {
 
   const token = request.cookies.get(SESSION_COOKIE)?.value;
 
-  if (!verifyAdminSessionToken(token)) {
+  if (!await verifyAdminSessionToken(token)) {
     return NextResponse.json({ authenticated: false }, { status: 401 });
   }
 
