@@ -16,7 +16,9 @@ const DANGEROUS_KEYS = new Set([
 ]);
 
 const URL_KEYS = /(^|\.)(href|link|url|mapLink|mapEmbedUrl|src|website)$/i;
-const IMAGE_KEYS = /(^|\.)(image|logo|background|thumbnail|photo|icon|banner|cover)$/i;
+// Note: 'icon' excluded - handled separately to support both Lucide icon names AND image paths
+const IMAGE_KEYS = /(^|\.)(image|logo|background|thumbnail|photo|banner|cover)$/i;
+const ICON_KEYS = /(^|\.)(icon)$/i;
 const SLUG_KEYS = /(^|\.)(slug)$/i;
 const EMAIL_KEYS = /(^|\.)(email|mail|formRecipient)$/i;
 const PHONE_KEYS = /(^|\.)(phone|fax|whatsapp|mobile|telephone)$/i;
@@ -70,6 +72,56 @@ function isSafeSlug(value) {
   return /^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(value);
 }
 
+// Lucide icon names - common ones used in the project
+const LUCIDE_ICONS = new Set([
+  'Activity', 'AlertCircle', 'AlertTriangle', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowUp',
+  'Award', 'BarChart', 'BarChart3', 'Book', 'BookOpen', 'Calendar', 'Camera', 'Check',
+  'CheckCircle', 'ChevronDown', 'ChevronLeft', 'ChevronRight', 'ChevronUp', 'Clock', 'Cloud',
+  'Code', 'Coffee', 'Copy', 'Database', 'Download', 'Edit', 'Edit2', 'Edit3', 'Eye',
+  'EyeOff', 'File', 'FileLock', 'FileLock2', 'FileText', 'Filter', 'Flag', 'Folder',
+  'FolderOpen', 'Globe', 'GraduationCap', 'Grid', 'Hash', 'Heart', 'Home', 'Image',
+  'Info', 'Key', 'Layers', 'Layout', 'LifeBuoy', 'Link', 'List', 'Lock', 'Login',
+  'LogOut', 'Mail', 'Map', 'Menu', 'MessageCircle', 'Monitor', 'Moon', 'MoreHorizontal',
+  'MoreVertical', 'Network', 'Package', 'PenTool', 'Phone', 'Play', 'Plus', 'Power',
+  'Printer', 'Profile', 'Recycle', 'RefreshCw', 'Repeat', 'Save', 'Search', 'Send',
+  'Server', 'Settings', 'Share', 'Shield', 'ShieldCheck', 'ShoppingCart', 'Sidebar',
+  'Slack', 'Smartphone', 'Square', 'Star', 'Sun', 'Tag', 'Terminal', 'ThumbsDown',
+  'ThumbsUp', 'Tool', 'Trash', 'Trash2', 'TrendingDown', 'TrendingUp', 'Type', 'Upload',
+  'User', 'Users', 'Video', 'Volume', 'Volume2', 'Wifi', 'Wrench', 'X', 'XCircle',
+  'Zap', 'Airplay', 'AlignCenter', 'AlignJustify', 'AlignLeft', 'AlignRight',
+  'Anchor', 'Aperture', 'Archive', 'ArrowDownCircle', 'ArrowLeftCircle', 'ArrowRightCircle',
+  'ArrowUpCircle', 'AtSign', 'Battery', 'BatteryCharging', 'Bell', 'BellOff',
+  'Bluetooth', 'Bold', 'BorderBottom', 'BorderLeft', 'BorderRight', 'BorderTop',
+  'Box', 'Briefcase', 'Cast', 'Chatbubble', 'Checkmark',
+  'ChevronsDown', 'ChevronsLeft', 'ChevronsRight', 'ChevronsUp', 'Clipboard', 'Close',
+  'ColorFilter', 'Compass', 'Connection', 'Contacts', 'Contrast', 'Crop',
+  'Cursor', 'Desktop', 'Disc', 'Document', 'DollarSign', 'Droplet',
+  'ExternalLink', 'FastForward', 'Feather', 'Flipchart', 'Frown',
+  'Gamepad', 'Gift', 'Guitar', 'Headphones',
+  'HelpCircle', 'Hexagon', 'Inbox', 'Infinity', 'Italic',
+  'Journal', 'Keyboard', 'Loader', 'LogIn', 'Maximize', 'Mic',
+  'Minimize', 'Minus', 'Mouse', 'Move', 'Music', 'Navigation', 'Octagon', 'Paperclip',
+  'Pause', 'Percent', 'PhoneCall', 'PieChart', 'Pin', 'Power',
+  'Radio', 'Rewind', 'Scissors',
+  'ShieldOff', 'Shirt', 'ShoppingBag', 'Shrink', 'Signal',
+  'SkipBack', 'SkipForward', 'Slash', 'Sliders',
+  'Smile', 'Speaker', 'SquareSplitHorizontal', 'SquareSplitVertical',
+  'StopCircle', 'Sunrise', 'Sunset', 'Table', 'Tablet',
+  'Target', 'Thermometer',
+  'ToggleLeft', 'ToggleRight', 'Tree', 'Triangle',
+  'Trophy', 'Truck', 'Tv', 'Twitch', 'Twitter', 'Umbrella', 'Underline',
+  'Undo', 'Unlink', 'Unlock', 'UserMinus', 'UserPlus',
+  'Utensils', 'Voicemail', 'Watch', 'Wind',
+  'Youtube', 'ZoomIn', 'ZoomOut',
+  'Assessment', 'Design', 'Implementation', 'Maintenance', 'Security', 'Training',
+  'Audit', 'Support', 'Asset', 'Disposal', 'Awareness', 'Event',
+]);
+
+function isSafeLucideIcon(value) {
+  if (!value || typeof value !== 'string') return false;
+  return LUCIDE_ICONS.has(value);
+}
+
 function isSafeEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -114,6 +166,15 @@ function validateString(value, path, errors) {
 
   if (IMAGE_KEYS.test(path) && value && !isSafeImagePath(value)) {
     addError(errors, path, 'Image path must be a safe image URL or internal image path.');
+  }
+
+  // Icon field: Accept either Lucide icon name OR image path
+  if (ICON_KEYS.test(path) && value) {
+    const isLucide = isSafeLucideIcon(value);
+    const isImage = isSafeImagePath(value);
+    if (!isLucide && !isImage) {
+      addError(errors, path, 'Icon must be a valid Lucide icon name (e.g., "Network", "Activity") or an image path (e.g., "/uploads/icon.png").');
+    }
   }
 
   if (SLUG_KEYS.test(path) && value && !isSafeSlug(value)) {

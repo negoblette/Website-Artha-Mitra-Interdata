@@ -99,8 +99,8 @@ export async function createAdminSession(ip, userAgent) {
 }
 
 /**
- * Verify admin session from Redis
- * @param {string} sessionId - Session ID from cookie
+ * Verify admin session from Redis (with JWT fallback)
+ * @param {string} sessionId - Session ID or JWT token from cookie
  * @returns {Promise<Object|null>} Session data or null if invalid
  */
 export async function verifyAdminSessionToken(sessionId) {
@@ -108,27 +108,51 @@ export async function verifyAdminSessionToken(sessionId) {
     return null;
   }
 
-  // Check if session is revoked
-  if (await isSessionRevoked(sessionId)) {
-    return null;
-  }
-
-  // Get session from Redis
+  // First, try to get session from Redis
   const session = await getSession(sessionId);
 
-  if (!session) {
-    return null;
+  // If session found in Redis, verify it
+  if (session) {
+    // Check if session is revoked
+    if (await isSessionRevoked(sessionId)) {
+      return null;
+    }
+
+    // Verify session structure
+    if (
+      session.userId !== 'admin' ||
+      session.role !== 'admin'
+    ) {
+      return null;
+    }
+
+    return session;
   }
 
-  // Verify session structure
+  // If session not in Redis, try to verify as JWT (fallback for when Redis is not available)
+  const payload = decodeSessionToken(sessionId);
+
   if (
-    session.userId !== 'admin' ||
-    session.role !== 'admin'
+    payload &&
+    payload.type === 'admin_session' &&
+    payload.role === 'admin' &&
+    payload.exp > Math.floor(Date.now() / 1000)
   ) {
-    return null;
+    // Check if JWT is revoked (if Redis is available)
+    if (payload.jti && await isSessionRevoked(payload.jti)) {
+      return null;
+    }
+
+    // Return session-like object for backward compatibility
+    return {
+      userId: payload.userId || 'admin',
+      role: payload.role,
+      createdAt: payload.iat * 1000,
+      isJWT: true, // Flag to indicate this is a JWT fallback
+    };
   }
 
-  return session;
+  return null;
 }
 
 /**

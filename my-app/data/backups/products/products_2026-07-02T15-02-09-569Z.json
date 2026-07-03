@@ -221,6 +221,14 @@
           "slug": "application-security"
         }
       ]
+    },
+    {
+      "name": "tes",
+      "slug": "tes",
+      "logo": "/uploads/da22ffa7-790b-44b8-9abb-43b0b7309076.png",
+      "website": "https://www.tes.com/",
+      "description": "tes",
+      "solutions": []
     }
   ],
   "carousel": {

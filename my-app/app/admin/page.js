@@ -35,6 +35,7 @@ const READ_ONLY_MAP = {
 const UPLOAD_MAX_BYTES = 10 * 1024 * 1024;
 const IMAGE_MIME_TYPES = ['image/png', 'image/jpeg'];
 const IMAGE_KEY_REGEX = /(image|logo|background|thumbnail|photo|icon|banner|cover)$/i;
+const ICON_KEY_REGEX = /^(icon)$/i;
 
 // ─── Field type detection ────────────────────────────────────────────────────
 
@@ -45,6 +46,7 @@ const EMAIL_KEY_REGEX = /^(email|mail)$/i;
 const CATEGORY_KEY_REGEX = /^(category|type|status|platform)$/i;
 
 function detectFieldType(key = '', value = '', path = '') {
+  if (ICON_KEY_REGEX.test(key)) return 'icon';
   if (IMAGE_KEY_REGEX.test(key)) return 'image';
   if (path && /(^|\.)images?\b/i.test(path)) return 'image';
   if (path && /(^|\.)logos?\b/i.test(path)) return 'image';
@@ -63,6 +65,99 @@ function detectFieldType(key = '', value = '', path = '') {
 
   return 'text';
 }
+
+const LUCIDE_ICON_OPTIONS = [
+  {name: 'Activity', label: 'Activity'},
+    {name: 'AlertCircle', label: 'Alert Circle'},
+    {name: 'ArrowDown', label: 'Arrow Down'},
+    {name: 'AlertTriangle', label: 'Alert Triangle'},
+    {name: 'ArrowLeft', label: 'Arrow Left'},
+    {name: 'ArrowRight', label: 'Arrow Right'},
+    {name: 'ArrowUp', label: 'Arrow Up'},
+    {name: 'Award', label: 'Award'},
+    {name: 'BarChart', label: 'Bar Chart'},
+    {name: 'BarChart3', label: 'Bar Chart 3'},
+    {name: 'Book', label: 'Book'},
+    {name: 'BookOpen', label: 'Book Open'},
+    {name: 'Calendar', label: 'Calendar'},
+    {name: 'Camera', label: 'Camera'},
+    {name: 'Check', label: 'Check'},
+    {name: 'CheckCircle', label: 'Check Circle'},
+    {name: 'ChevronDown', label: 'Chevron Down'},
+    {name: 'Cloud', label: 'Cloud'},
+    {name: 'Code', label: 'Code'},
+    {name: 'Database', label: 'Database'},
+    {name: 'Download', label: 'Download'},
+    {name: 'Edit', label: 'Edit'},
+    {name: 'Edit3', label: 'Edit 3'},
+    {name: 'Eye', label: 'Eye'},
+    { name: 'Eye', label: 'Eye' },
+    { name: 'File', label: 'File' },
+    { name: 'FileLock', label: 'File Lock' },
+    { name: 'FileLock2', label: 'File Lock 2' },
+    { name: 'Filter', label: 'Filter' },
+    { name: 'Folder', label: 'Folder' },
+    { name: 'Globe', label: 'Globe' },
+    { name: 'GraduationCap', label: 'Graduation Cap' },
+    { name: 'Grid', label: 'Grid' },
+    { name: 'Heart', label: 'Heart' },
+    { name: 'Home', label: 'Home' },
+    { name: 'Image', label: 'Image' },
+    { name: 'Info', label: 'Info' },
+    { name: 'Key', label: 'Key' },
+    { name: 'Layers', label: 'Layers' },
+    { name: 'Layout', label: 'Layout' },
+    { name: 'LifeBuoy', label: 'Life Buoy' },
+    { name: 'Link', label: 'Link' },
+    { name: 'List', label: 'List' },
+    { name: 'Lock', label: 'Lock' },
+    { name: 'LogOut', label: 'Log Out' },
+    { name: 'Mail', label: 'Mail' },
+    { name: 'Map', label: 'Map' },
+    { name: 'Menu', label: 'Menu' },
+    { name: 'Monitor', label: 'Monitor' },
+    { name: 'Moon', label: 'Moon' },
+    { name: 'MoreHorizontal', label: 'More Horizontal' },
+    { name: 'MoreVertical', label: 'More Vertical' },
+    { name: 'Network', label: 'Network' },
+    { name: 'Package', label: 'Package' },
+    { name: 'PenTool', label: 'Pen Tool' },
+    { name: 'Phone', label: 'Phone' },
+    { name: 'Play', label: 'Play' },
+    { name: 'Plus', label: 'Plus' },
+    { name: 'Power', label: 'Power' },
+    { name: 'Printer', label: 'Printer' },
+    { name: 'Recycle', label: 'Recycle' },
+    { name: 'RefreshCw', label: 'Refresh CW' },
+    { name: 'Save', label: 'Save' },
+    { name: 'Search', label: 'Search' },
+    { name: 'Send', label: 'Send' },
+    { name: 'Server', label: 'Server' },
+    { name: 'Settings', label: 'Settings' },
+    { name: 'Share', label: 'Share' },
+    { name: 'Shield', label: 'Shield' },
+    { name: 'ShieldCheck', label: 'Shield Check' },
+    { name: 'ShoppingCart', label: 'Shopping Cart' },
+    { name: 'Smartphone', label: 'Smartphone' },
+    { name: 'Star', label: 'Star' },
+    { name: 'Sun', label: 'Sun' },
+    { name: 'Tag', label: 'Tag' },
+    { name: 'Terminal', label: 'Terminal' },
+    { name: 'ThumbsUp', label: 'Thumbs Up' },
+    { name: 'Tool', label: 'Tool' },
+    { name: 'Trash', label: 'Trash' },
+    { name: 'Trash2', label: 'Trash 2' },
+    { name: 'TrendingUp', label: 'Trending Up' },
+    { name: 'Upload', label: 'Upload' },
+    { name: 'User', label: 'User' },
+    { name: 'Users', label: 'Users' },
+    { name: 'Video', label: 'Video' },
+    { name: 'Wifi', label: 'Wifi' },
+    { name: 'Wrench', label: 'Wrench' },
+    { name: 'X', label: 'X' },
+    { name: 'XCircle', label: 'X Circle' },
+    { name: 'Zap', label: 'Zap' },
+];
 
 // ─── Diff computation ────────────────────────────────────────────────────────
 
@@ -343,6 +438,148 @@ function DiffPreviewModal({ diff, onConfirm, onCancel, saving }) {
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function ErrorModal({ error, onClose }) {
+  return (
+    <AnimatePresence>
+      {error && (
+        <motion.div
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          <motion.div
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg z-10 flex flex-col max-h-[80vh]"
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+          >
+            {/* Header */}
+            <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-200 flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                <AlertTriangle size={16} className="text-red-600" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900 text-sm">{error.title || 'Error'}</h3>
+                <p className="text-gray-500 text-xs">{error.message}</p>
+              </div>
+              <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600 transition-colors">
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Error details */}
+            {error.details && error.details.length > 0 && (
+              <div className="overflow-y-auto flex-1 px-6 py-4">
+                <p className="text-sm font-medium text-gray-700 mb-3">Validation Errors:</p>
+                <div className="space-y-2">
+                  {error.details.map((detail, i) => (
+                    <div key={i} className="rounded-lg border border-red-200 bg-red-50 px-4 py-3">
+                      <p className="text-xs font-mono text-red-800 font-semibold">{detail.path}</p>
+                      <p className="text-sm text-red-600 mt-1">{detail.message}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Footer */}
+            <div className="flex gap-2 px-6 py-4 border-t border-gray-200 flex-shrink-0">
+              <button
+                onClick={onClose}
+                className="flex-1 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function IconPicker({value, onChange, label}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredIcons = LUCIDE_ICON_OPTIONS.filter(icon =>
+    icon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    icon.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const selectedIcon = LUCIDE_ICON_OPTIONS.find(i => i.name === value);
+
+  return (
+    <div className="relative">
+      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+
+      {/* display selected icon */}
+      <div
+        className="flex items-center gap-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition-colors"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {selectedIcon ? (
+          <>
+            <span className="text-lg">{selectedIcon.name}</span>
+            <span className="text-sm text-gray-600">{selectedIcon.label}</span>
+          </>
+        ) : (
+          <span className="text-sm text-gray-400">Select icon...</span>
+        )}
+      </div>
+
+      {/* Dropdown */}
+      {isOpen && (
+        <div className="absolute z-50 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+          {/* search Input */}
+          <div className="sticky top-0 bg-white p-2 border-b border-gray-200">
+            <input
+              type="text"
+              placeholder="Search Icons..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              autoFocus
+            />
+          </div>
+
+          {/* icon grid */}
+          <div className="p-2 grid grid-cols-4 gap-2">
+            {filteredIcons.map(icon => (
+              <div
+                key={icon.name}
+                className={`flex flex-col items-center p-2 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors ${
+                  value === icon.name ? 'bg-blue-100 border-2 border-blue-500' : ''
+                }`}
+                onClick={() => {
+                  onChange(icon.name);
+                  setIsOpen(false);
+                  setSearchTerm('');
+                }}
+              >
+                  <span className="text-xl mb-1">{icon.name}</span>
+                  <span className="text-xs text-gray-600 text-center">{icon.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {filteredIcons.length === 0 && (
+            <div className="p-4 text-center text-sm text-gray-500">
+              No icons found
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -706,6 +943,9 @@ export default function AdminPage() {
   // Delete confirmation modal state
   const [deleteConfirm, setDeleteConfirm] = useState(null); // null | { path, index, label }
 
+  // Error modal state
+  const [errorModal, setErrorModal] = useState(null); // null | { title, message, details: [] }
+
   useEffect(() => {
     async function checkSession() {
       const res = await fetch('/api/auth/me');
@@ -747,6 +987,18 @@ export default function AdminPage() {
       setOriginalData(JSON.parse(JSON.stringify(data)));
       setSaved(true);
       setTimeout(() => setSaved(false), 2500);
+    } else {
+      // Handle error response
+      const errorData = await res.json().catch(() => ({ error: 'Unknown error occurred' }));
+      const errorMessage = errorData.error || 'Failed to save content';
+      const errorDetails = errorData.details || [];
+
+      // Show error in modal
+      setErrorModal({
+        title: 'Save Failed',
+        message: errorMessage,
+        details: errorDetails,
+      });
     }
     setSaving(false);
     setDiffModal(null);
@@ -1036,6 +1288,12 @@ export default function AdminPage() {
         onConfirm={confirmRemoveArrayItem}
         onCancel={() => setDeleteConfirm(null)}
       />
+
+      {/* Error Modal */}
+      <ErrorModal
+        error={errorModal}
+        onClose={() => setErrorModal(null)}
+      />
     </div>
   );
 }
@@ -1320,6 +1578,14 @@ function JsonEditor({
           onChange={(val) => onChange(path, val)}
           allData={allData}
           readOnly={readOnly}
+        />
+      );
+    } else if (fieldType === 'icon') {
+      inputElement = (
+        <IconPicker
+          value={data}
+          onChange={(val) => onChange(path, val)}
+          label={fieldKey || 'Icon'}
         />
       );
     } else {

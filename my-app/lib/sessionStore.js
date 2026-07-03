@@ -7,24 +7,43 @@ const SESSION_MAX_AGE = 3600; // 1 jam dalam detik
 
 let redisClient;
 let redisConnectPromise;
+let redisAvailable = null; // null = unknown, true/false = checked
 
 async function getRedisClient() {
+  // If we already checked and Redis is not available, return null
+  if (redisAvailable === false) {
+    return null;
+  }
+
   if (redisClient?.isReady) {
     return redisClient;
   }
 
   if (!redisConnectPromise) {
-    redisClient = createClient({ url: REDIS_URL });
+    try {
+      redisClient = createClient({ url: REDIS_URL });
 
-    redisClient.on('error', (error) => {
-      console.error('[Session Store] Redis client error:', error);
-    });
+      redisClient.on('error', (error) => {
+        console.error('[Session Store] Redis client error:', error.message);
+        redisAvailable = false;
+      });
 
-    redisConnectPromise = redisClient.connect().then(() => redisClient).catch((error) => {
-      redisConnectPromise = null;
-      redisClient = undefined;
-      throw error;
-    });
+      redisConnectPromise = redisClient.connect().then(() => {
+        redisAvailable = true;
+        console.log('[Session Store] Redis connected successfully');
+        return redisClient;
+      }).catch((error) => {
+        console.warn('[Session Store] Redis not available, falling back to JWT:', error.message);
+        redisConnectPromise = null;
+        redisClient = undefined;
+        redisAvailable = false;
+        return null;
+      });
+    } catch (error) {
+      console.warn('[Session Store] Redis initialization failed:', error.message);
+      redisAvailable = false;
+      return null;
+    }
   }
   return redisConnectPromise;
 }
@@ -39,6 +58,14 @@ export async function createSession(sessionData) {
 
   try {
     const client = await getRedisClient();
+
+    // If Redis is not available, return session ID anyway
+    // (will be handled by fallback in adminAuth)
+    if (!client) {
+      console.warn('[Session Store] Redis not available, session not persisted');
+      return sessionId;
+    }
+
     const session = {
       ...sessionData,
       createdAt: Date.now(),
@@ -54,7 +81,7 @@ export async function createSession(sessionData) {
     return sessionId;
   } catch (error) {
     console.error('[Session Store] Failed to create session:', error);
-    throw error;
+    return sessionId; // Return ID anyway, fallback will handle it
   }
 }
 
@@ -68,6 +95,12 @@ export async function getSession(sessionId) {
 
   try {
     const client = await getRedisClient();
+
+    // If Redis is not available, return null (will trigger JWT fallback)
+    if (!client) {
+      return null;
+    }
+
     const data = await client.get(`${SESSION_PREFIX}${sessionId}`);
 
     if (!data) {
@@ -99,6 +132,11 @@ export async function deleteSession(sessionId) {
 
   try {
     const client = await getRedisClient();
+
+    if (!client) {
+      return; // Can't delete if Redis not available
+    }
+
     await client.del(`${SESSION_PREFIX}${sessionId}`);
     console.log(`[Session Store] Deleted session: ${sessionId}`);
   } catch (error) {
@@ -115,6 +153,11 @@ export async function revokeSession(sessionId) {
 
   try {
     const client = await getRedisClient();
+
+    if (!client) {
+      return; // Can't revoke if Redis not available
+    }
+
     await client.set(
       `${SESSION_PREFIX}revoked:${sessionId}`,
       '1',
@@ -136,6 +179,11 @@ export async function isSessionRevoked(sessionId) {
 
   try {
     const client = await getRedisClient();
+
+    if (!client) {
+      return false; // Can't check if Redis not available
+    }
+
     const result = await client.get(`${SESSION_PREFIX}revoked:${sessionId}`);
     return result === '1';
   } catch (error) {
@@ -150,6 +198,11 @@ export async function isSessionRevoked(sessionId) {
 export async function cleanupExpiredSessions() {
   try {
     const client = await getRedisClient();
+
+    if (!client) {
+      return; // Can't cleanup if Redis not available
+    }
+
     const keys = await client.keys(`${SESSION_PREFIX}*`);
 
     let cleaned = 0;

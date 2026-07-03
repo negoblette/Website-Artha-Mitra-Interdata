@@ -283,15 +283,6 @@
           "website": "https://www.crowdstrike.com/en-us/"
         }
       ]
-    },
-    {
-      "slug": "tes",
-      "name": "tes",
-      "icon": "Award",
-      "shortDescription": "masuk akal aja",
-      "fullDescription": "yg penring masuk",
-      "features": [],
-      "brands": []
     }
   ],
   "services": [
@@ -334,6 +325,11 @@
       "name": "Awareness Event",
       "icon": "Users",
       "description": "Awareness sessions and event support designed to strengthen security culture, user readiness, and stakeholder engagement."
+    },
+    {
+      "name": "8h88h",
+      "icon": "/uploads/85f10239-8972-49a5-b36d-cd988e2b53dc.png",
+      "description": "ihhvh"
     }
   ],
   "whyChoose": {

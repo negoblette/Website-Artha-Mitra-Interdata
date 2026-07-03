@@ -94,7 +94,7 @@ export async function POST(request) {
     }, { status: 415 });
   }
 
-  const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+  const uploadsDir = path.join(process.cwd(), 'data', 'uploads');
   await fs.mkdir(uploadsDir, { recursive: true });
 
   const ext = extensionForType(file.type);
