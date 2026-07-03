@@ -261,6 +261,33 @@ function collectCategories(obj, acc = new Set()) {
   return acc;
 }
 
+/** Collect all unique brand objects from data (keyed by name) */
+function collectAllBrands(obj) {
+  const brandsMap = new Map();
+  function walk(node) {
+    if (!node || typeof node !== 'object') return;
+    if (Array.isArray(node)) {
+      node.forEach(walk);
+      return;
+    }
+    for (const [key, val] of Object.entries(node)) {
+      if (key === 'brands' && Array.isArray(val)) {
+        val.forEach((brand) => {
+          if (brand && typeof brand === 'object' && brand.name) {
+            if (!brandsMap.has(brand.name)) {
+              brandsMap.set(brand.name, { ...brand });
+            }
+          }
+        });
+      } else if (typeof val === 'object') {
+        walk(val);
+      }
+    }
+  }
+  walk(obj);
+  return [...brandsMap.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
 function formatTimestamp(iso) {
   if (!iso) return '';
   try {
@@ -1070,6 +1097,23 @@ export default function AdminPage() {
     });
   }
 
+  function addBrandItem(path, brand) {
+    setData((prev) => {
+      const copy = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let obj = copy;
+      for (const k of keys) {
+        obj = isNaN(k) ? obj[k] : obj[parseInt(k)];
+      }
+      if (!Array.isArray(obj)) return copy;
+      // Prevent duplicate brands
+      const alreadyExists = obj.some((b) => b && b.name === brand.name);
+      if (alreadyExists) return copy;
+      obj.push(JSON.parse(JSON.stringify(brand)));
+      return copy;
+    });
+  }
+
   function requestRemoveArrayItem(path, index, label) {
     setDeleteConfirm({ path, index, label });
   }
@@ -1258,6 +1302,7 @@ export default function AdminPage() {
                 onDuplicateItem={duplicateArrayItem}
                 onMoveItem={moveArrayItem}
                 onUpload={handleUpload}
+                onAddBrand={addBrandItem}
                 readOnlyPaths={READ_ONLY_MAP[activePage]}
                 allData={data}
               />
@@ -1396,6 +1441,69 @@ function CategoryCombobox({ value, onChange, allData, readOnly }) {
   );
 }
 
+// ─── BrandPicker (inline list to select existing brand) ──────────────────────
+
+function BrandPicker({ allBrands, currentBrands, onSelect }) {
+  const [open, setOpen] = useState(false);
+
+  // Filter out brands already in the current array
+  const currentNames = new Set((currentBrands || []).map((b) => b?.name).filter(Boolean));
+  const available = allBrands.filter((b) => !currentNames.has(b.name));
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
+      >
+        <Plus size={14} />
+        Add Item
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-2 border border-gray-200 rounded-xl bg-gray-50 overflow-hidden">
+              <div className="max-h-64 overflow-y-auto divide-y divide-gray-100">
+                {available.map((brand) => (
+                  <button
+                    key={brand.name}
+                    type="button"
+                    onClick={() => {
+                      onSelect(brand);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-blue-50 transition-colors group bg-white"
+                  >
+                    {brand.logo && (
+                      <div className="w-9 h-9 rounded-lg border border-gray-200 bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+                        <img src={brand.logo} alt={brand.name} className="w-7 h-7 object-contain" />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-700 group-hover:text-blue-700 truncate">{brand.name}</p>
+                    </div>
+                    <Plus size={14} className="text-gray-300 group-hover:text-blue-500 flex-shrink-0" />
+                  </button>
+                ))}
+                {available.length === 0 && (
+                  <div className="px-4 py-3 text-sm text-gray-400 text-center bg-white">Semua brand sudah ditambahkan</div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 // ─── JsonEditor ───────────────────────────────────────────────────────────────
 
 function JsonEditor({
@@ -1407,6 +1515,7 @@ function JsonEditor({
   onDuplicateItem,
   onMoveItem,
   onUpload,
+  onAddBrand,
   readOnlyPaths = [],
   fieldKey,
   depth = 0,
@@ -1710,6 +1819,7 @@ function JsonEditor({
                   onDuplicateItem={onDuplicateItem}
                   onMoveItem={onMoveItem}
                   onUpload={onUpload}
+                  onAddBrand={onAddBrand}
                   readOnlyPaths={readOnlyPaths}
                   depth={depth + 1}
                   allData={allData}
@@ -1718,15 +1828,32 @@ function JsonEditor({
             </div>
           );
         })}
-        {!readOnly && !isSingleItemArrayPath(path) && (
-          <button
-            onClick={() => onAddItem(path)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
-          >
-            <Plus size={14} />
-            Add Item
-          </button>
-        )}
+        {!readOnly && !isSingleItemArrayPath(path) && (() => {
+          const isBrandsArray = /\.brands$|^brands$/.test(path);
+          const allBrands = isBrandsArray ? collectAllBrands(allData) : [];
+
+          // For brands arrays: use BrandPicker dropdown instead of plain Add Item
+          if (isBrandsArray && allBrands.length > 0 && onAddBrand) {
+            return (
+              <BrandPicker
+                allBrands={allBrands}
+                currentBrands={data}
+                onSelect={(brand) => onAddBrand(path, brand)}
+              />
+            );
+          }
+
+          // Default Add Item button for non-brands arrays
+          return (
+            <button
+              onClick={() => onAddItem(path)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
+            >
+              <Plus size={14} />
+              Add Item
+            </button>
+          );
+        })()}
       </div>
     );
   }
@@ -1766,6 +1893,7 @@ function JsonEditor({
                   onDuplicateItem={onDuplicateItem}
                   onMoveItem={onMoveItem}
                   onUpload={onUpload}
+                  onAddBrand={onAddBrand}
                   readOnlyPaths={readOnlyPaths}
                   fieldKey={key}
                   depth={depth + 1}
@@ -1786,6 +1914,7 @@ function JsonEditor({
                 onDuplicateItem={onDuplicateItem}
                 onMoveItem={onMoveItem}
                 onUpload={onUpload}
+                onAddBrand={onAddBrand}
                 readOnlyPaths={readOnlyPaths}
                 fieldKey={key}
                 depth={depth + 1}
