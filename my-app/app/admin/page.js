@@ -847,7 +847,7 @@ function LoginScreen({ onLogin }) {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-sm"
       >
-        <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
+        <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">``
           <div className="flex items-center justify-center mb-6">
             <div className="relative w-36 h-14">
               <Image src="/logo.png" alt="AMI" fill className="object-contain" priority />
