@@ -283,6 +283,21 @@
           "website": "https://www.crowdstrike.com/en-us/"
         }
       ]
+    },
+    {
+      "slug": "a",
+      "name": "a",
+      "icon": "AlertCircle",
+      "shortDescription": "a",
+      "fullDescription": "a",
+      "features": [],
+      "brands": [
+        {
+          "name": "Bitdefender",
+          "logo": "/images/principals/bitdefender.png",
+          "website": "https://www.bitdefender.com/en-id/"
+        }
+      ]
     }
   ],
   "services": [
