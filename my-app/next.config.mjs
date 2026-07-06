@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const isDev = process.env.NODE_ENV !== 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const publicCsp = [
   "default-src 'self'",
@@ -18,6 +19,12 @@ const publicCsp = [
 ].join('; ');
 
 const adminCsp = publicCsp.replace("frame-ancestors 'self'", "frame-ancestors 'none'");
+
+// HSTS header - only active in production (HTTPS required)
+const hstsHeader = isProduction ? [{
+  key: 'Strict-Transport-Security',
+  value: 'max-age=63072000; includeSubDomains; preload',
+}] : [];
 
 const nextConfig = {
   output: 'standalone',
@@ -87,6 +94,7 @@ async headers() {
           key: 'Referrer-Policy',
           value: 'strict-origin-when-cross-origin',
         },
+        ...hstsHeader,
       ],
     },
     {
@@ -112,6 +120,7 @@ async headers() {
           key: 'Cache-Control',                        //point no 3
           value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
         },
+        ...hstsHeader,
       ],
     },
     {
@@ -137,6 +146,7 @@ async headers() {
           key: 'Cache-Control',
           value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
         },
+        ...hstsHeader,
       ],
     },
     {

@@ -12,7 +12,7 @@ const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'act
 
 async function checkAuth(request) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
-  return await verifyAdminSessionToken(token);
+  return await verifyAdminSessionToken(token, request);
 }
 
 // Map which files affect which routes (for revalidation)

@@ -17,7 +17,7 @@ export default function VisionMission({ vision, mission }) {
             Vision & Mission
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm font-semibold leading-relaxed text-black sm:text-base text-justify">
-            The following vision and mission reflects the company's purpose and direction.
+            The following vision and mission reflects the company&apos;s purpose and direction.
           </p>
         </motion.div>
 

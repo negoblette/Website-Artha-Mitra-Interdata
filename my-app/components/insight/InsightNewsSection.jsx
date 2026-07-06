@@ -164,6 +164,7 @@ export default function InsightNewsSection({ data }) {
       }
 
       setItemsPerPage(4);
+      setCurrentPage(1);
     };
 
     updateItemsPerPage();
@@ -171,11 +172,6 @@ export default function InsightNewsSection({ data }) {
 
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
-
-  // Reset halaman news ketika jumlah item per halaman atau kategori berubah.
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [itemsPerPage, activeCategory]);
 
   return (
     <section className="relative py-24 overflow-hidden">

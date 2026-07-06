@@ -261,6 +261,7 @@ export default function ArticlesSection({ data }) {
       }
 
       setItemsPerPage(1);
+      setCurrentPage(1);
     };
 
     updateItemsPerPage();
@@ -269,14 +270,10 @@ export default function ArticlesSection({ data }) {
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
 
-  // Reset halaman artikel ketika jumlah item per halaman atau kategori berubah.
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [itemsPerPage, activeCategory]);
-
   // Ubah kategori aktif saat tombol filter diklik.
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
+    setCurrentPage(1);
   };
 
   return (

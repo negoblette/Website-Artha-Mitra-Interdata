@@ -8,6 +8,21 @@ import { checkRateLimit, clearRateLimit } from '@/lib/rateLimit';
 import { rejectInvalidAdminHost } from '@/lib/adminHost';
 import { logFailedLogin, logRateLimitHit } from '@/lib/auditLogger';
 import { readJsonWithLimit, REQUEST_LIMITS } from '@/lib/requestLimits';
+import crypto from 'crypto';
+
+
+
+function safeCompare(a,b){
+  if(!a|| !b) return false;
+  const bufA = Buffer.from(String(a), 'utf8');
+  const bufB = Buffer.from(String(b), 'utf8');
+  const maxLen = Math.max(bufA.length, bufB.length);
+  const paddedA = Buffer.alloc(maxLen, 0);
+  const paddedB = Buffer.alloc(maxLen, 0);
+  bufA.copy(paddedA);
+  bufB.copy(paddedB);
+  return crypto.timingSafeEqual(paddedA, paddedB);
+}
 
 export async function POST(request) {
   const invalidHost = rejectInvalidAdminHost(request);
@@ -43,7 +58,7 @@ export async function POST(request) {
     );
   }
 
-  if (!password || password !== process.env.ADMIN_PASSWORD) {
+  if (!password || !safeCompare(password, process.env.ADMIN_PASSWORD)) {
     //LOG : Failed Login -> poin checklist no 20
     await logFailedLogin ('Invalid password', request);
 

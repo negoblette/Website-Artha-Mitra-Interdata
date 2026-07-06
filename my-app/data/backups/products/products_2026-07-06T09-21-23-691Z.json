@@ -225,19 +225,10 @@
     {
       "name": "tes",
       "slug": "tes",
-      "logo": "/uploads/9f1b6a1c-e119-4a1a-abaf-d63814bfa0ee.png",
+      "logo": "",
       "website": "",
       "description": "",
-      "solutions": [
-        {
-          "name": "Security Management",
-          "slug": "security-management"
-        },
-        {
-          "name": "tes",
-          "slug": "res"
-        }
-      ]
+      "solutions": []
     }
   ],
   "carousel": {

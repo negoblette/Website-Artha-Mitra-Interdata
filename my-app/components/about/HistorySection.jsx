@@ -133,7 +133,7 @@ export default function HistorySection({ data }) {
             {data.title}
           </h2>
           <p className="mt-4 text-sm leading-relaxed font-semibold text-black md:text-base">
-            AMI's journey is built on long-term commitment, strong collaboration, and a focus on measurable results.
+            AMI&apos;s journey is built on long-term commitment, strong collaboration, and a focus on measurable results.
           </p>
         </div>
 

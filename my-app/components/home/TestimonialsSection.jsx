@@ -18,15 +18,6 @@ export default function TestimonialsSection({ data }) {
 
   const goNext = useCallback(() => {
     setTransitionDir("next");
-    setActiveIndex((prev) => (prev + 1) % items.length);
-  }, [items.length]);
-
-  const goPrev = useCallback(() => {
-    setTransitionDir("prev");
-    setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
-  }, [items.length]);
-
-  useEffect(() => {
     setIsTransitioning(true);
     if (transitionTimeoutRef.current) {
       clearTimeout(transitionTimeoutRef.current);
@@ -34,12 +25,28 @@ export default function TestimonialsSection({ data }) {
     transitionTimeoutRef.current = setTimeout(() => {
       setIsTransitioning(false);
     }, 360);
+    setActiveIndex((prev) => (prev + 1) % items.length);
+  }, [items.length]);
+
+  const goPrev = useCallback(() => {
+    setTransitionDir("prev");
+    setIsTransitioning(true);
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+    }
+    transitionTimeoutRef.current = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 360);
+    setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
+  }, [items.length]);
+
+  useEffect(() => {
     return () => {
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
       }
     };
-  }, [activeIndex]);
+  }, []);
 
   // Attach wheel listener with { passive: false } so preventDefault works
   useEffect(() => {

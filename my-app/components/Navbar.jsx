@@ -35,9 +35,7 @@ export default function Navbar({ data }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+  // Mobile menu auto-close when navigating (handled via onClick on nav links)
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
@@ -90,6 +88,7 @@ export default function Navbar({ data }) {
                 >
                   <Link
                     href={item.href}
+                    onClick={() => setMobileOpen(false)}
                     className={`group relative inline-flex h-10 items-center px-5 rounded-full text-[13px] font-semibold transition-colors ${
                       pathname === item.href
                         ? 'text-white'
@@ -114,6 +113,7 @@ export default function Navbar({ data }) {
             <div className="flex items-center justify-self-end gap-2">
               <MotionLink
                 href="/contact"
+                onClick={() => setMobileOpen(false)}
                 whileTap={{ boxShadow: '0 6px 14px rgba(0,0,0,0.32)'}}
                 transition={{ duration: 0.12 }}
                 className="group hidden sm:inline-flex h-12 items-center rounded-full bg-[rgb(13,27,94)] px-8 text-[13px] font-semibold text-white shadow-[0_4px_10px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#1e1f92]"

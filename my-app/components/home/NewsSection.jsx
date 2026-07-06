@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {ArrowRight, CalendarDays, Clock3} from 'lucide-react';
-
+import Image from 'next/image';
 
 // Helpers
 
@@ -115,7 +115,7 @@ export default function NewsSection({ data }) {
             {/* Image */}
             <div className="h-[22vh] sm:h-[28vh] w-full bg-[linear-gradient(135deg,#263d90_0%,#4b67c8_30%,#c12337_68%,#09134d_100%)] lg:h-[34vh]">
               {featured?.image? (
-                <img 
+                <Image 
                   src={featured.image}
                   alt={featured.title}
                   className="h-full w-full object-cover"

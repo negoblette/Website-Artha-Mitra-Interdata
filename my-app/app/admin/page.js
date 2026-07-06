@@ -288,6 +288,33 @@ function collectAllBrands(obj) {
   return [...brandsMap.values()].sort((a, b) => a.name.localeCompare(b.name));
 }
 
+
+function collectAllSolutions(obj) {
+  const solutionsMap = new Map();
+  function walk(node) {
+    if(!node || typeof node !== 'object') return;
+    if(Array.isArray(node)) {
+      node.forEach(walk);
+      return;
+    }
+    for (const [key, val] of Object.entries(node)) {
+      if (key === 'solutions' && Array.isArray(val)) {
+        val.forEach((sol) => {
+          if (sol && typeof sol === 'object' && sol.slug) {
+            if(!solutionsMap.has(sol.slug)) {
+              solutionsMap.set(sol.slug, { ...sol });
+            }
+          }
+        });
+      } else if (typeof val === 'object') {
+        walk(val);
+      }
+    }
+  }
+  walk(obj);
+  return [...solutionsMap.values()].sort((a, b) => a.name.localeCompare(b.name)); 
+}
+
 function formatTimestamp(iso) {
   if (!iso) return '';
   try {
@@ -1114,6 +1141,24 @@ export default function AdminPage() {
     });
   }
 
+
+  function addSolutionItem(path, solution) {
+    setData((prev) => {
+      const copy = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let obj = copy;
+      for(const k of keys) {
+        obj = isNaN(k) ? obj[k] : obj[parseInt(k)];
+      }
+      if(!Array.isArray(obj)) return copy;
+      //preventing duplication of solutions
+      const alreadyExists = obj.some((s) => s && s.slug === solution.slug);
+      if (alreadyExists) return copy;
+      obj.push(JSON.parse(JSON.stringify(solution)));
+      return copy;
+    })
+  }
+
   function requestRemoveArrayItem(path, index, label) {
     setDeleteConfirm({ path, index, label });
   }
@@ -1303,6 +1348,7 @@ export default function AdminPage() {
                 onMoveItem={moveArrayItem}
                 onUpload={handleUpload}
                 onAddBrand={addBrandItem}
+                onAddSolution={addSolutionItem}
                 readOnlyPaths={READ_ONLY_MAP[activePage]}
                 allData={data}
               />
@@ -1445,10 +1491,78 @@ function CategoryCombobox({ value, onChange, allData, readOnly }) {
 
 function BrandPicker({ allBrands, currentBrands, onSelect }) {
   const [open, setOpen] = useState(false);
+  const [showCustom, setShowCustom] = useState(false);
+  const [customName, setCustomName] = useState('');
+  const [customSlug, setCustomSlug] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
 
   // Filter out brands already in the current array
   const currentNames = new Set((currentBrands || []).map((b) => b?.name).filter(Boolean));
   const available = allBrands.filter((b) => !currentNames.has(b.name));
+
+  //auto generating slug
+  const autoSlug = (name) => {
+    if(!name) return '';
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  };
+
+  //handle add custom brand
+  const handleAddCustom = async () => {
+    //input validation
+    if(!customName.trim()){
+      setError('Brand name cannot be empty');
+      return;
+    }
+
+    setSaving(true);
+    setError(null);
+
+    try {
+      const newBrand = {
+        name: customName.trim(),
+        slug: customSlug.trim() || autoSlug(customName),
+        logo: '',
+        website: '',
+        description: '',
+        solutions: [],
+      };
+
+      //slug validation
+      if(!newBrand.slug) {
+        setError('Slug cannot be empty');
+        return;
+      }
+
+      //call API
+      const res = await fetch('/api/brands', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBrand), 
+      });
+
+
+      //handle response
+      if(!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to add brand');
+      }
+
+      //sukses add to current page
+      onSelect(newBrand);
+
+      //Reset form
+      setCustomName('');
+      setCustomSlug('');
+      setShowCustom(false);
+      setOpen(false);
+      setError(null);
+    } catch (err) {
+      setError(err.message || 'Failed to add brand');
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <div>
@@ -1472,6 +1586,120 @@ function BrandPicker({ allBrands, currentBrands, onSelect }) {
           >
             <div className="mt-2 border border-gray-200 rounded-xl bg-gray-50 overflow-hidden">
               <div className="max-h-64 overflow-y-auto divide-y divide-gray-100">
+                {/* error message */}
+                {error && (
+                  <div className="px-4 py-3 bg-red-50 border-b border-red-100">
+                    <p className="text-sm text-red-600">{error}</p>
+                  </div>
+                )}
+
+                {/* custom brand form */}
+                {showCustom ? (
+                <div className="p-4 bg-white space-y-3">
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 mb-1 block">
+                      Brand Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={customName}
+                      onChange={(e) => {
+                        setCustomName(e.target.value);
+                        setCustomSlug(autoSlug(e.target.value));
+                        setError(null);
+                      }}
+                      placeholder="e.g., Microsoft Azure"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !saving) {
+                          handleAddCustom();
+                        }
+                        if (e.key === 'Escape') {
+                          setShowCustom(false);
+                          setCustomName('');
+                          setCustomSlug('');
+                          setError(null);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 mb-1 block">
+                      Slug *
+                    </label>
+                    <input
+                      type="text"
+                      value={customSlug}
+                      onChange={(e) => {
+                        setCustomSlug(e.target.value);
+                        setError(null);
+                      }}
+                      placeholder="e.g., microsoft-azure"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !saving) {
+                          handleAddCustom();
+                        }
+                        if (e.key === 'Escape') {
+                          setShowCustom(false);
+                          setCustomName('');
+                          setCustomSlug('');
+                          setError(null);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowCustom(false);
+                        setCustomName('');
+                        setCustomSlug('');
+                        setError(null);
+                      }}
+                      className="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-sm font-medium transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleAddCustom}
+                      disabled={saving || !customName.trim()}
+                      className="flex-1 px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
+                    >
+                      {saving ? 'Adding...' : 'Add Brand'}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {/* Button to add custom brand - TAMBAH INI */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowCustom(true);
+                      setError(null);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-blue-50 transition-colors group bg-white border-b border-gray-100"
+                  >
+                    <div className="w-9 h-9 rounded-lg border border-dashed border-blue-300 bg-blue-50 flex items-center justify-center flex-shrink-0">
+                      <Plus size={16} className="text-blue-500" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-blue-600 group-hover:text-blue-700">
+                        Tambah Brand Baru
+                      </p>
+                      <p className="text-xs text-gray-400">
+                        Buat brand custom baru
+                      </p>
+                    </div>
+                  </button>
+
+
+
+
                 {available.map((brand) => (
                   <button
                     key={brand.name}
@@ -1483,7 +1711,7 @@ function BrandPicker({ allBrands, currentBrands, onSelect }) {
                   >
                     {brand.logo && (
                       <div className="w-9 h-9 rounded-lg border border-gray-200 bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
-                        <img src={brand.logo} alt={brand.name} className="w-7 h-7 object-contain" />
+                        <Image src={brand.logo} alt={brand.name} className="w-7 h-7 object-contain" />
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
@@ -1494,6 +1722,96 @@ function BrandPicker({ allBrands, currentBrands, onSelect }) {
                 ))}
                 {available.length === 0 && (
                   <div className="px-4 py-3 text-sm text-gray-400 text-center bg-white">Semua brand sudah ditambahkan</div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
+);
+}
+
+
+
+function SolutionPicker({ currentSolutions, onSelect}) {
+  const [open, setOpen] = useState(false);
+  const [allSolutions, setAllSolutions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+  const fetchSolutions = async () => {
+    if (allSolutions.length > 0) return; // Sudah di-fetch
+    setLoading(true);
+    try {
+      const res = await fetch('/api/solutions');
+      const data = await res.json();
+      if (data.success) {
+        setAllSolutions(data.solutions);
+      }
+    } catch (error) {
+      console.error('Failed to fetch solutions:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Filter solutions yang SUDAH ada di current brand
+  const currentSlugs = new Set(
+    (currentSolutions || []).map((s) => s?.slug).filter(Boolean)
+  );
+  const available = allSolutions.filter((s) => !currentSlugs.has(s.slug));
+
+  const handleOpen = () => {
+    setOpen(!open);
+    if (!open) {
+      fetchSolutions();
+    }
+  };
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={handleOpen}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
+      >
+        <Plus size={14} />
+        Add Item
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-2 border border-gray-200 rounded-xl bg-gray-50 overflow-hidden">
+              <div className="max-h-64 overflow-y-auto divide-y divide-gray-100">
+                {available.map((solution) => (
+                  <button
+                    key={solution.slug}
+                    type="button"
+                    onClick={() => onSelect({ name: solution.name, slug: solution.slug })}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-blue-50 transition-colors group bg-white"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-700 group-hover:text-blue-700 truncate">
+                        {solution.name}
+                      </p>
+                      <p className="text-xs text-gray-400 truncate">{solution.slug}</p>
+                    </div>
+                    <Plus size={14} className="text-gray-300 group-hover:text-blue-500 flex-shrink-0" />
+                  </button>
+                ))}
+                {available.length === 0 && (
+                  <div className="px-4 py-3 text-sm text-gray-400 text-center bg-white">
+                    Semua solution sudah ditambahkan
+                  </div>
                 )}
               </div>
             </div>
@@ -1516,6 +1834,7 @@ function JsonEditor({
   onMoveItem,
   onUpload,
   onAddBrand,
+  onAddSolution,
   readOnlyPaths = [],
   fieldKey,
   depth = 0,
@@ -1601,7 +1920,7 @@ function JsonEditor({
           {uploadError && <p className="text-xs text-red-500">{uploadError}</p>}
           {showPreview && data && (
             <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
-              <img src={data} alt="Preview" className="max-h-40 w-auto rounded" />
+              <Image src={data} alt="Preview" className="max-h-40 w-auto rounded" />
             </div>
           )}
         </div>
@@ -1820,6 +2139,7 @@ function JsonEditor({
                   onMoveItem={onMoveItem}
                   onUpload={onUpload}
                   onAddBrand={onAddBrand}
+                  onAddSolution={onAddSolution}
                   readOnlyPaths={readOnlyPaths}
                   depth={depth + 1}
                   allData={allData}
@@ -1830,7 +2150,9 @@ function JsonEditor({
         })}
         {!readOnly && !isSingleItemArrayPath(path) && (() => {
           const isBrandsArray = /\.brands$|^brands$/.test(path);
+          const isSolutionsArray = /\.solutions$|^solutions$/.test(path);
           const allBrands = isBrandsArray ? collectAllBrands(allData) : [];
+          const allSolutions = isSolutionsArray ? collectAllSolutions(allData) : [];
 
           // For brands arrays: use BrandPicker dropdown instead of plain Add Item
           if (isBrandsArray && allBrands.length > 0 && onAddBrand) {
@@ -1843,17 +2165,31 @@ function JsonEditor({
             );
           }
 
+          //For solutions array: using solution picker
+          if (isSolutionsArray && onAddSolution) {
+            return (
+              <SolutionPicker
+                currentSolutions={data}
+                onSelect={(solution) => onAddSolution(path, solution)}
+              />
+            )
+          }
+
           // Default Add Item button for non-brands arrays
-          return (
-            <button
-              onClick={() => onAddItem(path)}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
-            >
-              <Plus size={14} />
-              Add Item
-            </button>
-          );
-        })()}
+        //   return (
+        //     <button
+        //       onClick={() => onAddItem(path)}
+        //       className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
+        //     >
+        //       <Plus size={14} />
+        //       Add Item
+        //     </button>
+        //   );
+        // })()}
+            return (
+              <button onClick={() => onAddItem(path)}>Add Item</button>
+            );
+          })()}
       </div>
     );
   }
@@ -1894,6 +2230,7 @@ function JsonEditor({
                   onMoveItem={onMoveItem}
                   onUpload={onUpload}
                   onAddBrand={onAddBrand}
+                  onAddSolution={onAddSolution}
                   readOnlyPaths={readOnlyPaths}
                   fieldKey={key}
                   depth={depth + 1}
@@ -1915,6 +2252,7 @@ function JsonEditor({
                 onMoveItem={onMoveItem}
                 onUpload={onUpload}
                 onAddBrand={onAddBrand}
+                onAddSolution={onAddSolution}
                 readOnlyPaths={readOnlyPaths}
                 fieldKey={key}
                 depth={depth + 1}

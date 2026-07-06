@@ -283,23 +283,6 @@
           "website": "https://www.crowdstrike.com/en-us/"
         }
       ]
-    },
-    {
-      "slug": "res",
-      "name": "tes",
-      "icon": "AlertCircle",
-      "shortDescription": "tesss",
-      "fullDescription": "tersasa",
-      "features": [
-        "aeadasd"
-      ],
-      "brands": [
-        {
-          "name": "CrowdStrike",
-          "logo": "/images/principals/crowdstrike.png",
-          "website": "https://www.crowdstrike.com/en-us/"
-        }
-      ]
     }
   ],
   "services": [

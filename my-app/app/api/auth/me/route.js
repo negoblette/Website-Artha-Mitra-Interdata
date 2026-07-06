@@ -9,7 +9,7 @@ export async function GET(request) {
   const sessionId = request.cookies.get(SESSION_COOKIE)?.value;
 
   // Verify session from Redis
-  const session = await verifyAdminSessionToken(sessionId);
+  const session = await verifyAdminSessionToken(sessionId, request);
 
   if (!session) {
     return NextResponse.json({ authenticated: false }, { status: 401 });

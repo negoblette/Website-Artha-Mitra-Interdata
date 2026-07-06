@@ -1,10 +1,21 @@
 import { createClient } from 'redis';
 
-const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1';
+const REDIS_PORT = process.env.REDIS_PORT || '6379';
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
 const PREFIX = 'ami:session-revoked';
 
 let redisClient;
 let redisConnectPromise;
+
+function buildRedisUrl() {
+  const base = `redis://${REDIS_HOST}:${REDIS_PORT}`;
+  if (REDIS_PASSWORD) {
+    const encodedPassword = encodeURIComponent(REDIS_PASSWORD);
+    return `redis://:${encodedPassword}@${REDIS_HOST}:${REDIS_PORT}`;
+  }
+  return base;
+}
 
 async function getRedisClient() {
   if (redisClient?.isReady) {
@@ -12,6 +23,7 @@ async function getRedisClient() {
   }
 
   if (!redisConnectPromise) {
+    const REDIS_URL = buildRedisUrl();
     redisClient = createClient({ url: REDIS_URL });
 
     redisClient.on('error', (error) => {

@@ -1,9 +1,11 @@
 services:
   redis:
     image: redis:7-alpine
-    command: ["redis-server", "--appendonly", "no"]
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}", "--appendonly", "no"]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -15,7 +17,9 @@ services:
     env_file:
       - .env.local
     environment:
-      REDIS_URL: redis://redis:6379
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       ADMIN_ALLOWED_HOSTS: "localhost,127.0.0.1"
     depends_on:
       redis:

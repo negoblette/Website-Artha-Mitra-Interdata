@@ -1,13 +1,24 @@
 import { createClient } from 'redis';
 import crypto from 'crypto';
 
-const REDIS_URL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
+const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1';
+const REDIS_PORT = process.env.REDIS_PORT || '6379';
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
 const SESSION_PREFIX = 'ami:session:';
 const SESSION_MAX_AGE = 3600; // 1 jam dalam detik
 
 let redisClient;
 let redisConnectPromise;
 let redisAvailable = null; // null = unknown, true/false = checked
+
+function buildRedisUrl() {
+  const base = `redis://${REDIS_HOST}:${REDIS_PORT}`;
+  if (REDIS_PASSWORD) {
+    const encodedPassword = encodeURIComponent(REDIS_PASSWORD);
+    return `redis://:${encodedPassword}@${REDIS_HOST}:${REDIS_PORT}`;
+  }
+  return base;
+}
 
 async function getRedisClient() {
   // If we already checked and Redis is not available, return null
@@ -21,6 +32,7 @@ async function getRedisClient() {
 
   if (!redisConnectPromise) {
     try {
+      const REDIS_URL = buildRedisUrl();
       redisClient = createClient({ url: REDIS_URL });
 
       redisClient.on('error', (error) => {
@@ -62,8 +74,8 @@ export async function createSession(sessionData) {
     // If Redis is not available, return session ID anyway
     // (will be handled by fallback in adminAuth)
     if (!client) {
-      console.warn('[Session Store] Redis not available, session not persisted');
-      return sessionId;
+      console.error('[Session Store] Redis unavailable - blocking session creation');
+      throw new Error('Authentication system temporarily unavailable');
     }
 
     const session = {

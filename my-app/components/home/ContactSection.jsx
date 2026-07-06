@@ -15,7 +15,7 @@ export default function ContactSection({ data, contact, socials, whatsapp }) {
 
         {/* Headline */}
         <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1] sm:leading-[0.95] text-[rgb(13,27,94)]">
-          Let's start to
+          Let&apos;s start to
           <br />
           <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #0a0b85 0%, #2f54eb 100%)' }}>
             optimize IT 
@@ -25,7 +25,7 @@ export default function ContactSection({ data, contact, socials, whatsapp }) {
 
         {/* Subtitle */}
         <p className="mt-3 sm:mt-5 mx-auto max-w-xl text-xs sm:text-base leading-relaxed font-medium text-black/65 px-2 sm:px-0">
-          Have a project in mind or need IT consultation? We at Artha Mitra Interdata would love to listen to you. Reach out and let's start the great conversation.
+          Have a project in mind or need IT consultation? We at Artha Mitra Interdata would love to listen to you. Reach out and let&apos;s start the great conversation.
         </p>
 
         {/* CTA Buttons */}

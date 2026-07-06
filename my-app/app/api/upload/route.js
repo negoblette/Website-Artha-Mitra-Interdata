@@ -30,7 +30,7 @@ function validateMagicBytes(buffer, expectedType) {
 
 async function checkAuth(request) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
-  return await verifyAdminSessionToken(token);
+  return await verifyAdminSessionToken(token, request);
 }
 
 function extensionForType(mime) {

@@ -107,7 +107,7 @@ export async function logBackupListAccess(file, request = null) {
     await logActivity('backup', 'BACKUP_LIST_ACCESS', { file }, request);
 }
 
-export default {
+const auditLogger = {
     logActivity,
     logAuth,
     logFailedLogin,
@@ -120,3 +120,6 @@ export default {
     logBackupRestore,
     logBackupListAccess,
 };
+
+
+export default auditLogger;

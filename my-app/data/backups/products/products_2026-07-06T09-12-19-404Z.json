@@ -225,18 +225,11 @@
     {
       "name": "tes",
       "slug": "tes",
-      "logo": "/uploads/9f1b6a1c-e119-4a1a-abaf-d63814bfa0ee.png",
-      "website": "",
-      "description": "",
+      "logo": "/uploads/a72f30d4-2f17-49d4-a6bc-74fbbcde8f7a.png",
+      "website": "https://youtube.com",
+      "description": "tes aja",
       "solutions": [
-        {
-          "name": "Security Management",
-          "slug": "security-management"
-        },
-        {
-          "name": "tes",
-          "slug": "res"
-        }
+        "Application Security"
       ]
     }
   ],

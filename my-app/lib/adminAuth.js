@@ -101,9 +101,10 @@ export async function createAdminSession(ip, userAgent) {
 /**
  * Verify admin session from Redis (with JWT fallback)
  * @param {string} sessionId - Session ID or JWT token from cookie
+ * @param {Request} [request] - Optional request object for fingerprint verification
  * @returns {Promise<Object|null>} Session data or null if invalid
  */
-export async function verifyAdminSessionToken(sessionId) {
+export async function verifyAdminSessionToken(sessionId, request) {
   if (!sessionId) {
     return null;
   }
@@ -141,6 +142,23 @@ export async function verifyAdminSessionToken(sessionId) {
     // Check if JWT is revoked (if Redis is available)
     if (payload.jti && await isSessionRevoked(payload.jti)) {
       return null;
+    }
+
+    // Verify IP/UserAgent hasn't changed drastically (fingerprint check)
+    if (request) {
+      const currentIp = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
+      const currentUserAgent = request.headers.get('user-agent') || 'unknown';
+      const currentFingerprint = `${currentIp}-${currentUserAgent}`;
+
+      const storedIp = payload.ip || 'unknown';
+      const storedUserAgent = payload.userAgent || 'unknown';
+      const storedFingerprint = `${storedIp}-${storedUserAgent}`;
+
+      // Only check fingerprint if it was stored in the token
+      if (payload.fingerprint && currentFingerprint !== storedFingerprint) {
+        console.warn('[Auth] Session fingerprint mismatch - possible hijacking');
+        return null;
+      }
     }
 
     // Return session-like object for backward compatibility

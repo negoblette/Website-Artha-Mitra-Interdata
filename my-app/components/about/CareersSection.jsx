@@ -19,7 +19,8 @@ export default function CareersSection({ data }) {
         `I would like to apply for the ${positionTitle} position. Please find my details below.%0D%0A%0D%0A` +
         `Name:%0D%0APhone:%0D%0ALinkedIn/Portfolio:%0D%0A%0D%0AThank you.`
     );
-    window.location.href = `mailto:${careerEmail}?subject=${subject}&body=${body}`;
+    const mailtoUrl = `mailto:${careerEmail}?subject=${subject}&body=${body}`;
+    window.location.assign(mailtoUrl);
   };
 
   const handleSelectableLinkClick = (event) => {
