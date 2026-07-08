@@ -1,16 +1,11 @@
 import Link from 'next/link';
-import {ArrowRight, CalendarDays, Clock3} from 'lucide-react';
+import { ArrowRight, CalendarDays } from 'lucide-react';
 import Image from 'next/image';
 
 // Helpers
 
-function formatDate(value){
-  if(!value) return 'May 15, 2024';
-  return value;
-}
-
-function formatReadTime(value){
-  if(!value) return '5 min read';
+function formatDate(value) {
+  if (!value) return 'May 15, 2024';
   return value;
 }
 
@@ -69,7 +64,7 @@ function NewsTimelineItems({ item, index, isActive}) {
 // MAIN SECTION
 
 export default function NewsSection({ data }) {
-  const items = data?.items?.slice(0, 2 ) ?? [];
+  const items = data?.items?.slice(0, 3) ?? [];
   const featured = items[0];
 
     return (

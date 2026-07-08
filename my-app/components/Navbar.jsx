@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 export default function Navbar({ data }) {
   const [scrolled, setScrolled] = useState(false);

@@ -15,11 +15,7 @@
       "author": "AMI Editorial Team",
       "date": "2026-03-01",
       "image": "/images/brow.jpg",
-      "tags": [
-        "Zero Trust",
-        "Security",
-        "Access Control"
-      ]
+      "tags": ["Zero Trust", "Security", "Access Control"]
     },
     "items": [
       {
@@ -30,11 +26,7 @@
         "content": "Modern network security starts with clear segmentation, strong access controls, and continuous monitoring. Teams should align firewall policies, identity checks, and endpoint protection so threats are contained before they spread. This dummy article is meant to test article filtering and card layout in the insight section.",
         "author": "AMI Security Team",
         "date": "2026-02-15",
-        "tags": [
-          "Network Security",
-          "Access Control",
-          "Monitoring"
-        ]
+        "tags": ["Network Security", "Access Control", "Monitoring"]
       },
       {
         "slug": "zero-trust-explained",
@@ -45,11 +37,7 @@
         "content": "Zero Trust is based on the principle of verifying every request instead of assuming trust inside the network. In practice, this means stronger identity checks, limited access, and continuous validation of devices and users. The content here is intentionally generic so it can serve as safe placeholder data in the insight page.",
         "author": "AMI Security Team",
         "date": "2025-12-10",
-        "tags": [
-          "Zero Trust",
-          "Identity",
-          "Access Control"
-        ]
+        "tags": ["Zero Trust", "Identity", "Access Control"]
       },
       {
         "slug": "modern-infrastructure-planning",
@@ -59,11 +47,7 @@
         "content": "A scalable infrastructure plan considers capacity, resilience, and operational simplicity from the beginning. Good architecture avoids single points of failure, keeps core services observable, and leaves room for future growth. This placeholder content helps validate the article list without using production copy.",
         "author": "AMI Infrastructure Team",
         "date": "2026-01-20",
-        "tags": [
-          "Infrastructure",
-          "Scalability",
-          "Resilience"
-        ]
+        "tags": ["Infrastructure", "Scalability", "Resilience"]
       },
       {
         "slug": "bandwidth-qos-principles",
@@ -73,11 +57,7 @@
         "content": "QoS helps prioritize critical applications when network demand becomes uneven. By classifying traffic and reserving capacity for important services, teams can reduce congestion and improve user experience. This article is intentionally generic and works as a placeholder for testing repeated category entries.",
         "author": "AMI Infrastructure Team",
         "date": "2025-09-08",
-        "tags": [
-          "Bandwidth",
-          "QoS",
-          "Performance"
-        ]
+        "tags": ["Bandwidth", "QoS", "Performance"]
       },
       {
         "slug": "future-it-trends-2026",
@@ -87,12 +67,7 @@
         "content": "Technology teams are increasingly adopting automation to reduce repetitive tasks and improve response time. AI-assisted monitoring, edge processing, and software-defined services are becoming common parts of modern IT roadmaps. This sample article is meant to provide realistic variety for category filters and card heights.",
         "author": "AMI Research Team",
         "date": "2025-11-05",
-        "tags": [
-          "IT Trends",
-          "AI",
-          "Automation",
-          "Edge Computing"
-        ]
+        "tags": ["IT Trends", "AI", "Automation", "Edge Computing"]
       },
       {
         "slug": "cloud-readiness-checklist",
@@ -102,11 +77,7 @@
         "content": "Before a cloud migration, teams should review application dependencies, identity controls, backup strategy, and cost visibility. Clear ownership and phased adoption reduce risk and make the transition easier to manage. This placeholder article helps test a fifth category in the UI.",
         "author": "AMI Cloud Team",
         "date": "2025-10-18",
-        "tags": [
-          "Cloud",
-          "Migration",
-          "Governance"
-        ]
+        "tags": ["Cloud", "Migration", "Governance"]
       },
       {
         "slug": "future-tech-trends-2027",
@@ -116,12 +87,7 @@
         "content": "Technology teams are increasingly adopting automation to reduce repetitive tasks and improve response time. AI-assisted monitoring, edge processing, and software-defined services are becoming common parts of modern IT roadmaps. This sample article is meant to provide realistic variety for category filters and card heights.",
         "author": "AMI Research Team",
         "date": "2025-12-09",
-        "tags": [
-          "IT Trends",
-          "AI",
-          "Automation",
-          "Edge Computing"
-        ]
+        "tags": ["IT Trends", "AI", "Automation", "Edge Computing"]
       },
       {
         "slug": "reset-hack-checklist",
@@ -131,11 +97,7 @@
         "content": "Before a cloud migration, teams should review application dependencies, identity controls, backup strategy, and cost visibility. Clear ownership and phased adoption reduce risk and make the transition easier to manage. This placeholder article helps test a fifth category in the UI.",
         "author": "AMI Cloud Team",
         "date": "2025-10-18",
-        "tags": [
-          "Cloud",
-          "Migration",
-          "Governance"
-        ]
+        "tags": ["Cloud", "Migration", "Governance"]
       }
     ]
   },
@@ -286,15 +248,6 @@
         "content": "AI-generated phishing messages can be more personalized and harder to spot than traditional scams. Defenders should combine email security, identity verification, and ongoing user training to reduce the chance of successful impersonation attacks.",
         "date": "2025-05-27",
         "source": "Threat Intelligence Review"
-      },
-      {
-        "slug": "bapak-gw-jago-silat",
-        "category": "newskocakgmink",
-        "title": "bapak gw ketua psht",
-        "excerpt": "pshtshiliu",
-        "content": "apasaj",
-        "date": "2026-07-10",
-        "source": "kodokjemping"
       }
     ]
   }

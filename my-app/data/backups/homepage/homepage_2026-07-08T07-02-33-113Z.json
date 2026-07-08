@@ -102,58 +102,6 @@
                 "shortDescription"
               ]
             }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "security-management"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "cloud-security"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "res"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "teslagi"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
           }
         ]
       },
@@ -252,32 +200,6 @@
                 "description"
               ]
             }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "services",
-              "match": {
-                "name": "Awareness Event"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "services",
-              "match": {
-                "name": "tes lohya cik"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
-            }
           }
         ]
       }
@@ -312,56 +234,19 @@
       "label": "Visit Articles Page",
       "href": "/insight"
     },
-    "items": [
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "security-spending-2018"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
-      },
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "pci-dss-compliance"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
-      },
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "bapak-gw-jago-silat"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
+    "items": {
+      "_ref": {
+        "source": "insight.json",
+        "path": "news.items",
+        "displayFields": [
+          "slug",
+          "category",
+          "title",
+          "excerpt",
+          "date"
+        ]
       }
-    ]
+    }
   },
   "contactSection": {
     "eyebrow": "Contact Us",

@@ -21,7 +21,7 @@ const publicCsp = [
 const adminCsp = publicCsp.replace("frame-ancestors 'self'", "frame-ancestors 'none'");
 
 // HSTS header - only active in production (HTTPS required)
-const hstsHeader = isProduction ? [{
+const hstsHeader = (isProduction && process.env.FORCE_HTTPS === 'true') ? [{
   key: 'Strict-Transport-Security',
   value: 'max-age=63072000; includeSubDomains; preload',
 }] : [];

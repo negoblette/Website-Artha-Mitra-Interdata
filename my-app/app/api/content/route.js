@@ -7,6 +7,8 @@ import { validateContentPayload } from '@/lib/contentValidation';
 import { logContentUpdate, logRateLimitHit, logApiError } from '@/lib/auditLogger';
 import { readJsonWithLimit, REQUEST_LIMITS } from '@/lib/requestLimits';
 import { checkRateLimit } from '@/lib/rateLimit';
+import { resolveReferences } from '@/lib/referenceResolver';
+
 
 const VALID_FILES = ['global', 'homepage', 'about', 'solution', 'products', 'activities', 'insight'];
 
@@ -60,6 +62,7 @@ export async function GET(request) {
 
   const { searchParams } = new URL(request.url);
   const file = searchParams.get('file');
+  const resolveRefs = searchParams.get('resolveRefs') === 'true';
 
   if (!file || !VALID_FILES.includes(file)) {
     return NextResponse.json({ error: 'Invalid file parameter' }, { status: 400 });
@@ -70,7 +73,12 @@ export async function GET(request) {
   }
 
   try {
-    const data = getContent(file);
+    let data = getContent(file);
+
+    if(resolveRefs) {
+      data = await resolveReferences(data);
+    }
+    
     return NextResponse.json(data);
   } catch (err) {
     await logApiError('/api/content', 500, err?.message, request);

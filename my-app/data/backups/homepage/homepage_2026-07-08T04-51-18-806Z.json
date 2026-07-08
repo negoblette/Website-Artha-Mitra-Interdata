@@ -9,31 +9,19 @@
   },
   "howItWorks": {
     "title": "How We optimize IT For You",
-    "left": {
+    "left" : {
       "title": "Building Resilient & Future-Ready IT Solutions",
-      "description": "At Artha Mitra Interdata, optimizing IT means ensuring that technology consistently supports and strengthens your business objectives. We work closely with our customers as trusted partners, taking the time to understand their priorities so that every solution we design delivers practical, measurable value. From infrastructure to security, our focus is on building IT environments that are stable, efficient, and able to adapt as your business evolves."
+      "description": "At Artha Mitra Interdata, optimizing IT means ensuring that technology consistently supports and strengthens your business objectives. We work closely with our customers as trusted partners, taking the time to understand their priorities so that every solution we design delivers practical, measurable value. From infrastructure to security, our focus is on building IT environments that are stable, efficient, and able to adapt as your business evolves." 
     },
-    "right": {
+    "right" : {
       "title": "Aligned IT With Your Business Goals",
       "description": "Our approach is guided by a clear vision to become the technology partner of choice, and a mission to help customers achieve their competitive goals through strong leadership and professional service. Guided by our core values of Commitment, Integrity, Professionalism, Teamwork, and Advancement (CIPTA), we cultivate a culture of accountability, collaboration, and continuous improvement. These principles shape how we engage, how we deliver, and how we help our customers transform IT into a sustained competitive advantage."
-    },
+    }, 
     "stats": [
-      {
-        "value": "15+",
-        "label": "Years of Experience"
-      },
-      {
-        "value": "500+",
-        "label": "Trusted Clients"
-      },
-      {
-        "value": "98%",
-        "label": "Customer Satisfaction"
-      },
-      {
-        "value": "24/7",
-        "label": "Support"
-      }
+      { "value" : "15+", "label": "Years of Experience" },
+      { "value" : "500+", "label": "Trusted Clients" },
+      { "value" : "98%", "label": "Customer Satisfaction" },
+      { "value" : "24/7", "label": "Support" }
     ]
   },
   "offerings": {
@@ -45,17 +33,14 @@
         "description": "We offer a wide range of solutions centered on IT Infrastructure and Security, designed to maximize impact and value to your business. Our solutions cover everything from network hardware and software to advanced security measures, bandwidth optimization, and communication systems.",
         "items": [
           {
-            "_visible": true,
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "network-security"
+            "_visible" : true,
+            "_ref" : {
+              "source" : "solution.json",
+              "path" : "solutions",
+              "match" :{
+                "slug" : "network-security"
               },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "displayFields" : ["name", "description"]
             }
           },
           {
@@ -66,11 +51,7 @@
               "match": {
                 "slug": "data-security"
               },
-              "displayFields": [
-                "slug",
-                "name",
-                "shortDescription"
-              ]
+              "displayFields": ["slug", "name", "shortDescription"]
             }
           },
           {
@@ -81,11 +62,7 @@
               "match": {
                 "slug": "network-performance-monitoring"
               },
-              "displayFields": [
-                "slug",
-                "name",
-                "shortDescription"
-              ]
+              "displayFields": ["slug", "name", "shortDescription"]
             }
           },
           {
@@ -96,63 +73,7 @@
               "match": {
                 "slug": "network-performance-monitoring"
               },
-              "displayFields": [
-                "slug",
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "security-management"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "cloud-security"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "res"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "teslagi"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
+              "displayFields": ["slug", "name", "shortDescription"]
             }
           }
         ]
@@ -166,117 +87,64 @@
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Assessment"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Assessment" },
+              "displayFields": ["name", "description"]
             }
           },
           {
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Design"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Design" },
+              "displayFields": ["name", "description"]
             }
           },
           {
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Implementation"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Implementation" },
+              "displayFields": ["name", "description"]
             }
           },
           {
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Maintenance & Support"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Maintenance & Support" },
+              "displayFields": ["name", "description"]
             }
           },
           {
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Training"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Training" },
+              "displayFields": ["name", "description"]
             }
           },
           {
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Security Audit"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Security Audit" },
+              "displayFields": ["name", "description"]
             }
           },
           {
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Asset Disposal Service"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Asset Disposal Service" },
+              "displayFields": ["name", "description"]
             }
           },
           {
             "_ref": {
               "source": "solution.json",
               "path": "services",
-              "match": {
-                "name": "Awareness Event"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "services",
-              "match": {
-                "name": "tes lohya cik"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
+              "match": { "name": "Awareness Event" },
+              "displayFields": ["name", "description"]
             }
           }
         ]
@@ -312,56 +180,13 @@
       "label": "Visit Articles Page",
       "href": "/insight"
     },
-    "items": [
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "security-spending-2018"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
-      },
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "pci-dss-compliance"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
-      },
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "bapak-gw-jago-silat"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
+    "items": {
+      "_ref": {
+        "source": "insight.json",
+        "path": "news.items",
+        "displayFields": ["slug", "category", "title", "excerpt", "date"]
       }
-    ]
+    }
   },
   "contactSection": {
     "eyebrow": "Contact Us",

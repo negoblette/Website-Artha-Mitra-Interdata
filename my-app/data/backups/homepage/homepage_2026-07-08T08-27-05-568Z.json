@@ -350,7 +350,7 @@
           "source": "insight.json",
           "path": "news.items",
           "match": {
-            "slug": "bapak-gw-jago-silat"
+            "slug": "ddi-iot-success"
           },
           "displayFields": [
             "slug",

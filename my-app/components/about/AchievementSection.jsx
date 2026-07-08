@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
+import NextImage from 'next/image';
 
 export default function AchievementSection({ data }) {
   const [cardRatio, setCardRatio] = useState(null);
@@ -98,9 +98,11 @@ export default function AchievementSection({ data }) {
               style={{ aspectRatio: cardRatio || '16 / 9' }}
             >
               <div className="relative h-full overflow-hidden rounded-xl bg-[#0a0b85] text-white shadow-[0_12px_24px_rgba(10,11,133,0.22)] transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_18px_32px_rgba(10,11,133,0.24)]">
-                <Image
+                <NextImage
                   src={images[cardIndex]}
                   alt={`Achievement ${cardIndex + 1}`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 33vw"
                   className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
                   loading="lazy"
                   onLoad={(event) => handleImageLoad(images[cardIndex], event)}

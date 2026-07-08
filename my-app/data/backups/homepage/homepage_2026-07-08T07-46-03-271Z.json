@@ -102,58 +102,6 @@
                 "shortDescription"
               ]
             }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "security-management"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "cloud-security"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "res"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "teslagi"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
           }
         ]
       },
@@ -265,19 +213,6 @@
                 "description"
               ]
             }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "services",
-              "match": {
-                "name": "tes lohya cik"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
-            }
           }
         ]
       }
@@ -350,7 +285,7 @@
           "source": "insight.json",
           "path": "news.items",
           "match": {
-            "slug": "bapak-gw-jago-silat"
+            "slug": "ddi-iot-success"
           },
           "displayFields": [
             "slug",

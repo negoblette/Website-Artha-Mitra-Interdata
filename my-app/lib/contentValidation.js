@@ -28,9 +28,14 @@ const MAX_DEPTH = 12;
 const MAX_ARRAY_LENGTH = 150;
 const MAX_KEYS_PER_OBJECT = 120;
 const MAX_TOTAL_NODES = 8000;
-const MAX_SHORT_TEXT = 500;
+const MAX_SHORT_TEXT = 1000;
 const MAX_LONG_TEXT = 6000;
 const MAX_URL_LENGTH = 2048;
+
+function maxArrayLengthForPath(file, path) {
+  if (file === 'homepage' && path === 'news.items') return 3;
+  return MAX_ARRAY_LENGTH;
+}
 
 function isPlainObject(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -228,8 +233,9 @@ function validateNode(value, path, errors, state) {
   }
 
   if (Array.isArray(value)) {
-    if (value.length > MAX_ARRAY_LENGTH) {
-      addError(errors, path, `Array has too many items. Max ${MAX_ARRAY_LENGTH}.`);
+    const maxLength = maxArrayLengthForPath(state.file, path);
+    if (value.length > maxLength) {
+      addError(errors, path, `Array has too many items. Max ${maxLength}.`);
       return;
     }
 
@@ -287,6 +293,7 @@ export function validateContentPayload(file, payload) {
   validateNode(payload, '', errors, {
     depth: 0,
     nodes: 0,
+    file,
   });
 
   return {

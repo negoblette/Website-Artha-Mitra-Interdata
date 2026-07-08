@@ -12,6 +12,7 @@ import {
   Link, Mail, Phone, Hash, Calendar as CalendarIcon, Tag,
   ChevronDown,
 } from 'lucide-react';
+import { MasterListPicker } from '@/components/admin/MasterListPicker';
 
 const PAGES = [
   { key: 'global', label: 'Global Settings', icon: Globe },
@@ -204,6 +205,116 @@ function computeDiff(original, updated) {
 function isReadOnlyPath(path, readOnlyPaths = []) {
   if (!path) return false;
   return readOnlyPaths.some((blocked) => path === blocked || path.startsWith(`${blocked}.`));
+}
+
+function getValueAtPath(obj, path) {
+  if (!obj || !path) return undefined;
+  return path.split('.').reduce((acc, key) => {
+    if (acc === null || acc === undefined) return undefined;
+    return acc[key];
+  }, obj);
+}
+
+function normalizeHomepageData(payload) {
+  const copy = JSON.parse(JSON.stringify(payload));
+  const tabs = copy?.offerings?.tabs;
+
+  if (Array.isArray(tabs)) {
+    copy.offerings.tabs = tabs.map((tab) => {
+      const normalizedTab = { ...tab };
+      if (normalizedTab.items && !Array.isArray(normalizedTab.items)) {
+        normalizedTab.items = [normalizedTab.items];
+      }
+      if (!Array.isArray(normalizedTab.items)) {
+        normalizedTab.items = [];
+      }
+      return normalizedTab;
+    });
+  }
+
+  if (copy?.news) {
+    if (copy.news.items && !Array.isArray(copy.news.items)) {
+      copy.news.items = [copy.news.items];
+    }
+    if (!Array.isArray(copy.news.items)) {
+      copy.news.items = [];
+    }
+  }
+
+  return copy;
+}
+
+function isHomepageOfferingsItemsPath(path = '') {
+  return /^offerings\.tabs\.\d+\.items$/.test(path);
+}
+
+function isHomepageNewsItemsPath(path = '') {
+  return path === 'news.items';
+}
+
+function getOfferingTabConfig(allData, path = '') {
+  const match = path.match(/^offerings\.tabs\.(\d+)\.items$/);
+  if (!match) return null;
+
+  const tabIndex = Number.parseInt(match[1], 10);
+  const tab = getValueAtPath(allData, `offerings.tabs.${tabIndex}`);
+  if (!tab || typeof tab !== 'object') return null;
+
+  const label = String(tab.label || tab.title || tab.eyebrow || '').toLowerCase();
+  if (label.includes('service')) {
+    return {
+      source: 'solution.json',
+      sourcePath: 'services',
+      displayField: 'name',
+      matchField: 'name',
+      displayFields: ['name', 'description'],
+      placeholder: 'Pilih Service dari Master List',
+      searchPlaceholder: 'Cari service yang ingin ditampilkan',
+    };
+  }
+
+  return {
+    source: 'solution.json',
+    sourcePath: 'solutions',
+    displayField: 'name',
+    matchField: 'slug',
+    displayFields: ['name', 'shortDescription'],
+    placeholder: 'Pilih Solution dari Master List',
+    searchPlaceholder: 'Cari solution yang ingin ditampilkan',
+  };
+}
+
+function getHomepageNewsConfig(path = '') {
+  if (!isHomepageNewsItemsPath(path)) return null;
+
+  return {
+    source: 'insight.json',
+    sourcePath: 'news.items',
+    displayField: 'title',
+    matchField: 'slug',
+    displayFields: ['slug', 'category', 'title', 'excerpt', 'date'],
+    placeholder: 'Pilih News dari Master List',
+    searchPlaceholder: 'Cari news yang ingin ditampilkan',
+    maxItems: 3,
+  };
+}
+
+function getHomepageMasterListConfig(allData, path = '') {
+  return getOfferingTabConfig(allData, path) || getHomepageNewsConfig(path);
+}
+
+function buildMasterListRef(item, config) {
+  const matchValue = item?.[config.matchField];
+  if (!matchValue) return null;
+
+  return {
+    _ref: {
+      source: config.source,
+      path: config.sourcePath,
+      match: { [config.matchField]: matchValue },
+      displayFields: config.displayFields,
+    },
+  };
 }
 
 const ARRAY_LABEL_OVERRIDES = {
@@ -901,7 +1012,7 @@ function LoginScreen({ onLogin }) {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-sm"
       >
-        <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">``
+        <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
           <div className="flex items-center justify-center mb-6">
             <div className="relative w-36 h-14">
               <Image src="/logo.png" alt="AMI" fill className="object-contain" priority />
@@ -1020,8 +1131,9 @@ export default function AdminPage() {
     const res = await fetch(`/api/content?file=${page}`);
     if (res.ok) {
       const json = await res.json();
-      setData(json);
-      setOriginalData(JSON.parse(JSON.stringify(json)));
+      const normalized = page === 'homepage' ? normalizeHomepageData(json) : json;
+      setData(normalized);
+      setOriginalData(JSON.parse(JSON.stringify(normalized)));
     } else if (res.status === 401) {
       setIsAuthenticated(false);
       setData(null);
@@ -1141,22 +1253,77 @@ export default function AdminPage() {
     });
   }
 
-
-  function addSolutionItem(path, solution) {
+  function addMasterListItems(path, items) {
     setData((prev) => {
       const copy = JSON.parse(JSON.stringify(prev));
       const keys = path.split('.');
       let obj = copy;
-      for(const k of keys) {
+      for (const k of keys) {
         obj = isNaN(k) ? obj[k] : obj[parseInt(k)];
       }
-      if(!Array.isArray(obj)) return copy;
-      //preventing duplication of solutions
-      const alreadyExists = obj.some((s) => s && s.slug === solution.slug);
-      if (alreadyExists) return copy;
-      obj.push(JSON.parse(JSON.stringify(solution)));
+      if (!Array.isArray(obj)) return copy;
+
+      const config = activePage === 'homepage' ? getHomepageMasterListConfig(copy, path) : null;
+      if (config) {
+        const existingKeys = new Set(
+          obj.map((entry) => JSON.stringify(entry?._ref?.match || {})).filter((value) => value !== '{}')
+        );
+        const maxItems = Number.isInteger(config.maxItems) && config.maxItems > 0 ? config.maxItems : null;
+        const remainingSlots = maxItems ? Math.max(maxItems - obj.length, 0) : Infinity;
+        if (remainingSlots === 0) return copy;
+
+        let addedCount = 0;
+        for (const item of items) {
+          if (addedCount >= remainingSlots) break;
+          const refItem = buildMasterListRef(item, config);
+          const refKey = refItem?._ref?.match ? JSON.stringify(refItem._ref.match) : '';
+          if (!refItem || existingKeys.has(refKey)) continue;
+          existingKeys.add(refKey);
+          obj.push(refItem);
+          addedCount += 1;
+        }
+        return copy;
+      }
+
+      for (const item of items) {
+        const existsKey = item?.slug || item?.name;
+        const alreadyExists = obj.some((entry) => (entry?.slug || entry?.name) === existsKey);
+        if (!alreadyExists) {
+          obj.push(JSON.parse(JSON.stringify(item)));
+        }
+      }
       return copy;
-    })
+    });
+  }
+
+  function addSolutionItem(path, solution) {
+    addMasterListItems(path, [solution]);
+  }
+
+  // NEW: Function to add service from master list
+  function addServiceItem(path, service) {
+    addMasterListItems(path, [service]);
+  }
+
+  // NEW: Function to add news from master list
+  function addNewsItem(path, news) {
+    setData((prev) => {
+      const copy = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let obj = copy;
+      for (const k of keys) {
+        obj = isNaN(k) ? obj[k] : obj[parseInt(k)];
+      }
+      if (!Array.isArray(obj)) return copy;
+
+      // Prevent duplicate news
+      const alreadyExists = obj.some((n) => n && n.slug === news.slug);
+      if (alreadyExists) return copy;
+
+      // Add the news (from master list picker)
+      obj.push(JSON.parse(JSON.stringify(news)));
+      return copy;
+    });
   }
 
   function requestRemoveArrayItem(path, index, label) {
@@ -1341,6 +1508,7 @@ export default function AdminPage() {
               <JsonEditor
                 data={data}
                 path=""
+                activePage={activePage}
                 onChange={updateField}
                 onAddItem={addArrayItem}
                 onRemoveItem={requestRemoveArrayItem}
@@ -1349,6 +1517,9 @@ export default function AdminPage() {
                 onUpload={handleUpload}
                 onAddBrand={addBrandItem}
                 onAddSolution={addSolutionItem}
+                onAddService={addServiceItem}
+                onAddNews={addNewsItem}
+                onAddMasterListItems={addMasterListItems}
                 readOnlyPaths={READ_ONLY_MAP[activePage]}
                 allData={data}
               />
@@ -1489,7 +1660,7 @@ function CategoryCombobox({ value, onChange, allData, readOnly }) {
 
 // ─── BrandPicker (inline list to select existing brand) ──────────────────────
 
-function BrandPicker({ allBrands, currentBrands, onSelect }) {
+function BrandPicker({ allBrands = [], currentBrands, onSelect, createOnly = false }) {
   const [open, setOpen] = useState(false);
   const [showCustom, setShowCustom] = useState(false);
   const [customName, setCustomName] = useState('');
@@ -1498,8 +1669,9 @@ function BrandPicker({ allBrands, currentBrands, onSelect }) {
   const [error, setError] = useState(null);
 
   // Filter out brands already in the current array
+  const sourceBrands = Array.isArray(allBrands) ? allBrands : [];
   const currentNames = new Set((currentBrands || []).map((b) => b?.name).filter(Boolean));
-  const available = allBrands.filter((b) => !currentNames.has(b.name));
+  const available = createOnly ? [] : sourceBrands.filter((b) => !currentNames.has(b.name));
 
   //auto generating slug
   const autoSlug = (name) => {
@@ -1572,7 +1744,7 @@ function BrandPicker({ allBrands, currentBrands, onSelect }) {
         className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
       >
         <Plus size={14} />
-        Add Item
+        {createOnly ? 'Tambah Brand Baru' : 'Add Item'}
       </button>
 
       <AnimatePresence>
@@ -1594,7 +1766,7 @@ function BrandPicker({ allBrands, currentBrands, onSelect }) {
                 )}
 
                 {/* custom brand form */}
-                {showCustom ? (
+                {createOnly || showCustom ? (
                 <div className="p-4 bg-white space-y-3">
                   <div>
                     <label className="text-xs font-medium text-gray-600 mb-1 block">
@@ -1827,6 +1999,7 @@ function SolutionPicker({ currentSolutions, onSelect}) {
 function JsonEditor({
   data,
   path,
+  activePage,
   onChange,
   onAddItem,
   onRemoveItem,
@@ -1835,6 +2008,9 @@ function JsonEditor({
   onUpload,
   onAddBrand,
   onAddSolution,
+  onAddService,
+  onAddNews,
+  onAddMasterListItems,
   readOnlyPaths = [],
   fieldKey,
   depth = 0,
@@ -2072,11 +2248,12 @@ function JsonEditor({
       <div className="space-y-2">
         {data.map((item, i) => {
           const itemLabel = typeof item === 'object' && item
-            ? item.title || item.label || item.name || item.slug || item.year || ''
+            ? item?._ref?.match?.name || item?._ref?.match?.slug || item.title || item.label || item.name || item.slug || item.year || ''
             : typeof item === 'string' ? item.substring(0, 50) : '';
           const baseLabel = getArrayItemBaseLabel(path);
           const displayLabel = baseLabel ? `${baseLabel} ${i + 1}` : `[${i}]`;
           const isSingleItemArray = isSingleItemArrayPath(path);
+          const isOfferingsItem = isHomepageOfferingsItemsPath(path);
 
           return (
             <div key={i} className="relative group/item">
@@ -2101,7 +2278,7 @@ function JsonEditor({
                     >
                       <ArrowDown size={12} />
                     </button>
-                    {!isSingleItemArray && (
+                    {!isSingleItemArray && !isOfferingsItem && (
                       <button
                         onClick={(e) => { e.stopPropagation(); onDuplicateItem(path, i); }}
                         className="p-1 hover:bg-blue-50 rounded text-gray-400 hover:text-blue-600"
@@ -2129,21 +2306,40 @@ function JsonEditor({
                   </span>
                 )}
               >
-                <JsonEditor
-                  data={item}
-                  path={path ? `${path}.${i}` : `${i}`}
-                  onChange={onChange}
-                  onAddItem={onAddItem}
-                  onRemoveItem={onRemoveItem}
-                  onDuplicateItem={onDuplicateItem}
-                  onMoveItem={onMoveItem}
-                  onUpload={onUpload}
-                  onAddBrand={onAddBrand}
-                  onAddSolution={onAddSolution}
-                  readOnlyPaths={readOnlyPaths}
-                  depth={depth + 1}
-                  allData={allData}
-                />
+                {isOfferingsItem ? (
+                  <div className="space-y-2 rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-600">
+                    <div><span className="font-medium text-gray-800">Source:</span> {item?._ref?.source || '-'}</div>
+                    <div><span className="font-medium text-gray-800">Path:</span> {item?._ref?.path || '-'}</div>
+                    <div>
+                      <span className="font-medium text-gray-800">Match:</span>{' '}
+                      {JSON.stringify(item?._ref?.match || {})}
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-800">Fields:</span>{' '}
+                      {(item?._ref?.displayFields || []).join(', ') || '-'}
+                    </div>
+                  </div>
+                ) : (
+                  <JsonEditor
+                    data={item}
+                    path={path ? `${path}.${i}` : `${i}`}
+                    activePage={activePage}
+                    onChange={onChange}
+                    onAddItem={onAddItem}
+                    onRemoveItem={onRemoveItem}
+                    onDuplicateItem={onDuplicateItem}
+                    onMoveItem={onMoveItem}
+                    onUpload={onUpload}
+                    onAddBrand={onAddBrand}
+                    onAddSolution={onAddSolution}
+                    onAddService={onAddService}
+                    onAddNews={onAddNews}
+                    onAddMasterListItems={onAddMasterListItems}
+                    readOnlyPaths={readOnlyPaths}
+                    depth={depth + 1}
+                    allData={allData || data}
+                  />
+                )}
               </CollapsibleSection>
             </div>
           );
@@ -2151,45 +2347,103 @@ function JsonEditor({
         {!readOnly && !isSingleItemArrayPath(path) && (() => {
           const isBrandsArray = /\.brands$|^brands$/.test(path);
           const isSolutionsArray = /\.solutions$|^solutions$/.test(path);
-          const allBrands = isBrandsArray ? collectAllBrands(allData) : [];
-          const allSolutions = isSolutionsArray ? collectAllSolutions(allData) : [];
+          const isServicesArray = /\.services$|^services$/i.test(path);
+          const isNewsArray = /news\.items$|^news\.items$/i.test(path);
+          const masterListConfig = activePage === 'homepage' ? getHomepageMasterListConfig(allData, path) : null;
 
-          // For brands arrays: use BrandPicker dropdown instead of plain Add Item
-          if (isBrandsArray && allBrands.length > 0 && onAddBrand) {
+          if (masterListConfig) {
             return (
-              <BrandPicker
-                allBrands={allBrands}
-                currentBrands={data}
-                onSelect={(brand) => onAddBrand(path, brand)}
+              <MasterListPicker
+                source={masterListConfig.source}
+                path={masterListConfig.sourcePath}
+                displayField={masterListConfig.displayField}
+                matchField={masterListConfig.matchField}
+                currentItems={data}
+                placeholder={masterListConfig.placeholder}
+                searchPlaceholder={masterListConfig.searchPlaceholder || 'Cari item yang ingin ditampilkan'}
+                multiSelect
+                maxSelections={masterListConfig.maxItems}
+                onSelectMany={(items) => onAddMasterListItems(path, items)}
               />
             );
           }
 
-          //For solutions array: using solution picker
-          if (isSolutionsArray && onAddSolution) {
+          // Brands use the master list for existing items and a separate create-only flow for new brands.
+          if (isBrandsArray && onAddBrand) {
             return (
-              <SolutionPicker
-                currentSolutions={data}
-                onSelect={(solution) => onAddSolution(path, solution)}
-              />
-            )
+              <div className="space-y-2">
+                <MasterListPicker
+                  source="products.json"
+                  path="brands"
+                  displayField="name"
+                  matchField="slug"
+                  onSelect={(brand) => onAddBrand(path, brand)}
+                  currentItems={data}
+                  placeholder="Pilih Brand dari Master List"
+                />
+                <BrandPicker
+                  currentBrands={data}
+                  onSelect={(brand) => onAddBrand(path, brand)}
+                  createOnly
+                />
+              </div>
+            );
           }
+
+
+
+          
+
+          // // For solutions array: using solution picker
+          // if (isSolutionsArray && onAddSolution) {
+          //   return (
+          //     <MasterListPicker
+          //       source="solution.json"
+          //       path="solutions"
+          //       displayField="name"
+          //       matchField="slug"
+          //       onSelect={(solution) => onAddSolution(path, solution)}
+          //       currentItems={data}
+          //       placeholder="Pilih Solution dari Master List"
+          //     />
+          //   );
+          // }
+
+          // // Services: Use MasterListPicker (NEW)
+          // if (isServicesArray && onAddService) {
+          //   return (
+          //     <MasterListPicker
+          //       source="solution.json"
+          //       path="services"
+          //       displayField="name"
+          //       matchField="name"
+          //       onSelect={(service) => onAddService(path, service)}
+          //       currentItems={data}
+          //       placeholder="Pilih Service dari Master List"
+          //     />
+          //   );
+          // }
+
+          // // News: Use MasterListPicker (NEW)
+          // if (isNewsArray && onAddNews) {
+          //   return (
+          //     <MasterListPicker
+          //       source="insight.json"
+          //       path="news.items"
+          //       displayField="title"
+          //       matchField="slug"
+          //       onSelect={(news) => onAddNews(path, news)}
+          //       currentItems={data}
+          //       placeholder="Pilih News dari Master List"
+          //     />
+          //   );
+          // }
 
           // Default Add Item button for non-brands arrays
-        //   return (
-        //     <button
-        //       onClick={() => onAddItem(path)}
-        //       className="flex items-center gap-2 px-4 py-2 rounded-lg border border-dashed border-gray-300 text-gray-400 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm w-full justify-center"
-        //     >
-        //       <Plus size={14} />
-        //       Add Item
-        //     </button>
-        //   );
-        // })()}
-            return (
-              <button onClick={() => onAddItem(path)}>Add Item</button>
-            );
-          })()}
+          return (
+            <button onClick={() => onAddItem(path)}>Add Item</button>
+          );
+        })()}
       </div>
     );
   }
@@ -2223,6 +2477,7 @@ function JsonEditor({
                 <JsonEditor
                   data={value}
                   path={fieldPath}
+                  activePage={activePage}
                   onChange={onChange}
                   onAddItem={onAddItem}
                   onRemoveItem={onRemoveItem}
@@ -2231,6 +2486,9 @@ function JsonEditor({
                   onUpload={onUpload}
                   onAddBrand={onAddBrand}
                   onAddSolution={onAddSolution}
+                  onAddService={onAddService}
+                  onAddNews={onAddNews}
+                  onAddMasterListItems={onAddMasterListItems}
                   readOnlyPaths={readOnlyPaths}
                   fieldKey={key}
                   depth={depth + 1}
@@ -2245,6 +2503,7 @@ function JsonEditor({
               <JsonEditor
                 data={value}
                 path={fieldPath}
+                activePage={activePage}
                 onChange={onChange}
                 onAddItem={onAddItem}
                 onRemoveItem={onRemoveItem}
@@ -2253,6 +2512,9 @@ function JsonEditor({
                 onUpload={onUpload}
                 onAddBrand={onAddBrand}
                 onAddSolution={onAddSolution}
+                onAddService={onAddService}
+                onAddNews={onAddNews}
+                onAddMasterListItems={onAddMasterListItems}
                 readOnlyPaths={readOnlyPaths}
                 fieldKey={key}
                 depth={depth + 1}

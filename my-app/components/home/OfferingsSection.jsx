@@ -51,12 +51,20 @@ const serviceIconMap = {
   "Awareness Event": ShieldPlus,
 };
 
-function OfferColumn({ eyebrow, title, items, icons, iconMap }) {
-  const normalizedItems = items.map((item) =>
-    typeof item === 'string'
-      ? { name: item, description: 'Enterprise-grade support tailored for your operations.' }
-      : item
-  );
+function OfferColumn({ eyebrow, title, items = [], icons = [], iconMap }) {
+  const normalizedItems = Array.isArray(items)
+    ? items.map((item) => {
+        if (typeof item === 'string') {
+          return { name: item, description: 'Enterprise-grade support tailored for your operations.' };
+        }
+
+        return {
+          ...item,
+          name: item?.name || item?.title || item?.label || '',
+          description: item?.description ?? item?.shortDescription ?? item?.fullDescription ?? '',
+        };
+      })
+    : [];
 
   return (
     <div className="h-full min-h-0 flex flex-col px-3 sm:px-7 py-4 sm:py-6">
@@ -67,7 +75,7 @@ function OfferColumn({ eyebrow, title, items, icons, iconMap }) {
 
       <div className="no-scrollbar mt-1.5 space-y-3 sm:space-y-4 overflow-y-auto sm:pl-50 sm:pr-50 flex-1 min-h-0">
         {normalizedItems.map((item, i) => {
-          const Icon = iconMap?.[item.name] ?? icons[i % icons.length];
+          const Icon = iconMap?.[item.name] ?? icons[i % icons.length] ?? icons[0];
 
           return (
             <div key={`${item.name}-${i}`}>
