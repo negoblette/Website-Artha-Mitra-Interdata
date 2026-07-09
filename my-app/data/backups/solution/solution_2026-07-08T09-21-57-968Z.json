@@ -283,6 +283,61 @@
           "website": "https://www.crowdstrike.com/en-us/"
         }
       ]
+    },
+    {
+      "slug": "res",
+      "name": "tes",
+      "icon": "AlertCircle",
+      "shortDescription": "tesss",
+      "fullDescription": "tersasa",
+      "features": [
+        "aeadasd"
+      ],
+      "brands": [
+        {
+          "name": "CrowdStrike",
+          "logo": "/images/principals/crowdstrike.png",
+          "website": "https://www.crowdstrike.com/en-us/"
+        }
+      ]
+    },
+    {
+      "slug": "teslagi",
+      "name": "teslagi",
+      "icon": "ArrowDown",
+      "shortDescription": "yang ada aja lah",
+      "fullDescription": "yaudahlahyah kocak kodok muter mwuehehe",
+      "features": [
+        "kocak gmink"
+      ],
+      "brands": [
+        {
+          "name": "Gigamon",
+          "slug": "gigamon",
+          "logo": "/images/principals/gigamon.png",
+          "website": "https://www.gigamon.com",
+          "description": "Deep observability pipeline delivering network-derived intelligence across hybrid cloud environments.",
+          "solutions": [
+            {
+              "name": "Network Infrastructure",
+              "slug": "network-infrastructure"
+            }
+          ]
+        },
+        {
+          "name": "DAS Security",
+          "slug": "das-security",
+          "logo": "/images/principals/das.png",
+          "website": "https://www.dbappsecurity.com",
+          "description": "Application and data security solutions including WAF, database audit, and risk control.",
+          "solutions": [
+            {
+              "name": "Network Security",
+              "slug": "network-security"
+            }
+          ]
+        }
+      ]
     }
   ],
   "services": [
@@ -327,9 +382,9 @@
       "description": "Awareness sessions and event support designed to strengthen security culture, user readiness, and stakeholder engagement."
     },
     {
-      "name": "8h88h",
-      "icon": "/uploads/85f10239-8972-49a5-b36d-cd988e2b53dc.png",
-      "description": "ihhvh"
+      "name": "tes lohya cik",
+      "icon": "LogOut",
+      "description": "tes lohya"
     }
   ],
   "whyChoose": {

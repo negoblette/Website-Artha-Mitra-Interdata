@@ -154,45 +154,6 @@
                 "shortDescription"
               ]
             }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "network-infrastructure"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "application-security"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "endpoint-security"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
           }
         ]
       },
