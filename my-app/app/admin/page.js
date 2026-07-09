@@ -13,6 +13,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { MasterListPicker } from '@/components/admin/MasterListPicker';
+import SafePreview from '@/components/admin/SafePreview';
 
 const PAGES = [
   { key: 'global', label: 'Global Settings', icon: Globe },
@@ -45,6 +46,8 @@ const DATE_KEY_REGEX = /^(date|publishedAt|createdAt|updatedAt|eventDate|startDa
 const PHONE_KEY_REGEX = /^(phone|fax|whatsapp|mobile|telephone)$/i;
 const EMAIL_KEY_REGEX = /^(email|mail)$/i;
 const CATEGORY_KEY_REGEX = /^(category|type|status|platform)$/i;
+const HTML_KEY_REGEX = /(^|\.)(html|richText|richContent|bodyHtml|contentHtml|previewHtml)$/i;
+const IFRAME_KEY_REGEX = /(^|\.)(iframeSrc|iframe|embedUrl|mapEmbedUrl)$/i;
 
 function detectFieldType(key = '', value = '', path = '') {
   if (ICON_KEY_REGEX.test(key)) return 'icon';
@@ -53,6 +56,8 @@ function detectFieldType(key = '', value = '', path = '') {
   if (path && /(^|\.)logos?\b/i.test(path)) return 'image';
   if (typeof value === 'string' && /(\/uploads\/|\/images\/|\.png$|\.jpg$|\.jpeg$|\.webp$)/i.test(value) && value.length < 200) return 'image';
 
+  if (HTML_KEY_REGEX.test(key) || (typeof value === 'string' && /<\/?[a-z][\s\S]*>/i.test(value))) return 'html';
+  if (IFRAME_KEY_REGEX.test(key)) return 'iframe';
 
   if (URL_KEY_REGEX.test(key)) return 'url';
   if (typeof value === 'string' && /^https?:\/\//i.test(value) && !IMAGE_KEY_REGEX.test(key)) return 'url';
@@ -2028,30 +2033,20 @@ function JsonEditor({
     const isLong = data.length > 100;
     const fieldType = detectFieldType(fieldKey || '', data, path);
     const isImageType = fieldType === 'image';
-    const showPreview = isImageType;
-    const showUploader = !readOnly && showPreview && typeof onUpload === 'function';
+    const isPreviewableType = fieldType === 'image' || fieldType === 'html' || fieldType === 'iframe';
+    const showPreview = isPreviewableType;
+    const showUploader = !readOnly && isImageType && typeof onUpload === 'function';
 
     async function handleFileChange(e) {
       const file = e.target.files?.[0];
       if (!file) return;
-      if (!IMAGE_MIME_TYPES.includes(file.type)) {
-        setUploadError('Only PNG/JPG images are allowed.');
-        e.target.value = '';
-        return;
-      }
-      if (file.size > UPLOAD_MAX_BYTES) {
-        setUploadError('File is too large. Max 10MB.');
-        e.target.value = '';
-        return;
-      }
-      setUploadError('');
-      setUploading(true);
+
       try {
         await onUpload(path, file);
+        setUploadError('');
       } catch (error) {
-        setUploadError(error?.message || 'Upload failed.');
+        setUploadError(error.message || 'Upload failed');
       } finally {
-        setUploading(false);
         e.target.value = '';
       }
     }
@@ -2059,7 +2054,7 @@ function JsonEditor({
     // Determine which input to render based on fieldType
     let inputElement;
 
-    if (isLong || isImageType) {
+    if (isLong || isImageType || fieldType === 'html' || fieldType === 'iframe') {
       // Long text / image path → textarea or existing image UI
       inputElement = (
         <div className="space-y-2">
@@ -2093,11 +2088,15 @@ function JsonEditor({
               </div>
             )}
           </div>
+
           {uploadError && <p className="text-xs text-red-500">{uploadError}</p>}
+          
           {showPreview && data && (
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
-              <Image src={data} alt="Preview" className="max-h-40 w-auto rounded" />
-            </div>
+            <SafePreview
+              kind={fieldType}
+              value={data}
+              title={fieldKey || path || 'Preview'}
+            />
           )}
         </div>
       );
