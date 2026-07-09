@@ -1458,7 +1458,7 @@ export default function AdminPage() {
       </motion.aside>
 
       {/* Main Content */}
-      <main className={`flex-1 transition-all ${sidebarOpen ? 'ml-[260px]' : 'ml-[72px]'}`}>
+      <main className={`flex-1 h-screen overflow-y-auto transition-all ${sidebarOpen ? 'ml-[260px]' : 'ml-[72px]'}`}>
         {/* Header */}
         <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-gray-200 px-6 h-16 flex items-center justify-between">
           <div>
@@ -2389,58 +2389,41 @@ function JsonEditor({
             );
           }
 
+          // For solutions array on solution page: add new solution with template
+          if (isSolutionsArray && activePage === 'solution') {
+            return (
+              <button
+                onClick={() => onAddItem(path)}
+                className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border border-dashed border-blue-300 hover:border-blue-400 w-full justify-center"
+              >
+                <Plus size={16} />
+                Add New Solution
+              </button>
+            );
+          }
 
+          // For services array on solution page
+          if (isServicesArray && activePage === 'solution') {
+            return (
+              <button
+                onClick={() => onAddItem(path)}
+                className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border border-dashed border-blue-300 hover:border-blue-400 w-full justify-center"
+              >
+                <Plus size={16} />
+                Add New Service
+              </button>
+            );
+          }
 
-          
-
-          // // For solutions array: using solution picker
-          // if (isSolutionsArray && onAddSolution) {
-          //   return (
-          //     <MasterListPicker
-          //       source="solution.json"
-          //       path="solutions"
-          //       displayField="name"
-          //       matchField="slug"
-          //       onSelect={(solution) => onAddSolution(path, solution)}
-          //       currentItems={data}
-          //       placeholder="Pilih Solution dari Master List"
-          //     />
-          //   );
-          // }
-
-          // // Services: Use MasterListPicker (NEW)
-          // if (isServicesArray && onAddService) {
-          //   return (
-          //     <MasterListPicker
-          //       source="solution.json"
-          //       path="services"
-          //       displayField="name"
-          //       matchField="name"
-          //       onSelect={(service) => onAddService(path, service)}
-          //       currentItems={data}
-          //       placeholder="Pilih Service dari Master List"
-          //     />
-          //   );
-          // }
-
-          // // News: Use MasterListPicker (NEW)
-          // if (isNewsArray && onAddNews) {
-          //   return (
-          //     <MasterListPicker
-          //       source="insight.json"
-          //       path="news.items"
-          //       displayField="title"
-          //       matchField="slug"
-          //       onSelect={(news) => onAddNews(path, news)}
-          //       currentItems={data}
-          //       placeholder="Pilih News dari Master List"
-          //     />
-          //   );
-          // }
-
-          // Default Add Item button for non-brands arrays
+          // Default Add Item button for other arrays
           return (
-            <button onClick={() => onAddItem(path)}>Add Item</button>
+            <button
+              onClick={() => onAddItem(path)}
+              className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border border-dashed border-blue-300 hover:border-blue-400 w-full justify-center"
+            >
+              <Plus size={16} />
+              Add Item
+            </button>
           );
         })()}
       </div>
@@ -2535,8 +2518,8 @@ function CollapsibleSection({ label, children, depth = 0, actions, readOnly = fa
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={`border border-gray-200 rounded-lg overflow-hidden ${depth > 0 ? 'ml-0' : ''}`}>
-      <div className="w-full flex items-center gap-2 bg-gray-50 hover:bg-gray-100 transition-colors">
+    <div className={`border border-gray-200 rounded-lg ${depth > 0 ? 'ml-0' : ''}`}>
+      <div className={`w-full flex items-center gap-2 bg-gray-50 hover:bg-gray-100 transition-colors ${open ? 'sticky top-16 z-30 rounded-t-lg border-b border-gray-200' : 'rounded-lg'}`}>
         <button
           type="button"
           onClick={() => setOpen(!open)}
