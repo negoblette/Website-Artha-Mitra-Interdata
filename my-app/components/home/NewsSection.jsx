@@ -64,7 +64,7 @@ function NewsTimelineItems({ item, index, isActive}) {
 // MAIN SECTION
 
 export default function NewsSection({ data }) {
-  const items = data?.items?.slice(0, 3) ?? [];
+  const items = (data?.items ?? []).filter(Boolean).slice(0, 3);
   const featured = items[0];
 
     return (

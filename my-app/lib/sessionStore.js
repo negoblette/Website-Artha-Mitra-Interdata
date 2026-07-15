@@ -11,6 +11,26 @@ let redisClient;
 let redisConnectPromise;
 let redisAvailable = null; // null = unknown, true/false = checked
 
+// ─── In-Memory Fallback ──────────────────────────────────────────────────────
+const memorySessionStore = new Map();
+const CLEANUP_INTERVAL = 5 * 60 * 1000; // 5 minutes
+
+let cleanupTimer = null;
+function startMemoryCleanup() {
+  if (cleanupTimer) return;
+  cleanupTimer = setInterval(() => {
+    const now = Date.now();
+    for (const [key, entry] of memorySessionStore) {
+      if (entry.expiresAt <= now) {
+        memorySessionStore.delete(key);
+      }
+    }
+  }, CLEANUP_INTERVAL);
+  if (cleanupTimer.unref) cleanupTimer.unref();
+}
+
+// ─── Redis Client ────────────────────────────────────────────────────────────
+
 function buildRedisUrl() {
   const base = `redis://${REDIS_HOST}:${REDIS_PORT}`;
   if (REDIS_PASSWORD) {
@@ -33,10 +53,21 @@ async function getRedisClient() {
   if (!redisConnectPromise) {
     try {
       const REDIS_URL = buildRedisUrl();
-      redisClient = createClient({ url: REDIS_URL });
+      redisClient = createClient({
+        url: REDIS_URL,
+        socket: {
+          connectTimeout: 2000, // fail fast instead of hanging
+          reconnectStrategy: false, // never auto-retry; we handle fallback ourselves
+        },
+      });
 
+      let loggedError = false;
       redisClient.on('error', (error) => {
-        console.error('[Session Store] Redis client error:', error.message);
+        // Avoid log spam: only log the first error for this client instance
+        if (!loggedError) {
+          console.error('[Session Store] Redis client error:', error.message);
+          loggedError = true;
+        }
         redisAvailable = false;
       });
 
@@ -45,10 +76,13 @@ async function getRedisClient() {
         console.log('[Session Store] Redis connected successfully');
         return redisClient;
       }).catch((error) => {
-        console.warn('[Session Store] Redis not available, falling back to JWT:', error.message);
+        console.warn('[Session Store] Redis not available, using in-memory fallback:', error.message);
         redisConnectPromise = null;
-        redisClient = undefined;
         redisAvailable = false;
+        // Fully release the zombie client so it stops retrying/emitting errors
+        const deadClient = redisClient;
+        redisClient = undefined;
+        deadClient?.destroy();
         return null;
       });
     } catch (error) {
@@ -61,27 +95,38 @@ async function getRedisClient() {
 }
 
 /**
- * Create a new session and store it in Redis
+ * Check if we're using in-memory fallback (for logging/diagnostics)
+ */
+export function isUsingMemoryFallback() {
+  return redisAvailable === false;
+}
+
+/**
+ * Create a new session and store it in Redis (or memory fallback)
  * @param {Object} sessionData - Data to store in session
  * @returns {string} Session ID
  */
 export async function createSession(sessionData) {
   const sessionId = crypto.randomUUID();
 
+  const session = {
+    ...sessionData,
+    createdAt: Date.now(),
+  };
+
   try {
     const client = await getRedisClient();
 
-    // If Redis is not available, return session ID anyway
-    // (will be handled by fallback in adminAuth)
     if (!client) {
-      console.error('[Session Store] Redis unavailable - blocking session creation');
-      throw new Error('Authentication system temporarily unavailable');
+      // Fallback: store in memory
+      console.log('[Session Store] Using in-memory fallback for session:', sessionId);
+      memorySessionStore.set(`${SESSION_PREFIX}${sessionId}`, {
+        value: JSON.stringify(session),
+        expiresAt: Date.now() + SESSION_MAX_AGE * 1000,
+      });
+      startMemoryCleanup();
+      return sessionId;
     }
-
-    const session = {
-      ...sessionData,
-      createdAt: Date.now(),
-    };
 
     await client.set(
       `${SESSION_PREFIX}${sessionId}`,
@@ -92,13 +137,19 @@ export async function createSession(sessionData) {
     console.log(`[Session Store] Created session: ${sessionId}`);
     return sessionId;
   } catch (error) {
-    console.error('[Session Store] Failed to create session:', error);
-    return sessionId; // Return ID anyway, fallback will handle it
+    console.error('[Session Store] Redis failed, using in-memory fallback:', error.message);
+    // Fallback: store in memory so login still works
+    memorySessionStore.set(`${SESSION_PREFIX}${sessionId}`, {
+      value: JSON.stringify(session),
+      expiresAt: Date.now() + SESSION_MAX_AGE * 1000,
+    });
+    startMemoryCleanup();
+    return sessionId;
   }
 }
 
 /**
- * Get session data from Redis
+ * Get session data from Redis (or memory fallback)
  * @param {string} sessionId
  * @returns {Object|null} Session data or null if not found
  */
@@ -108,9 +159,15 @@ export async function getSession(sessionId) {
   try {
     const client = await getRedisClient();
 
-    // If Redis is not available, return null (will trigger JWT fallback)
     if (!client) {
-      return null;
+      // Fallback: read from memory
+      const entry = memorySessionStore.get(`${SESSION_PREFIX}${sessionId}`);
+      if (!entry) return null;
+      if (entry.expiresAt <= Date.now()) {
+        memorySessionStore.delete(`${SESSION_PREFIX}${sessionId}`);
+        return null;
+      }
+      return JSON.parse(entry.value);
     }
 
     const data = await client.get(`${SESSION_PREFIX}${sessionId}`);
@@ -130,29 +187,38 @@ export async function getSession(sessionId) {
 
     return session;
   } catch (error) {
-    console.error('[Session Store] Failed to get session:', error);
-    return null;
+    console.error('[Session Store] Failed to get session, trying memory:', error.message);
+    // Try memory fallback
+    const entry = memorySessionStore.get(`${SESSION_PREFIX}${sessionId}`);
+    if (!entry || entry.expiresAt <= Date.now()) {
+      if (entry) memorySessionStore.delete(`${SESSION_PREFIX}${sessionId}`);
+      return null;
+    }
+    return JSON.parse(entry.value);
   }
 }
 
 /**
- * Delete session from Redis
+ * Delete session from Redis (or memory fallback)
  * @param {string} sessionId
  */
 export async function deleteSession(sessionId) {
   if (!sessionId) return;
 
+  // Always try to delete from memory too
+  memorySessionStore.delete(`${SESSION_PREFIX}${sessionId}`);
+
   try {
     const client = await getRedisClient();
 
     if (!client) {
-      return; // Can't delete if Redis not available
+      return; // Already deleted from memory above
     }
 
     await client.del(`${SESSION_PREFIX}${sessionId}`);
     console.log(`[Session Store] Deleted session: ${sessionId}`);
   } catch (error) {
-    console.error('[Session Store] Failed to delete session:', error);
+    console.error('[Session Store] Failed to delete session from Redis:', error.message);
   }
 }
 
@@ -167,7 +233,14 @@ export async function revokeSession(sessionId) {
     const client = await getRedisClient();
 
     if (!client) {
-      return; // Can't revoke if Redis not available
+      // Memory fallback: store revocation flag
+      memorySessionStore.set(`${SESSION_PREFIX}revoked:${sessionId}`, {
+        value: '1',
+        expiresAt: Date.now() + SESSION_MAX_AGE * 1000,
+      });
+      startMemoryCleanup();
+      console.log(`[Session Store] Revoked session (memory): ${sessionId}`);
+      return;
     }
 
     await client.set(
@@ -177,7 +250,13 @@ export async function revokeSession(sessionId) {
     );
     console.log(`[Session Store] Revoked session: ${sessionId}`);
   } catch (error) {
-    console.error('[Session Store] Failed to revoke session:', error);
+    console.error('[Session Store] Failed to revoke session:', error.message);
+    // Fallback: store in memory
+    memorySessionStore.set(`${SESSION_PREFIX}revoked:${sessionId}`, {
+      value: '1',
+      expiresAt: Date.now() + SESSION_MAX_AGE * 1000,
+    });
+    startMemoryCleanup();
   }
 }
 
@@ -193,14 +272,20 @@ export async function isSessionRevoked(sessionId) {
     const client = await getRedisClient();
 
     if (!client) {
-      return false; // Can't check if Redis not available
+      // Memory fallback
+      const entry = memorySessionStore.get(`${SESSION_PREFIX}revoked:${sessionId}`);
+      if (!entry || entry.expiresAt <= Date.now()) return false;
+      return entry.value === '1';
     }
 
     const result = await client.get(`${SESSION_PREFIX}revoked:${sessionId}`);
     return result === '1';
   } catch (error) {
-    console.error('[Session Store] Failed to check session revocation:', error);
-    return false;
+    console.error('[Session Store] Failed to check session revocation:', error.message);
+    // Check memory fallback
+    const entry = memorySessionStore.get(`${SESSION_PREFIX}revoked:${sessionId}`);
+    if (!entry || entry.expiresAt <= Date.now()) return false;
+    return entry.value === '1';
   }
 }
 
@@ -208,11 +293,19 @@ export async function isSessionRevoked(sessionId) {
  * Cleanup expired sessions
  */
 export async function cleanupExpiredSessions() {
+  // Clean memory store
+  const now = Date.now();
+  for (const [key, entry] of memorySessionStore) {
+    if (entry.expiresAt <= now) {
+      memorySessionStore.delete(key);
+    }
+  }
+
   try {
     const client = await getRedisClient();
 
     if (!client) {
-      return; // Can't cleanup if Redis not available
+      return; // Memory cleanup done above
     }
 
     const keys = await client.keys(`${SESSION_PREFIX}*`);
@@ -233,7 +326,7 @@ export async function cleanupExpiredSessions() {
       console.log(`[Session Store] Cleaned up ${cleaned} expired sessions`);
     }
   } catch (error) {
-    console.error('[Session Store] Failed to cleanup sessions:', error);
+    console.error('[Session Store] Failed to cleanup sessions:', error.message);
   }
 }
 
