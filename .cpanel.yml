@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/t84485/staging.arthamitra.co.id/
+    - /bin/cp -R my-app/. $DEPLOYPATH

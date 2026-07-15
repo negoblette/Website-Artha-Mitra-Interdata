@@ -129,32 +129,7 @@
               ]
             }
           },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "res"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "teslagi"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
+
           {
             "_ref": {
               "source": "solution.json",
@@ -304,19 +279,6 @@
                 "description"
               ]
             }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "services",
-              "match": {
-                "name": "tes lohya cik"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
-            }
           }
         ]
       }
@@ -374,22 +336,6 @@
           "path": "news.items",
           "match": {
             "slug": "pci-dss-compliance"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
-      },
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "bapak-gw-jago-silat"
           },
           "displayFields": [
             "slug",

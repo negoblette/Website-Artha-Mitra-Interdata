@@ -43,7 +43,7 @@ export async function resolveReferences(data, options = {}) {
 
 function walkAndResolve(value, state) {
   if (Array.isArray(value)) {
-    return value.map((item) => walkAndResolve(item, state));
+    return value.map((item) => walkAndResolve(item, state)).filter(Boolean);
   }
 
   if (!value || typeof value !== 'object') {
