@@ -1,4 +1,5 @@
 import { getContent } from '@/lib/content';
+import { isSectionVisible } from '@/lib/sectionVisibility';
 import ActivitiesHero from '@/components/activities/ActivitiesHero';
 import ProgramsSection from '@/components/activities/ProgramsSection';
 import EventsSection from '@/components/activities/EventsSection';
@@ -81,7 +82,7 @@ export default function ActivitiesPage() {
   return (
     <div className="relative z-10">
       {/* Section hero utama halaman Activities. */}
-      <ActivitiesHero data={data.hero} />
+      {isSectionVisible(data, 'hero') && <ActivitiesHero data={data.hero} />}
 
       {/* Wrapper untuk section Programs dan Events beserta dekorasi background-nya. */}
       <div className="relative overflow-visible">
@@ -90,10 +91,10 @@ export default function ActivitiesPage() {
         {renderActivitiesBg(activitiesBgDesktop)}
 
         {/* Section daftar program/kegiatan yang bisa dibuka detailnya. */}
-        <ProgramsSection data={data.programs} />
+        {isSectionVisible(data, 'programs') && <ProgramsSection data={data.programs} />}
 
         {/* Section daftar event dengan carousel dan kartu flip. */}
-        <EventsSection data={data.events} />
+        {isSectionVisible(data, 'events') && <EventsSection data={data.events} />}
       </div>
     </div>
   );

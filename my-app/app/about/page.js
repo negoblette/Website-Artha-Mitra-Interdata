@@ -1,4 +1,5 @@
 import { getContent } from '@/lib/content';
+import { isSectionVisible } from '@/lib/sectionVisibility';
 import AboutHero from '@/components/about/AboutHero';
 import VisionMission from '@/components/about/VisionMission';
 import CiptaValuesSection from '@/components/about/CiptaValuesSection';
@@ -28,13 +29,13 @@ export default function AboutPage() {
         }}
       />
       <div className="relative z-10">
-        <AboutHero data={data.hero} />
-        <VisionMission vision={data.vision} mission={data.mission} />
-        <CiptaValuesSection values={data.coreValues?.values} />
-        <HistorySection data={data.history} />
-        <AchievementSection data={data.achievement} />
-        <LifeAtAmi data={data.lifeAtAmi} />
-        <CareersSection data={data.careers} />
+        {isSectionVisible(data, 'hero') && <AboutHero data={data.hero} />}
+        {isSectionVisible(data, 'vision') && isSectionVisible(data, 'mission') && <VisionMission vision={data.vision} mission={data.mission} />}
+        {isSectionVisible(data, 'coreValues') && <CiptaValuesSection values={data.coreValues?.values} />}
+        {isSectionVisible(data, 'history') && <HistorySection data={data.history} />}
+        {isSectionVisible(data, 'achievement') && <AchievementSection data={data.achievement} />}
+        {isSectionVisible(data, 'lifeAtAmi') && <LifeAtAmi data={data.lifeAtAmi} />}
+        {isSectionVisible(data, 'careers') && <CareersSection data={data.careers} />}
       </div>
     </div>
   );

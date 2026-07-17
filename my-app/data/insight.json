@@ -288,5 +288,10 @@
         "source": "Threat Intelligence Review"
       }
     ]
+  },
+  "_sectionVisibility": {
+    "hero": true,
+    "articles": true,
+    "news": true
   }
 }

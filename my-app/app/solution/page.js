@@ -1,4 +1,5 @@
 import { getContent } from '@/lib/content';
+import { isSectionVisible } from '@/lib/sectionVisibility';
 import SolutionHero from '@/components/solution/SolutionHero';
 import SolutionGrid from '@/components/solution/SolutionGrid';
 import ServicesGrid from '@/components/solution/ServicesGrid';
@@ -14,10 +15,10 @@ export default function SolutionPage() {
 
   return (
     <div className="relative z-10">
-      <SolutionHero data={data.hero} />
-      <SolutionGrid solutions={data.solutions} />
-      <ServicesGrid services={data.services} />
-      <WhyChoose data={data.whyChoose} />
+      {isSectionVisible(data, 'hero') && <SolutionHero data={data.hero} />}
+      {isSectionVisible(data, 'solutions') && <SolutionGrid solutions={data.solutions} />}
+      {isSectionVisible(data, 'services') && <ServicesGrid services={data.services} />}
+      {isSectionVisible(data, 'whyChoose') && <WhyChoose data={data.whyChoose} />}
     </div>
   );
 }
