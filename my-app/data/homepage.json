@@ -129,7 +129,6 @@
               ]
             }
           },
-
           {
             "_ref": {
               "source": "solution.json",
@@ -351,5 +350,8 @@
   "contactSection": {
     "eyebrow": "Contact Us",
     "title": "Get In Touch With Us"
+  },
+  "_sectionVisibility": {
+    "news": false
   }
 }

@@ -8,7 +8,7 @@ import {
   Home, Info, Layers, Package, Calendar, Globe,
   Save, ChevronRight, Edit3, Check, X,
   Menu, LogOut, Plus, Trash2, Copy, ArrowUp, ArrowDown,
-  Lock, BookOpen, History, RotateCcw, Eye, AlertTriangle,
+  Lock, BookOpen, History, RotateCcw, Eye, EyeOff, AlertTriangle,
   Link, Mail, Phone, Hash, Calendar as CalendarIcon, Tag,
   ChevronDown,
 } from 'lucide-react';
@@ -33,6 +33,160 @@ const READ_ONLY_MAP = {
   activities: ['hero'],
   insight: ['hero'],
 };
+
+// Human-readable labels for section keys in the Section Visibility Panel
+const SECTION_LABELS = {
+  homepage: {
+    hero: 'Hero Banner',
+    howItWorks: 'How It Works',
+    offerings: 'Our Offerings',
+    testimonials: 'Testimonials',
+    news: 'News & Articles',
+    contactSection: 'Contact Section',
+  },
+  about: {
+    hero: 'Hero Banner',
+    vision: 'Vision',
+    mission: 'Mission',
+    coreValues: 'Core Values (CIPTA)',
+    history: 'History & Journey',
+    achievement: 'Achievement',
+    lifeAtAmi: 'Life at AMI',
+    careers: 'Careers',
+  },
+  solution: {
+    hero: 'Hero Banner',
+    solutions: 'Solutions Grid',
+    services: 'Services Grid',
+    whyChoose: 'Why Choose Us',
+  },
+  products: {
+    hero: 'Hero Banner',
+    carousel: 'Product Carousel',
+    brands: 'Brand Grid',
+  },
+  activities: {
+    hero: 'Hero Banner',
+    programs: 'Programs',
+    events: 'Events',
+  },
+  insight: {
+    hero: 'Hero Banner',
+    articles: 'Articles',
+    news: 'News',
+  },
+};
+
+function SectionVisibilityPanel({ data, activePage, onChange }) {
+  if (!data || activePage === 'global') return null;
+
+  const labels = SECTION_LABELS[activePage] || {};
+  const sectionKeys = Object.keys(data).filter(
+    (key) => key !== '_sectionVisibility' && typeof data[key] === 'object' && data[key] !== null
+  );
+
+  // Include simple value sections too (like vision, mission which are strings)
+  const allKeys = Object.keys(data).filter((key) => key !== '_sectionVisibility');
+  const relevantKeys = Object.keys(labels).length > 0 ? Object.keys(labels) : allKeys;
+
+  if (relevantKeys.length === 0) return null;
+
+  const visibility = data._sectionVisibility || {};
+
+  function toggleSection(sectionKey) {
+    const current = visibility[sectionKey] !== false; // default true
+    const updated = { ...visibility, [sectionKey]: !current };
+    onChange('_sectionVisibility', updated);
+  }
+
+  function showAll() {
+    const updated = {};
+    relevantKeys.forEach((key) => { updated[key] = true; });
+    onChange('_sectionVisibility', updated);
+  }
+
+  function hideAll() {
+    const updated = {};
+    relevantKeys.forEach((key) => { updated[key] = false; });
+    onChange('_sectionVisibility', updated);
+  }
+
+  const visibleCount = relevantKeys.filter((k) => visibility[k] !== false).length;
+  const hiddenCount = relevantKeys.length - visibleCount;
+
+  return (
+    <div className="mb-6 border border-gray-200 rounded-xl bg-white overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+            <Eye size={16} className="text-blue-600" />
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900">Section Visibility</h3>
+            <p className="text-xs text-gray-500">
+              {visibleCount} visible{hiddenCount > 0 && <span className="text-amber-600 font-medium"> · {hiddenCount} hidden</span>}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={showAll}
+            className="px-2.5 py-1 rounded-md text-[11px] font-medium text-green-700 bg-green-50 hover:bg-green-100 border border-green-200 transition-colors"
+          >
+            Show All
+          </button>
+          <button
+            onClick={hideAll}
+            className="px-2.5 py-1 rounded-md text-[11px] font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 border border-gray-200 transition-colors"
+          >
+            Hide All
+          </button>
+        </div>
+      </div>
+
+      {/* Section toggles */}
+      <div className="p-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+        {relevantKeys.map((key) => {
+          const isVisible = visibility[key] !== false;
+          const label = labels[key] || toTitleCase(key);
+
+          return (
+            <button
+              key={key}
+              onClick={() => toggleSection(key)}
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg border text-left transition-all ${
+                isVisible
+                  ? 'border-green-200 bg-green-50/60 hover:bg-green-50'
+                  : 'border-gray-200 bg-gray-50/60 hover:bg-gray-100 opacity-60'
+              }`}
+            >
+              <div className={`w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 ${
+                isVisible ? 'bg-green-100' : 'bg-gray-200'
+              }`}>
+                {isVisible
+                  ? <Eye size={14} className="text-green-600" />
+                  : <EyeOff size={14} className="text-gray-400" />
+                }
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className={`text-sm font-medium truncate ${
+                  isVisible ? 'text-gray-800' : 'text-gray-400 line-through'
+                }`}>
+                  {label}
+                </p>
+                <p className="text-[10px] text-gray-400 font-mono">{key}</p>
+              </div>
+              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                isVisible ? 'bg-green-500' : 'bg-gray-300'
+              }`} />
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 const UPLOAD_MAX_BYTES = 10 * 1024 * 1024;
 const IMAGE_MIME_TYPES = ['image/png', 'image/jpeg'];
@@ -1510,6 +1664,11 @@ export default function AdminPage() {
             </div>
           ) : data ? (
             <div className="max-w-4xl">
+              <SectionVisibilityPanel
+                data={data}
+                activePage={activePage}
+                onChange={updateField}
+              />
               <JsonEditor
                 data={data}
                 path=""
@@ -2434,7 +2593,7 @@ function JsonEditor({
   if (typeof data === 'object') {
     return (
       <div className="space-y-3">
-        {Object.entries(data).map(([key, value]) => {
+        {Object.entries(data).filter(([key]) => key !== '_sectionVisibility').map(([key, value]) => {
           const fieldPath = path ? `${path}.${key}` : key;
           const isSimple = typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
           const isFieldReadOnly = isReadOnlyPath(fieldPath, readOnlyPaths);
