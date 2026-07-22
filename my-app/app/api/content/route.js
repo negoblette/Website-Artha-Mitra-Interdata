@@ -176,6 +176,11 @@ export async function PUT(request) {
     try { revalidatePath(route); } catch {}
   }
 
+  // If section visibility changed, revalidate the root layout so the navbar updates
+  if (body._sectionVisibility && file !== 'global' && file !== 'homepage') {
+    try { revalidatePath('/', 'layout'); } catch {}
+  }
+
   // If solution data changed, revalidate all dynamic solution pages
   if (file === 'solution' && body.solutions) {
     for (const sol of body.solutions) {

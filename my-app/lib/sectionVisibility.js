@@ -19,3 +19,20 @@ export function isSectionVisible(data, sectionKey) {
   const visibility = data._sectionVisibility[sectionKey];
   return visibility !== false; // default true if not explicitly set to false
 }
+
+/**
+ * Check if ALL content sections on a page are hidden.
+ * Returns true only when `_sectionVisibility` exists AND every content key
+ * (keys other than `_sectionVisibility` itself) is explicitly set to false.
+ *
+ * @param {Object} data - The full page data object
+ * @returns {boolean} true if all sections are hidden
+ */
+export function areAllSectionsHidden(data) {
+  if (!data || !data._sectionVisibility) return false;
+
+  const contentKeys = Object.keys(data).filter((k) => k !== '_sectionVisibility');
+  if (contentKeys.length === 0) return false;
+
+  return contentKeys.every((key) => data._sectionVisibility[key] === false);
+}
