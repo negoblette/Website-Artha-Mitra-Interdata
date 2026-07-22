@@ -285,20 +285,66 @@
       ]
     },
     {
-      "slug": "tes",
+      "slug": "res",
       "name": "tes",
-      "icon": "Award",
-      "shortDescription": "masuk akal aja",
-      "fullDescription": "yg penring masuk",
-      "features": [],
-      "brands": []
+      "icon": "AlertCircle",
+      "shortDescription": "tesss",
+      "fullDescription": "tersasa",
+      "features": [
+        "aeadasd"
+      ],
+      "brands": [
+        {
+          "name": "CrowdStrike",
+          "logo": "/images/principals/crowdstrike.png",
+          "website": "https://www.crowdstrike.com/en-us/"
+        }
+      ]
     },
     {
-      "slug": "a",
-      "name": "",
-      "icon": "",
-      "shortDescription": "",
-      "fullDescription": "",
+      "slug": "teslagi",
+      "name": "teslagi",
+      "icon": "ArrowDown",
+      "shortDescription": "yang ada aja lah",
+      "fullDescription": "yaudahlahyah kocak kodok muter mwuehehe",
+      "features": [
+        "kocak gmink"
+      ],
+      "brands": [
+        {
+          "name": "Gigamon",
+          "slug": "gigamon",
+          "logo": "/images/principals/gigamon.png",
+          "website": "https://www.gigamon.com",
+          "description": "Deep observability pipeline delivering network-derived intelligence across hybrid cloud environments.",
+          "solutions": [
+            {
+              "name": "Network Infrastructure",
+              "slug": "network-infrastructure"
+            }
+          ]
+        },
+        {
+          "name": "DAS Security",
+          "slug": "das-security",
+          "logo": "/images/principals/das.png",
+          "website": "https://www.dbappsecurity.com",
+          "description": "Application and data security solutions including WAF, database audit, and risk control.",
+          "solutions": [
+            {
+              "name": "Network Security",
+              "slug": "network-security"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "nbvc",
+      "name": "ngh",
+      "icon": "AlertCircle",
+      "shortDescription": "jhgf",
+      "fullDescription": "jgv",
       "features": [],
       "brands": []
     }
@@ -343,6 +389,11 @@
       "name": "Awareness Event",
       "icon": "Users",
       "description": "Awareness sessions and event support designed to strengthen security culture, user readiness, and stakeholder engagement."
+    },
+    {
+      "name": "tes lohya cik",
+      "icon": "LogOut",
+      "description": "tes lohya"
     }
   ],
   "whyChoose": {

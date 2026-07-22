@@ -1,4 +1,5 @@
 import { getContent } from '@/lib/content';
+import { isSectionVisible } from '@/lib/sectionVisibility';
 import InsightHero from '@/components/insight/InsightHero';
 import ArticlesSection from '@/components/insight/ArticlesSection';
 import InsightNewsSection from '@/components/insight/InsightNewsSection';
@@ -15,13 +16,13 @@ export default function InsightPage() {
   return (
     <>
       {/* Section hero utama halaman Insight. */}
-      <InsightHero data={data.hero} />
+      {isSectionVisible(data, 'hero') && <InsightHero data={data.hero} />}
 
       {/* Section artikel dengan featured article, filter kategori, dan pagination. */}
-      <ArticlesSection data={data.articles} />
+      {isSectionVisible(data, 'articles') && <ArticlesSection data={data.articles} />}
 
       {/* Section news/latest updates dengan filter kategori dan pagination. */}
-      <InsightNewsSection data={data.news} />
+      {isSectionVisible(data, 'news') && <InsightNewsSection data={data.news} />}
     </>
   );
 }

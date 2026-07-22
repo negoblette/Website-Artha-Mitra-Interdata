@@ -221,39 +221,6 @@
           "slug": "application-security"
         }
       ]
-    },
-    {
-      "name": "tes",
-      "slug": "tes",
-      "logo": "/uploads/9f1b6a1c-e119-4a1a-abaf-d63814bfa0ee.png",
-      "website": "",
-      "description": "",
-      "solutions": [
-        {
-          "name": "Security Management",
-          "slug": "security-management"
-        },
-        {
-          "name": "tes",
-          "slug": "res"
-        }
-      ]
-    },
-    {
-      "name": "tes3",
-      "slug": "tes3",
-      "logo": "",
-      "website": "",
-      "description": "",
-      "solutions": []
-    },
-    {
-      "name": "tes2",
-      "slug": "tes2",
-      "logo": "",
-      "website": "",
-      "description": "",
-      "solutions": []
     }
   ],
   "carousel": {

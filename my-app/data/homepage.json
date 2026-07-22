@@ -134,32 +134,6 @@
               "source": "solution.json",
               "path": "solutions",
               "match": {
-                "slug": "res"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
-                "slug": "teslagi"
-              },
-              "displayFields": [
-                "name",
-                "shortDescription"
-              ]
-            }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "solutions",
-              "match": {
                 "slug": "network-infrastructure"
               },
               "displayFields": [
@@ -304,19 +278,6 @@
                 "description"
               ]
             }
-          },
-          {
-            "_ref": {
-              "source": "solution.json",
-              "path": "services",
-              "match": {
-                "name": "tes lohya cik"
-              },
-              "displayFields": [
-                "name",
-                "description"
-              ]
-            }
           }
         ]
       }
@@ -383,27 +344,14 @@
             "date"
           ]
         }
-      },
-      {
-        "_ref": {
-          "source": "insight.json",
-          "path": "news.items",
-          "match": {
-            "slug": "bapak-gw-jago-silat"
-          },
-          "displayFields": [
-            "slug",
-            "category",
-            "title",
-            "excerpt",
-            "date"
-          ]
-        }
       }
     ]
   },
   "contactSection": {
     "eyebrow": "Contact Us",
     "title": "Get In Touch With Us"
+  },
+  "_sectionVisibility": {
+    "news": false
   }
 }
