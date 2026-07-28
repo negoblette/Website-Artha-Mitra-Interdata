@@ -8,6 +8,8 @@ import AchievementSection from '@/components/about/AchievementSection';
 import LifeAtAmi from '@/components/about/LifeAtAmi';
 import CareersSection from '@/components/about/CareersSection';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'About Artha Mitra Interdata',
   description: 'Learn about our vision, mission, history, and the team behind AMI.',

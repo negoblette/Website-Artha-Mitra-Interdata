@@ -4,6 +4,8 @@ import InsightHero from '@/components/insight/InsightHero';
 import ArticlesSection from '@/components/insight/ArticlesSection';
 import InsightNewsSection from '@/components/insight/InsightNewsSection';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Insight — Artha Mitra Interdata',
   description: 'Articles, news, and insights about IT infrastructure, cybersecurity, and technology trends from Artha Mitra Interdata.',

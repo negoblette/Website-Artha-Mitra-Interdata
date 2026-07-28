@@ -9,6 +9,8 @@ import NewsSection from '@/components/home/NewsSection';
 import ContactSection from '@/components/home/ContactSection';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const homepageData = getContent('homepage');
   const global = getContent('global');

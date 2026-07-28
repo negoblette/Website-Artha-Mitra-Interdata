@@ -4,6 +4,8 @@ import ProductsHero from '@/components/products/ProductsHero';
 import ProductsCarousel from '@/components/products/ProductsCarousel';
 import BrandGrid from '@/components/products/BrandGrid';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Technology Partners — Artha Mitra Interdata',
   description: 'Discover our world-class technology partners and the solutions they power.',

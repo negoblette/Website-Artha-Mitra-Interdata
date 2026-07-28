@@ -5,6 +5,8 @@ import SolutionGrid from '@/components/solution/SolutionGrid';
 import ServicesGrid from '@/components/solution/ServicesGrid';
 import WhyChoose from '@/components/solution/WhyChoose';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Solutions & Services — Artha Mitra Interdata',
   description: 'Explore our IT infrastructure and security solutions, professional services, and technology partnerships.',
