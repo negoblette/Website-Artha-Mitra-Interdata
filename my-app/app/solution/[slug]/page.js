@@ -2,6 +2,7 @@ import { getContent } from '@/lib/content';
 import { notFound } from 'next/navigation';
 import SolutionDetailClient from './SolutionDetailClient';
 
+export const dynamic = 'force-dynamic';
 export function generateStaticParams() {
   const data = getContent('solution');
   return data.solutions.map((s) => ({ slug: s.slug }));
