@@ -5,6 +5,8 @@ import ProgramsSection from '@/components/activities/ProgramsSection';
 import EventsSection from '@/components/activities/EventsSection';
 import Image from 'next/image';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Activities - Artha Mitra Interdata',
   description: 'Our latest events, programs, and activities.',
