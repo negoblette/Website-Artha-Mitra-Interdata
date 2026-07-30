@@ -117,7 +117,7 @@ export default function InsightNewsSection({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [categoryPage, setCategoryPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
-  const categoriesPerPage = 10;
+  const categoriesPerPage = 5;
 
   // Normalisasi item news: hanya item berslug yang dipakai, lalu dedupe berdasarkan slug.
   const items = Array.from(
