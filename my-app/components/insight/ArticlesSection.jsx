@@ -206,7 +206,7 @@ export default function ArticlesSection({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [categoryPage, setCategoryPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(3);
-  const categoriesPerPage = 10;
+  const categoriesPerPage = 5;
 
   // Normalisasi item artikel: hanya item berslug yang dipakai, lalu dedupe berdasarkan slug.
   const items = Array.from(
@@ -379,9 +379,9 @@ export default function ArticlesSection({ data }) {
           ))}
         </div>
 
-        {/* Kontrol pagination artikel hanya muncul jika data melebihi item per halaman. */}
+        {/* Kontrol pagination artikel hanya muncul jika data melebihi item per halaman. */} 
         {filteredItems.length > itemsPerPage && (
-          <div className="mt-10 flex items-center justify-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <button
               type="button"
               onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}

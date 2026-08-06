@@ -113,7 +113,7 @@ export default function WhyChoose({ data }) {
                           Achievement {String(i + 1).padStart(2, '0')}
                         </p> */}
                         <span
-                          className="relative z-10 text-sm font-semibold text-white/90"
+                          className="relative z-10 text-sm font-semibold leading-7 text-white/90"
                           style={{
                             animation: 'textGlow 4s ease-in-out infinite',
                             animationDelay: `${i * 0.7}s`,
